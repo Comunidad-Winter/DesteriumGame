@@ -1,0 +1,6 @@
+[INIT]
+CantPremios=1 ' acá va la cantidad de premios en este caso para el ejemplo es 1
+
+[PREMIO1] 'siempre que pongan un item de canje colocan PREMIO y el numero del premio 
+ObjIndex=1073 ' este es el número del objeto
+Puntos=10 ' y este es la cantidad de puntos necesarios 
