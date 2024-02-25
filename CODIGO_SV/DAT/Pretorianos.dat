@@ -1,0 +1,64 @@
+﻿
+' Los ejercitos son conformados a través de un REY (El npc que se escribe primero) y todos sus guardianes luego de éste.
+' Cada guardian tiene una jugabilidad pre-cargada con una inteligencia así mismo pre-cargada.
+
+[INIT]
+Last=0
+
+[1]
+Map=152-82-31
+NpcIndex=733-731-731-729-735-736
+Respawn=1800
+
+[2]
+Map=152-35-52
+NpcIndex=733-731-731-729-735-736
+Respawn=1800
+
+[3]
+Map=152-75-73
+NpcIndex=733-731-731-729-735-736
+Respawn=1800
+
+[4]
+Map=152-41-74
+NpcIndex=733-731-731-729-735-736
+Respawn=1800
+
+
+' Dungeon Nereo
+[5]
+Map=184-76-53
+NpcIndex=160-159-158-157-156
+Respawn=1800
+
+' Dungeon Thanak
+[6]
+Map=174-24-20
+NpcIndex=171-172-172-173-173
+Respawn=1800
+
+' Dungeon Spectra
+[7]
+Map=182-28-85
+NpcIndex=152-151-151-149-150
+Respawn=1800
+
+
+
+
+
+
+
+
+
+[111]	' Medusa Reina
+NpcIndex=703-793-794-793-794
+Map=107-50-50
+Respawn=7200
+
+
+100 ROCA BECK - > 20 DSP
+
+
+100 PIEDRA BECK - > 40 DSP
