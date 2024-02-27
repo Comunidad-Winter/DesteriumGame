@@ -1,0 +1,2 @@
+Línea 27: la clase MSWinsockLib.Winsock del control Winsock1 no era una clase de control cargada.
+Línea 130: la clase SHDocVwCtl.WebBrowser del control WebAuxiliar no era una clase de control cargada.

@@ -1,0 +1,274 @@
+[INIT]
+NumQuests=14
+
+[QUEST1]
+Nombre=Introducción a las categorías.
+Desc=Bienvenido a las tierras desterianas joven aventurero. Como sabrás las cosas han cambiado mucho en estos tiempos. Las clases sociales se han divido en 3 tipos de poderes diferentes: Bronce, Plata y Oro. Yo te puedo ayudar a conseguir la Primera Categoría tipo bronce. Pero tu debes cumplir los siguientes requisitos: Gana 25 Retos y traeme una serie de objetos.
+RequiredLevel=35
+
+RequiredOBJs=2
+RequiredOBJ1=386-1500
+RequiredOBJ2=390-1
+
+RequiredNPCs=0
+RequiredNPC1=0-0
+
+RewardGLD=500000
+RewardEXP=150000
+
+RewardOBJs=1
+RewardOBJ1=946-1
+
+[QUEST2]
+Nombre=¡Quest Épica! I
+Desc=Si has llegado hasta aquí significa demasiado. Los usuarios tipo Bronce merecen un equipamiento para poder sobrevivir, yo puedo conseguirte uno, pero necesito que me traigas los siguientes objetos.
+RequiredLevel=38
+
+RequiredOBJs=2
+RequiredOBJ1=386-400
+RequiredOBJ2=943-2
+
+RequiredNPCs=2
+RequiredNPC1=547-3
+RequiredNPC2=552-2
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1020-1
+
+[QUEST3]
+Nombre=¡Quest Épica! I
+Desc=Si has llegado hasta aquí significa demasiado. Los usuarios tipo Bronce merecen un equipamiento para poder sobrevivir, yo puedo conseguirte uno, pero necesito que me traigas los siguientes objetos.
+RequiredLevel=38
+
+RequiredOBJs=2
+RequiredOBJ1=386-300
+RequiredOBJ2=943-3
+
+RequiredNPCs=2
+RequiredNPC1=547-3
+RequiredNPC2=552-2
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1021-1
+
+[QUEST4]
+Nombre=¡Quest Épica! I
+Desc=Si has llegado hasta aquí significa demasiado. Los usuarios tipo Bronce merecen un equipamiento para poder sobrevivir, yo puedo conseguirte uno, pero necesito que me traigas los siguientes objetos.
+RequiredLevel=38
+
+RequiredOBJs=2
+RequiredOBJ1=386-400
+RequiredOBJ2=943-2
+
+RequiredNPCs=2
+RequiredNPC1=547-3
+RequiredNPC2=552-2
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1019-1
+
+[QUEST5]
+Nombre=¡Quest Épica! I
+Desc=Si has llegado hasta aquí significa demasiado. Los usuarios tipo Bronce merecen un equipamiento para poder sobrevivir, yo puedo conseguirte uno, pero necesito que me traigas los siguientes objetos.
+RequiredLevel=38
+
+RequiredOBJs=2
+RequiredOBJ1=386-400
+RequiredOBJ2=943-2
+
+RequiredNPCs=2
+RequiredNPC1=547-3
+RequiredNPC2=552-2
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1017-1
+
+[QUEST6]
+Nombre=¡Quest Épica! I
+Desc=Si has llegado hasta aquí significa demasiado. Los usuarios tipo Bronce merecen un equipamiento para poder sobrevivir, yo puedo conseguirte uno, pero necesito que me traigas los siguientes objetos.
+RequiredLevel=38
+
+RequiredOBJs=2
+RequiredOBJ1=386-400
+RequiredOBJ2=943-2
+
+RequiredNPCs=2
+RequiredNPC1=547-3
+RequiredNPC2=552-2
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1018-1
+
+[QUEST7]
+Nombre=¡Quest Épica! II
+Desc=Ha llegado el momento ideal para conseguir un buen anillo, ¿no?. Recolecta lo siguiente y te compensaré con uno.
+RequiredLevel=42
+
+RequiredOBJs=2
+RequiredOBJ1=386-500
+RequiredOBJ2=943-1
+
+RequiredNPCs=1
+RequiredNPC1=553-5
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1023-1
+
+[QUEST8]
+Nombre=¡Quest Épica! II
+Desc=Ha llegado el momento ideal para conseguir un buen anillo, ¿no?. Recolecta lo siguiente y te compensaré con uno.
+RequiredLevel=42
+
+RequiredOBJs=2
+RequiredOBJ1=386-500
+RequiredOBJ2=943-1
+
+RequiredNPCs=1
+RequiredNPC1=553-5
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1024-1
+
+
+[QUEST9]
+Nombre=¡Quest Épica! III
+Desc=Parece que los objetivos se van completando y eres un guerrero de Bronce casi completo. A estas alturas posees anillo y armadura, pero te faltan aún ciertos objetos que se nivelen. Presta atención a lo que debes hacer ahora.
+RequiredLevel=45
+
+RequiredOBJs=2
+RequiredOBJ1=386-800
+RequiredOBJ2=943-2
+
+RequiredNPCs=1
+RequiredNPC1=589-10
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=2
+RewardOBJ1=1025-1
+RewardOBJ2=1022-1
+
+[QUEST10]
+Nombre=¡Quest Épica! III
+Desc=Parece que los objetivos se van completando y eres un guerrero de Bronce casi completo. A estas alturas posees anillo y armadura, pero te faltan aún ciertos objetos que se nivelen. Presta atención a lo que debes hacer ahora.
+RequiredLevel=45
+
+RequiredOBJs=2
+RequiredOBJ1=386-800
+RequiredOBJ2=943-2
+
+RequiredNPCs=1
+RequiredNPC1=589-10
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=2
+RewardOBJ1=1028-1
+RewardOBJ2=1026-1
+
+[QUEST11]
+Nombre=¡Quest Épica! III
+Desc=Parece que los objetivos se van completando y eres un guerrero de Bronce casi completo. A estas alturas posees anillo y armadura, pero te faltan aún ciertos objetos que se nivelen. Presta atención a lo que debes hacer ahora.
+RequiredLevel=45
+
+RequiredOBJs=2
+RequiredOBJ1=386-800
+RequiredOBJ2=943-2
+
+RequiredNPCs=1
+RequiredNPC1=589-10
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1027-1
+
+[QUEST12]
+Nombre=¡Quest Épica! III
+Desc=Parece que los objetivos se van completando y eres un guerrero de Bronce casi completo. A estas alturas posees anillo y armadura, pero te faltan aún ciertos objetos que se nivelen. Presta atención a lo que debes hacer ahora.
+RequiredLevel=45
+
+RequiredOBJs=2
+RequiredOBJ1=386-800
+RequiredOBJ2=943-2
+
+RequiredNPCs=1
+RequiredNPC1=589-10
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=2
+RewardOBJ1=1028-1
+RewardOBJ2=1029-1
+
+[QUEST13]
+Nombre=¡Quest Épica! VI
+Desc=¿Crees que tienes todo? Creo que te falta un casco. ¡Tú sabrás!
+RequiredLevel=46
+
+RequiredOBJs=2
+RequiredOBJ1=386-800
+
+RequiredNPCs=1
+RequiredNPC1=547-4
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1033-1
+
+[QUEST14]
+Nombre=¡Quest Épica! VI
+Desc=¿Crees que tienes todo? Creo que te falta un casco. ¡Tú sabrás!
+RequiredLevel=46
+
+RequiredOBJs=2
+RequiredOBJ1=386-800
+
+RequiredNPCs=1
+RequiredNPC1=547-4
+
+
+RewardGLD=500000
+RewardEXP=90000
+
+RewardOBJs=1
+RewardOBJ1=1016-1

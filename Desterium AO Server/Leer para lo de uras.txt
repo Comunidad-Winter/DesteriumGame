@@ -1,0 +1,6 @@
+
+En el Obj.dat para agregar un aura, abajo del item ponele un:
+Aura=NumAura  (el NumAura es el de Auras.ini en el cliente)
+
+Y en el cliente, en la carpeta INIT, está el Auras.ini
+Ahi le mandas el Grh indexado del aura que le mandaste xd

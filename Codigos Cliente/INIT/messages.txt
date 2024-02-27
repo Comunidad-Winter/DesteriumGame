@@ -1,0 +1,9 @@
+¡Bienvenido a Desterium AO!
+/ping
+/Online
+/Ingresar
+/Salir
+
+
+
+

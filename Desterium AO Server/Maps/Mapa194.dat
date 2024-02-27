@@ -1,0 +1,10 @@
+[MAPA194]
+Name=Torneos
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=0
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=DUNGEON
+BackUp= 1
+Pk=1

@@ -1,0 +1,24 @@
+[MAPA49]
+Name=Deathmatch
+MusicNum=0
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=1
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=CAMPO
+Restringir=No
+BackUp= 1
+Pk=0
+[MAPA193]
+Name=Eventos
+MusicNum=0
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=0
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=CAMPO
+Restringir=No
+BackUp= 0
+Pk=0
