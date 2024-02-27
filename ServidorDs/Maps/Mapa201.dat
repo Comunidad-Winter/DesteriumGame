@@ -1,0 +1,11 @@
+[MAPA201]
+Name=Casa de Maestros
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=True
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=CIUDAD
+Restringir=VIPP
+BackUp= 1
+Pk=0

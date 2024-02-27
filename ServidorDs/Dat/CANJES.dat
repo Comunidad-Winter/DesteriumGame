@@ -1,0 +1,840 @@
+[INIT]
+NumCanjes=114
+
+[CANJE1] 'Montura x fragmentos
+NumRequired=1
+ObjRequired1=1066-15
+ObjCanje=881-1
+Points=500
+Npc=707
+
+[CANJE2] ' Cofre premium x cofres de oro
+NumRequired=1
+ObjRequired1=944-3
+ObjCanje=1115-1
+Points=200
+Npc=707
+
+[CANJE3] ' Trofeos ORO x Alas Rayos Dorados
+NumRequired=1
+ObjRequired1=889-3
+ObjCanje=1128-1
+Points=1200
+Npc=707
+
+[CANJE4] ' Trofeos PLATA x Cofre PREMIUM
+NumRequired=1
+ObjRequired1=897-3
+ObjCanje=1115-1
+Points=1200
+Npc=707
+
+[CANJE5] ' Trofeos Bronce x Cofre ORO
+NumRequired=1
+ObjRequired1=890-3
+ObjCanje=944-1
+Points=250
+Npc=707
+
+[CANJE6] ' Puntos Alas Blancas
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1163-1
+Points=1200
+Npc=707
+
+[CANJE7] ' Puntos Alas Violetas
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1159-1
+Points=1200
+Npc=707
+
+[CANJE8] ' Puntos Alas Doradas
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1168-1
+Points=1200
+Npc=707
+
+[CANJE9] ' Tiara Reina Mia
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1155-1
+Points=500
+Npc=707
+
+[CANJE10] ' Escudo Outkast
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1158-1
+Points=800
+Npc=707
+
+[CANJE11] ' Espada de forsh
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1154-1
+Points=800
+Npc=707
+
+[CANJE12] ' Espada de Hielo (TODAS)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1153-1
+Points=800
+Npc=707
+
+[CANJE13] ' ALAS DE FUEGO ! (TODAS)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1138-1
+Points=1200
+Npc=707
+
+[CANJE14] ' ALAS DE FUEGO ! (TODAS)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1139-1
+Points=1200
+Npc=707
+
+[CANJE15] ' Anillos de tranformacion
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1141-1
+Points=1200
+Npc=707
+
+[CANJE16] ' Anillos de tranformacion
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1142-1
+Points=1200
+Npc=707
+
+[CANJE17] ' Armadura Imperial Lobrega +5
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=673-100
+Points=1200
+Npc=707
+
+[CANJE18] ' Armadura Imperial Lobrega E/G +5
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=678-1
+Points=1200
+Npc=707
+
+[CANJE19] ' Túnica Hechizera/o Oscura +5
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=676-1
+Points=1200
+Npc=707
+
+[CANJE20] ' Armadura Caballero/a Oscuro/a E/G +5 
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=383-1
+Points=1200
+Npc=707
+
+############# NPC 708 ###########################
+
+[CANJE17] ' Túnica White Celestial RM+5 [Todas]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1203-1
+Points=1200
+Npc=708
+
+[CANJE18] ' Túnica White RM+5 [Todas/Altos]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1211-1
+Points=1200
+Npc=708
+
+[CANJE19] ' Túnica Hellow RM+5 E/G
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1207-1
+Points=1200
+Npc=708
+
+[CANJE20] ' Túnica DraGeat RM+5 D/B/C/M
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1209-1
+Points=1200
+Npc=708
+
+
+[CANJE21] ' Armadura Multik RM+5 C/P/W/B/C/A
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1205-1
+Points=2000
+Npc=708
+
+
+[CANJE22] ' Túnica Rosh RM+5 E/G
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1212-1
+Points=1200
+Npc=708
+
+[CANJE23] ' Túnica Multik RM+5 M/D/B/C/A
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1182-1
+Points=1200
+Npc=708
+
+[CANJE24] ' Armadura Azul RM+5
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1202-1
+Points=1200
+Npc=708
+
+[CANJE25] ' Arco Pinky
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1234-1
+Points=1200
+Npc=708
+
+[CANJE26] ' Espada llamas Pala/Clero
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1232-1
+Points=1200
+Npc=708
+
+[CANJE27] ' Espada Violeh - C/P/W
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1231-1
+Points=1200
+Npc=708
+
+[CANJE28] ' Espada multicolor
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1192-1
+Points=1200
+Npc=708
+
+[CANJE29] ' Báculo Greih Magos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1228-1
+Points=1200
+Npc=708
+
+[CANJE30] ' Báculo Ocream Magos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1227-1
+Points=1200
+Npc=708
+
+[CANJE31] ' Báculo White
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1226-1
+Points=350
+Npc=708
+
+[CANJE32] ' Báculo MultikColor
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1225-1
+Points=350
+Npc=708
+
+[CANJE33] ' Escudo White C/P/W/C
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1223-1
+Points=1200
+Npc=708
+
+[CANJE34] ' Escudo MultikColor B/C/P/W/C/A
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1222-1
+Points=1200
+Npc=708
+
+[CANJE35] ' Corona Rey RM+3 (Todas)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1220-1
+Points=1200
+Npc=708
+
+[CANJE36] ' Corona Kish RM+3 (Todas)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1218-1
+Points=1200
+Npc=708
+
+[CANJE37] ' Gorro Black [Magos]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1217-1
+Points=1200
+Npc=708
+
+[CANJE38] ' Corona White RM+3 (Todas)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1216-1
+Points=1200
+Npc=708
+
+
+[CANJE39] ' Casco Black RM+3 P/C/W/B/A/C
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1215-1
+Points=1200
+Npc=708
+
+[CANJE40] ' Casco White RM+3 P/C/W/B/A/C
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1214-1
+Points=1200
+Npc=708
+
+[CANJE41] ' Casco multicolor RM+2 C/P/W/C
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1191-1
+Points=1200
+Npc=708
+
+[CANJE42] ' Gorro White [Magos]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1213-1
+Points=1200
+Npc=708
+
+[CANJE43] ' Sombrero multicolor
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1190-1
+Points=1200
+Npc=708
+
+[CANJE44] ' Sombrero del Caos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1186-1
+Points=1200
+Npc=708
+
+[CANJE45] ' Montura de dinosaurio
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1132-1
+Points=1200
+Npc=708
+
+############### NPC 738 #################################
+
+[CANJE46] ' Espada Gosuk [P/C/W]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1274-1
+Points=1200
+Npc=738
+
+[CANJE47] ' Túnica Magenta RM+5 [Altos/Todas]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1267-1
+Points=1200
+Npc=738
+
+[CANJE48] ' Túnica de titan RM+6 [Altos/Todas]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1266-1
+Points=2000
+Npc=738
+
+[CANJE49] ' Túnica tunning RM+6 [Altos/Todas
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1265-1
+Points=1200
+Npc=738
+
+[CANJE50] ' Legendaria blanca RM+6 [Todas/Altos]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1264-1
+Points=2000
+Npc=738
+
+[CANJE51] ' Túnica Rosita E/G
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1263-1
+Points=1200
+Npc=738
+
+[CANJE52] ' Armadura negra RM+5 [C/P/W/C/A]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1262-1
+Points=1200
+Npc=738
+
+[CANJE53] ' Armadura negra RM+5 E/G [C/P/W/C/A]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1261-1
+Points=1200
+Npc=738
+
+[CANJE54] ' Armadura roja RM+5 [C/P/W/C/A]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1260-1
+Points=1200
+Npc=738
+
+[CANJE55] ' Armadura multicolor RM+5 [Todas/Altos]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1257-1
+Points=1200
+Npc=738
+
+[CANJE56] ' Túnica Negron RM+6 (E/G)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1256-1
+Points=1200
+Npc=738
+
+[CANJE57] ' Túnica Red RM+6 (E/G)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1255-1
+Points=1200
+Npc=738
+
+[CANJE58] ' Armadura Capa White RM+5 [C/P/W/C/A]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1254-1
+Points=1200
+Npc=738
+
+[CANJE59] ' Túnica de dragón RM+6 [Altos/Todas]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1253-1
+Points=1200
+Npc=738
+
+[CANJE60] ' Casco de craneo RM+4
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1249-1
+Points=1200
+Npc=738
+
+[CANJE61] ' Corona violeta RM +4
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1248-1
+Points=1200
+Npc=738
+
+[CANJE62] 'Corona verde rm+4
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1247-1
+Points=1200
+Npc=738
+
+[CANJE63] 'Casco rojo rm+4 [C/P/A/W/C/B]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1246-1
+Points=1200
+Npc=738
+
+[CANJE64] 'Escudo Vision [C/P/W/C/A/B]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1245-1
+Points=1200
+Npc=738
+
+[CANJE65] 'Escudo Del Diablo [C/P/W/C/A/B]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1244-1
+Points=1200
+Npc=738
+
+[CANJE66] 'Espada Aladin [P/C/W/]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1243-1
+Points=2000
+Npc=738
+
+[CANJE67] 'Arco Zeus
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1242-1
+Points=1200
+Npc=738
+
+[CANJE68] 'Arco Red
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1241-1
+Points=1200
+Npc=738
+
+[CANJE69] 'Espada Arcaño [C/P/W/]
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1240-1
+Points=1200
+Npc=738
+
+[CANJE70] 'Túnica Unicor (E/G)
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1273-1
+Points=1200
+Npc=738
+
+############# NPC 739 ##############################
+
+[CANJE71] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1152-1
+Points=1200
+Npc=739
+
+[CANJE72] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1159-1
+Points=1200
+Npc=739
+
+[CANJE73] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1160-1
+Points=1200
+Npc=739
+
+[CANJE74] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1161-1
+Points=2000
+Npc=739
+
+[CANJE75] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1162-1
+Points=1200
+Npc=739
+
+[CANJE76] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1163-1
+Points=1200
+Npc=739
+
+[CANJE77] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1166-1
+Points=1200
+Npc=739
+
+[CANJE78] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1167-1
+Points=1200
+Npc=739
+
+[CANJE79] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1168-1
+Points=1200
+Npc=739
+
+[CANJE80] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1169-1
+Points=1200
+Npc=739
+
+[CANJE81] 'alas de colores
+NumRequired=1
+ObjRequired1=880-700
+ObjCanje=1170-1
+Points=1200
+Npc=739
+
+[CANJE82] 'Vestidos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1177-1
+Points=2000
+Npc=739
+
+[CANJE83] 'Vestidos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1178-1
+Points=300
+Npc=739
+
+[CANJE84] 'Vestidos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1179-1
+Points=300
+Npc=739
+
+[CANJE85] 'Vestidos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1180-1
+Points=300
+Npc=739
+
+[CANJE86] 'Vestidos
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1181-1
+Points=300
+Npc=739
+
+[CANJE87] 'alas de demonio
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=114-1
+Points=1200
+Npc=739
+
+############ NPC 740 #######################################
+
+[CANJE88] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1315-1
+Points=1200
+Npc=740
+
+[CANJE89] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1314-1
+Points=1200
+Npc=740
+
+[CANJE90] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1313-1
+Points=1200
+Npc=740
+
+[CANJE91] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1311-1
+Points=1200
+Npc=740
+
+[CANJE92] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1310-1
+Points=1200
+Npc=740
+
+[CANJE93] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1312-1
+Points=1200
+Npc=740
+
+[CANJE94] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1309-1
+Points=1200
+Npc=740
+
+[CANJE95] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1306-1
+Points=1200
+Npc=740
+
+[CANJE96] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1305-1
+Points=1200
+Npc=740
+
+[CANJE97] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1302-1
+Points=1200
+Npc=740
+
+[CANJE98] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1301-1
+Points=1200
+Npc=740
+
+[CANJE99] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1300-1
+Points=1200
+Npc=740
+
+[CANJE100] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1299-1
+Points=1200
+Npc=740
+
+[CANJE101] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1298-1
+Points=1200
+Npc=740
+
+[CANJE102] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1297-1
+Points=1200
+Npc=740
+
+
+[CANJE103] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1294-1
+Points=1200
+Npc=740
+
+[CANJE104] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1293-1
+Points=1200
+Npc=740
+
+[CANJE105] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1292-1
+Points=1200
+Npc=740
+
+[CANJE106] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1291-1
+Points=1200
+Npc=740
+
+[CANJE107] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1290-1
+Points=1200
+Npc=740
+
+[CANJE108] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1289-1
+Points=1200
+Npc=740
+
+[CANJE109] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1288-1
+Points=1200
+Npc=740
+
+[CANJE110] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1287-1
+Points=1200
+Npc=740
+
+[CANJE111] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1286-1
+Points=1200
+Npc=740
+
+[CANJE112] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1285-1
+Points=1200
+Npc=500
+
+[CANJE113] 'ITEMS VIP
+NumRequired=0
+ObjRequired1=0-0
+ObjCanje=1284-1
+Points=1200
+Npc=740
+
+[CANJE114] 'puntos x dsp
+NumRequired=1
+ObjRequired1=880-100
+ObjCanje=1277-10
+Points=
+Npc=740

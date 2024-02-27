@@ -1,0 +1,12 @@
+[MAPA186]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=False
+NoEncriptarMP=0
+BackUp=1
+Pk=1
+Terreno=BOSQUE
+Zona=DUNGEON
+Name=Concilio de las Sombras
+OcultarSinEfecto=1
+Restringir=CAOS

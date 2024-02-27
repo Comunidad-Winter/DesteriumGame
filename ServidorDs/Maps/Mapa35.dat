@@ -1,0 +1,13 @@
+[MAPA35]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp=1
+MUSICNUM=3
+Pk=1
+Terreno=BOSQUE
+Zona=CAMPO
+Name=Mansión de Nix
+Restringir=NO
+OcultarSinEfecto=1

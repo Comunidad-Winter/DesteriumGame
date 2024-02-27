@@ -1,0 +1,11 @@
+[MAPA16]
+MagiaSinefecto=True
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp=0
+MUSICNUM=1
+Pk=0
+Terreno=DESIERTO
+Zona=CAMPO
+Name=Oasis

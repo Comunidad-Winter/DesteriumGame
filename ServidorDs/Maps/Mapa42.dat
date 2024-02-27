@@ -1,0 +1,14 @@
+[MAPA42]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+Restringir=QUINCE
+MUSICNUM=14
+BackUp= 1
+Pk=0
+Terreno=BOSQUE
+Zona=DUNGEON
+Name=Catacumbas
+OcultarSinEfecto=1
+InvocarSinEfecto=1

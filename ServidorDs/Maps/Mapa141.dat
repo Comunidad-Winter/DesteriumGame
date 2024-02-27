@@ -1,0 +1,12 @@
+[MAPA141]
+MagiaSinefecto=0
+InviSinEfecto=False
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp= 1
+Pk=1
+Terreno=BOSQUE
+Zona=DUNGEON
+Name=Pasillo Principal
+OcultarSinEfecto=0
+Restringir=NO

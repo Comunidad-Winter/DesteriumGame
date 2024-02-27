@@ -1,0 +1,13 @@
+[MAPA17]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=True
+NoEncriptarMP=0
+BackUp= 1
+MUSICNUM=1
+Pk=0
+Terreno=DESIERTO
+Zona=CAMPO
+Name=Desierto Rinkel
+OcultarSinEfecto=1
+InvocarSinEfecto=1

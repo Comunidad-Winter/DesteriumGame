@@ -1,0 +1,73 @@
+[INIT]
+NumCofres=4
+
+[COFRE1] ' Cofre Violeta (Items de Herrería)
+ObjIndex=1341
+Probabilidad=1
+NumObj=5
+Obj1=1037-2-5
+Obj2=405-1-50
+Obj3=646-1-30
+Obj4=403-1-45
+Obj5=880-1-45
+
+[COFRE2] 'Cofre Amarillo (Items Premium)
+ObjIndex=1342 
+Probabilidad=5
+NumObj=7
+Obj1=943-1-1
+Obj2=628-1-1
+Obj3=560-1-1
+Obj4=126-1-1
+Obj5=1037-1-1
+Obj6=943-1-1
+Obj7=623-1-7
+
+[COFRE3] ' Cofre Celeste
+ObjIndex=1343
+Probabilidad=16
+NumObj=15
+Obj1=1010-1-5
+Obj2=913-1-5
+Obj3=973-1-5
+Obj4=630-1-5
+Obj5=880-1-5
+Obj6=943-1-5
+Obj7=878-1-5
+Obj8=839-1-5
+
+
+[COFRE4] ' Cofre Verde
+ObjIndex=1344 'N
+Probabilidad=30 
+NumObj=6
+Obj1=390-1-25
+Obj2=391-1-25
+Obj3=392-1-25
+Obj4=393-1-25
+Obj5=481-1-25
+Obj5=482-1-25
+Obj6=485-1-25
+
+##########################################
+
+¡REVIVIENDO EL MUELLE DE NIX!
+Los Dioses han creado una caña de pesca, cubierta de oro solido que podrá sacar de la ciudad de Nix , valiosos cofres perdidos en el tiempo. Al abrirlos los mismos podrán revelar sus reliquias al usuario o bien desaparecer.
+
+Para pescar estos cofres, deberás comenzar por juntar monedas de oro y una vez obtenida la cantidad de 15.000.000 monedas de oro dirigirte a la ciudad de Nix. En la casa de pescadores encontrarás lo que necesitas para comenzar a pescar cofres! Tu personaje deberá ser nivel 35 o superior para equipar la caña.
+
+Recuerda que podrás subirte a tu barca para ubicarte en un lugar de tu agrado o bien pescar desde las orillas del rio.
+
+¡Existen 4 tipos de Cofres! En el muelle de Nix podrás agarrar 1 de los cuatro cofres disponibles. Cuando logres capturar el cofre tendrás diferentes porcentajes (%) dependiendo el cofre y el mismo hará que puedas pescar el cofre o no. Los cofres pueden dropear hasta 3 objetos seguidos!
+
+REQUISITOS E INFORMACIÓN:
+- Tener Caña de pesca de ORO. (Se consigue en Nix)
+- Tener 100 skills en Pesca.
+- Es necesario pescar únicamente en la ciudad de Nix.
+- Cada tirada de caña tiene un 80% de no pescar ningún cofre.
+
+OBTENCIÓN DE LOS COFRES:
+Cofre Violeta: (Fácil)
+Cofre Verde:   (Medio)
+Cofre Celeste: (Difícil)
+Cofre Amarillo: (Extremadamente Difícil)

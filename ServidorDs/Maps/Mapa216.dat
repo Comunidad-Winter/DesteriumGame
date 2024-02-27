@@ -1,0 +1,20 @@
+[MAPA211]
+Name=Nuevo Mapa
+MusicNum=0
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=1
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=CAMPO
+Restringir=NO
+BackUp= 0
+Pk=0
+[MAPA216]
+MagiaSinefecto=1
+InviSinEfecto=1
+ResuSinEfecto=1
+NoEncriptarMP=0
+BackUp= 0
+Pk=1
+Name=Busqueda

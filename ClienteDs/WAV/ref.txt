@@ -1,0 +1,13 @@
+109 = Elemental de agua
+
+110 =Elemental tierra
+
+111=Elemental de fuego
+
+112=Dungeon magma.
+
+113=Desequipar espada.
+
+114=Equipar espada.
+
+115=Abrir puerta con llave.

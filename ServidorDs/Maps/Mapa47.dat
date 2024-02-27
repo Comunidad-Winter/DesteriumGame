@@ -1,0 +1,14 @@
+[MAPA47]
+MagiaSinefecto=0
+InviSinEfecto=False
+ResuSinEfecto=False
+NoEncriptarMP=0
+BackUp= 1
+MUSICNUM=1
+Pk=1
+Terreno=BOSQUE
+Zona=CAMPO
+Name=Isla Veleta
+OcultarSinEfecto=0
+InvocarSinEfecto=1
+Restringir=NO

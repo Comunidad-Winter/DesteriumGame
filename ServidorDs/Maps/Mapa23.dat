@@ -1,0 +1,12 @@
+[MAPA23]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp=1
+Pk=0
+Terreno=BOSQUE
+Zona=CAMPO
+Name=Bosque
+OcultarSinEfecto=1
+Restringir=NO

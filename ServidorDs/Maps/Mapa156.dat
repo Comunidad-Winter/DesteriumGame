@@ -1,0 +1,12 @@
+[MAPA156]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=True
+NoEncriptarMP=0
+MUSICNUM=1
+BackUp= 1
+Pk=1
+Terreno=BOSQUE
+Zona=CAMPO
+Name=Arghâl Oeste
+InvocarSinEfecto=1

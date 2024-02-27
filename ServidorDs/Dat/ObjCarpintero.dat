@@ -1,0 +1,77 @@
+[INIT]
+NumObjs=25
+
+[Obj1] ' Cuchara
+Index=163
+
+[Obj2] ' Silla
+Index=168
+
+[Obj3] ' Barca
+Index=474
+
+[Obj4] ' Galera
+Index=475
+
+[Obj5] ' Galeón
+Index=476
+
+[Obj6] ' Arco simple
+Index=478
+
+[Obj7] ' Arco compuesto
+Index=479
+
+[Obj8] ' Flecha
+Index=480
+
+[Obj9] 'Laúd
+Index=469
+
+[Obj10] 'Tambor
+Index=362
+
+[Obj11] 'Flecha + 3
+Index=553
+
+[Obj12] ' Laud
+Index=469
+
+[Obj13] 'Tambor
+Index=362
+
+[Obj14] 'Flauta
+Index=540
+
+[Obj15] 'Flecha envenenada
+Index=551
+
+[Obj16] 'Flecha de tejo
+Index=828
+
+[Obj17] 'Flecha incendiaria
+Index=553
+
+[Obj18] 'Mueble rustico
+Index=167
+
+[Obj19] 'Arco simple reforzado
+Index=626
+
+[Obj20] 'Arco compuesto reforzado
+Index=627
+
+[Obj21] 'Arco de Cazador
+Index=628
+
+[Obj22] 'Laúd mágico
+Index=643
+
+[Obj23] 'Báculo Engarzada
+Index=623
+
+[Obj24] 'Bastón nudoso
+Index=624
+
+[Obj25] 'Vara de fresno
+Index=625

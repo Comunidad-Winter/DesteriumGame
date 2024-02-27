@@ -1,0 +1,53 @@
+[ENTENDERLO FACIL ACA ABAJO]
+El sistema es fácil, en el [INIT] tenes la cantidad de invasiones existentes y la cantidad de drops existentes. La idea es que mediante formulario vos elijas que invasion hacer. Vos antes configurado vas a tener Drops para las criaturas que respawneen. Donde el Drop caerá en el inventario del que mate a la criatura. Al igual que los canjes.
+
+Con respecto a los objetos dropeables, hay que tener en cuenta que es que cada objeto tiene su probabilidad de salir. Casi siempre se le da algo al usuario.
+
+
+
+' //EWsto facil.
+[INIT]
+NumInvasiones=1
+NumDrops=5
+
+
+
+' // Invasion 1, cantidad de npcs = 2 significa que hay dos tipos de npcs
+' // Npc1 = numero-cantidad-dropindex
+' // 10Araña gigante que podran o no, dar el drop 1
+[INVASION1]
+CantNpcs=6
+Npc1=737-7-1 'Numero-Cantidad-DropIndex
+Npc2=737-10-2 'Numero-Cantidad-DropIndex
+Npc3=736-10-3
+Npc4=729-10-1
+Npc5=729-10-4
+Npc6=726-10-5
+
+[DROP1]
+Points=0
+NumObj=2
+Obj1=1037-3-40
+Obj2=880-100-5
+Obj3=1037-1-70
+
+[DROP2]
+Points=15
+NumObj=1
+Obj1=880-150-30
+Obj2=880-400-5
+
+[DROP3]
+Points=30
+NumObj=1
+Obj1=880-150-30
+
+[DROP4]
+Points=0
+NumObj=1
+Obj1=880-200-40
+
+[DROP5]
+Points=10
+NumObj=1
+Obj1=880-300-10

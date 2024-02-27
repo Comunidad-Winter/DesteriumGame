@@ -1,0 +1,13 @@
+[MAPA48]
+MagiaSinefecto=0
+InviSinEfecto=False
+ResuSinEfecto=True
+NoEncriptarMP=0
+BackUp= 1
+MUSICNUM=1
+Pk=0
+Terreno=BOSQUE
+Zona=DUNGEON
+Name=Deadly Room
+Restringir=NO
+OcultarSinEfecto=0

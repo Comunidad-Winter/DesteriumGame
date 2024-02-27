@@ -1,0 +1,11 @@
+[MAPA209]
+Name=Dungeon Premium
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp=1
+Pk=1
+restringir=PREMIUM
+OcultarSinEfecto=1
+InvocarSinEfecto=0

@@ -1,0 +1,12 @@
+[MAPA39]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=True
+NoEncriptarMP=0
+BackUp= 1
+MUSICNUM=3
+Pk=0
+Terreno=BOSQUE
+Zona=CAMPO
+Name=Bosque Dorck
+OcultarSinEfecto=1

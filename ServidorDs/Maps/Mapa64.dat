@@ -1,0 +1,11 @@
+[MAPA64]
+MagiaSinefecto=0
+InviSinEfecto=False
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp= 1
+Pk=0
+Name=Lindos Este
+Terreno=BOSQUE
+Zona=CIUDAD
+OcultarSinEfecto=1

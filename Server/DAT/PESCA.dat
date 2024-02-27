@@ -1,7 +1,0 @@
-'RECORDAR: La pesca puede sacar más de un cofre a la vez dependiendo sus probabilidades.
-
-[INIT]
-ITEMS=3
-1=1341-1-4
-2=1343-1-4
-3=1037-1-5

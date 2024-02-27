@@ -1,0 +1,12 @@
+[MAPA10]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp= 1
+Pk=1
+Terreno=BOSQUE
+Zona=CAMPO
+Name=Bosque de Tigres
+Restringir=NO
+InvocarSinEfecto=1

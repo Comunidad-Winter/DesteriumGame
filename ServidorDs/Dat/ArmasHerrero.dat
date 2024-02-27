@@ -1,0 +1,71 @@
+[INIT]
+NumArmas=23
+
+[Arma1] ' Daga
+Index=15
+
+[Arma2] ' Daga +1
+Index=165
+
+[Arma3] ' Daga +2
+Index=365
+
+[Arma4] ' Daga +3
+Index=366
+
+[Arma5] ' Daga +4
+Index=367
+
+[Arma6] ' Espada Corta
+Index=164
+
+[Arma7] ' Espada Larga
+Index=2
+
+[Arma8] ' Espada Dos Manos
+Index=19
+
+[Arma9] ' Sable
+Index=125
+
+[Arma10] ' Espada vikinga
+Index=123
+
+[Arma11] 'Katana
+Index=124
+
+[Arma12] ' Hacha de Bárbaro
+Index=159
+
+[Arma13] ' Hacha larga de guerra
+Index=126
+
+[Arma14] ' Hacha de guerra dos filos
+Index=129
+
+[Arma15] ' Cimitarra
+Index=399
+
+[Arma16] ' Martillo de guerra
+Index=401
+
+[Arma17] ' Espada de plata
+Index=403
+
+[Arma18] ' Espada mata dragones
+Index=1037
+
+[Arma19] ' Hacha de leñador
+Index=127
+
+[Arma20] ' Hacha dorada
+Index=630
+
+[Arma21] ' Piquete de minero
+Index=187
+
+[Arma22] ' Serrucho
+Index=198
+
+[Arma23] ' Eldhir
+Index=943

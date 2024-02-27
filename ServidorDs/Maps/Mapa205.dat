@@ -1,0 +1,13 @@
+[MAPA205]
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=0
+NoEncriptarMP=0
+BackUp= 1
+Pk=0
+Name=Isla de Aprendices
+Terreno=NIEVE
+Zona=DUNGEON
+Restringir=NO
+InvocarSinEfecto=0
+OcultarSinEfecto=1

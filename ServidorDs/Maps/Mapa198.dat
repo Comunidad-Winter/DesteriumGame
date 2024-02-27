@@ -1,0 +1,13 @@
+[MAPA198]
+Name=Torneos Faccionarios
+MusicNum=54
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=True
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=DUNGEON
+Restringir=NO
+BackUp= 1
+Pk=1
+OcultarSinEfecto=1

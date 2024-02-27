@@ -1,0 +1,20 @@
+[EVENTO]
+Name=EVENTO
+MusicNum=0
+MagiaSinefecto=0
+InviSinEfecto=0
+ResuSinEfecto=0
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=CAMPO
+Restringir=No
+BackUp= 0
+Pk=0
+[Mapa207]
+Pk=1
+InviSinEfecto=True
+MagiaSinEfecto=True
+ResuSinEfecto=True
+Restringir=NO
+backup=1
+OcultarSinEfecto=1

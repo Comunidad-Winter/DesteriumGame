@@ -1,0 +1,84 @@
+
+[INIT]
+NumArmaduras=27
+
+[Armadura1] ' Cota de mallas
+Index=359
+
+[Armadura2] ' Cota de Mallas (H/E/EO-M)
+Index=499
+
+[Armadura3] ' Cota de mallas (E/G-H/M)
+Index=616
+
+[Armadura4] ' Armadura de placas completa
+Index=195
+
+[Armadura5] ' Armadura de placas completa + 1 
+Index=390
+
+[Armadura6] ' Armadura de placas completa + 2
+Index=391
+
+[Armadura7] ' Armadura de placas completa (E/G-H/M)
+Index=243
+
+[Armadura8] ' Armadura de gala (E/G-H/M)
+Index=392
+
+[Armadura9] ' Armadura de placas completa + 2 (E/G-H/M)
+Index=393
+
+[Armadura10] ' Armadura de herrero
+Index=484
+
+[Armadura11] ' Armadura de placas azules
+Index=489
+
+[Armadura12] ' Armadura de Placas Roja (Mujer)
+Index=493
+
+[Armadura13] ' Armadura de placas de gala
+Index=497
+
+[Armadura14] ' Armadura Escarlata
+Index=495
+
+[Armadura15] ' Armadura de la Ciénaga
+Index=496
+
+[Armadura16] ' Armadura Bruñida (E/G-H/M)
+Index=500
+
+[Armadura17] ' Armadura Legendaria
+Index=485
+
+[Armadura18] ' Dama de las Tinieblas
+Index=487
+
+[Armadura19] ' Escudo de hierro
+Index=130
+
+[Armadura20] ' Escudo Imperial
+Index=133
+
+[Armadura21] ' Casco de hierro
+Index=132
+
+[Armadura22] ' Casco de hierro completo
+Index=131
+
+[Armadura23] ' Casco de plata
+Index=405
+
+[Armadura24] ' Anillo de resistencia mágica
+Index=644
+
+[Armadura25] ' Anillo de protección mágica
+Index=645
+
+[Armadura26] ' Anillo de Disolución Mágica
+Index=646
+
+[Armadura27] ' Anillo mágico
+Index=648

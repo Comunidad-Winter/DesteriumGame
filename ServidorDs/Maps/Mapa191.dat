@@ -1,0 +1,11 @@
+[MAPA191]
+Name=Retos
+MagiaSinefecto=0
+InviSinEfecto=True
+ResuSinEfecto=1
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=DUNGEON
+BackUp= 1
+Pk=0
+OcultarSinEfecto=1

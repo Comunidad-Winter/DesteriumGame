@@ -1,0 +1,20 @@
+[MAPA216]
+Name=Enfrentamientos
+MusicNum=0
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=1
+NoEncriptarMP=0
+Terreno=BOSQUE
+Zona=CAMPO
+Restringir=NO
+BackUp= 0
+Pk=1
+[MAPA217]
+Name=Enfrentamientos
+MagiaSinefecto=0
+InviSinEfecto=1
+ResuSinEfecto=1
+NoEncriptarMP=0
+BackUp= 0
+Pk=1
