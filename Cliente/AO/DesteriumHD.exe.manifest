@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3">
+    <assemblyIdentity name="Desterium" processorArchitecture="X86" type="win32" version="1.2.0.4" />
+    <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+        <security>
+            <requestedPrivileges>
+                <requestedExecutionLevel level="requireAdministrator" uiAccess="false"/>
+            </requestedPrivileges>
+        </security>
+    </trustInfo> 
+ <dependency>
+        <dependentAssembly>
+            <assemblyIdentity language="*" name="Microsoft.Windows.Common-Controls" processorArchitecture="X86" publicKeyToken="6595b64144ccf1df" type="win32" version="6.0.0.0" />
+        </dependentAssembly>
+    </dependency>
+    <file name="Aurora.Multimedia.dll">
+        <typelib tlbid="{BCAA90BC-24DB-4470-901A-CD7932B14011}" version="1.0" flags="hasdiskimage" helpdir="" />
+        <comClass clsid="{4D539813-A654-44D0-B7EE-B347AE1BD08A}"/>
+        <comClass clsid="{DCC3659F-FFEF-4B7B-A7B8-77F5BA079986}"/>
+	<comClass clsid="{7282A944-80D0-4CFD-AC9C-55B70518EEB3}"/>
+        <comClass clsid="{DCC3659F-FFEF-4B7B-A7B8-77F5BA079988}"/>
+    </file>
+	
+    <file name="Aurora.Network.dll">
+        <typelib tlbid="{88D89F7C-BB59-4F13-9850-93CBD874039D}" version="1.5" flags="hasdiskimage" helpdir="" />
+        <comClass clsid="{07CC11E3-D300-4CD4-9EB0-C4EB4D63865D}"/>
+        <comClass clsid="{ACF5D638-7DDD-443D-B9B4-E5DC3C01BB4C}"/>
+        <comClass clsid="{9BE50AF2-385F-4C56-9826-65C320451642}"/>
+        <comClass clsid="{AC398261-6275-4797-950A-5B914DDB2130}"/>
+        <comClass clsid="{25DEA4F0-4C5B-4674-B357-2C6FFE8ABF46}"/>
+    </file>
+
+    <file name="RICHTX32.OCX">
+        <typelib tlbid="{3B7C8863-D78F-101B-B9B5-04021C009402}" version="1.2" flags="hasdiskimage" helpdir="" />
+        <comClass clsid="{2334D2B2-713E-11CF-8AE5-00AA00C00905}"/>
+        <comClass clsid="{2334D2B4-713E-11CF-8AE5-00AA00C00905}"/>
+        <comClass clsid="{3B7C8860-D78F-101B-B9B5-04021C009402}"/>
+        <comClass clsid="{4A8F35A0-D900-11CF-89B4-00AA00688B10}"/>
+        <comClass clsid="{4A8F35A1-D900-11CF-89B4-00AA00688B10}"/>
+    </file>
+
+    <file name="ComDlg32.OCX">
+        <typelib tlbid="{F9043C88-F6F2-101A-A3C9-08002B2F49FB}" version="1.2" flags="hasdiskimage" helpdir="" />
+        <comClass clsid="{F9043C85-F6F2-101A-A3C9-08002B2F49FB}"/>
+    </file>
+
+ <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+        <application>
+            <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />
+        </application>
+    </compatibility>
+    <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+        <application>
+            <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+        </application>
+    </compatibility>
+</assembly>

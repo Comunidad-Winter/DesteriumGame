@@ -1,0 +1,24 @@
+[1] ' Normal
+R=255
+G=255
+B=0
+[2] ' Clan
+R=228
+G=218
+B=70
+[3] ' Party
+R=228
+G=218
+B=76
+[4] ' Gritar
+R=240
+G=60
+B=60
+[5] ' Palabras Mágicas
+R=16
+G=246
+B=255
+[6] ' Susurrar
+R=132
+G=245
+B=200
