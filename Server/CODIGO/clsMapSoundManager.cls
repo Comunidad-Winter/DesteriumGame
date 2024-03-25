@@ -68,6 +68,7 @@ Private Sub Class_Initialize()
     'armar el array
     ReDim p_Mapas(1 To NumMaps) As p_tSoundMapInfo
     Call LoadSoundMapInfo
+
 End Sub
 
 Public Sub LoadSoundMapInfo()
@@ -103,6 +104,7 @@ Public Sub LoadSoundMapInfo()
 
         Else
             p_Mapas(i).cantidad = 0
+
         End If
 
     Next i
@@ -133,8 +135,11 @@ Public Sub ReproducirSonidosDeMapas()
                 'tocarlo
                 If p_Mapas(i).flags(SonidoMapa) Xor p_eSoundFlags.ninguna Then
                     Call SendData(SendTarget.toMap, i, PrepareMessagePlayEffect(p_Mapas(i).SoundIndex(SonidoMapa), posX, posY))
+
                 End If
+
             End If
+
         End If
 
     Next i
@@ -144,5 +149,6 @@ End Sub
 Public Sub ReproducirSonido(ByVal Destino As SendTarget, _
                             ByVal Index As Integer, _
                             ByVal SoundIndex As Integer)
-    Call SendData(Destino, Index, PrepareMessagePlayEffect(SoundIndex, UserList(Index).Pos.X, UserList(Index).Pos.Y, UserList(Index).Char.CharIndex))
+    Call SendData(Destino, Index, PrepareMessagePlayEffect(SoundIndex, UserList(Index).Pos.X, UserList(Index).Pos.Y, UserList(Index).Char.charindex))
+
 End Sub

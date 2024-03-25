@@ -625,16 +625,18 @@ Private Const ANCHO_BARRA      As Byte = 73 'pixeles
 
 Private Const BAR_LEFT_POS     As Integer = 361 'pixeles
 
-
 ' Botones Graficos
-Private cBotonCerrar       As clsGraphicalButton
-Private cBotonAceptar    As clsGraphicalButton
+Private cBotonCerrar           As clsGraphicalButton
 
-Public LastButtonPressed   As clsGraphicalButton
+Private cBotonAceptar          As clsGraphicalButton
+
+Public LastButtonPressed       As clsGraphicalButton
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
 End Sub
@@ -646,13 +648,11 @@ Private Sub Form_Load()
     
     Me.Picture = LoadPicture(DirInterface & "menucompacto\skills.jpg")
     
-    
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
         Set clsFormulario = New clsFormMovementManager
         clsFormulario.Initialize Me
     #End If
-    
           
     'Flags para saber que skills se modificaron
     ReDim Flags(1 To NUMSKILLS)
@@ -670,13 +670,16 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub LoadButtons()
+
     Dim GrhPath As String
+
     GrhPath = DirInterface
 
     Set cBotonAceptar = New clsGraphicalButton
     
     Set LastButtonPressed = New clsGraphicalButton
     Call cBotonAceptar.Initialize(imgAceptar, GrhPath & "menucompacto\buttons\save.jpg", GrhPath & "menucompacto\buttons\save_hover.jpg", GrhPath & "menucompacto\buttons\save.jpg", Me)
+
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -689,11 +692,12 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         imgMenos(A).Picture = Nothing
         imgMas(A).Picture = Nothing
     Next A
-End Sub
 
+End Sub
 
 Private Sub imgCerrar_Click()
     Unload Me
+
 End Sub
 
 Private Sub SumarSkillPoint(ByVal SkillIndex As Integer)
@@ -709,9 +713,10 @@ Private Sub SumarSkillPoint(ByVal SkillIndex As Integer)
                   
     End If
           
-   ' SkillPoints = Alocados
-   lblSkill(SkillIndex).Caption = UserEstadisticas.Skills(SkillIndex)
-   lblPoints.Caption = Alocados
+    ' SkillPoints = Alocados
+    lblSkill(SkillIndex).Caption = UserEstadisticas.Skills(SkillIndex)
+    lblPoints.Caption = Alocados
+
 End Sub
 
 Private Sub RestarSkillPoint(ByVal SkillIndex As Integer)
@@ -722,66 +727,83 @@ Private Sub RestarSkillPoint(ByVal SkillIndex As Integer)
             UserEstadisticas.Skills(SkillIndex) = Val(UserEstadisticas.Skills(SkillIndex)) - 1
             Flags(SkillIndex) = Flags(SkillIndex) - 1
             Alocados = Alocados + 1
+
         End If
+
     End If
-          
           
     'SkillPoints = Alocados
     lblSkill(SkillIndex).Caption = UserEstadisticas.Skills(SkillIndex)
     lblPoints.Caption = Alocados
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     MirandoEstadisticas = False
+
 End Sub
 
 Private Sub imgAceptar_Click()
     
     On Error GoTo ErrHandler
-    
-    
 
-        Dim skillChanges(NUMSKILLS) As Byte
+    Dim skillChanges(NUMSKILLS) As Byte
     
-        Dim i                       As Long
+    Dim i                       As Long
     
-    
-        If SkillPoints > 0 Then
-            For i = 1 To NUMSKILLS
-                skillChanges(i) = CByte(UserEstadisticas.Skills(i)) - UserSkills(i)
-                'Actualizamos nuestros datos locales
-                UserSkills(i) = Val(UserEstadisticas.Skills(i))
-            Next i
+    If SkillPoints > 0 Then
+
+        For i = 1 To NUMSKILLS
+            skillChanges(i) = CByte(UserEstadisticas.Skills(i)) - UserSkills(i)
+            'Actualizamos nuestros datos locales
+            UserSkills(i) = Val(UserEstadisticas.Skills(i))
+        Next i
             
-            Call WriteModifySkills(skillChanges())
+        Call WriteModifySkills(skillChanges())
               
-            SkillPoints = Alocados
-        End If
-        
+        SkillPoints = Alocados
+
+    End If
     
     Unload Me
 
     Exit Sub
 
 ErrHandler:
+
 End Sub
 
 Private Sub imgMas_Click(Index As Integer)
-     Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
     Call SumarSkillPoint(Index)
+
 End Sub
 
-Private Sub imgMas_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgMas_MouseMove(Index As Integer, _
+                             Button As Integer, _
+                             Shift As Integer, _
+                             X As Single, _
+                             Y As Single)
     imgMas(Index).Picture = LoadPicture(DirInterface & "menucompacto\buttons\mas.jpg")
+
 End Sub
-Private Sub imgMenos_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgMenos_MouseMove(Index As Integer, _
+                               Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     imgMenos(Index).Picture = LoadPicture(DirInterface & "menucompacto\buttons\menos.jpg")
+
 End Sub
+
 Private Sub imgMenos_Click(Index As Integer)
-     Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
     Call RestarSkillPoint(Index)
+
 End Sub
 
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub

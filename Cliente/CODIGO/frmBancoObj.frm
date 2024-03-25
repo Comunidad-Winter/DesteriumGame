@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmBancoObj 
    BackColor       =   &H80000000&
    BorderStyle     =   0  'None
@@ -300,9 +300,6 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-
-
-
 '[CODE]:MatuX
 '
 '    Le puse el iconito de la manito a los botones ^_^ y
@@ -348,44 +345,63 @@ Public LastIndex2     As Integer
 
 Public NoPuedeMover   As Boolean
 
-Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+Private Declare Function SetWindowLong _
+                Lib "user32" _
+                Alias "SetWindowLongA" (ByVal hWnd As Long, _
+                                        ByVal nIndex As Long, _
+                                        ByVal dwNewLong As Long) As Long
+
 Private Const GWL_EXSTYLE = -20
+
 Private Const WS_EX_LAYERED = &H80000
+
 Private Const WS_EX_TRANSPARENT As Long = &H20&
 
 Public Enum eSolapaBanco
+
     Npc = 1
     User = 2
+
 End Enum
 
 Public Enum eModo
-        M_GLD = 1
-        M_DSP = 2
+
+    M_GLD = 1
+    M_DSP = 2
+
 End Enum
 
-Public ModoBank As eModo
+Public ModoBank   As eModo
+
 Public SolapaView As eSolapaBanco
 
 Private Sub cantidad_Change()
 
     If Val(cantidad.Text) <= 1 Then
         cantidad.Text = 1
+
     End If
     
     If Not IsNumeric(cantidad.Text) Then
         cantidad.Text = 1
+
     End If
         
     If ModoBank = M_GLD Or ModoBank = M_DSP Then
         If Val(cantidad.Text) > 10000000 Then
             cantidad.Text = 10000000
             cantidad.SelStart = Len(cantidad.Text)
+
         End If
+
     Else
+
         If Val(cantidad.Text) > 10000 Then
             cantidad.Text = 10000
             cantidad.SelStart = Len(cantidad.Text)
+
         End If
+
     End If
     
     Dim ItemSlot As Byte
@@ -393,9 +409,12 @@ Private Sub cantidad_Change()
 End Sub
 
 Private Sub cantidad_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub cantidad_KeyPress(KeyAscii As Integer)
@@ -403,31 +422,38 @@ Private Sub cantidad_KeyPress(KeyAscii As Integer)
     If (KeyAscii <> 8) Then
         If (KeyAscii <> 6) And (KeyAscii < 48 Or KeyAscii > 57) Then
             KeyAscii = 0
+
         End If
+
     End If
 
 End Sub
 
-
 Private Sub Form_Click()
+
     If Not InvComNpc Is Nothing Then
-    InvComNpc.DeselectItem
+        InvComNpc.DeselectItem
+
     End If
     
     If Not InvComUsu Is Nothing Then
-    InvComUsu.DeselectItem
+        InvComUsu.DeselectItem
+
     End If
+
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         FrmMain.SetFocus
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub Form_Load()
-
 
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
@@ -437,21 +463,24 @@ Private Sub Form_Load()
     
     ' Ventanas de BOVEDA
     g_Captions(eCaption.Boveda_Npc) = wGL_Graphic.Create_Device_From_Display(frmBancoObj.PicBancoInv.hWnd, frmBancoObj.PicBancoInv.ScaleWidth, frmBancoObj.PicBancoInv.ScaleHeight)
-    g_Captions(eCaption.Boveda_User) = wGL_Graphic.Create_Device_From_Display(frmBancoObj.PicInv.hWnd, frmBancoObj.PicInv.ScaleWidth, frmBancoObj.PicInv.ScaleHeight)
+    g_Captions(eCaption.Boveda_User) = wGL_Graphic.Create_Device_From_Display(frmBancoObj.picInv.hWnd, frmBancoObj.picInv.ScaleWidth, frmBancoObj.picInv.ScaleHeight)
     
-    Me.Picture = LoadPicture(App.path & "\resource\interface\bank\bank_item.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\bank\bank_item.jpg")
     
     lblGld.Caption = IIf(UserBankGold > 0, Format$(UserBankGold, "##,##"), "0")
     lblDSP.Caption = IIf(UserBankEldhir > 0, Format$(UserBankEldhir, "##,##"), "0")
     
     GldUser.Caption = PonerPuntos(UserGLD)
+
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     
     If MirandoObjetos Then
         FrmObject_Info.Close_Form
+
     End If
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -466,6 +495,7 @@ Private Sub Form_Unload(Cancel As Integer)
 
     If MirandoObjetos Then
         Call FrmObject_Info.Close_Form
+
     End If
 
 End Sub
@@ -473,10 +503,13 @@ End Sub
 Public Sub Bank_Money(ByVal Modo As eModo, ByVal ModoExtract As Boolean)
 
     Select Case Modo
+
         Case eModo.M_GLD
             Call WriteBankGold(Val(cantidad.Text), 0, ModoExtract)
+
         Case eModo.M_DSP
             Call WriteBankGold(Val(cantidad.Text), 1, ModoExtract)
+
     End Select
     
 End Sub
@@ -530,14 +563,17 @@ Private Sub SelectedModo(ByVal Modo As eModo)
     Select Case ModoBank
     
         Case eModo.M_DSP
-            imgDsp.Picture = LoadPicture(App.path & "\resource\interface\bank\dsp_clic.jpg")
+            imgDsp.Picture = LoadPicture(App.path & "\AO\resource\interface\bank\dsp_clic.jpg")
             imgGld.Picture = Nothing
+
         Case eModo.M_GLD
-            imgGld.Picture = LoadPicture(App.path & "\resource\interface\bank\gld_clic.jpg")
+            imgGld.Picture = LoadPicture(App.path & "\AO\resource\interface\bank\gld_clic.jpg")
             imgDsp.Picture = Nothing
+
     End Select
     
 End Sub
+
 Private Sub imgDsp_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
@@ -545,6 +581,7 @@ Private Sub imgDsp_Click()
     InvBanco(1).DeselectItem
     
     SelectedModo (M_DSP)
+
 End Sub
 
 Private Sub imgGld_Click()
@@ -563,29 +600,37 @@ Private Sub imgScroll_Click(Index As Integer)
     
         Case 0 ' Scroll volver >> Banco
             InvBanco(0).ScrollInventory (False)
+
         Case 1 ' Scroll Avanzar >> Banco
             InvBanco(0).ScrollInventory (True)
+
         Case 2 ' Scroll Volver >> User
             InvBanco(1).ScrollInventory (False)
+
         Case 3 ' Scroll Avanzar >> User
             InvBanco(1).ScrollInventory (True)
+
     End Select
     
 End Sub
 
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub lblDsp_Click()
     imgDsp_Click
+
 End Sub
 
 Private Sub lblGld_Click()
     imgGld_Click
+
 End Sub
 
 Private Sub PicBancoInv_Click()
+
     If ModoBank > 0 Then
         ModoBank = 0
         imgDsp.Picture = Nothing
@@ -594,35 +639,45 @@ Private Sub PicBancoInv_Click()
         If Val(cantidad.Text) > 10000 Then
             cantidad.Text = 10000
             cantidad.SelStart = Len(cantidad.Text)
+
         End If
+
     End If
     
 End Sub
 
 Private Sub PicBancoInv_DblClick()
+
     Dim ItemSlot As Byte
+
     ItemSlot = InvBanco(0).SelectedItem
 
     If ItemSlot = 0 Then Exit Sub
     SelectedObjIndex = InvBanco(0).ObjIndex(InvBanco(0).SelectedItem)
     SelectedObjIndex_Update
+
 End Sub
 
 Private Sub PicBancoInv_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub PicInv_DblClick()
+
     Dim ItemSlot As Byte
+
     ItemSlot = InvBanco(1).SelectedItem
 
     If ItemSlot = 0 Then Exit Sub
     SelectedObjIndex = InvBanco(1).ObjIndex(InvBanco(1).SelectedItem)
     SelectedObjIndex_Update
-End Sub
 
+End Sub
 
 ''
 ' Calculates the selling price of an item (The price that a merchant will sell you the item)
@@ -648,6 +703,7 @@ Private Function CalculateSellPrice(ByRef objValue As Single, _
 
 error:
     MsgBox err.Description, vbExclamation, "Error: " & err.Number
+
 End Function
 
 ''
@@ -673,36 +729,41 @@ Private Function CalculateBuyPrice(ByRef objValue As Single, _
 
 error:
     MsgBox err.Description, vbExclamation, "Error: " & err.Number
+
 End Function
 
 Private Sub PicInv_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub Timer_Timer()
     Timer.Enabled = False
-End Sub
 
+End Sub
 
 ' Drag And Drop
 Private Function Search_GhID(gh As Integer) As Integer
 
-    Dim I As Integer
+    Dim i As Integer
 
-    For I = 1 To frmBancoObj.ImageList1.ListImages.Count
+    For i = 1 To frmBancoObj.ImageList1.ListImages.Count
 
-        If frmBancoObj.ImageList1.ListImages(I).Key = "g" & CStr(gh) Then
-            Search_GhID = I
+        If frmBancoObj.ImageList1.ListImages(i).Key = "g" & CStr(gh) Then
+            Search_GhID = i
 
             Exit For
 
         End If
 
-    Next I
+    Next i
 
 End Function
+
 Private Sub PicInv_MouseMove(Button As Integer, _
                              Shift As Integer, _
                              X As Single, _
@@ -710,7 +771,7 @@ Private Sub PicInv_MouseMove(Button As Integer, _
 
     Dim Position  As Integer
 
-    Dim I         As Long
+    Dim i         As Long
 
     Dim file_path As String
 
@@ -738,31 +799,33 @@ Private Sub PicInv_MouseMove(Button As Integer, _
                 Position = Search_GhID(3057)
                   
                 If Position = 0 Then
-                    I = GrhData(InvBanco(1).GrhIndex(InvBanco(1).SelectedItem)).FileNum
+                    i = GrhData(InvBanco(1).GrhIndex(InvBanco(1).SelectedItem)).FileNum
                     Call Get_Image(DirGraficos & GRH_RESOURCE_FILE_DEFAULT, CStr(3057), data, False)
                     Set bmpData = ArrayToPicture(data(), 0, UBound(data) + 1) ' GSZAO ' GSZAO
                     frmBancoObj.ImageList1.ListImages.Add , "g3057", Picture:=bmpData
                     Position = frmBancoObj.ImageList1.ListImages.Count
                     Set bmpData = Nothing
+
                 End If
                  
-                Set PicInv.MouseIcon = frmBancoObj.ImageList1.ListImages(Position).ExtractIcon
-                frmBancoObj.PicInv.MousePointer = vbCustom
+                Set picInv.MouseIcon = frmBancoObj.ImageList1.ListImages(Position).ExtractIcon
+                frmBancoObj.picInv.MousePointer = vbCustom
        
                 Exit Sub
 
             End If
+
         End If
         
-        
-    'Else
-       ' If MirandoObjetos Then
-          '  FrmObject_Info.Top = Me.Top + Y
-          ' FrmObject_Info.Left = Me.Left + X
+        'Else
+        ' If MirandoObjetos Then
+        '  FrmObject_Info.Top = Me.Top + Y
+        ' FrmObject_Info.Left = Me.Left + X
         'End If
     End If
 
 End Sub
+
 Private Sub PicBancoInv_MouseMove(Button As Integer, _
                                   Shift As Integer, _
                                   X As Single, _
@@ -770,7 +833,7 @@ Private Sub PicBancoInv_MouseMove(Button As Integer, _
 
     Dim Position  As Integer
 
-    Dim I         As Long
+    Dim i         As Long
 
     Dim file_path As String
 
@@ -790,7 +853,6 @@ Private Sub PicBancoInv_MouseMove(Button As Integer, _
     If InvBanco(0).SelectedItem = 0 Then Exit Sub
     If (Button = vbRightButton) Then
         
-        
         If InvBanco(0).GrhIndex(InvBanco(0).SelectedItem) > 0 Then
             Last_I = InvBanco(0).SelectedItem
 
@@ -799,12 +861,13 @@ Private Sub PicBancoInv_MouseMove(Button As Integer, _
                 Position = Search_GhID(3057)
                   
                 If Position = 0 Then
-                    I = GrhData(InvBanco(0).GrhIndex(InvBanco(0).SelectedItem)).FileNum
+                    i = GrhData(InvBanco(0).GrhIndex(InvBanco(0).SelectedItem)).FileNum
                     Call Get_Image(DirGraficos & GRH_RESOURCE_FILE_DEFAULT, CStr(3057), data, False)
                     Set bmpData = ArrayToPicture(data(), 0, UBound(data) + 1)
                     frmBancoObj.ImageList1.ListImages.Add , "g3057", Picture:=bmpData
                     Position = frmBancoObj.ImageList1.ListImages.Count
                     Set bmpData = Nothing
+
                 End If
                  
                 Set PicBancoInv.MouseIcon = frmBancoObj.ImageList1.ListImages(Position).ExtractIcon
@@ -813,24 +876,27 @@ Private Sub PicBancoInv_MouseMove(Button As Integer, _
                 Exit Sub
 
             End If
+
         End If
        
     End If
 
 End Sub
+
 Private Sub PicInv_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     
     If InvBanco(1).SelectedItem = 0 Then Exit Sub
     
     If Not (Button = vbRightButton) Then Exit Sub
-    If Not (X > 0 And X < PicInv.ScaleWidth And Y > 0 And Y < PicInv.ScaleHeight) Then
+    If Not (X > 0 And X < picInv.ScaleWidth And Y > 0 And Y < picInv.ScaleHeight) Then
         Call WriteBankDeposit(InvBanco(1).SelectedItem, cantidad.Text, SelectedBank)
           
         InvBanco(1).sMoveItem = False
         InvBanco(1).uMoveItem = False
           
     End If
-    PicInv.MousePointer = vbDefault
+
+    picInv.MousePointer = vbDefault
 
 End Sub
 
@@ -843,6 +909,7 @@ Private Sub PicBancoInv_MouseUp(Button As Integer, _
     If Not (Button = vbRightButton) Then Exit Sub
     If Not (X > 0 And X < PicBancoInv.ScaleWidth And Y > 0 And Y < PicBancoInv.ScaleHeight) Then
         Call WriteBankExtractItem(InvBanco(0).SelectedItem, Val(cantidad.Text), SelectedBank)
+
     End If
 
     PicBancoInv.MousePointer = vbDefault
@@ -852,7 +919,9 @@ Private Sub PicBancoInv_MouseUp(Button As Integer, _
 End Sub
 
 Private Sub tUpdate_Timer()
+
     If Not MirandoBanco Then Exit Sub
     Call InvBanco(0).DrawInventory
     Call InvBanco(1).DrawInventory
+
 End Sub

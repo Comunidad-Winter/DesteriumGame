@@ -34,7 +34,7 @@ Attribute VB_Exposed = False
 '**************************************************************************
 Option Explicit
 
-Private WithEvents ButtonHolder As image
+Private WithEvents ButtonHolder As Image
 Attribute ButtonHolder.VB_VarHelpID = -1
 
 Private RollOverButtonImage     As Picture  'img holder
@@ -53,7 +53,7 @@ Private OverButton              As Boolean 'Indicates wether the mouse is over t
 
 Private Disabled                As Boolean 'Indicates wether it's enabled or not
 
-Public Sub Initialize(ByRef imgButton As image, _
+Public Sub Initialize(ByRef imgButton As Image, _
                       ByVal imgNormalPath As String, _
                       ByVal imgRollOverPath As String, _
                       ByVal imgClickPath As String, _
@@ -82,6 +82,7 @@ Public Sub Initialize(ByRef imgButton As image, _
         If ShowHandPointer Then
             .MousePointer = vbCustom
             .MouseIcon = picMouseIcon
+
         End If
         
         If StartDisabled Then
@@ -89,6 +90,7 @@ Public Sub Initialize(ByRef imgButton As image, _
             .Picture = DisabledButtonImage
         Else
             .Picture = NormalButtonImage
+
         End If
 
     End With
@@ -107,6 +109,7 @@ Private Sub ButtonHolder_Click()
     If Not SoundClick Then Exit Sub
     
     Call Audio.PlayInterface(SND_CLICK)
+
 End Sub
 
 Private Sub ButtonHolder_MouseDown(Button As Integer, _
@@ -123,6 +126,7 @@ Private Sub ButtonHolder_MouseDown(Button As Integer, _
     If Disabled Then Exit Sub
     
     ButtonHolder.Picture = ClickButtonImage
+
 End Sub
 
 Private Sub ButtonHolder_MouseMove(Button As Integer, _
@@ -149,11 +153,13 @@ Private Sub ButtonHolder_MouseMove(Button As Integer, _
         OverButton = True
         
         Set FormActual.LastButtonPressed = Me
+
     End If
 
     Exit Sub
 
 ErrHandler:
+
 End Sub
 
 Public Sub ToggleToNormal()
@@ -169,6 +175,7 @@ Public Sub ToggleToNormal()
     
     ButtonHolder.Picture = NormalButtonImage
     OverButton = False
+
 End Sub
 
 Private Sub ButtonHolder_MouseUp(Button As Integer, _
@@ -185,6 +192,7 @@ Private Sub ButtonHolder_MouseUp(Button As Integer, _
     If Disabled Then Exit Sub
     
     ButtonHolder.Picture = RollOverButtonImage
+
 End Sub
 
 Public Sub EnableButton(Optional ByVal ToogleEnable As Boolean = True)
@@ -198,10 +206,12 @@ Public Sub EnableButton(Optional ByVal ToogleEnable As Boolean = True)
         ButtonHolder.Picture = DisabledButtonImage
     Else
         ButtonHolder.Picture = NormalButtonImage
+
     End If
     
 End Sub
 
 Public Function IsEnabled() As Boolean
     IsEnabled = Not Disabled
+
 End Function

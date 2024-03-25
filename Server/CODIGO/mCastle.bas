@@ -2,14 +2,17 @@ Attribute VB_Name = "mCastle"
 Option Explicit
 
 Public Enum eCastle
+
     CASTLE_NORTH = 1
     CASTLE_EAST = 2
     CASTLE_SOUTH = 3
     CASTLE_WEST = 4
     CASTLE_TOTAL = 5
+
 End Enum
 
 Public Type tCastle
+
     Name As String
     GuildName As String
     GuildIndex As Integer
@@ -21,53 +24,64 @@ Public Type tCastle
     Map As Integer
     
     LastAttack As Integer
+
 End Type
 
 Public CastleBonus As Integer
-Public CastleLast As Integer
-Public Castle() As tCastle
+
+Public CastleLast  As Integer
+
+Public Castle()    As tCastle
 
 ' #Chequea si puede atacar al castillo
-Public Function Castle_CanAttack(ByVal GuildIndex As Integer, ByVal CastleIndex As Integer) As Boolean
+Public Function Castle_CanAttack(ByVal GuildIndex As Integer, _
+                                 ByVal CastleIndex As Integer) As Boolean
     
-    On Error GoTo Errhandler
+    On Error GoTo ErrHandler
     
     With Castle(CastleIndex)
+
         If GuildIndex = .GuildIndex Then
             Castle_CanAttack = False
+
         End If
         
     End With
     
     Exit Function
-Errhandler:
+ErrHandler:
      
 End Function
 
 ' # Comprueba que pueda aplicar el BONUS
-Public Function Castle_CheckBonus(ByVal GuildIndex As Integer, ByVal CastleIndex As eCastle) As Boolean
+Public Function Castle_CheckBonus(ByVal GuildIndex As Integer, _
+                                  ByVal CastleIndex As eCastle) As Boolean
     
-    On Error GoTo Errhandler
+    On Error GoTo ErrHandler
     
     If GuildIndex > 0 Then
         If Castle(CastleIndex).GuildIndex = GuildIndex Then
             Castle_CheckBonus = True
+
         End If
+
     End If
                 
     Exit Function
-Errhandler:
+ErrHandler:
+
 End Function
 
 ' # Cargamos la info de castillos
 Public Sub Castle_Load()
 
-    On Error GoTo Errhandler
+    On Error GoTo ErrHandler
     
-    Dim A As Long
+    Dim A        As Long
+
     Dim FilePath As String
     
-    Dim Manager As clsIniManager
+    Dim Manager  As clsIniManager
     
     Set Manager = New clsIniManager
     
@@ -80,6 +94,7 @@ Public Sub Castle_Load()
     ReDim Castle(1 To CastleLast) As tCastle
     
     For A = 1 To CastleLast
+
         With Castle(A)
             .Name = Manager.GetValue(A, "NAME")
             .GuildName = Manager.GetValue(A, "GUILDNAME")
@@ -89,28 +104,30 @@ Public Sub Castle_Load()
             .LastAttack = val(Manager.GetValue(A, "LASTATTACK"))
             .Map = val(Manager.GetValue(A, "MAP"))
             
-            
             MapInfo(.Map).FreeAttack = True
+
         End With
+
     Next A
     
     Set Manager = Nothing
     
     Castle_Save
     Exit Sub
-Errhandler:
+ErrHandler:
     
 End Sub
 
 ' # Guardamos la info de castillos
 Public Sub Castle_Save()
 
-    On Error GoTo Errhandler
+    On Error GoTo ErrHandler
     
-    Dim A As Long
+    Dim A        As Long
+
     Dim FilePath As String
     
-    Dim Manager As clsIniManager
+    Dim Manager  As clsIniManager
     
     Set Manager = New clsIniManager
     
@@ -120,6 +137,7 @@ Public Sub Castle_Save()
     Call Manager.ChangeValue("INIT", "CASTLEBONUS", CastleBonus)
     
     For A = 1 To CastleLast
+
         With Castle(A)
             Call Manager.ChangeValue(A, "NAME", .Name)
             Call Manager.ChangeValue(A, "GUILDNAME", .GuildName)
@@ -128,25 +146,26 @@ Public Sub Castle_Save()
             Call Manager.ChangeValue(A, "DESC", .Desc)
             Call Manager.ChangeValue(A, "LASTATTACK", .LastAttack)
             Call Manager.ChangeValue(A, "MAP", CStr(.Map))
+
         End With
+
     Next A
     
     Manager.DumpFile FilePath
     Set Manager = Nothing
     
     Exit Sub
-Errhandler:
+ErrHandler:
     
 End Sub
-
 
 ' # Avisa que el castillo está siendo atacado.
 Public Sub Castle_Attack(ByVal CastleIndex As Integer, ByVal GuildIndex As Integer)
     
-    On Error GoTo Errhandler
-    
+    On Error GoTo ErrHandler
     
     Dim Time As Long
+
     Time = GetTime
     
     With Castle(CastleIndex)
@@ -158,33 +177,38 @@ Public Sub Castle_Attack(ByVal CastleIndex As Integer, ByVal GuildIndex As Integ
         Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("El '" & .Name & "' está siendo atacado por el clan '" & GuildsInfo(GuildIndex).Name & "'", FontTypeNames.FONTTYPE_GUILD))
         
         .LastSpam = GetTime
+
     End With
     
     Exit Sub
-Errhandler:
+ErrHandler:
     
 End Sub
 
 ' # Chequea que tenga todos los Castillos Conquistados
 Public Function Castle_CheckAllConquist(ByVal GuildIndex As Integer) As Boolean
 
-    On Error GoTo Errhandler
+    On Error GoTo ErrHandler
     
     Dim A As Long
     
     For A = 1 To CastleLast
+
         With Castle(A)
+
             If .GuildIndex <> GuildIndex Then
                 Exit Function
+
             End If
     
         End With
+
     Next A
     
     Castle_CheckAllConquist = True
     
     Exit Function
-Errhandler:
+ErrHandler:
     
 End Function
 
@@ -198,12 +222,13 @@ Public Sub Castle_Close(ByVal CastleIndex As Integer)
         .LastAttack = 0
     
     End With
+
 End Sub
+
 ' # Conquista el Castillo
 Public Sub Castle_Conquist(ByVal CastleIndex As Integer, ByVal GuildIndex As Integer)
 
-    On Error GoTo Errhandler
-    
+    On Error GoTo ErrHandler
     
     With Castle(CastleIndex)
         .DateConquist = Format(Now, "dd/MM/yyyy hh:mm:ss")
@@ -236,23 +261,23 @@ Public Sub Castle_Conquist(ByVal CastleIndex As Integer, ByVal GuildIndex As Int
             ' # Envia un mensaje a discord
             TextDiscord = "El clan **'" & .GuildName & "'** conquistó los 4 castillos. Recibe **BONUS** 10% de **EXPERIENCIA** y **ORO**."
             WriteMessageDiscord CHANNEL_CASTLE, TextDiscord
+
         End If
                 
         Call SendData(SendTarget.ToAll, 0, PrepareMessagePlayEffect(eSound.sVictory, 0, 0))
         Call Castle_Save
+
     End With
     
-    
     Exit Sub
-Errhandler:
+ErrHandler:
     
 End Sub
-
 
 ' # Viaja al Castillo en caso de que sea el DUEÑO
 Public Sub Castle_Travel(ByVal UserIndex As Integer, ByVal CastleIndex As eCastle)
 
-    On Error GoTo Errhandler
+    On Error GoTo ErrHandler
     
     Const Cost As Long = 15000
     
@@ -263,16 +288,19 @@ Public Sub Castle_Travel(ByVal UserIndex As Integer, ByVal CastleIndex As eCastl
         If .GuildIndex = 0 Then
             Call WriteConsoleMsg(UserIndex, "¡No puedes viajar al Castillo sin un CLAN y sin ser poseedor del Castillo!", FontTypeNames.FONTTYPE_INFORED)
             Exit Sub
+
         End If
     
         If .GuildIndex <> Castle(CastleIndex).GuildIndex Then
             Call WriteConsoleMsg(UserIndex, "No puedes viajar al Castillo sin ser poseedor del Castillo.", FontTypeNames.FONTTYPE_INFORED)
             Exit Sub
+
         End If
         
         If .Stats.Gld < Cost Then
             Call WriteConsoleMsg(UserIndex, "Necesitas " & Cost & " Monedas de Oro para poder viajar al Castillo.", FontTypeNames.FONTTYPE_INFORED)
             Exit Sub
+
         End If
         
         ' #
@@ -281,12 +309,12 @@ Public Sub Castle_Travel(ByVal UserIndex As Integer, ByVal CastleIndex As eCastl
         If Not (Time - Castle(CastleIndex).LastSpam) <= 60000 Then
             Call WriteConsoleMsg(UserIndex, "El Castillo no está siendo atacado por nadie en un lapso de 60 segundos. NO puedes viajar directamente.", FontTypeNames.FONTTYPE_INFORED)
             Exit Sub
+
         End If
 
         .Stats.Gld = .Stats.Gld - Cost
         
         Call WriteUpdateGold(UserIndex)
-        
         
         Dim Pos As WorldPos
         
@@ -300,6 +328,6 @@ Public Sub Castle_Travel(ByVal UserIndex As Integer, ByVal CastleIndex As eCastl
     End With
     
     Exit Sub
-Errhandler:
+ErrHandler:
 
 End Sub

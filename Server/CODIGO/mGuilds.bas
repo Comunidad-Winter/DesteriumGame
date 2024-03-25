@@ -3,52 +3,53 @@ Attribute VB_Name = "mGuilds"
 
 Option Explicit
 
-Public Const STAT_GUILD_MAXELV       As Byte = 15
+Public Const STAT_GUILD_MAXELV As Byte = 15
 
 ' Requisitos de talismanes
 
 #If Classic = 0 Then
-    Public Const GUILD_RUNA_VERIL        As Integer = 159
+
+    Public Const GUILD_RUNA_VERIL    As Integer = 159
     
-    Public Const GUILD_RUNA_LEVIATAN     As Integer = 160
+    Public Const GUILD_RUNA_LEVIATAN As Integer = 160
     
-    Public Const GUILD_RUNA_EGIPTO       As Integer = 161
+    Public Const GUILD_RUNA_EGIPTO   As Integer = 161
     
-    Public Const GUILD_RUNA_POLAR        As Integer = 162
+    Public Const GUILD_RUNA_POLAR    As Integer = 162
     
-    Public Const GUILD_RUNA_VESPAR       As Integer = 163
+    Public Const GUILD_RUNA_VESPAR   As Integer = 163
 
 #Else
 
-    Public Const GUILD_CRISTAL    As Integer = 2207
+    Public Const GUILD_CRISTAL As Integer = 2207
 
 #End If
     
-    Public Const MAX_GUILD_LEVEL    As Byte = 15
+Public Const MAX_GUILD_LEVEL         As Byte = 15
     
-    Public Const MAX_GUILD_ALINEATION    As Byte = 5
+Public Const MAX_GUILD_ALINEATION    As Byte = 5
     
-    Public Const MAX_GUILD_MEMBER        As Byte = 30
+Public Const MAX_GUILD_MEMBER        As Byte = 30
     
-    Public Const MIN_GUILD_POINTS        As Integer = 2000
+Public Const MIN_GUILD_POINTS        As Integer = 2000
     
-    Public Const MIN_GLD_FOUND           As Long = 0
+Public Const MIN_GLD_FOUND           As Long = 0
     
-    Public Const MAX_GUILDS              As Integer = 300
+Public Const MAX_GUILDS              As Integer = 300
     
-    Public Const MAX_GUILD_CODEX         As Byte = 4
+Public Const MAX_GUILD_CODEX         As Byte = 4
     
-    Public Const MAX_GUILD_LEN           As Byte = 15
+Public Const MAX_GUILD_LEN           As Byte = 15
     
-    Public Const MAX_GUILD_LEN_CODEX     As Byte = 60
+Public Const MAX_GUILD_LEN_CODEX     As Byte = 60
     
-    Public Const MAX_GUILD_RANGE         As Byte = 4
+Public Const MAX_GUILD_RANGE         As Byte = 4
     
-    Public Const MAX_GUILD_POINTS        As Integer = 10000
+Public Const MAX_GUILD_POINTS        As Integer = 10000
     
-    Private Const MIN_GUILD_LEVEL_FOUND  As Byte = 35
+Private Const MIN_GUILD_LEVEL_FOUND  As Byte = 35
     
-    Private Const MIN_GUILD_LEVEL_MEMBER As Byte = 25
+Private Const MIN_GUILD_LEVEL_MEMBER As Byte = 25
 
 Public Enum eGuildRange
 
@@ -86,6 +87,7 @@ Public Type tGuildMemberInfo
 End Type
 
 Public Type tGuildMember
+
     UserIndex As Integer
     Name As String
     Range As eGuildRange
@@ -120,67 +122,67 @@ Dim FilePath_Guild_CharInfo        As String
 ' Fin de Declaraciones
 
 Private Function Guild_Exist(ByVal GuildName As String) As Boolean
-        '<EhHeader>
-        On Error GoTo Guild_Exist_Err
-        '</EhHeader>
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo Guild_Exist_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     For A = 1 To MAX_GUILDS
+    For A = 1 To MAX_GUILDS
 
-102         With GuildsInfo(A)
+        With GuildsInfo(A)
 
-104             If StrComp(UCase$(.Name), GuildName) = 0 Then
-106                 Guild_Exist = True
-                    Exit Function
+            If StrComp(UCase$(.Name), GuildName) = 0 Then
+                Guild_Exist = True
+                Exit Function
 
-                End If
+            End If
 
-            End With
+        End With
 
-108     Next A
+    Next A
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guild_Exist_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guild_Exist " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guild_Exist " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Private Function Guilds_SlotUser(ByVal GuildIndex As Integer, _
                                  ByVal Name As String) As Byte
 
-        '<EhHeader>
-        On Error GoTo Guilds_SlotUser_Err
+    '<EhHeader>
+    On Error GoTo Guilds_SlotUser_Err
 
-        '</EhHeader>
-        Dim A As Long
+    '</EhHeader>
+    Dim A As Long
     
-100     With GuildsInfo(GuildIndex)
+    With GuildsInfo(GuildIndex)
 
-102         For A = 1 To MAX_GUILD_MEMBER
+        For A = 1 To MAX_GUILD_MEMBER
 
-104             If StrComp(.Members(A).Name, Name) = 0 Then
-106                 Guilds_SlotUser = A
-                    Exit Function
+            If StrComp(.Members(A).Name, Name) = 0 Then
+                Guilds_SlotUser = A
+                Exit Function
 
-                End If
+            End If
 
-108         Next A
+        Next A
 
-        End With
+    End With
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_SlotUser_Err:
-        LogError Err.description & vbCrLf & "in Guilds_SlotUser " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in Guilds_SlotUser " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' Generamos el archivo de clanes en caso de no tenerlo.
@@ -255,6 +257,7 @@ Public Sub Guilds_Load()
     
     If FileExist(FilePath_Guild_CharInfo, vbArchive) Then
         ReadGuild.Initialize FilePath_Guild
+
     End If
     
     If FileExist(FilePath_Guild_CharInfo, vbArchive) Then
@@ -281,6 +284,7 @@ Public Sub Guilds_Load()
             ReDim .Members(1 To MAX_GUILD_MEMBER) As tGuildMember
             
             .NumMembers = 0
+
             For B = 1 To MAX_GUILD_MEMBER
                 Tmp = ReadGuild.GetValue(A, "MEMBER" & B)
                     
@@ -431,7 +435,6 @@ Public Sub Guilds_Save_All()
     Set Guild = New clsIniManager
     Set GuildChar = New clsIniManager
     
-    
     Guild.Initialize FilePath_Guild
     GuildChar.Initialize FilePath_Guild_CharInfo
         
@@ -575,64 +578,80 @@ Private Function Guilds_Check_New(ByVal UserIndex As Integer, _
 
         End If
         
-            If Not TieneObjetos(GUILD_CRISTAL, 3, UserIndex) Then
-                Guilds_Check_New = "Consigue 3 Cristales de Hielo. ¡Se crean con 10 Fragmentos de Cristal!"
+        If Not TieneObjetos(GUILD_CRISTAL, 3, UserIndex) Then
+            Guilds_Check_New = "Consigue 3 Cristales de Hielo. ¡Se crean con 10 Fragmentos de Cristal!"
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
         
-            If .Stats.Gld < MIN_GLD_FOUND Then
-                Guilds_Check_New = "Para fundar un clan debes disponer de " & MIN_GLD_FOUND & " Monedas de Oro."
+        If .Stats.Gld < MIN_GLD_FOUND Then
+            Guilds_Check_New = "Para fundar un clan debes disponer de " & MIN_GLD_FOUND & " Monedas de Oro."
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
        
-            If Guild_Exist(UCase$(Name)) Then
-                Guilds_Check_New = "Ya existe un clan con ese nombre."
-                Exit Function
+        If Guild_Exist(UCase$(Name)) Then
+            Guilds_Check_New = "Ya existe un clan con ese nombre."
+            Exit Function
 
-            End If
+        End If
 
-        End With
+    End With
     
-        Exit Function
+    Exit Function
 
 ErrHandler:
-        Call LogError("Error en Clanes5")
+    Call LogError("Error en Clanes5")
     
-    End Function
+End Function
     
 ' # Determina el máximo de miembros permitidos por Nivel
 Function Guilds_Max_Members(ByVal Elv As Integer) As Integer
+
     Select Case Elv
+
         Case 1
             Guilds_Max_Members = 6
+
         Case 2, 3
             Guilds_Max_Members = 9
+
         Case 4
             Guilds_Max_Members = 11
+
         Case 5
             Guilds_Max_Members = 13
+
         Case 6 To 7
             Guilds_Max_Members = 15
+
         Case 8
             Guilds_Max_Members = 17
+
         Case 9
             Guilds_Max_Members = 19
+
         Case 10
             Guilds_Max_Members = 21
+
         Case 11 To 12
             Guilds_Max_Members = 24
+
         Case 13
             Guilds_Max_Members = 27
+
         Case 14 To 15
             Guilds_Max_Members = 30
+
         Case Else
             Guilds_Max_Members = 0 ' Nivel no válido
+
     End Select
+
 End Function
+
 ' Se funda un nuevo clan
 Public Sub Guilds_New(ByVal UserIndex As Integer, _
                       ByVal Name As String, _
@@ -687,18 +706,22 @@ End Sub
 
 ' # Determina la experiencia a juntar para pasar al siguiente Nivel
 Private Function Guilds_Elu(ByVal Lvl As Byte) As Long
+
     Dim experienceNeeded As Long
     
     Select Case Lvl
+
         Case 1
             experienceNeeded = 50
+
         Case Else
             experienceNeeded = 100 * (Lvl - 1)
+
     End Select
     
     Guilds_Elu = experienceNeeded
-End Function
 
+End Function
 
 ' Enviamos una invitación a cualquier personaje para que ingrese a nuestro clan.
 Public Sub Guilds_SendInvitation(ByVal UserIndex As Integer, ByVal UserName As String)
@@ -738,7 +761,8 @@ Public Sub Guilds_SendInvitation(ByVal UserIndex As Integer, ByVal UserName As S
         
         tUser = NameIndex(UserName)
         
-        Dim Lvl As Byte
+        Dim Lvl       As Byte
+
         Dim GuildUser As Byte
         
         If tUser <= 0 Then
@@ -747,7 +771,6 @@ Public Sub Guilds_SendInvitation(ByVal UserIndex As Integer, ByVal UserName As S
         Else
             GuildUser = UserList(tUser).GuildIndex
             Lvl = UserList(tUser).Stats.Elv
-
 
         End If
         
@@ -771,7 +794,9 @@ Public Sub Guilds_SendInvitation(ByVal UserIndex As Integer, ByVal UserName As S
         
         If tUser > 0 Then
             Call WriteConsoleMsg(tUser, "El lider del clan " & .Name & " te ha ofrecido pertenecer a su clan. Si deseas aceptar la invitación tipea /SICLAN " & UserList(UserIndex).Name & ".", FontTypeNames.FONTTYPE_INFOGREEN)
+
         End If
+
     End With
 
     Exit Sub
@@ -811,6 +836,7 @@ Public Sub Guilds_AcceptInvitation(ByVal UserIndex As Integer, ByVal LeaderName 
     Else
         GuildIndex = UserList(tLeader).GuildIndex
         GuildRange = UserList(tLeader).GuildRange
+
     End If
     
     If GuildIndex = 0 Then
@@ -868,48 +894,49 @@ End Sub
 
 ' Un personaje abandona un clan
 Public Sub Guilds_KickMe(ByVal UserIndex As Integer)
-        '<EhHeader>
-        On Error GoTo Guilds_KickMe_Err
-        '</EhHeader>
 
-        On Error GoTo ErrHandler
+    '<EhHeader>
+    On Error GoTo Guilds_KickMe_Err
+
+    '</EhHeader>
+
+    On Error GoTo ErrHandler
     
-        Dim GuildIndex As Integer
+    Dim GuildIndex As Integer
     
-100     With UserList(UserIndex)
-102         GuildIndex = .GuildIndex
+    With UserList(UserIndex)
+        GuildIndex = .GuildIndex
             
-104         If .GuildRange = rFound Or .GuildRange = rLeader Then
-106             Call WriteConsoleMsg(UserIndex, "¡Tú no puedes salir del clan!", FontTypeNames.FONTTYPE_INFORED)
+        If .GuildRange = rFound Or .GuildRange = rLeader Then
+            Call WriteConsoleMsg(UserIndex, "¡Tú no puedes salir del clan!", FontTypeNames.FONTTYPE_INFORED)
 
-                Exit Sub
+            Exit Sub
 
-            End If
-            
+        End If
              
-             If .GuildSlot > 0 Then
-108             Call Guilds_KickUserSlot(GuildIndex, .GuildSlot)
-             Else
-                   .GuildIndex = 0
-                   .GuildSlot = 0
-                   .GuildRange = 0
-             End If
-        End With
+        If .GuildSlot > 0 Then
+            Call Guilds_KickUserSlot(GuildIndex, .GuildSlot)
+        Else
+            .GuildIndex = 0
+            .GuildSlot = 0
+            .GuildRange = 0
+
+        End If
+
+    End With
     
-        Exit Sub
+    Exit Sub
 
 ErrHandler:
-110     Call LogError("Error en Clanes9")
+    Call LogError("Error en Clanes9")
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Guilds_KickMe_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_KickMe " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_KickMe " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' El Líder/Fundador elimina a un personaje del clan
@@ -919,9 +946,9 @@ Public Sub Guilds_KickUser(ByVal UserIndex As Integer, ByVal UserName As String)
 
     ' // NUEVO
     
-    Dim tUser As Integer
+    Dim tUser     As Integer
 
-    Dim SlotUser As Integer
+    Dim SlotUser  As Integer
 
     Dim TempGuild As Integer
     
@@ -948,6 +975,7 @@ Public Sub Guilds_KickUser(ByVal UserIndex As Integer, ByVal UserName As String)
         If UCase$(UserName) = UCase$(.Name) Then
             Call WriteConsoleMsg(UserIndex, "¡No puedes echarte a ti mismo!", FontTypeNames.FONTTYPE_INFORED)
             Exit Sub
+
         End If
         
         tUser = NameIndex(UserName)
@@ -956,6 +984,7 @@ Public Sub Guilds_KickUser(ByVal UserIndex As Integer, ByVal UserName As String)
             TempGuild = UserList(tUser).GuildIndex
         Else
             TempGuild = val(GetVar(CharPath & UserName & ".chr", "GUILD", "GUILDINDEX"))
+
         End If
 
         SlotUser = Guilds_Search_User(GuildIndex, UCase$(UserName))
@@ -964,17 +993,22 @@ Public Sub Guilds_KickUser(ByVal UserIndex As Integer, ByVal UserName As String)
             
             ' # FIX :: EL PERSONAJE NO PERTENECE AL CLAN PERO SIGUE FIGURETI
             If TempGuild <> GuildIndex Then
+
                 Dim Nulo As tGuildMember
+
                 GuildsInfo(GuildIndex).Members(SlotUser) = Nulo
                 GuildsInfo(GuildIndex).NumMembers = GuildsInfo(GuildIndex).NumMembers - 1
                 Call Guilds_Save(GuildIndex)
                 Call LogError("Clanes:: Clan " & GuildIndex & " Encontró un personaje bug " & UserName)
                 Exit Sub
+
             End If
             
             Call Guilds_KickUserSlot(GuildIndex, SlotUser)
             Call WriteConsoleMsg(UserIndex, "¡Has expulsado a " & UserName & "!", FontTypeNames.FONTTYPE_INFOGREEN)
+
         End If
+
     End With
     
     Exit Sub
@@ -1085,8 +1119,9 @@ Public Sub Guilds_CheckAlineation(ByVal UserIndex As Integer, _
                 Call WriteConsoleMsg(UserIndex, "Tu alineación no te permite permanecer en el clan.", FontTypeNames.FONTTYPE_INFORED)
                 Call SendData(SendTarget.ToDiosesYclan, .GuildIndex, PrepareMessageConsoleMsg("El personaje " & .Name & " no ha podido validar su permanencia en el clan.", FontTypeNames.FONTTYPE_GUILDMSG))
                             
-                 If Slot > 0 Then
+                If Slot > 0 Then
                     Call Guilds_KickUserSlot(.GuildIndex, Slot)
+
                 End If
                 
             End If
@@ -1225,64 +1260,64 @@ End Function
 
 ' Preparamos la lista de todos los clanes disponible.
 Public Function Guilds_PrepareList() As String()
-        '<EhHeader>
-        On Error GoTo Guilds_PrepareList_Err
-        '</EhHeader>
 
-        Dim A                          As Long
+    '<EhHeader>
+    On Error GoTo Guilds_PrepareList_Err
 
-        Dim GuildList(1 To MAX_GUILDS) As String
+    '</EhHeader>
+
+    Dim A                          As Long
+
+    Dim GuildList(1 To MAX_GUILDS) As String
         
-100     For A = 1 To MAX_GUILDS
-102         GuildList(A) = GuildsInfo(A).Name
-104     Next A
+    For A = 1 To MAX_GUILDS
+        GuildList(A) = GuildsInfo(A).Name
+    Next A
     
-106     Guilds_PrepareList = GuildList
+    Guilds_PrepareList = GuildList
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_PrepareList_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_PrepareList " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_PrepareList " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' Buscamos un personaje en una GUILD.
 Private Function Guilds_SearchSlotUser(ByVal GuildIndex As Integer, _
                                        ByVal UserName As String) As Byte
-        '<EhHeader>
-        On Error GoTo Guilds_SearchSlotUser_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Guilds_SearchSlotUser_Err
+
+    '</EhHeader>
     
-        Dim A As Long
+    Dim A As Long
     
-100     For A = 1 To MAX_GUILD_MEMBER
+    For A = 1 To MAX_GUILD_MEMBER
 
-102         With GuildsInfo(GuildIndex).Members(A)
+        With GuildsInfo(GuildIndex).Members(A)
 
-104             If .Name = UserName Then
-106                 Guilds_SearchSlotUser = A
+            If .Name = UserName Then
+                Guilds_SearchSlotUser = A
 
-                    Exit Function
+                Exit Function
 
-                End If
+            End If
 
-            End With
+        End With
 
-108     Next A
+    Next A
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_SearchSlotUser_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_SearchSlotUser " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_SearchSlotUser " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' Preparamos la lista de usuarios ONLINE/OFFLINE
@@ -1331,133 +1366,135 @@ End Sub
 ' Eliminamos a un personaje de la GUILD
 Private Sub Guilds_KickUserSlot(ByVal GuildIndex As Integer, ByVal SlotUser As Byte)
 
-        '<EhHeader>
-        On Error GoTo Guilds_KickUserSlot_Err
+    '<EhHeader>
+    On Error GoTo Guilds_KickUserSlot_Err
 
-        '</EhHeader>
-        Dim UserName                    As String
+    '</EhHeader>
+    Dim UserName                    As String
 
+    Dim A                           As Long, B As Long
 
-        Dim A                           As Long, B As Long
+    Dim Temp(1 To MAX_GUILD_MEMBER) As tGuildMember
 
-        Dim Temp(1 To MAX_GUILD_MEMBER) As tGuildMember
-
-        Dim TempVacio                   As tGuildMember
+    Dim TempVacio                   As tGuildMember
         
-        Dim tUser As Integer
+    Dim tUser                       As Integer
         
-100     With GuildsInfo(GuildIndex)
-102         UserName = .Members(SlotUser).Name
+    With GuildsInfo(GuildIndex)
+        UserName = .Members(SlotUser).Name
         
-104         tUser = NameIndex(UserName)
+        tUser = NameIndex(UserName)
         
-106         If tUser > 0 Then
-108             Call Guilds_Update_Member(tUser, 0)
-110             Call Guilds_Update_Member_Range(tUser, 0)
+        If tUser > 0 Then
+            Call Guilds_Update_Member(tUser, 0)
+            Call Guilds_Update_Member_Range(tUser, 0)
                   
-                  GuildsInfo(GuildIndex).Members(SlotUser).UserIndex = 0
-                  UserList(tUser).GuildSlot = 0
-112             Call RefreshCharStatus(tUser)
-            Else
-114             Call Guilds_Save_Member(UCase$(.Members(SlotUser).Name), 0)
-116             Call Guilds_Save_Member_Range(UCase$(.Members(SlotUser).Name), 0)
+            GuildsInfo(GuildIndex).Members(SlotUser).UserIndex = 0
+            UserList(tUser).GuildSlot = 0
+            Call RefreshCharStatus(tUser)
+        Else
+            Call Guilds_Save_Member(UCase$(.Members(SlotUser).Name), 0)
+            Call Guilds_Save_Member_Range(UCase$(.Members(SlotUser).Name), 0)
 
-            End If
+        End If
 
-124         With .Members(SlotUser)
-126             .Name = vbNullString
-128             .Range = rNone
+        With .Members(SlotUser)
+            .Name = vbNullString
+            .Range = rNone
 
-130             .Char.Body = 0
-132             .Char.Head = 0
-134             .Char.Weapon = 0
-136             .Char.Helm = 0
-138             .Char.Class = 0
-140             .Char.Raze = 0
-142             .Char.Elv = 0
-144             .Char.Range = 0
-146             .Char.Name = vbNullString
-148             .Char.Points = 0
+            .Char.Body = 0
+            .Char.Head = 0
+            .Char.Weapon = 0
+            .Char.Helm = 0
+            .Char.Class = 0
+            .Char.Raze = 0
+            .Char.Elv = 0
+            .Char.Range = 0
+            .Char.Name = vbNullString
+            .Char.Points = 0
 
-            End With
-        
-158         .NumMembers = .NumMembers - 1
-            
-              Call mGuilds.Guilds_Save(GuildIndex)
         End With
+        
+        .NumMembers = .NumMembers - 1
+            
+        Call mGuilds.Guilds_Save(GuildIndex)
 
-        '<EhFooter>
-        Exit Sub
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 Guilds_KickUserSlot_Err:
-        LogError Err.description & vbCrLf & "in Guilds_KickUserSlot " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in Guilds_KickUserSlot " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Private Function Guilds_Search_User_FreeSlot(ByVal GuildIndex As Integer) As Byte
-        '<EhHeader>
-        On Error GoTo Guilds_Search_User_FreeSlot_Err
-        '</EhHeader>
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo Guilds_Search_User_FreeSlot_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     With GuildsInfo(GuildIndex)
+    With GuildsInfo(GuildIndex)
 
-102         For A = 1 To MAX_GUILD_MEMBER
+        For A = 1 To MAX_GUILD_MEMBER
 
-104             If .Members(A).Name = vbNullString Then
-106                 Guilds_Search_User_FreeSlot = A
-                    Exit Function
+            If .Members(A).Name = vbNullString Then
+                Guilds_Search_User_FreeSlot = A
+                Exit Function
 
-                End If
+            End If
 
-108         Next A
+        Next A
     
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_Search_User_FreeSlot_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Search_User_FreeSlot " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Search_User_FreeSlot " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
-Private Function Guilds_Search_User(ByVal GuildIndex As Integer, ByVal UserName As String) As Byte
-        '<EhHeader>
-        On Error GoTo Guilds_Search_User_Err
-        '</EhHeader>
+Private Function Guilds_Search_User(ByVal GuildIndex As Integer, _
+                                    ByVal UserName As String) As Byte
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo Guilds_Search_User_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     With GuildsInfo(GuildIndex)
+    With GuildsInfo(GuildIndex)
 
-102         For A = 1 To MAX_GUILD_MEMBER
+        For A = 1 To MAX_GUILD_MEMBER
 
-104             If StrComp(.Members(A).Name, UserName) = 0 Then
-106                 Guilds_Search_User = A
-                    Exit Function
+            If StrComp(.Members(A).Name, UserName) = 0 Then
+                Guilds_Search_User = A
+                Exit Function
 
-                End If
+            End If
 
-108         Next A
+        Next A
     
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_Search_User_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Search_User " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Search_User " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 ' Se agrega un personaje a un clan
 Private Sub Guilds_Add_Member(ByVal GuildIndex As Integer, _
                               ByVal UserIndex As Integer, _
@@ -1478,6 +1515,7 @@ Private Sub Guilds_Add_Member(ByVal GuildIndex As Integer, _
         Call Guilds_Update_Char_Info(UserIndex)
         
         Call SendData(SendTarget.ToOne, UserIndex, PrepareUpdateLevelGuild(.Lvl))
+
     End With
 
     Exit Sub
@@ -1492,143 +1530,143 @@ Private Sub Guilds_Modify_Member(ByVal GuildIndex As Integer, _
                                  ByVal SlotMember As Byte, _
                                  ByVal UserName As String, _
                                  ByVal GuildRange As eGuildRange)
-        '<EhHeader>
-        On Error GoTo Guilds_Modify_Member_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Guilds_Modify_Member_Err
+
+    '</EhHeader>
                                  
-100     With GuildsInfo(GuildIndex)
-102         .Members(SlotMember).Name = UCase$(UserName)
-104         .Members(SlotMember).Range = GuildRange
+    With GuildsInfo(GuildIndex)
+        .Members(SlotMember).Name = UCase$(UserName)
+        .Members(SlotMember).Range = GuildRange
 
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Guilds_Modify_Member_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Modify_Member " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Modify_Member " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Actualizamos la información del personaje. (GUILDINDEX)
 Private Sub Guilds_Update_Member(ByVal UserIndex As Integer, ByVal GuildIndex As Integer)
-        '<EhHeader>
-        On Error GoTo Guilds_Update_Member_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Guilds_Update_Member_Err
+
+    '</EhHeader>
                                  
-100     With UserList(UserIndex)
-102         .GuildIndex = GuildIndex
-104         Call Guilds_Save_Member(UCase$(.Name), GuildIndex)
+    With UserList(UserIndex)
+        .GuildIndex = GuildIndex
+        Call Guilds_Save_Member(UCase$(.Name), GuildIndex)
 
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Guilds_Update_Member_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Update_Member " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Update_Member " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Guardamos la información del personaje (GUILDINDEX)
 Private Sub Guilds_Save_Member(ByVal UserName As String, ByVal GuildIndex As Integer)
-        '<EhHeader>
-        On Error GoTo Guilds_Save_Member_Err
-        '</EhHeader>
 
-100     Call WriteVar(CharPath & UserName & ".chr", "GUILD", "GuildIndex", CStr(GuildIndex))
+    '<EhHeader>
+    On Error GoTo Guilds_Save_Member_Err
 
-        '<EhFooter>
-        Exit Sub
+    '</EhHeader>
+
+    Call WriteVar(CharPath & UserName & ".chr", "GUILD", "GuildIndex", CStr(GuildIndex))
+
+    '<EhFooter>
+    Exit Sub
 
 Guilds_Save_Member_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Save_Member " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Save_Member " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Actualizamos la información del personaje. (RANGO)
 Private Sub Guilds_Update_Member_Range(ByVal UserIndex As Integer, _
                                        ByVal GuildRange As eGuildRange)
-        '<EhHeader>
-        On Error GoTo Guilds_Update_Member_Range_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Guilds_Update_Member_Range_Err
+
+    '</EhHeader>
                                  
-100     With UserList(UserIndex)
-102         .GuildRange = GuildRange
+    With UserList(UserIndex)
+        .GuildRange = GuildRange
         
-104         Call Guilds_Save_Member_Range(UCase$(.Name), GuildRange)
+        Call Guilds_Save_Member_Range(UCase$(.Name), GuildRange)
 
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Guilds_Update_Member_Range_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Update_Member_Range " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Update_Member_Range " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Guardamos la información del personaje. (RANGO)
 Private Sub Guilds_Save_Member_Range(ByVal UserName As String, _
                                      ByVal GuildRange As eGuildRange)
-        '<EhHeader>
-        On Error GoTo Guilds_Save_Member_Range_Err
-        '</EhHeader>
-                                 
-100     Call WriteVar(CharPath & UCase$(UserName) & ".chr", "GUILD", "GuildRange", CStr(GuildRange))
 
-        '<EhFooter>
-        Exit Sub
+    '<EhHeader>
+    On Error GoTo Guilds_Save_Member_Range_Err
+
+    '</EhHeader>
+                                 
+    Call WriteVar(CharPath & UCase$(UserName) & ".chr", "GUILD", "GuildRange", CStr(GuildRange))
+
+    '<EhFooter>
+    Exit Sub
 
 Guilds_Save_Member_Range_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_Save_Member_Range " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_Save_Member_Range " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Chequeo inicial. Esto se debe a que los clanes se actualizan cada worldsave y pueden haber rollbacks
 Private Function Guilds_CheckRollBack(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo Guilds_CheckRollBack_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Guilds_CheckRollBack_Err
+
+    '</EhHeader>
     
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
 
-            Dim SlotUser As Byte
+        Dim SlotUser As Byte
 
-102         SlotUser = Guilds_SearchSlotUser(.GuildIndex, UCase$(.Name))
+        SlotUser = Guilds_SearchSlotUser(.GuildIndex, UCase$(.Name))
         
-104         If SlotUser = 0 Then
-106             Call Guilds_Update_Member(UserIndex, 0)
-108             Guilds_CheckRollBack = True
+        If SlotUser = 0 Then
+            Call Guilds_Update_Member(UserIndex, 0)
+            Guilds_CheckRollBack = True
 
-            End If
+        End If
         
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_CheckRollBack_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_CheckRollBack " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_CheckRollBack " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' Un miembro de un clan se conecta
@@ -1647,6 +1685,7 @@ Public Sub Guilds_Connect(ByVal UserIndex As Integer)
             Call SendData(SendTarget.ToDiosesYclan, .GuildIndex, PrepareMessageConsoleMsg("El personaje " & .Name & " se ha conectado.", FontTypeNames.FONTTYPE_GUILDMSG))
             Call Guilds_Update_Char_Info(UserIndex)
             Call SendData(SendTarget.ToOne, UserIndex, PrepareUpdateLevelGuild(GuildsInfo(.GuildIndex).Lvl))
+
         End If
 
     End With
@@ -1716,228 +1755,225 @@ ErrHandler:
 End Sub
 
 Public Function Guilds_SearchIndex(ByVal GuildName As String) As Integer
-        '<EhHeader>
-        On Error GoTo Guilds_SearchIndex_Err
-        '</EhHeader>
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo Guilds_SearchIndex_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     For A = 1 To MAX_GUILDS
+    For A = 1 To MAX_GUILDS
 
-102         With GuildsInfo(A)
+        With GuildsInfo(A)
 
-104             If StrComp(UCase$(GuildsInfo(A).Name), GuildName) = 0 Then
-106                 Guilds_SearchIndex = A
-                    Exit Function
+            If StrComp(UCase$(GuildsInfo(A).Name), GuildName) = 0 Then
+                Guilds_SearchIndex = A
+                Exit Function
 
-                End If
+            End If
         
-            End With
+        End With
     
-108     Next A
+    Next A
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Guilds_SearchIndex_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_SearchIndex " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_SearchIndex " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' El clan suma experiencia y/o nivel
 Public Sub Guilds_AddExp(ByVal UserIndex As Integer, ByVal Exp As Long)
-        '<EhHeader>
-        On Error GoTo Guilds_AddExp_Err
-        '</EhHeader>
 
-        Dim GuildIndex As Integer
+    '<EhHeader>
+    On Error GoTo Guilds_AddExp_Err
 
-100     GuildIndex = UserList(UserIndex).GuildIndex
+    '</EhHeader>
+
+    Dim GuildIndex As Integer
+
+    GuildIndex = UserList(UserIndex).GuildIndex
     
-102     If GuildsInfo(GuildIndex).Lvl = STAT_GUILD_MAXELV Then Exit Sub
+    If GuildsInfo(GuildIndex).Lvl = STAT_GUILD_MAXELV Then Exit Sub
     
-104     With GuildsInfo(GuildIndex)
+    With GuildsInfo(GuildIndex)
          
-106         .Exp = .Exp + Exp
+        .Exp = .Exp + Exp
         
-108         Call SendData(SendTarget.ToClanArea, UserIndex, PrepareMessageRenderConsole("ExpClan +" & CStr(Format(Exp, "###,###,###")), d_Exp, 3000, 0))
+        Call SendData(SendTarget.ToClanArea, UserIndex, PrepareMessageRenderConsole("ExpClan +" & CStr(Format(Exp, "###,###,###")), d_Exp, 3000, 0))
         
-110         Do While .Exp >= .Elu
+        Do While .Exp >= .Elu
             
-                'Checkea si alcanzó el máximo nivel
-112             If .Lvl >= STAT_GUILD_MAXELV Then
-114                 .Exp = 0
-116                 .Elu = 0
-                    Exit Sub
+            'Checkea si alcanzó el máximo nivel
+            If .Lvl >= STAT_GUILD_MAXELV Then
+                .Exp = 0
+                .Elu = 0
+                Exit Sub
 
-                End If
+            End If
     
-118             .Lvl = .Lvl + 1
-120             .Exp = .Exp - .Elu
-122             .Elu = Guilds_Elu(.Lvl)
-124             .MaxMembers = Guilds_Max_Members(.Lvl)
+            .Lvl = .Lvl + 1
+            .Exp = .Exp - .Elu
+            .Elu = Guilds_Elu(.Lvl)
+            .MaxMembers = Guilds_Max_Members(.Lvl)
             
-126             Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("El Clan " & .Name & " ha llegado al Nivel '" & .Lvl & "'", FontTypeNames.FONTTYPE_GUILD))
-128             Call SendData(SendTarget.ToAll, 0, PrepareMessagePlayEffect(eSound.sVictory4, 50, 50, UserList(UserIndex).Char.charindex))
-130             Call SendData(SendTarget.ToDiosesYclan, GuildIndex, PrepareUpdateLevelGuild(.Lvl))
-132             Call Guilds_Save(GuildIndex)
-            Loop
+            Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("El Clan " & .Name & " ha llegado al Nivel '" & .Lvl & "'", FontTypeNames.FONTTYPE_GUILD))
+            Call SendData(SendTarget.ToAll, 0, PrepareMessagePlayEffect(eSound.sVictory4, 50, 50, UserList(UserIndex).Char.charindex))
+            Call SendData(SendTarget.ToDiosesYclan, GuildIndex, PrepareUpdateLevelGuild(.Lvl))
+            Call Guilds_Save(GuildIndex)
+        Loop
    
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Guilds_AddExp_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mGuilds.Guilds_AddExp " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_AddExp " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Enviamos la Posicion del UserIndex a los Miembros Activos
 Public Sub Guilds_UpdatePosition(ByVal UserIndex As Integer)
 
-        '<EhHeader>
-        On Error GoTo Guilds_UpdatePosition_Err
+    '<EhHeader>
+    On Error GoTo Guilds_UpdatePosition_Err
 
-        '</EhHeader>
+    '</EhHeader>
 
-        Dim A          As Long
+    Dim A          As Long
 
-        Dim GuildIndex As Integer
+    Dim GuildIndex As Integer
     
-100     GuildIndex = UserList(UserIndex).GuildIndex
+    GuildIndex = UserList(UserIndex).GuildIndex
     
-102     If GuildIndex = 0 Then Exit Sub
+    If GuildIndex = 0 Then Exit Sub
     
-104     With GuildsInfo(GuildIndex)
+    With GuildsInfo(GuildIndex)
     
-            ' Minimo de Nivel Requerido >>
-106         If GuildsInfo(GuildIndex).Lvl < 7 Then Exit Sub
+        ' Minimo de Nivel Requerido >>
+        If GuildsInfo(GuildIndex).Lvl < 7 Then Exit Sub
         
-108         For A = 1 To MAX_GUILD_MEMBER
+        For A = 1 To MAX_GUILD_MEMBER
 
-110             If .Members(A).UserIndex > 0 And .Members(A).UserIndex <> UserIndex Then
-112                   If UserList(.Members(A).UserIndex).Pos.Map = UserList(UserIndex).Pos.Map Then
-114                         Call WriteUpdatePosGuild(.Members(A).UserIndex, A, UserIndex)
+            If .Members(A).UserIndex > 0 And .Members(A).UserIndex <> UserIndex Then
+                If UserList(.Members(A).UserIndex).Pos.Map = UserList(UserIndex).Pos.Map Then
+                    Call WriteUpdatePosGuild(.Members(A).UserIndex, A, UserIndex)
                             
-                        Else
-116                         Call WriteUpdatePosGuild(.Members(A).UserIndex, A, 0)
+                Else
+                    Call WriteUpdatePosGuild(.Members(A).UserIndex, A, 0)
         
-                        End If
-
                 End If
 
-118         Next A
+            End If
+
+        Next A
     
-        End With
+    End With
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Guilds_UpdatePosition_Err:
-        LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_UpdatePosition " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.Guilds_UpdatePosition " & "at line " & Erl
 
-        
-
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub ChangeLeader(ByVal UserIndex As Integer, ByVal UserName As String)
 
-        '<EhHeader>
-        On Error GoTo ChangeLeader_Err
+    '<EhHeader>
+    On Error GoTo ChangeLeader_Err
 
-        '</EhHeader>
+    '</EhHeader>
     
-        Dim tUser     As Integer
+    Dim tUser     As Integer
 
-        Dim SlotGuild As Integer
+    Dim SlotGuild As Integer
 
-        Dim GuildTemp As Integer
+    Dim GuildTemp As Integer
     
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
 
-102         If .GuildIndex = 0 Then
-104             Call WriteConsoleMsg(UserIndex, "¡No perteneces a ningún clan!", FontTypeNames.FONTTYPE_INFORED)
-                Exit Sub
-
-            End If
-        
-106         If .GuildRange <> rFound Then
-108             Call WriteConsoleMsg(UserIndex, "¡No eres líder de ningún clan!", FontTypeNames.FONTTYPE_INFORED)
-                Exit Sub
-
-            End If
-        
-110         If Not TieneObjetos(ESCRITURAS_CLAN, 1, UserIndex) Then Exit Sub
-
-        End With
-        
-        If Not PersonajeExiste(UserName) Then
-            Call WriteConsoleMsg(UserIndex, "¡El personaje no existe!", FontTypeNames.FONTTYPE_INFORED)
+        If .GuildIndex = 0 Then
+            Call WriteConsoleMsg(UserIndex, "¡No perteneces a ningún clan!", FontTypeNames.FONTTYPE_INFORED)
             Exit Sub
 
         End If
+        
+        If .GuildRange <> rFound Then
+            Call WriteConsoleMsg(UserIndex, "¡No eres líder de ningún clan!", FontTypeNames.FONTTYPE_INFORED)
+            Exit Sub
 
-112     tUser = NameIndex(UserName)
+        End If
+        
+        If Not TieneObjetos(ESCRITURAS_CLAN, 1, UserIndex) Then Exit Sub
 
-114     If tUser > 0 Then
+    End With
+        
+    If Not PersonajeExiste(UserName) Then
+        Call WriteConsoleMsg(UserIndex, "¡El personaje no existe!", FontTypeNames.FONTTYPE_INFORED)
+        Exit Sub
 
-116         With UserList(tUser)
+    End If
+
+    tUser = NameIndex(UserName)
+
+    If tUser > 0 Then
+
+        With UserList(tUser)
             
-118             If .GuildIndex <> UserList(UserIndex).GuildIndex Then
-120                 Call WriteConsoleMsg(UserIndex, "El personaje debe pertenecer a tu clan.", FontTypeNames.FONTTYPE_INFORED)
-                    Exit Sub
-
-                End If
-
-122             SlotGuild = .GuildSlot
-124             Call Guilds_Update_Member_Range(tUser, eGuildRange.rFound)
-
-            End With
-    
-        Else
-126         GuildTemp = val(GetVar(CharPath & UCase$(UserName) & ".chr", "GUILD", "GUILDINDEX"))
-
-              If GuildTemp > 0 Then
-                SlotGuild = Guilds_SlotUser(GuildTemp, UCase$(UserName))
-              End If
-              
-128         If GuildTemp <> UserList(UserIndex).GuildIndex Then
-130             Call WriteConsoleMsg(UserIndex, "El personaje debe pertenecer a tu clan.", FontTypeNames.FONTTYPE_INFORED)
+            If .GuildIndex <> UserList(UserIndex).GuildIndex Then
+                Call WriteConsoleMsg(UserIndex, "El personaje debe pertenecer a tu clan.", FontTypeNames.FONTTYPE_INFORED)
                 Exit Sub
 
             End If
-            
-132         Call WriteVar(CharPath & UCase$(UserName) & ".chr", "GUILD", "GUILDRANGE", CStr(eGuildRange.rFound))
+
+            SlotGuild = .GuildSlot
+            Call Guilds_Update_Member_Range(tUser, eGuildRange.rFound)
+
+        End With
+    
+    Else
+        GuildTemp = val(GetVar(CharPath & UCase$(UserName) & ".chr", "GUILD", "GUILDINDEX"))
+
+        If GuildTemp > 0 Then
+            SlotGuild = Guilds_SlotUser(GuildTemp, UCase$(UserName))
 
         End If
+              
+        If GuildTemp <> UserList(UserIndex).GuildIndex Then
+            Call WriteConsoleMsg(UserIndex, "El personaje debe pertenecer a tu clan.", FontTypeNames.FONTTYPE_INFORED)
+            Exit Sub
+
+        End If
+            
+        Call WriteVar(CharPath & UCase$(UserName) & ".chr", "GUILD", "GUILDRANGE", CStr(eGuildRange.rFound))
+
+    End If
     
-138     Call Guilds_Modify_Member(UserList(UserIndex).GuildIndex, SlotGuild, UserName, eGuildRange.rFound)
+    Call Guilds_Modify_Member(UserList(UserIndex).GuildIndex, SlotGuild, UserName, eGuildRange.rFound)
     
-        ' Chau Old Leader
-140     Call Guilds_Update_Member_Range(UserIndex, eGuildRange.rNone)
-142     Call Guilds_Modify_Member(UserList(UserIndex).GuildIndex, UserList(UserIndex).GuildSlot, UserList(UserIndex).Name, eGuildRange.rNone)
+    ' Chau Old Leader
+    Call Guilds_Update_Member_Range(UserIndex, eGuildRange.rNone)
+    Call Guilds_Modify_Member(UserList(UserIndex).GuildIndex, UserList(UserIndex).GuildSlot, UserList(UserIndex).Name, eGuildRange.rNone)
     
-        ' Chau Objs
-144     Call QuitarObjetos(ESCRITURAS_CLAN, 1, UserIndex)
-146     Call Guilds_Save(UserList(UserIndex).GuildIndex)
+    ' Chau Objs
+    Call QuitarObjetos(ESCRITURAS_CLAN, 1, UserIndex)
+    Call Guilds_Save(UserList(UserIndex).GuildIndex)
     
-148     Call SendData(SendTarget.ToDiosesYclan, UserList(UserIndex).GuildIndex, PrepareMessageConsoleMsg("El líder pasó a ser el personaje " & UserName & " ¡Felicitaciones! Aunque no lo queramos...", FontTypeNames.FONTTYPE_GUILD))
-        '<EhFooter>
-        Exit Sub
+    Call SendData(SendTarget.ToDiosesYclan, UserList(UserIndex).GuildIndex, PrepareMessageConsoleMsg("El líder pasó a ser el personaje " & UserName & " ¡Felicitaciones! Aunque no lo queramos...", FontTypeNames.FONTTYPE_GUILD))
+    '<EhFooter>
+    Exit Sub
 
 ChangeLeader_Err:
-        LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.ChangeLeader " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mGuilds.ChangeLeader " & "at line " & Erl
 
-        
-
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 

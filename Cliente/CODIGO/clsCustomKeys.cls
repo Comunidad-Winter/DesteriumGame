@@ -234,6 +234,7 @@ Public Function ReadableName(ByVal KeyCode As Integer) As String
         Case Else
             'In all other cases, key is considered not valid.
             ReadableName = Constants.vbNullString
+
     End Select
 
 End Function
@@ -250,7 +251,7 @@ Public Sub LoadCustomKeys()
     'Last Modification: 08/21/07
     '
     '***************************************************
-    Dim I       As Long
+    Dim i       As Long
 
     Dim FileNum As Integer
 
@@ -261,10 +262,10 @@ Public Sub LoadCustomKeys()
               
     Open IniPath & KEY_CONFIG_FILE For Binary Access Read Lock Read Write As FileNum
           
-    For I = 1 To NUM_CUSTOM_KEYS
-        Get FileNum, , mappedKeys(I)
+    For i = 1 To NUM_CUSTOM_KEYS
+        Get FileNum, , mappedKeys(i)
 
-        If LenB(ReadableName(mappedKeys(I))) = 0 Then
+        If LenB(ReadableName(mappedKeys(i))) = 0 Then
             Close FileNum
             Call err.Raise(ERROR_NO_KEY_FILE)
 
@@ -272,9 +273,10 @@ Public Sub LoadCustomKeys()
 
         End If
 
-    Next I
+    Next i
           
     Close FileNum
+
 End Sub
 
 ''
@@ -289,17 +291,18 @@ Public Sub SaveCustomKeys()
     '***************************************************
     Dim FileNum As Integer
 
-    Dim I       As Long
+    Dim i       As Long
 
     FileNum = FreeFile()
           
     Open IniPath & KEY_CONFIG_FILE For Binary Access Write As FileNum
           
-    For I = 1 To NUM_CUSTOM_KEYS
-        Put FileNum, , mappedKeys(I)
-    Next I
+    For i = 1 To NUM_CUSTOM_KEYS
+        Put FileNum, , mappedKeys(i)
+    Next i
           
     Close #FileNum
+
 End Sub
 
 ''
@@ -317,6 +320,7 @@ Public Property Get BindedKey(ByVal Index As eKeyType) As Integer
     '***************************************************
     If Index < 1 Or Index > NUM_CUSTOM_KEYS Then Exit Property
     BindedKey = mappedKeys(Index)
+
 End Property
 
 ''
@@ -347,6 +351,7 @@ Public Property Let BindedKey(ByVal Index As eKeyType, ByVal NewVal As Integer)
     End If
           
     mappedKeys(Index) = NewVal
+
 End Property
 
 ''
@@ -386,7 +391,9 @@ Public Sub LoadDefaults()
     mappedKeys(eKeyType.mKeyPanelParty) = KeyCodeConstants.vbKeyF7
     mappedKeys(eKeyType.mKeyPanelFight) = KeyCodeConstants.vbKeyF5
     mappedKeys(eKeyType.mKeyTabPanel) = KeyCodeConstants.vbKeyNumpad0
+
 End Sub
+
 Public Sub LoadModernas()
     '***************************************************
     'Author: Rapsodius
@@ -421,6 +428,7 @@ Public Sub LoadModernas()
     mappedKeys(eKeyType.mKeyPanelParty) = KeyCodeConstants.vbKeyF7
     mappedKeys(eKeyType.mKeyPanelFight) = KeyCodeConstants.vbKeyF5
     mappedKeys(eKeyType.mKeyTabPanel) = KeyCodeConstants.vbKeyQ
+
 End Sub
 
 ''
@@ -465,6 +473,7 @@ Public Property Get Count() As Byte
     '
     '***************************************************
     Count = NUM_CUSTOM_KEYS
+
 End Property
 
 ''
@@ -505,5 +514,6 @@ Private Sub Class_Terminate()
     '
     '***************************************************
     Call SaveCustomKeys
+
 End Sub
 

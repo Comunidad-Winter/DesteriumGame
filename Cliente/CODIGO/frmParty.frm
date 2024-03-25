@@ -28,7 +28,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100.000.000"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -50,7 +50,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100.000.000"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -72,7 +72,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100.000.000"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -94,7 +94,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100.000.000"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -122,7 +122,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100.000.000"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -143,7 +143,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -164,7 +164,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -185,7 +185,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -206,7 +206,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -227,7 +227,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -255,7 +255,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -276,7 +276,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -297,7 +297,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -318,7 +318,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -347,7 +347,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100%"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -369,7 +369,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100%"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -391,7 +391,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100%"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -413,7 +413,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100%"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -435,7 +435,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "100%"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -455,7 +455,7 @@ Begin VB.Form frmParty
       BackStyle       =   0  'Transparent
       Caption         =   "<Vacio>"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   400
@@ -488,30 +488,36 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Public picCheckBox          As Picture
-Public picCheckBoxNulo      As Picture
+Public picCheckBox       As Picture
 
-Public cRewardExp As Boolean
+Public picCheckBoxNulo   As Picture
 
-Private BotonAbandonar As clsGraphicalButton
-Private BotonGuardar As clsGraphicalButton
+Public cRewardExp        As Boolean
+
+Private BotonAbandonar   As clsGraphicalButton
+
+Private BotonGuardar     As clsGraphicalButton
+
 Public LastButtonPressed As clsGraphicalButton
-Private clsFormulario As clsFormMovementManager
+
+Private clsFormulario    As clsFormMovementManager
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     
     If KeyCode = vbKeyEscape Then
-    Unload Me
+        Unload Me
+
     End If
+
 End Sub
 
 Private Sub Form_Load()
     Me.Picture = LoadPicture(DirInterface & "menucompacto\group.jpg")
     
     #If ModoBig = 0 Then
-            ' Handles Form movement (drag and dr|op).
-            Set clsFormulario = New clsFormMovementManager
-            clsFormulario.Initialize Me, 120
+        ' Handles Form movement (drag and dr|op).
+        Set clsFormulario = New clsFormMovementManager
+        clsFormulario.Initialize Me, 120
     #End If
     
     Call LoadButtons
@@ -521,6 +527,7 @@ End Sub
 Private Sub LoadButtons()
     
     Dim GrhPath As String
+
     GrhPath = DirInterface & "menucompacto\buttons\"
     
     Set picCheckBox = LoadPicture(GrhPath & "check.jpg")
@@ -534,34 +541,40 @@ Private Sub LoadButtons()
     Call BotonGuardar.Initialize(imgSavePorc, GrhPath & "guardar.jpg", GrhPath & "guardar_hover.jpg", GrhPath & "guardar.jpg", Me)
   
 End Sub
+
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
+
 End Sub
 
 Private Sub imgAbandonate_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Protocol.WritePartyClient 4
     Unload Me
+
 End Sub
 
 Private Sub imgCheck_Click()
         
-        Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
         
-        If UCase$(lblUser(0).Caption) <> UCase$(FrmMain.Label8(0).Caption) Then
-            Call ShowConsoleMsg("Solo el Líder puede cambiar esta opción...")
-            Exit Sub
-        End If
+    If UCase$(lblUser(0).Caption) <> UCase$(FrmMain.Label8(0).Caption) Then
+        Call ShowConsoleMsg("Solo el Líder puede cambiar esta opción...")
+        Exit Sub
+
+    End If
         
-        cRewardExp = Not cRewardExp
+    cRewardExp = Not cRewardExp
         
-        If cRewardExp Then
-            imgCheck.Picture = picCheckBox
-        Else
-            imgCheck.Picture = picCheckBoxNulo
-        End If
+    If cRewardExp Then
+        imgCheck.Picture = picCheckBox
+    Else
+        imgCheck.Picture = picCheckBoxNulo
+
+    End If
         
-        WritePartyClient 2
+    WritePartyClient 2
+
 End Sub
 
 Private Sub imgSavePorc_Click()
@@ -584,10 +597,12 @@ Private Sub imgSavePorc_Click()
     If TotalExp <> 100 Then Exit Sub
     
     WriteGroupChangePorc Exp
+
 End Sub
 
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub lblExp_Click(Index As Integer)
@@ -597,4 +612,5 @@ Private Sub lblExp_Click(Index As Integer)
     Temp = InputBox("Elige el porcentaje de experiencia que deseas para este personaje", "Grupos Desterium: Edición de porcentaje", lblExp(Index).Caption)
 
     lblExp(Index).Caption = Val(Temp)
+
 End Sub

@@ -2,6 +2,7 @@ Attribute VB_Name = "mAnuncios"
 Option Explicit
 
 Public Enum eAnuncios
+
     A_MISION_COMPLETADA = 1
     
 End Enum
@@ -16,12 +17,14 @@ Public Type tAnuncios
     Text() As String ' Los distintos logros que se va mostrando en pantalla. Cada uno dura 1 segundo
     
     Tipo As eAnuncios
+
 End Type
 
 Public Anuncio As tAnuncios
 
-
-Public Sub Anuncio_AddNew(ByVal Tittle As String, ByRef Text() As String, ByRef Tipo As eAnuncios)
+Public Sub Anuncio_AddNew(ByVal Tittle As String, _
+                          ByRef Text() As String, _
+                          ByRef Tipo As eAnuncios)
     
     With Anuncio
         .Active = True
@@ -30,8 +33,8 @@ Public Sub Anuncio_AddNew(ByVal Tittle As String, ByRef Text() As String, ByRef 
         .Last = 1
         .Tipo = Tipo
         .Alpha = 0
+
     End With
-    
     
 End Sub
 
@@ -39,14 +42,13 @@ End Sub
 Public Sub Anuncio_Update_Render()
 
     Dim X As Long
+
     Dim Y As Long
+
     X = 144
     Y = 40
     
-    Dim Div As Long
-    
-
-    
+    Dim Div  As Long
     
     Dim Mult As Long
     
@@ -66,12 +68,14 @@ Public Sub Anuncio_Update_Render()
             
         ' @Texto Vigente
         Draw_Text f_Booter, 18, X + 140, Y + 40, To_Depth(7, , , 3), 0, ARGB(255, 255, 255, 255 - Anuncio.Alpha), FONT_ALIGNMENT_CENTER Or FONT_ALIGNMENT_TOP, Anuncio.Text(Anuncio.Last), False, True
+
     End If
 
 End Sub
 
 Public Sub Anuncio_Update_Render_Tipo(ByVal X As Long, ByVal Y As Long)
     Call Draw_Texture_Graphic_Gui(127, X + 124, Y - 20, To_Depth(7, , , 3), 32, 32, 0, 0, 32, 32, ARGB(255, 255, 255, 255 - Anuncio.Alpha), 0, t_Alpha)
+
 End Sub
 
 Public Sub Anuncio_Update_Next_Text()
@@ -86,6 +90,7 @@ Public Sub Anuncio_Update_Next_Text()
             If Avance Mod 120 = 0 Then
                 .Last = .Last + 1
                 Avance = 0
+
             End If
             
             If .Last >= UBound(.Text) Then
@@ -94,19 +99,26 @@ Public Sub Anuncio_Update_Next_Text()
                 
                 If .Alpha >= 255 Then
                     Anuncio_Reset
+
                 End If
+
             End If
+
         End If
     
     End With
+
 End Sub
 
 Public Sub Anuncio_Reset()
+
     With Anuncio
         .Active = False
         .Last = 0
         .Tittle = vbNullString
         .Tipo = 0
         .Alpha = 0
+
     End With
+
 End Sub

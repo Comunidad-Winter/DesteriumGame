@@ -261,88 +261,107 @@ Option Explicit
 
 Private Sub lblINIT_Click()
         
+    Dim TempLottery As tLottery
         
-        Dim TempLottery As tLottery
+    If Not IsValidDateFormat(txtDate.Text) Then
+        Call MsgBox("El formato de la fecha es incorrecto. UTILICE DD/MM/YYYY HH:MM y agrega 'hs'. Ejemplo: 01/01/2023 20:00hs")
+        Exit Sub
+
+    End If
         
+    If Len(txtName.Text) <= 5 Then
+        Call MsgBox("Elige un nombre más largo.")
+        Exit Sub
+
+    End If
         
-        If Not IsValidDateFormat(txtDate.Text) Then
-            Call MsgBox("El formato de la fecha es incorrecto. UTILICE DD/MM/YYYY HH:MM y agrega 'hs'. Ejemplo: 01/01/2023 20:00hs")
-            Exit Sub
-        End If
-        
-        If Len(txtName.Text) <= 5 Then
-            Call MsgBox("Elige un nombre más largo.")
-            Exit Sub
-        End If
-        
-        If Len(txtDesc.Text) <= 20 Then
-            Call MsgBox("Elige una descripción más larga.")
-            Exit Sub
-        End If
-        
+    If Len(txtDesc.Text) <= 20 Then
+        Call MsgBox("Elige una descripción más larga.")
+        Exit Sub
+
+    End If
                 
-        If Len(txtChar.Text) <= 0 And Len(txtObj(0).Text) <= 0 Then
-            Call MsgBox("¡Elige algo para sortear!")
-            Exit Sub
-        End If
+    If Len(txtChar.Text) <= 0 And Len(txtObj(0).Text) <= 0 Then
+        Call MsgBox("¡Elige algo para sortear!")
+        Exit Sub
+
+    End If
         
-        If Len(txtObj(0).Text) > 0 And Len(txtObj(1).Text) <= 0 Then
-            Call MsgBox("¡Elige la cantidad del objeto a sortear!")
-            Exit Sub
-        End If
+    If Len(txtObj(0).Text) > 0 And Len(txtObj(1).Text) <= 0 Then
+        Call MsgBox("¡Elige la cantidad del objeto a sortear!")
+        Exit Sub
+
+    End If
         
-        With TempLottery
-            .Name = txtName.Text
-            .Desc = txtDesc.Text
-            .DateFinish = txtDate.Text
-            .PrizeChar = txtChar.Text
-            .PrizeObj = Val(txtObj(0).Text)
-            .PrizeObjAmount = Val(txtObj(1).Text)
-        End With
+    With TempLottery
+        .Name = txtName.Text
+        .Desc = txtDesc.Text
+        .DateFinish = txtDate.Text
+        .PrizeChar = txtChar.Text
+        .PrizeObj = Val(txtObj(0).Text)
+        .PrizeObjAmount = Val(txtObj(1).Text)
+
+    End With
         
-        Call WriteLotteryNew(TempLottery)
+    Call WriteLotteryNew(TempLottery)
+
 End Sub
 
 Function IsValidDateFormat(inputString As String) As Boolean
-    Dim strParts() As String
+
+    Dim strParts()  As String
+
     Dim dateParts() As String
+
     Dim timeParts() As String
-    Dim isValid As Boolean
-    Dim suffix As String
+
+    Dim isValid     As Boolean
+
+    Dim suffix      As String
     
     isValid = False
 
     ' Split the string into date and time parts
     strParts = Split(inputString, " ")
+
     If UBound(strParts) = 1 Then
         ' Split the date into day, month, year
         dateParts = Split(strParts(0), "/")
+
         If UBound(dateParts) = 2 Then
             If IsNumeric(dateParts(0)) And IsNumeric(dateParts(1)) And IsNumeric(dateParts(2)) Then
-                If (CInt(dateParts(0)) > 0 And CInt(dateParts(0)) <= 31) And _
-                   (CInt(dateParts(1)) > 0 And CInt(dateParts(1)) <= 12) And _
-                   (CInt(dateParts(2)) >= 0) Then
+                If (CInt(dateParts(0)) > 0 And CInt(dateParts(0)) <= 31) And (CInt(dateParts(1)) > 0 And CInt(dateParts(1)) <= 12) And (CInt(dateParts(2)) >= 0) Then
 
                     ' Check the time
                     If Len(strParts(1)) > 2 Then
                         suffix = Right(strParts(1), 2)
+
                         If suffix = "hs" Then
                             timeParts = Split(Left(strParts(1), Len(strParts(1)) - 2), ":")
+
                             If UBound(timeParts) = 1 Then
                                 If IsNumeric(timeParts(0)) And IsNumeric(timeParts(1)) Then
-                                    If (CInt(timeParts(0)) >= 0 And CInt(timeParts(0)) <= 23) And _
-                                       (CInt(timeParts(1)) >= 0 And CInt(timeParts(1)) <= 59) Then
+                                    If (CInt(timeParts(0)) >= 0 And CInt(timeParts(0)) <= 23) And (CInt(timeParts(1)) >= 0 And CInt(timeParts(1)) <= 59) Then
                                         isValid = True
+
                                     End If
+
                                 End If
+
                             End If
+
                         End If
+
                     End If
 
                 End If
+
             End If
+
         End If
+
     End If
 
     IsValidDateFormat = isValid
+
 End Function

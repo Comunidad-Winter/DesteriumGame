@@ -53,6 +53,7 @@ Attribute VB_Exposed = False
 '   - Add:  AddNode method to add a main node.
 '           AddKey method to add key into the refered main node.
 '           DumpFile method to dump the data into a file.
+' Reparado por Lorwik
 
 Option Explicit
 Option Base 0
@@ -101,6 +102,7 @@ Private MainNodes  As Long
 'Default constructor. Does nothing.
 
 Private Sub Class_Initialize()
+
     '**************************************************************
     'Author: Juan Martín Sotuyo Dodero
     'Last Modify Date: 5/01/2006
@@ -129,9 +131,11 @@ Private Sub Class_Terminate()
         Next i
         
         Erase fileData
+
     End If
     
     MainNodes = 0
+
 End Sub
 
 ''
@@ -181,6 +185,7 @@ Public Sub Initialize(ByVal File As String)
                     fileData(MainNodes).Name = UCase$(Trim$(mid$(Text, 2, Pos - 2)))
                     
                     MainNodes = MainNodes + 1
+
                 End If
 
             Else
@@ -200,11 +205,15 @@ Public Sub Initialize(ByVal File As String)
                             .values(.numValues).Key = UCase$(Left$(Text, Pos - 1))
                             
                             .numValues = .numValues + 1
+
                         End With
 
                     End If
+
                 End If
+
             End If
+
         End If
 
     Loop
@@ -246,41 +255,43 @@ Private Sub SortChildNodes(ByRef Node As MainNode, _
     '**************************************************************
     Dim Min  As Integer      'First item in the list
 
-    Dim Max  As Integer      'Last item in the list
+    Dim max  As Integer      'Last item in the list
 
     Dim comp As String      'Item used to compare
 
     Dim Temp As ChildNode
     
     Min = First
-    Max = Last
+    max = Last
     
     With Node
-        comp = .values((Min + Max) \ 2).Key
+        comp = .values((Min + max) \ 2).Key
     
-        Do While Min <= Max
+        Do While Min <= max
             Do While .values(Min).Key < comp And Min < Last
                 Min = Min + 1
             Loop
 
-            Do While .values(Max).Key > comp And Max > First
-                Max = Max - 1
+            Do While .values(max).Key > comp And max > First
+                max = max - 1
             Loop
 
-            If Min <= Max Then
+            If Min <= max Then
                 Temp = .values(Min)
-                .values(Min) = .values(Max)
-                .values(Max) = Temp
+                .values(Min) = .values(max)
+                .values(max) = Temp
                 Min = Min + 1
-                Max = Max - 1
+                max = max - 1
+
             End If
 
         Loop
 
     End With
     
-    If First < Max Then SortChildNodes Node, First, Max
+    If First < max Then SortChildNodes Node, First, max
     If Min < Last Then SortChildNodes Node, Min, Last
+
 End Sub
 
 ''
@@ -299,38 +310,40 @@ Private Sub SortMainNodes(ByVal First As Integer, ByVal Last As Integer)
     '**************************************************************
     Dim Min  As Integer      'First item in the list
 
-    Dim Max  As Integer      'Last item in the list
+    Dim max  As Integer      'Last item in the list
 
     Dim comp As String      'Item used to compare
 
     Dim Temp As MainNode
     
     Min = First
-    Max = Last
+    max = Last
     
-    comp = fileData((Min + Max) \ 2).Name
+    comp = fileData((Min + max) \ 2).Name
     
-    Do While Min <= Max
+    Do While Min <= max
         Do While fileData(Min).Name < comp And Min < Last
             Min = Min + 1
         Loop
 
-        Do While fileData(Max).Name > comp And Max > First
-            Max = Max - 1
+        Do While fileData(max).Name > comp And max > First
+            max = max - 1
         Loop
 
-        If Min <= Max Then
+        If Min <= max Then
             Temp = fileData(Min)
-            fileData(Min) = fileData(Max)
-            fileData(Max) = Temp
+            fileData(Min) = fileData(max)
+            fileData(max) = Temp
             Min = Min + 1
-            Max = Max - 1
+            max = max - 1
+
         End If
 
     Loop
     
-    If First < Max Then SortMainNodes First, Max
+    If First < max Then SortMainNodes First, max
     If Min < Last Then SortMainNodes Min, Last
+
 End Sub
 
 ''
@@ -362,9 +375,11 @@ Public Function GetValue(ByVal Main As String, ByVal Key As String) As String
         'If we found it we return it
         If j >= 0 Then
             GetValue = fileData(i).values(j).Value
+
             'Else
             'GetValue = 0
         End If
+
     End If
 
 End Function
@@ -400,6 +415,7 @@ Public Sub ChangeValue(ByVal Main As String, ByVal Key As String, ByVal Value As
     Else
         'If we found it we change it
         fileData(i).values(j).Value = Value
+
     End If
 
 End Sub
@@ -421,20 +437,20 @@ Private Function FindKey(ByRef Node As MainNode, ByVal Key As String) As Long
     '**************************************************************
     Dim Min As Long
 
-    Dim Max As Long
+    Dim max As Long
 
     Dim mid As Long
     
     Min = 0
-    Max = Node.numValues - 1
+    max = Node.numValues - 1
     
-    Do While Min <= Max
-        mid = (Min + Max) \ 2
+    Do While Min <= max
+        mid = (Min + max) \ 2
         
         If Node.values(mid).Key < Key Then
             Min = mid + 1
         ElseIf Node.values(mid).Key > Key Then
-            Max = mid - 1
+            max = mid - 1
         Else
             'We found it
             FindKey = mid
@@ -448,6 +464,7 @@ Private Function FindKey(ByRef Node As MainNode, ByVal Key As String) As Long
     'Not found, return the negation of the position where it should be
     '(all higher values are to the right of the list and lower values are to the left)
     FindKey = Not Min
+
 End Function
 
 ''
@@ -466,20 +483,20 @@ Private Function FindMain(ByVal Name As String) As Long
     '**************************************************************
     Dim Min As Long
 
-    Dim Max As Long
+    Dim max As Long
 
     Dim mid As Long
     
     Min = 0
-    Max = MainNodes - 1
+    max = MainNodes - 1
     
-    Do While Min <= Max
-        mid = (Min + Max) \ 2
+    Do While Min <= max
+        mid = (Min + max) \ 2
         
         If fileData(mid).Name < Name Then
             Min = mid + 1
         ElseIf fileData(mid).Name > Name Then
-            Max = mid - 1
+            max = mid - 1
         Else
             'We found it
             FindMain = mid
@@ -493,6 +510,7 @@ Private Function FindMain(ByVal Name As String) As Long
     'Not found, return the negation of the position where it should be
     '(all higher values are to the right of the list and lower values are to the left)
     FindMain = Not Min
+
 End Function
 
 ''
@@ -508,6 +526,7 @@ Public Function KeyExists(ByVal Name As String) As Boolean
     'Returns true of the key exists, false otherwise.
     '**************************************************************
     KeyExists = FindMain(UCase$(Name)) >= 0
+
 End Function
 
 Private Function AddNode(ByRef Name As String) As Long
@@ -537,6 +556,7 @@ Private Function AddNode(ByRef Name As String) As Long
     
         fileData(MainPos).numValues = 0
         Erase fileData(MainPos).values
+
     End If
 
     fileData(MainPos).Name = Name
@@ -544,6 +564,7 @@ Private Function AddNode(ByRef Name As String) As Long
     MainNodes = MainNodes + 1
 
     AddNode = MainPos
+
 End Function
 
 Private Function AddKey(ByRef Main As String, _
@@ -587,9 +608,11 @@ Private Function AddKey(ByRef Main As String, _
         .values(KeyPos).Value = Value
     
         .numValues = .numValues + 1
+
     End With
 
     AddKey = KeyPos
+
 End Function
 
 Public Sub DumpFile(ByRef File As String)
@@ -619,9 +642,11 @@ Public Sub DumpFile(ByRef File As String)
             Next j
             
             Print #hFile, ""
+
         End With
 
     Next i
     
     Close hFile
+
 End Sub

@@ -11,7 +11,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
- '*****************************************************
+'*****************************************************
 'Graphical inventory for ORE 0.4.1
 'Designed and implemented by Juan Martín Sotuyo Dodero (Maraxus)
 'juansotuyo@hotmail.com
@@ -35,9 +35,11 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private ShowInfo As Boolean
-Private ShowEquipped As Boolean
-Private Inventory_Pictures            As Integer ' Cada inventario comprende un rectangulo de AxB donde conforma X cantidad de TILES. (Comercios se usa 28, Inventario se usa el clásico)
+Private ShowInfo                   As Boolean
+
+Private ShowEquipped               As Boolean
+
+Private Inventory_Pictures         As Integer ' Cada inventario comprende un rectangulo de AxB donde conforma X cantidad de TILES. (Comercios se usa 28, Inventario se usa el clásico)
 
 Private InventoryIndex             As Integer
 
@@ -65,7 +67,7 @@ Private dragAndDropOn              As Boolean
 
 Private PictureModernOn            As Boolean
 
-Private Inventory()                     As Inventory    'User's inventory
+Private Inventory()                As Inventory    'User's inventory
 
 Private MouseDownSelectedItem      As Long
 
@@ -78,13 +80,14 @@ Public sMoveItem                   As Boolean 'USABA DRAG
     
 Public Event dragDone(ByVal originalSlot As Integer, ByVal newSlot As Integer)
 
-Private lFrameTimer                As Long
+Private lFrameTimer As Long
 
-Private ViewInfo                   As Boolean
+Private ViewInfo    As Boolean
 
-Private FontSize As Byte
+Private FontSize    As Byte
 
 Private Sub Class_Initialize()
+
     '***************************************************
     'Author: Juan Martín Sotuyo Dodero (Maraxus)
     'Last Modify Date: 27/07/04
@@ -93,6 +96,7 @@ Private Sub Class_Initialize()
 End Sub
 
 Private Sub Class_Terminate()
+
     '***************************************************
     'Author: Juan Martín Sotuyo Dodero (Maraxus)
     'Last Modify Date: 27/07/04
@@ -111,9 +115,11 @@ Public Sub ScrollInventory(ByVal Up As Boolean)
     'Only move if there is something to show up /down
     If CanScroll(Up) Then
         InventoryOffset = InventoryOffset + IIf(Up, Inventory_Pictures, -Inventory_Pictures)
+
     End If
 
     DrawInventory
+
 End Sub
 
 Public Function CanScroll(ByVal Up As Boolean)
@@ -127,6 +133,7 @@ Public Function CanScroll(ByVal Up As Boolean)
         CanScroll = (InventoryOffset + Inventory_Pictures) <= UBound(Inventory) + (InventoryOffset / Inventory_Pictures)
     Else
         CanScroll = InventoryOffset > 0
+
     End If
     
 End Function
@@ -145,6 +152,7 @@ Public Sub SelectGold()
     
     'Select the gold
     InvSelectedItem = FLAGORO
+
 End Sub
 
 Public Sub SelectEldhir()
@@ -161,6 +169,7 @@ Public Sub SelectEldhir()
     
     'Select the dsps money
     InvSelectedItem = FLAGELDHIR
+
 End Sub
 
 Public Sub DeselectItem()
@@ -210,6 +219,7 @@ Public Property Get MaxHit(ByVal Slot As Integer) As Integer
     'Retrieves the max hit of the selected item
     '***************************************************
     MaxHit = Inventory(Slot).MaxHit
+
 End Property
 
 Public Property Get MinHit(ByVal Slot As Integer) As Integer
@@ -219,6 +229,7 @@ Public Property Get MinHit(ByVal Slot As Integer) As Integer
     'Retrieves the min hit of the selected item
     '***************************************************
     MinHit = Inventory(Slot).MinHit
+
 End Property
 
 Public Property Get MaxHitMag(ByVal Slot As Integer) As Integer
@@ -228,6 +239,7 @@ Public Property Get MaxHitMag(ByVal Slot As Integer) As Integer
     'Retrieves the max hit of the selected item
     '***************************************************
     MaxHitMag = Inventory(Slot).MaxHitMag
+
 End Property
 
 Public Property Get MinHitMag(ByVal Slot As Integer) As Integer
@@ -237,6 +249,7 @@ Public Property Get MinHitMag(ByVal Slot As Integer) As Integer
     'Retrieves the min hit of the selected item
     '***************************************************
     MinHitMag = Inventory(Slot).MinHitMag
+
 End Property
 
 Public Property Get MaxDef(ByVal Slot As Integer) As Integer
@@ -246,6 +259,7 @@ Public Property Get MaxDef(ByVal Slot As Integer) As Integer
     'Retrieves the defense of the selected item
     '***************************************************
     MaxDef = Inventory(Slot).MaxDef
+
 End Property
 
 Public Property Get MinDef(ByVal Slot As Integer) As Integer
@@ -255,6 +269,7 @@ Public Property Get MinDef(ByVal Slot As Integer) As Integer
     'Retrieves the defense of the selected item
     '***************************************************
     MinDef = Inventory(Slot).MinDef
+
 End Property
 
 Public Property Get MaxDefMag(ByVal Slot As Integer) As Integer
@@ -264,6 +279,7 @@ Public Property Get MaxDefMag(ByVal Slot As Integer) As Integer
     'Retrieves the defense of the selected item
     '***************************************************
     MaxDefMag = Inventory(Slot).MaxDefMag
+
 End Property
 
 Public Property Get MinDefMag(ByVal Slot As Integer) As Integer
@@ -273,6 +289,7 @@ Public Property Get MinDefMag(ByVal Slot As Integer) As Integer
     'Retrieves the defense of the selected item
     '***************************************************
     MinDefMag = Inventory(Slot).MinDefMag
+
 End Property
 
 Public Property Get GrhIndex(ByVal Slot As Integer) As Long
@@ -282,6 +299,7 @@ Public Property Get GrhIndex(ByVal Slot As Integer) As Long
     'Retrieves the grh index of the selected item
     '***************************************************
     GrhIndex = Inventory(Slot).GrhIndex
+
 End Property
 
 Public Property Get Valor(ByVal Slot As Integer) As Single
@@ -291,6 +309,7 @@ Public Property Get Valor(ByVal Slot As Integer) As Single
     'Retrieves the value of the selected item
     '***************************************************
     Valor = Inventory(Slot).Valor
+
 End Property
 
 Public Property Get ExistSkin(ByVal Slot As Integer) As Single
@@ -300,6 +319,7 @@ Public Property Get ExistSkin(ByVal Slot As Integer) As Single
     'Retrieves the value of the selected item
     '***************************************************
     ExistSkin = Inventory(Slot).ExistSkin
+
 End Property
 
 Public Property Get ValorAzul(ByVal Slot As Integer) As Single
@@ -309,6 +329,7 @@ Public Property Get ValorAzul(ByVal Slot As Integer) As Single
     'Retrieves the value of the selected item
     '***************************************************
     ValorAzul = Inventory(Slot).ValorAzul
+
 End Property
 
 Public Property Get CanUse(ByVal Slot As Integer) As Boolean
@@ -318,6 +339,7 @@ Public Property Get CanUse(ByVal Slot As Integer) As Boolean
     'Retrieves the value of the selected item
     '***************************************************
     CanUse = Inventory(Slot).CanUse
+
 End Property
 
 Public Property Get Amount(ByVal Slot As Integer) As Long
@@ -331,6 +353,7 @@ Public Property Get Amount(ByVal Slot As Integer) As Long
         Amount = UserGLD
     ElseIf Slot >= LBound(Inventory) And Slot <= UBound(Inventory) Then
         Amount = Inventory(Slot).Amount
+
     End If
 
 End Property
@@ -342,6 +365,7 @@ Public Property Get ObjIndex(ByVal Slot As Integer) As Integer
     'Retrieves the selected item's object index
     '***************************************************
     ObjIndex = Inventory(Slot).ObjIndex
+
 End Property
 
 Public Property Get ObjType(ByVal Slot As Integer) As Integer
@@ -351,6 +375,7 @@ Public Property Get ObjType(ByVal Slot As Integer) As Integer
     'Retrieves the selected item's object type
     '***************************************************
     ObjType = Inventory(Slot).ObjType
+
 End Property
 
 Public Property Get ItemName(ByVal Slot As Integer) As String
@@ -360,6 +385,7 @@ Public Property Get ItemName(ByVal Slot As Integer) As String
     'Retrieves the selected item's name
     '***************************************************
     ItemName = Inventory(Slot).Name
+
 End Property
 
 Public Property Get Equipped(ByVal Slot As Integer) As Boolean
@@ -369,6 +395,7 @@ Public Property Get Equipped(ByVal Slot As Integer) As Boolean
     'Retrieves True if the item at the given pos is eqiupped
     '***************************************************
     Equipped = Inventory(Slot).Equipped
+
 End Property
 
 Public Property Get MaxObjs() As Integer
@@ -378,6 +405,7 @@ Public Property Get MaxObjs() As Integer
     'Retrieves the capacity of the Inventory
     '***************************************************
     MaxObjs = UBound(Inventory)
+
 End Property
 
 Public Sub SetMaxObjs(ByVal MaxObjs As Integer)
@@ -390,6 +418,7 @@ Public Sub SetMaxObjs(ByVal MaxObjs As Integer)
     If UBound(Inventory) = MaxObjs Then Exit Sub
     
     ReDim Preserve Inventory(1 To MaxObjs) As Inventory
+
 End Sub
 
 Public Sub ToggleShowValue(ByVal bShow As Boolean)
@@ -399,6 +428,7 @@ Public Sub ToggleShowValue(ByVal bShow As Boolean)
     'Indicates if the amount of the items in the inventory is shown
     '***************************************************
     ShowValue = bShow
+
 End Sub
 
 Public Sub ClearAllSlots()
@@ -470,9 +500,10 @@ Public Sub SetItem(ByVal Slot As Integer, _
         .Oro = eOro
         .Premium = ePremium
         .ExistSkin = ExistSkin
+
     End With
     
-  '  Call Invalidate(InventoryWindow.hWnd)
+    '  Call Invalidate(InventoryWindow.hWnd)
     
 End Sub
 
@@ -497,12 +528,10 @@ Private Function ClickItem(ByVal X As Long, ByVal Y As Long) As Long
     Last = UBound(Inventory) - InventoryOffset
     
     'If Last > 0 Then
-        TempItem = temp_x + (temp_y) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 + (UBound(Inventory) - Last)
+    TempItem = temp_x + (temp_y) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 + (UBound(Inventory) - Last)
     'Else
-       ' TempItem = temp_x + (temp_y + Last) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1
-   ' End If
-    
-    
+    ' TempItem = temp_x + (temp_y + Last) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1
+    ' End If
     
     'Make sure it's within limits
     If TempItem <= UBound(Inventory) Then
@@ -512,7 +541,9 @@ Private Function ClickItem(ByVal X As Long, ByVal Y As Long) As Long
             ClickItem = TempItem
         Else
             ClickItem = 0
+
         End If
+
     End If
 
 End Function
@@ -567,14 +598,15 @@ Public Sub DrawInventory()
         End If
         
     #Else
-          If InventoryIndex <> eCaption.MainPicture Then
+
+        If InventoryIndex <> eCaption.MainPicture Then
             Call Draw_Texture_Graphic_Gui(133, 0, 0, To_Depth(1), 245, 140, 0, 0, 245, 140, ARGB(255, 255, 255, 255), 0, eTechnique.t_Alpha)
+
         End If
             
         NotBig = True
-        
 
-       ' Call Draw_Texture_Graphic_Gui(51, 0, 0, To_Depth(1), 160, 192, 0, 0, 160, 192, -1, 0, eTechnique.t_Default)
+        ' Call Draw_Texture_Graphic_Gui(51, 0, 0, To_Depth(1), 160, 192, 0, 0, 160, 192, -1, 0, eTechnique.t_Default)
     #End If
 
     Dim Last  As Long
@@ -601,31 +633,27 @@ Public Sub DrawInventory()
             If PictureModernOn Then
                 If ClientSetup.bResolution = 0 Then
                     Call Draw_Texture_Graphic_Gui(3, DestX, DestY, To_Depth(2), ownTilePixelWidth / Div, ownTilePixelWidth / Div, 0, 0, ownTilePixelWidth / Div, ownTilePixelWidth / Div, ARGB(255, 255, 255, 255), 0, eTechnique.t_Alpha)
+
                 End If
+
             End If
-            
             
             If .GrhIndex Then
                 
-               ' If ObjData(.ObjIndex).Color <> 0 Then
-                   ' Call Draw_Texture(86747, DestX, DestY, To_Depth(3), ownTilePixelWidth / Div, ownTilePixelWidth / Div, ObjData(.ObjIndex).Color, 0, eTechnique.t_Alpha)
-               ' End If
+                ' If ObjData(.ObjIndex).Color <> 0 Then
+                ' Call Draw_Texture(86747, DestX, DestY, To_Depth(3), ownTilePixelWidth / Div, ownTilePixelWidth / Div, ObjData(.ObjIndex).Color, 0, eTechnique.t_Alpha)
+                ' End If
                
-               If .ExistSkin > 0 Then
-                      If Skins_CheckingItems(.ObjIndex) Then
-                            Call Draw_Texture(6579, DestX, DestY, To_Depth(7), ownTilePixelWidth, ownTilePixelWidth, ARGB(0, 255, 0, 255), 0, eTechnique.t_Alpha)
+                If .ExistSkin > 0 Then
+                    If Skins_CheckingItems(.ObjIndex) Then
+                        Call Draw_Texture(6579, DestX, DestY, To_Depth(7), ownTilePixelWidth, ownTilePixelWidth, ARGB(0, 255, 0, 255), 0, eTechnique.t_Alpha)
                     
                     Else
                         Call Draw_Texture(6579, DestX, DestY, To_Depth(6), ownTilePixelWidth, ownTilePixelWidth, ARGB(255, 0, 0, 255), 0, eTechnique.t_Alpha)
+
+                    End If
+                
                 End If
-                    
-                    
-                  
-                
-               End If
-               
-                
-              
                 
                 If ((LoopC) = SelectedItem) Then
                     Call Draw_Texture(6579, DestX, DestY, To_Depth(7), ownTilePixelWidth, ownTilePixelWidth, ARGB(255, 255, 255, 255), 0, eTechnique.t_Alpha)
@@ -670,7 +698,9 @@ Public Sub DrawInventory()
                             #End If
                         Else
                             Call Draw_Texture(6579, DestX, DestY, To_Depth(6), ownTilePixelWidth, ownTilePixelWidth, ARGB(0, 255, 0, 255), 0, eTechnique.t_Alpha)
+
                         End If
+
                     End If
 
                 End If
@@ -711,7 +741,7 @@ Private Sub InventoryWindow_MouseMove(Button As Integer, _
     
     Dim ObjIndex As Integer
     
-    Dim Last As Long
+    Dim Last     As Long
     
     'Exit if it got outside the control's areanv
     If X < 0 Or Y < 0 Or X > InventoryWindow.Width Or Y > InventoryWindow.Height Then
@@ -724,7 +754,7 @@ Private Sub InventoryWindow_MouseMove(Button As Integer, _
 
     End If
     
-     Last = UBound(Inventory) - InventoryOffset
+    Last = UBound(Inventory) - InventoryOffset
     
     If Button = vbRightButton Then
         uMoveItem = True
@@ -741,26 +771,34 @@ Private Sub InventoryWindow_MouseMove(Button As Integer, _
                 
             If ObjIndex > 0 Then
                 InventoryWindow.ToolTipText = ObjData(ObjIndex).Name
+
             End If
             
             If ShowInfo Then
                 If ObjIndex > 0 Then
                     If InventoryIndex <> eCaption.MainPicture Then
                         Call ShowInfoItem(ObjIndex)
+
                     End If
                     
                 Else
+
                     If MirandoObjetos Then
-                       FrmObject_Info.Close_Form
+                        FrmObject_Info.Close_Form
+
                     End If
                     
                 End If
+
             End If
             
         Else
+
             If MirandoObjetos Then
                 FrmObject_Info.Close_Form
+
             End If
+
         End If
 
     End If
@@ -778,7 +816,7 @@ Private Sub InventoryWindow_MouseDown(Button As Integer, _
 
     Dim TempItem As Integer
     
-    Dim Last As Long
+    Dim Last     As Long
     
     Last = UBound(Inventory) - InventoryOffset
     
@@ -794,7 +832,9 @@ Private Sub InventoryWindow_MouseDown(Button As Integer, _
             TempItem = temp_x + (temp_y) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 + (UBound(Inventory) - Last)
             
             slotDragged = TempItem
+
         End If
+
     End If
 
 End Sub
@@ -848,12 +888,13 @@ Public Sub Initialize(ByRef InvPic As PictureBox, _
     PictureModernOn = True 'PictureModern
     
     ViewInfo = eViewInfo
+
     If ImgContainer Then InvSelectedItem = ClickItem(1, 1)   'If there is anything there we select the top left item
 
     Inventory_Pictures = MaxObjs_Render
     
     ShowInfo = eShowInfo
-   ' Call Invalidate(InventoryWindow.hWnd)
+    ' Call Invalidate(InventoryWindow.hWnd)
     
 End Sub
 
@@ -877,9 +918,9 @@ Private Sub InventoryWindow_MouseUp(Button As Integer, _
 
     Dim temp_y      As Long
     
-    Dim Last As Long
+    Dim Last        As Long
     
-    Dim ObjIndex As Integer
+    Dim ObjIndex    As Integer
     
     'Exit if it got outside the control's area
     If X < 0 Or Y < 0 Or X > InventoryWindow.Width Or Y > InventoryWindow.Height Then Exit Sub
@@ -888,7 +929,6 @@ Private Sub InventoryWindow_MouseUp(Button As Integer, _
     Last = UBound(Inventory) - InventoryOffset
     temp_x = X \ ownTilePixelWidth
     temp_y = Y \ ownTilePixelHeight
-            
             
     InvSelectedItem = temp_x + (temp_y) * (InventoryWindow.ScaleWidth \ ownTilePixelWidth) + 1 + (UBound(Inventory) - Last)
             
@@ -901,35 +941,36 @@ Private Sub InventoryWindow_MouseUp(Button As Integer, _
                     Call Protocol.WriteMoveItem(slotDragged, InvSelectedItem, eMoveType.Bank)
                 Else
                     Call Protocol.WriteMoveItem(slotDragged, InvSelectedItem, eMoveType.Inventory)
+
                 End If
                 
                 uMoveItem = False
                 sMoveItem = False
-                FrmMain.PicInv.MouseIcon = Nothing
+                FrmMain.picInv.MouseIcon = Nothing
+
             End If
-            
 
         End If
-        
         
         ObjIndex = Inventory(InvSelectedItem).ObjIndex
         
         If ObjIndex > 0 Then
             'If (Shift = 1) Then
-              '  Call ShowInfoItem(ObjIndex)
-           ' End If
+            '  Call ShowInfoItem(ObjIndex)
+            ' End If
         Else
-             'If MirandoObjetos Then
-                      '  FrmObject_Info.Close_Form
-                   ' End If
+
+            'If MirandoObjetos Then
+            '  FrmObject_Info.Close_Form
+            ' End If
         End If
+
     Else
 
         'Get the currently clickced item
         If Not sMoveItem Then InvSelectedItem = ClickItem(CInt(X), CInt(Y))
         
-        
-      '  Call Invalidate(InventoryWindow.hWnd)
+        '  Call Invalidate(InventoryWindow.hWnd)
         
         If uMoveItem And InvSelectedItem <> MouseDownSelectedItem And MouseDownSelectedItem <> 0 And InvSelectedItem <> 0 And Not sMoveItem And Not Comerciando Then
         
@@ -945,11 +986,14 @@ Private Sub InventoryWindow_MouseUp(Button As Integer, _
             If prevSelItem <> 0 And prevSelItem <> FLAGORO Then Call DrawInventory
 
             If InvSelectedItem Then Call DrawInventory
+
         End If
+
     End If
 
 End Sub
 
 Private Sub InventoryWindow_Paint()
     Call DrawInventory
+
 End Sub

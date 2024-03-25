@@ -184,18 +184,17 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private clsFormulario          As clsFormMovementManager
+Private clsFormulario   As clsFormMovementManager
 
-Private ListMercader As clsGraphicalList
-Private picCheckBox          As Picture
-Private picCheckBoxNulo      As Picture
+Private ListMercader    As clsGraphicalList
 
-Private OrdenLevel As Boolean
-Private ViewFast As Boolean
+Private picCheckBox     As Picture
 
+Private picCheckBoxNulo As Picture
 
+Private OrdenLevel      As Boolean
 
-
+Private ViewFast        As Boolean
 
 Private Sub ButtonView_Click()
     
@@ -204,40 +203,44 @@ Private Sub ButtonView_Click()
     If ListMercader.ListIndex = -1 Then
         Call MsgBox("Selecciona una publicación para ver su detalle. Recuerda que puedes activar la vista rápida para visualizar todas las publicaciones de una manera más rápida.", vbInformation)
         Exit Sub
+
     End If
 
     If Not MirandoMercader Then
         Call FrmMercaderInfo.Show(, FrmMain)
     Else
         Call FrmMercaderInfo.UpdateInfo
+
     End If
-    
     
 End Sub
 
 Private Sub chkGld_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
-    
-    
     'chkLevel.Picture = picCheckBox
     'Set chkLevel.Picture = picCheckBoxNulo
     
     Call MsgBox("En desarrollo")
+
 End Sub
+
 Private Sub chkDsp_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call MsgBox("En desarrollo")
+
 End Sub
+
 Private Sub chkChange_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call MsgBox("En desarrollo")
+
 End Sub
 
 Private Sub chkView_Click()
-     Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
      
     If ViewFast Then
         ViewFast = False
@@ -245,7 +248,9 @@ Private Sub chkView_Click()
     Else
         ViewFast = True
         chkView.Picture = picCheckBox
+
     End If
+
 End Sub
 
 Private Sub LoadButtons()
@@ -267,7 +272,9 @@ Private Sub cmbClass_Click()
     Else
         Call Filter_Class(cmbClass.ListIndex)
         Call Mercader_List
+
     End If
+
 End Sub
 
 Private Sub Form_Load()
@@ -294,10 +301,10 @@ Private Sub Form_Load()
 
         If MercaderList(A).Char > 0 Then
             ListMercader.AddItem Mercader_Prepare_List(A)
+
         End If
         
     Next A
-
     
     cmbClass.AddItem "(Ninguna)"
     
@@ -307,7 +314,6 @@ Private Sub Form_Load()
     
     cmbClass.ListIndex = 0
     
-    
     imgView.ToolTipText = "Activa la vista rápida para seleccionar la publicación y visualizarla."
     imgLevel.ToolTipText = "Ordena las publicaciones según el nivel del primer personaje."
     ImgSecure.ToolTipText = "Ofrece DSP. Concreta la venta y le haremos llegar de manera segura el dinero real. (solo AR$)"
@@ -316,6 +322,7 @@ Private Sub Form_Load()
         chkView.Picture = picCheckBox
     Else
         Set chkView.Picture = picCheckBoxNulo
+
     End If
 
     If OrdenLevel Then
@@ -324,7 +331,6 @@ Private Sub Form_Load()
         Set chkLevel.Picture = picCheckBoxNulo
         
     End If
-    
     
     MercaderSelected = 0
     
@@ -337,8 +343,11 @@ Private Sub Form_Load()
         
         If ListMercader.ListCount > 0 Then
             MercaderSelected = MercaderSelected
+
         End If
+
     End If
+
 End Sub
 
 Private Function Mercader_Prepare_List(ByVal A As Long) As String
@@ -351,24 +360,24 @@ Private Sub imgNew_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     FrmMercaderPublication.Show , FrmMain
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Form_KeyDown vbKeyEscape, 0
-End Sub
 
+End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
 End Sub
-
-
 
 Private Sub PicMercader_Click()
 
@@ -386,24 +395,28 @@ Private Sub PicMercader_Click()
             Call FrmMercaderInfo.Show(, FrmMain)
         Else
             Call FrmMercaderInfo.UpdateInfo
+
         End If
         
         If MirandoOffer Then
             
             MercaderOff = 3
             Call WriteMercader_Required(MercaderOff, MercaderSelected, 0)
+
         End If
         
     Else
+
         If MirandoMercader Then
             Call FrmMercaderInfo.UpdateInfo
+
         End If
 
         If MirandoOffer Then
-             MercaderOff = 3
+            MercaderOff = 3
             Call WriteMercader_Required(MercaderOff, MercaderSelected, 0)
+
         End If
-        
         
     End If
     
@@ -420,43 +433,53 @@ Private Sub txtSearch_Change()
         Else
             Call Filter_Class(cmbClass.ListIndex)
             Call Mercader_List
+
         End If
+
     Else
         Call Filter_Mercader(txtSearch.Text)
-    End If
-End Sub
 
+    End If
+
+End Sub
 
 ' # Filtra una publicación a través de un "NOMBRE DE PERSONAJE"
 Private Sub Filter_Mercader(ByRef sCompare As String)
 
-    Dim lIndex As Long, b As Long, C As Long
+    Dim lIndex  As Long, b As Long, C As Long
+
     Dim MaoNull As tMercader
-    Dim Slot As Long
-    Dim A As Long
+
+    Dim Slot    As Long
+
+    Dim A       As Long
     
     For A = 1 To MERCADER_MAX_LIST
         MercaderList(A) = MercaderList_Copy(A)
     Next A
         
     If UBound(MercaderList) <> 0 Then
+
         For lIndex = 1 To UBound(MercaderList)
             For b = 1 To ACCOUNT_MAX_CHARS
+
                 If InStr(1, UCase$(MercaderList_Copy(lIndex).Chars(b).Name), UCase$(sCompare), vbBinaryCompare) Then
                     Slot = Slot + 1
                     MercaderList(Slot) = MercaderList_Copy(lIndex)
                     ListMercader.AddItem Mercader_Prepare_List(lIndex)
+
                 End If
+
             Next b
         Next lIndex
+
     End If
     
 End Sub
 
-
 ' # Habilita/Deshabilita el orden por NIVEL.
 Private Sub chkLevel_Click()
-     Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
      
     ListMercader.Clear
             
@@ -471,14 +494,16 @@ Private Sub chkLevel_Click()
             
             'Call Mercader_List_Virgen
             
-           ' ListMercader.Clear
+            ' ListMercader.Clear
             ' # Filtramos por la clase
             Call Filter_Class(cmbClass.ListIndex)
+
         End If
+
     Else
         OrdenLevel = True
         chkLevel.Picture = picCheckBox
-       ' ListMercader.Clear
+        ' ListMercader.Clear
         
         ' # Filtramos por la clase
         If cmbClass.ListIndex > 0 Then
@@ -486,13 +511,13 @@ Private Sub chkLevel_Click()
         Else
             ' # Ordenamos SOLO por Nivel
             Call Chars_OrdenateLevel(True)
+
         End If
-        
        
     End If
-   
     
     Mercader_List
+
 End Sub
 
 ' # Listamos la lista sin modificaciones
@@ -506,14 +531,18 @@ Private Sub Mercader_List_Virgen()
     
     If OrdenLevel Then
         Call Chars_OrdenateLevel(False)
+
     End If
         
     For A = 1 To MERCADER_MAX_LIST
     
         If MercaderList(A).Char > 0 Then
             ListMercader.AddItem Mercader_Prepare_List(A)
+
         End If
+
     Next A
+
 End Sub
 
 ' # Listamos las publicaciones con los filtros aplicados.
@@ -522,20 +551,28 @@ Private Sub Mercader_List()
     Dim A As Long, C As Long
     
     For A = 1 To MERCADER_MAX_LIST
+
         If MercaderList(A).Char > 0 Then
             If cmbClass.ListIndex = 0 Then
                 ListMercader.AddItem Mercader_Prepare_List(A)
             Else
+
                 For C = 1 To ACCOUNT_MAX_CHARS
+
                     If MercaderList(A).Chars(C).Class = cmbClass.ListIndex Then
                         ListMercader.AddItem Mercader_Prepare_List(A)
                         Exit For
+
                     End If
+
                 Next C
+
             End If
             
         End If
+
     Next A
+
 End Sub
 
 ' # Filtro por Nivel
@@ -549,51 +586,66 @@ Public Sub Chars_OrdenateLevel(ByVal Adding As Boolean)
         For b = 1 To MERCADER_MAX_LIST - A
 
             With MercaderList(b)
+
                 If .Chars(1).Elv < MercaderList(b + 1).Chars(1).Elv Then
                     Temp = MercaderList(b)
                     MercaderList(b) = MercaderList(b + 1)
                     MercaderList(b + 1) = Temp
+
                 End If
+
             End With
+
         Next b
     Next A
+
 End Sub
 
 ' # Buscar por clase
 Private Sub Filter_Class(ByVal Clase As Byte)
 
-    Dim lIndex As Long, b As Long, C As Long
+    Dim lIndex  As Long, b As Long, C As Long
+
     Dim MaoNull As tMercader
-    Dim Slot As Long
-    Dim A As Long
+
+    Dim Slot    As Long
+
+    Dim A       As Long
     
     For A = 1 To MERCADER_MAX_LIST
-       MercaderList(A) = MaoNull
+        MercaderList(A) = MaoNull
     Next A
         
     If UBound(MercaderList) <> 0 Then
+
         For lIndex = 1 To UBound(MercaderList)
             
             For b = 1 To ACCOUNT_MAX_CHARS
+
                 If MercaderList_Copy(lIndex).Chars(b).Class = Clase Then
                     Slot = Slot + 1
                     MercaderList(Slot) = MercaderList_Copy(lIndex)
+
                 End If
+
             Next b
         Next lIndex
-    End If
 
+    End If
     
     If OrdenLevel Then
         Call Chars_OrdenateLevel(False)
+
     End If
-    
     
 End Sub
 
-
 ' Lista Gráfica de Hechizos
-Private Sub PicMercader_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMercader_MouseDown(Button As Integer, _
+                                  Shift As Integer, _
+                                  X As Single, _
+                                  Y As Single)
+
     If Y < 0 Then Y = 0
     
     If Y > Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then Y = Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
@@ -604,32 +656,45 @@ Private Sub PicMercader_MouseDown(Button As Integer, Shift As Integer, X As Sing
     
     Else
         ListMercader.DownBarrita = Y - ListMercader.Scroll * (PicMercader.ScaleHeight - ListMercader.BarraHeight) / (ListMercader.ListCount - ListMercader.VisibleCount)
+
     End If
     
 End Sub
 
-Private Sub PicMercader_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMercader_MouseMove(Button As Integer, _
+                                  Shift As Integer, _
+                                  X As Single, _
+                                  Y As Single)
 
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
     
-    If yy < 0 Then yy = 0
+        If yy < 0 Then yy = 0
     
-    If yy > Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then yy = Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
+        If yy > Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then yy = Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
     
-    If ListMercader.DownBarrita > 0 Then
-        ListMercader.Scroll = (Y - ListMercader.DownBarrita) * (ListMercader.ListCount - ListMercader.VisibleCount) / (PicMercader.ScaleHeight - ListMercader.BarraHeight)
-    Else
-        ListMercader.ListIndex = Int(yy / ListMercader.Pixel_Alto) + ListMercader.Scroll
+        If ListMercader.DownBarrita > 0 Then
+            ListMercader.Scroll = (Y - ListMercader.DownBarrita) * (ListMercader.ListCount - ListMercader.VisibleCount) / (PicMercader.ScaleHeight - ListMercader.BarraHeight)
+        Else
+            ListMercader.ListIndex = Int(yy / ListMercader.Pixel_Alto) + ListMercader.Scroll
+
+        End If
+
+    ElseIf Button = 0 Then
+        ListMercader.ShowBarrita = X > PicMercader.ScaleWidth - ListMercader.BarraWidth * 2
+
     End If
-ElseIf Button = 0 Then
-    ListMercader.ShowBarrita = X > PicMercader.ScaleWidth - ListMercader.BarraWidth * 2
-End If
+
 End Sub
 
-Private Sub PicMercader_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMercader_MouseUp(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     ListMercader.DownBarrita = 0
-End Sub
 
+End Sub
 

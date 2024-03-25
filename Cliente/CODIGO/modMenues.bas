@@ -7,11 +7,11 @@ Public Sub LoadMenuInfo()
 
     On Error Resume Next
 
-    Dim FilePath As String
+    Dim filePath As String
     
-    FilePath = IniPath & "Menu.dat"
+    filePath = IniPath & "Menu.dat"
     
-    If Not FileExist(FilePath, vbArchive) Then
+    If Not FileExist(filePath, vbArchive) Then
         Call MsgBox("ERROR: no se ha podido cargar los menues. Falta el archivo menu.dat, reinstale el juego", vbCritical + vbOKOnly)
 
         Exit Sub
@@ -20,7 +20,7 @@ Public Sub LoadMenuInfo()
     
     Dim NumMenues As Long
 
-    NumMenues = Val(GetVar(FilePath, "INIT", "NumMenues"))
+    NumMenues = Val(GetVar(filePath, "INIT", "NumMenues"))
     
     If NumMenues > 0 Then ReDim MenuInfo(1 To NumMenues)
     
@@ -32,7 +32,7 @@ Public Sub LoadMenuInfo()
     
     For Index = 1 To NumMenues
         
-        iTemp = Val(GetVar(FilePath, "MENU" & Index, "NumActions"))
+        iTemp = Val(GetVar(filePath, "MENU" & Index, "NumActions"))
         
         With MenuInfo(Index)
             .NumActions = CByte(iTemp)
@@ -41,9 +41,9 @@ Public Sub LoadMenuInfo()
                 ReDim .Actions(1 To iTemp)
                 
                 For ActionIndex = 1 To iTemp
-                    .Actions(ActionIndex).ActionIndex = Val(GetVar(FilePath, "MENU" & Index, "Action" & ActionIndex))
-                    .Actions(ActionIndex).NormalGrh = Val(GetVar(FilePath, "MENU" & Index, "NormalGrh" & ActionIndex))
-                    .Actions(ActionIndex).FocusGrh = Val(GetVar(FilePath, "MENU" & Index, "FocusGrh" & ActionIndex))
+                    .Actions(ActionIndex).ActionIndex = Val(GetVar(filePath, "MENU" & Index, "Action" & ActionIndex))
+                    .Actions(ActionIndex).NormalGrh = Val(GetVar(filePath, "MENU" & Index, "NormalGrh" & ActionIndex))
+                    .Actions(ActionIndex).FocusGrh = Val(GetVar(filePath, "MENU" & Index, "FocusGrh" & ActionIndex))
                 Next ActionIndex
 
             End If
@@ -109,6 +109,7 @@ Public Sub PerformMenuAction(ByVal Action As Byte)
             '*
         
         Case eMenuAction.ieLightFire
+
             '*
     End Select
 

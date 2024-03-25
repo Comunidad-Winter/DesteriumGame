@@ -2,124 +2,130 @@ Attribute VB_Name = "mNewChars"
 Option Explicit
 
 Public Sub IUser_Editation_Skills(ByRef Temp As User)
-        '<EhHeader>
-        On Error GoTo IUser_Editation_Skills_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo IUser_Editation_Skills_Err
+
+    '</EhHeader>
     
-        ' Todas
-100     Temp.Stats.UserSkills(eSkill.Resistencia) = LevelSkill(Temp.Stats.Elv).LevelValue
-102     Temp.Stats.UserSkills(eSkill.Tacticas) = LevelSkill(Temp.Stats.Elv).LevelValue
-104     Temp.Stats.UserSkills(eSkill.Armas) = LevelSkill(Temp.Stats.Elv).LevelValue
-106     Temp.Stats.UserSkills(eSkill.Comerciar) = LevelSkill(Temp.Stats.Elv).LevelValue
-108     Temp.Stats.UserSkills(eSkill.Navegacion) = 35
-          Temp.Stats.UserSkills(eSkill.Ocultarse) = RandomNumber(1, 37)
+    ' Todas
+    Temp.Stats.UserSkills(eSkill.Resistencia) = LevelSkill(Temp.Stats.Elv).LevelValue
+    Temp.Stats.UserSkills(eSkill.Tacticas) = LevelSkill(Temp.Stats.Elv).LevelValue
+    Temp.Stats.UserSkills(eSkill.Armas) = LevelSkill(Temp.Stats.Elv).LevelValue
+    Temp.Stats.UserSkills(eSkill.Comerciar) = LevelSkill(Temp.Stats.Elv).LevelValue
+    Temp.Stats.UserSkills(eSkill.Navegacion) = 35
+    Temp.Stats.UserSkills(eSkill.Ocultarse) = RandomNumber(1, 37)
            
-        ' Clases con maná
-110     If Temp.Stats.MaxMan > 0 Then
-112         Temp.Stats.UserSkills(eSkill.Magia) = LevelSkill(Temp.Stats.Elv).LevelValue ' + RandomNumber(1, 7)
-        End If
+    ' Clases con maná
+    If Temp.Stats.MaxMan > 0 Then
+        Temp.Stats.UserSkills(eSkill.Magia) = LevelSkill(Temp.Stats.Elv).LevelValue ' + RandomNumber(1, 7)
+
+    End If
     
-        ' Todas menos mago APUÑALAN
-114     If Temp.Clase <> eClass.Mage Then
-116           Temp.Stats.UserSkills(eSkill.Apuñalar) = LevelSkill(Temp.Stats.Elv).LevelValue
-        End If
+    ' Todas menos mago APUÑALAN
+    If Temp.Clase <> eClass.Mage Then
+        Temp.Stats.UserSkills(eSkill.Apuñalar) = LevelSkill(Temp.Stats.Elv).LevelValue
+
+    End If
     
-        ' Escudos
-118     If Temp.Clase <> eClass.Mage And Temp.Clase <> eClass.Druid Then
-120         Temp.Stats.UserSkills(eSkill.Defensa) = LevelSkill(Temp.Stats.Elv).LevelValue
-        End If
+    ' Escudos
+    If Temp.Clase <> eClass.Mage And Temp.Clase <> eClass.Druid Then
+        Temp.Stats.UserSkills(eSkill.Defensa) = LevelSkill(Temp.Stats.Elv).LevelValue
+
+    End If
     
-        If Temp.Clase = eClass.Hunter Or Temp.Clase = eClass.Warrior Then
-            Temp.Stats.UserSkills(eSkill.Proyectiles) = LevelSkill(Temp.Stats.Elv).LevelValue
-        End If
+    If Temp.Clase = eClass.Hunter Or Temp.Clase = eClass.Warrior Then
+        Temp.Stats.UserSkills(eSkill.Proyectiles) = LevelSkill(Temp.Stats.Elv).LevelValue
+
+    End If
         
-        ' Armas de proyectiles
-122     If Temp.Clase = eClass.Hunter Then
-              Temp.Stats.UserSkills(eSkill.Ocultarse) = LevelSkill(Temp.Stats.Elv).LevelValue + RandomNumber(1, 14)
-        End If
+    ' Armas de proyectiles
+    If Temp.Clase = eClass.Hunter Then
+        Temp.Stats.UserSkills(eSkill.Ocultarse) = LevelSkill(Temp.Stats.Elv).LevelValue + RandomNumber(1, 14)
+
+    End If
     
-        ' Ocultarse & Robar
-126     If Temp.Clase = eClass.Thief Then
-128         Temp.Stats.UserSkills(eSkill.Ocultarse) = LevelSkill(Temp.Stats.Elv).LevelValue + RandomNumber(20, 40)
-130         Temp.Stats.UserSkills(eSkill.Robar) = LevelSkill(Temp.Stats.Elv).LevelValue + RandomNumber(20, 40)
-        End If
+    ' Ocultarse & Robar
+    If Temp.Clase = eClass.Thief Then
+        Temp.Stats.UserSkills(eSkill.Ocultarse) = LevelSkill(Temp.Stats.Elv).LevelValue + RandomNumber(20, 40)
+        Temp.Stats.UserSkills(eSkill.Robar) = LevelSkill(Temp.Stats.Elv).LevelValue + RandomNumber(20, 40)
+
+    End If
     
-        ' Mineria, Tala, Pesca
-134       Temp.Stats.UserSkills(eSkill.Pesca) = LevelSkill(Temp.Stats.Elv).LevelValue
-136       Temp.Stats.UserSkills(eSkill.Mineria) = LevelSkill(Temp.Stats.Elv).LevelValue
-138       Temp.Stats.UserSkills(eSkill.Talar) = LevelSkill(Temp.Stats.Elv).LevelValue
+    ' Mineria, Tala, Pesca
+    Temp.Stats.UserSkills(eSkill.Pesca) = LevelSkill(Temp.Stats.Elv).LevelValue
+    Temp.Stats.UserSkills(eSkill.Mineria) = LevelSkill(Temp.Stats.Elv).LevelValue
+    Temp.Stats.UserSkills(eSkill.Talar) = LevelSkill(Temp.Stats.Elv).LevelValue
         
+    ' Checking Final
+    Dim A As Long
         
+    For A = 1 To NUMSKILLS
         
-        
-        ' Checking Final
-        Dim A As Long
-        
-        For A = 1 To NUMSKILLS
-        
-            If Temp.Stats.UserSkills(A) > 100 Then
-                Temp.Stats.UserSkills(A) = 100
-            End If
+        If Temp.Stats.UserSkills(A) > 100 Then
+            Temp.Stats.UserSkills(A) = 100
+
+        End If
             
-        Next A
+    Next A
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 IUser_Editation_Skills_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.FrmPanelCreator.IUser_Editation_Skills " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.FrmPanelCreator.IUser_Editation_Skills " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub IUser_Editation_Reputacion_Frags(ByRef Temp As User, ByVal Frags As Integer)
-        '<EhHeader>
-        On Error GoTo IUser_Editation_Reputacion_Frags_Err
-        '</EhHeader>
-        Dim L     As Long
 
-100     Frags = RandomNumber(val(FrmPanelCreator.txtFrags(0).Text), val(FrmPanelCreator.txtFrags(1).Text))
+    '<EhHeader>
+    On Error GoTo IUser_Editation_Reputacion_Frags_Err
+
+    '</EhHeader>
+    Dim L As Long
+
+    Frags = RandomNumber(val(FrmPanelCreator.txtFrags(0).Text), val(FrmPanelCreator.txtFrags(1).Text))
     
-102     With Temp.Reputacion
+    With Temp.Reputacion
 
-104         If RandomNumber(1, 100) >= 50 Then
-106             .AsesinoRep = (vlASESINO * 2)
-108             If .AsesinoRep > MAXREP Then .AsesinoRep = MAXREP
+        If RandomNumber(1, 100) >= 50 Then
+            .AsesinoRep = (vlASESINO * 2)
+
+            If .AsesinoRep > MAXREP Then .AsesinoRep = MAXREP
              
-110              .BandidoRep = Frags + RandomNumber(1, 12) * 1000
+            .BandidoRep = Frags + RandomNumber(1, 12) * 1000
              
-112             .BurguesRep = 0
-114             .NobleRep = 0
-116             .PlebeRep = 0
-118             Temp.Faction.FragsCiu = Frags
-120             Temp.Faction.FragsCri = RandomNumber(1, Frags)
-122             Temp.Faction.FragsOther = Temp.Faction.FragsCri + Temp.Faction.FragsCiu
+            .BurguesRep = 0
+            .NobleRep = 0
+            .PlebeRep = 0
+            Temp.Faction.FragsCiu = Frags
+            Temp.Faction.FragsCri = RandomNumber(1, Frags)
+            Temp.Faction.FragsOther = Temp.Faction.FragsCri + Temp.Faction.FragsCiu
             
-            Else
-124             .NobleRep = (vlNoble * Frags)
+        Else
+            .NobleRep = (vlNoble * Frags)
 
-126             If .NobleRep > MAXREP Then .NobleRep = MAXREP
-128             Temp.Faction.FragsCri = Frags
-130             Temp.Faction.FragsOther = Temp.Faction.FragsCri
-            End If
+            If .NobleRep > MAXREP Then .NobleRep = MAXREP
+            Temp.Faction.FragsCri = Frags
+            Temp.Faction.FragsOther = Temp.Faction.FragsCri
+
+        End If
         
-132         L = (-.AsesinoRep) + (-.BandidoRep) + .BurguesRep + (-.LadronesRep) + .NobleRep + .PlebeRep
-134         L = L / 6
-136         .promedio = L
+        L = (-.AsesinoRep) + (-.BandidoRep) + .BurguesRep + (-.LadronesRep) + .NobleRep + .PlebeRep
+        L = L / 6
+        .promedio = L
 
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 IUser_Editation_Reputacion_Frags_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.FrmPanelCreator.IUser_Editation_Reputacion_Frags " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.FrmPanelCreator.IUser_Editation_Reputacion_Frags " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub IUser_Editation_Spells(ByRef Temp As User)
@@ -193,5 +199,4 @@ Public Sub IUser_Editation_Spells(ByRef Temp As User)
     End With
 
 End Sub
-
 

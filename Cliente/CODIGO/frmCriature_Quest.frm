@@ -252,6 +252,7 @@ Option Explicit
 
 ' Determina el Panel seleccionado en el que esta posicionado
 Public Enum ePanelCommerce
+
     eList = 0 '  Predeterminada con Lista de Objetos
     eRequiredObj = 1 ' Objetos que requiere para comprar y/o construir el obj
     eRequiredNpc = 2 ' Panel de Criaturas requeridas para completar la misión
@@ -259,9 +260,10 @@ Public Enum ePanelCommerce
 
 End Enum
 
-Public PanelCommerce As ePanelCommerce
+Public PanelCommerce  As ePanelCommerce
         
-Private Heading As Byte
+Private Heading       As Byte
+
 Private clsFormulario As clsFormMovementManager
 
 Public LastIndex1     As Integer
@@ -273,7 +275,6 @@ Public LasActionBuy   As Boolean
 Private ClickNpcInv   As Boolean
 
 Private lIndex        As Byte
-
 
 Private Sub Form_Load()
     
@@ -295,16 +296,16 @@ Private Sub Form_Load()
         Item(A).Left = Item(1).Left
         
     Next A
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     
-  '  frmMain.SetFocus
+    '  frmMain.SetFocus
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.cPivQuest))
     
-    
-   ' If MirandoObjetos Then
-        'FrmObject_Info.Close_Form
+    ' If MirandoObjetos Then
+    'FrmObject_Info.Close_Form
     'End If
     
 End Sub
@@ -319,7 +320,9 @@ Private Sub imgCommerce_Click()
         Unload Me
     Else
         Call MsgBox("La criatura no comercia objetos")
+
     End If
+
 End Sub
 
 Private Sub imgFabricar_Click()
@@ -328,14 +331,18 @@ Private Sub imgFabricar_Click()
     If QuestIndex <= 0 Then
         Call MsgBox("Selecciona el objeto a construir...")
         Exit Sub
+
     End If
     
-     If Crafting_Checking_Object(QuestNpc(QuestIndex)) Then
+    If Crafting_Checking_Object(QuestNpc(QuestIndex)) Then
         WriteCraftBlacksmith QuestNpc(QuestIndex)
+
     End If
+
 End Sub
 
 Private Sub imgNpcInfo_Click()
+
     If QuestIndex <= 0 Then Exit Sub
     If QuestNpcIndex <= 0 Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
@@ -343,9 +350,12 @@ Private Sub imgNpcInfo_Click()
     SelectedNpcIndex = QuestList(QuestNpc(QuestIndex)).Npcs(QuestNpcIndex).NpcIndex
     
     Call Invalidate(FrmCriatura_Info.hWnd)
+
     If Not FrmCriatura_Info.visible Then
         Call FrmCriatura_Info.Show(, frmCriatura_Quest)
+
     End If
+
 End Sub
 
 Private Sub imgUnload_Click()
@@ -360,11 +370,13 @@ Private Sub imgUnload_Click()
         
     Else
         Unload Me
+
     End If
     
 End Sub
 
 Private Sub Item_Click(Index As Integer)
+
     If (Index + 1) > QuestLast Then Exit Sub
     
     Call Audio.PlayInterface(SND_CLICK)
@@ -391,34 +403,44 @@ Private Sub Item_Click(Index As Integer)
     NextQuest.Left = (Npc.Left) - 16
     PanelCommerce = ePanelCommerce.eRequiredObj
     
-    
 End Sub
 
 ' # Comprueba de tener los recursos necesarios que necesita el objeto para ser creado/mejorado
 Public Function Crafting_Checking_Object(ByVal QuestIndex As Integer) As Boolean
-    Dim A As Long
+
+    Dim A    As Long
+
     Dim Temp As String
     
     Crafting_Checking_Object = True
     
     With QuestList(QuestIndex)
+
         For A = 1 To .Obj
+
             If Not TieneObjetos(.Objs(A).ObjIndex) >= .Objs(A).Amount Then
                 Temp = Temp & "* " & ObjData(.Objs(A).ObjIndex).Name & " (x" & .Objs(A).Amount & ")" & vbCrLf
                 Crafting_Checking_Object = False
+
             End If
+
         Next A
         
         If Not Crafting_Checking_Object Then
             Call ShowConsoleMsg("Te faltan recursos: " & vbCrLf & Temp)
+
         End If
         
     End With
     
-    
 End Function
 
-Private Sub Item_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Item_MouseMove(Index As Integer, _
+                           Button As Integer, _
+                           Shift As Integer, _
+                           X As Single, _
+                           Y As Single)
+
     If QuestIndex <= 0 Then Exit Sub
     If QuestList(QuestNpc(QuestIndex)).Obj < (Index + 1) Then Exit Sub
     
@@ -427,74 +449,93 @@ Private Sub Item_MouseMove(Index As Integer, Button As Integer, Shift As Integer
     Call ShowInfoItem(QuestList(QuestNpc(QuestIndex)).RewardObjs(1).ObjIndex)
     
 End Sub
-Private Sub ItemRequired_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-  If QuestIndex <= 0 Then Exit Sub
-  If QuestList(QuestNpc(QuestIndex)).Obj < (Index + 1) Then Exit Sub
+
+Private Sub ItemRequired_MouseMove(Index As Integer, _
+                                   Button As Integer, _
+                                   Shift As Integer, _
+                                   X As Single, _
+                                   Y As Single)
+
+    If QuestIndex <= 0 Then Exit Sub
+    If QuestList(QuestNpc(QuestIndex)).Obj < (Index + 1) Then Exit Sub
     
     QuestObjIndex = Index + 1
     'PanelCommerce = ePanelCommerce.eRequiredObj_Selected
     Call ShowInfoItem(QuestList(QuestNpc(QuestIndex)).Objs(QuestObjIndex).ObjIndex)
+
 End Sub
 
 Private Sub LastNpc_Click()
+
     If QuestIndex <= 0 Then Exit Sub
     If QuestList(QuestNpc(QuestIndex)).Npc = 1 Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
     
     QuestNpcIndex = QuestNpcIndex - 1
+
     If QuestNpcIndex <= 0 Then QuestNpcIndex = 1
     Render_QuestPanel
+
 End Sub
 
 Private Sub LastQuest_Click()
+
     If QuestIndex <= 0 Then Exit Sub
     If QuestList(QuestNpc(QuestIndex)).LastQuest <= 0 Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
     
-    
     Dim Last As Byte
+
     QuestNpcIndex = 0
     QuestObjIndex = 0
     Last = QuestNpc(QuestIndex)
     
     QuestNpc(QuestIndex) = QuestList(Last).LastQuest
+
 End Sub
 
 Private Sub NextNpc_Click()
+
     If QuestIndex <= 0 Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
     
     QuestNpcIndex = QuestNpcIndex + 1
+
     If QuestNpcIndex > QuestList(QuestNpc(QuestIndex)).Npc Then QuestNpcIndex = QuestList(QuestNpc(QuestIndex)).Npc
     Render_QuestPanel
+
 End Sub
 
 Private Sub NextQuest_Click()
+
     If QuestIndex <= 0 Then Exit Sub
     If QuestList(QuestNpc(QuestIndex)).NextQuest <= 0 Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
     
     Dim Last As Byte
+
     QuestNpcIndex = 0
     QuestObjIndex = 0
     Last = QuestNpc(QuestIndex)
     
     QuestNpc(QuestIndex) = QuestList(Last).NextQuest
+
 End Sub
 
 Private Sub Npc_Click()
+
     If QuestIndex <= 0 Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
     
     PanelCommerce = ePanelCommerce.eRequiredNpc
     QuestNpcIndex = 1
     Render_QuestPanel
-
     
 End Sub
 
 Private Sub tUpdate_Timer()
   
     Render_QuestPanel
+
 End Sub
 

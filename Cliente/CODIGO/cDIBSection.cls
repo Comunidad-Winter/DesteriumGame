@@ -224,17 +224,23 @@ Public Function CopyToClipboard(Optional ByVal bAsDIB As Boolean = True) As Bool
 
                         If (SetClipboardData(lFmt, hObj) <> 0) Then
                             CopyToClipboard = True
+
                         End If
 
                         CloseClipboard
+
                     End If
+
                 End If
+
             End If
 
             DeleteDC lhDC
+
         End If
 
         DeleteDC lhDCDesktop
+
     End If
 
 End Function
@@ -252,10 +258,12 @@ Public Function CreateDIB(ByVal lhDC As Long, _
         .biBitCount = 24
         .biCompression = BI_RGB
         .biSizeImage = BytesPerScanLine * .biHeight
+
     End With
 
     hDiB = CreateDIBSection(lhDC, m_tBI, DIB_RGB_COLORS, m_lPtr, 0, 0)
     CreateDIB = (hDiB <> 0)
+
 End Function
 
 Public Function CreateFromPicture(ByRef picThis As StdPicture)
@@ -285,8 +293,11 @@ Public Function CreateFromPicture(ByRef picThis As StdPicture)
                 LoadPictureBlt lhDC
                 SelectObject lhDC, lhBmpOld
                 DeleteDC lhDC
+
             End If
+
         End If
+
     End If
 
 End Function
@@ -302,7 +313,9 @@ Public Function Create(ByVal lWidth As Long, ByVal lHeight As Long) As Boolean
         Else
             DeleteDC m_hDC
             m_hDC = 0
+
         End If
+
     End If
 
 End Function
@@ -310,14 +323,17 @@ End Function
 Public Property Get BytesPerScanLine() As Long
     ' Scans must align on dword boundaries:
     BytesPerScanLine = (m_tBI.bmiHeader.biWidth * 3 + 3) And &HFFFFFFFC
+
 End Property
 
 Public Property Get Width() As Long
     Width = m_tBI.bmiHeader.biWidth
+
 End Property
 
 Public Property Get Height() As Long
     Height = m_tBI.bmiHeader.biHeight
+
 End Property
 
 Public Sub LoadPictureBlt(ByVal lhDC As Long, _
@@ -330,6 +346,7 @@ Public Sub LoadPictureBlt(ByVal lhDC As Long, _
     If lSrcWidth < 0 Then lSrcWidth = m_tBI.bmiHeader.biWidth
     If lSrcHeight < 0 Then lSrcHeight = m_tBI.bmiHeader.biHeight
     BitBlt m_hDC, 0, 0, lSrcWidth, lSrcHeight, lhDC, lSrcLeft, lSrcTop, eRop
+
 End Sub
 
 Public Sub PaintPicture(ByVal lhDC As Long, _
@@ -344,18 +361,22 @@ Public Sub PaintPicture(ByVal lhDC As Long, _
     If (lDestWidth < 0) Then lDestWidth = m_tBI.bmiHeader.biWidth
     If (lDestHeight < 0) Then lDestHeight = m_tBI.bmiHeader.biHeight
     BitBlt lhDC, lDestLeft, lDestTop, lDestWidth, lDestHeight, m_hDC, lSrcLeft, lSrcTop, eRop
+
 End Sub
 
 Public Property Get hdc() As Long
     hdc = m_hDC
+
 End Property
 
 Public Property Get hDiB() As Long
     hDiB = m_hDIb
+
 End Property
 
 Public Property Get DIBSectionBitsPtr() As Long
     DIBSectionBitsPtr = m_lPtr
+
 End Property
 
 Public Sub RandomiseBits(Optional ByVal bGray As Boolean = False)
@@ -379,6 +400,7 @@ Public Sub RandomiseBits(Optional ByVal bGray As Boolean = False)
         .Bounds(1).lLbound = 0
         .Bounds(1).cElements = BytesPerScanLine()
         .pvData = m_lPtr
+
     End With
 
     CopyMemory ByVal VarPtrArray(bDib()), VarPtr(tSA), 4
@@ -424,12 +446,15 @@ Public Sub ClearUp()
         If (m_hDIb <> 0) Then
             SelectObject m_hDC, m_hBmpOld
             DeleteObject m_hDIb
+
         End If
 
         DeleteDC m_hDC
+
     End If
 
     m_hDC = 0: m_hDIb = 0: m_hBmpOld = 0: m_lPtr = 0
+
 End Sub
 
 Public Function Resample(ByVal lNewHeight As Long, ByVal lNewWidth As Long) As cDIBSection
@@ -445,9 +470,11 @@ Public Function Resample(ByVal lNewHeight As Long, ByVal lNewWidth As Long) As c
         Else
             ' No size change so just return a copy:
             cDib.LoadPictureBlt m_hDC
+
         End If
 
         Set Resample = cDib
+
     End If
 
 End Function
@@ -471,6 +498,7 @@ Private Function ResampleDib(ByRef cDibTo As cDIBSection) As Boolean
         .Bounds(1).lLbound = 0
         .Bounds(1).cElements = BytesPerScanLine()
         .pvData = m_lPtr
+
     End With
 
     CopyMemory ByVal VarPtrArray(bDibFrom()), VarPtr(tSAFrom), 4
@@ -484,6 +512,7 @@ Private Function ResampleDib(ByRef cDibTo As cDIBSection) As Boolean
         .Bounds(1).lLbound = 0
         .Bounds(1).cElements = cDibTo.BytesPerScanLine()
         .pvData = cDibTo.DIBSectionBitsPtr
+
     End With
 
     CopyMemory ByVal VarPtrArray(bDibTo()), VarPtr(tSATo), 4
@@ -494,7 +523,7 @@ Private Function ResampleDib(ByRef cDibTo As cDIBSection) As Boolean
 
     Dim X      As Long, Y As Long, xEnd As Long, xOut As Long
 
-    Dim FX     As Single, fY As Single
+    Dim fX     As Single, fY As Single
 
     Dim ifY    As Long, ifX As Long
 
@@ -504,7 +533,7 @@ Private Function ResampleDib(ByRef cDibTo As cDIBSection) As Boolean
 
     Dim g      As Long, g1 As Single, g2 As Single, g3 As Single, g4 As Single
 
-    Dim B      As Long, b1 As Single, b2 As Single, b3 As Single, b4 As Single
+    Dim b      As Long, b1 As Single, b2 As Single, b3 As Single, b4 As Single
 
     Dim ir1    As Long, ig1 As Long, ib1 As Long
 
@@ -522,9 +551,9 @@ Private Function ResampleDib(ByRef cDibTo As cDIBSection) As Boolean
         dy = fY - ifY
         
         For X = 0 To xEnd
-            FX = X * xScale
-            ifX = Int(FX)
-            dX = FX - ifX
+            fX = X * xScale
+            ifX = Int(fX)
+            dX = fX - ifX
             
             ifX = ifX * 3
             ' Interpolate using the four nearest pixels in the source
@@ -537,20 +566,21 @@ Private Function ResampleDib(ByRef cDibTo As cDIBSection) As Boolean
             ir1 = r1 * (1 - dy) + r3 * dy: ig1 = g1 * (1 - dy) + g3 * dy: ib1 = b1 * (1 - dy) + b3 * dy
             ir2 = r2 * (1 - dy) + r4 * dy: ig2 = g2 * (1 - dy) + g4 * dy: ib2 = b2 * (1 - dy) + b4 * dy
             ' Interpolate in y:
-            r = ir1 * (1 - dX) + ir2 * dX: g = ig1 * (1 - dX) + ig2 * dX: B = ib1 * (1 - dX) + ib2 * dX
+            r = ir1 * (1 - dX) + ir2 * dX: g = ig1 * (1 - dX) + ig2 * dX: b = ib1 * (1 - dX) + ib2 * dX
             
             ' Set output:
             If (r < 0) Then r = 0
             If (r > 255) Then r = 255
             If (g < 0) Then g = 0
             If (g > 255) Then g = 255
-            If (B < 0) Then B = 0
-            If (B > 255) Then
-                B = 255
+            If (b < 0) Then b = 0
+            If (b > 255) Then
+                b = 255
+
             End If
 
             xOut = X * 3
-            bDibTo(xOut, Y) = B
+            bDibTo(xOut, Y) = b
             bDibTo(xOut + 1, Y) = g
             bDibTo(xOut + 2, Y) = r
             
@@ -568,5 +598,6 @@ End Function
 
 Private Sub Class_Terminate()
     ClearUp
+
 End Sub
 

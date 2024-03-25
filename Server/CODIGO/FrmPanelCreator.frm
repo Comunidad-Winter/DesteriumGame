@@ -353,56 +353,75 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private UserClase As Byte
-Private UserRaza As Byte
-Private UserLvl As Byte
-Private UserUps As Byte
-Private UserHead As Integer
-Private UserSexo As Byte
+
+Private UserRaza  As Byte
+
+Private UserLvl   As Byte
+
+Private UserUps   As Byte
+
+Private UserHead  As Integer
+
+Private UserSexo  As Byte
+
 Private UserFrags As Integer
-Private UserGld As Long
+
+Private UserGld   As Long
 
 Private Sub btnSave_Click()
 
     If PersonajeExiste(txtName.Text) Then
         FrmPanelCreator.lblExito.Caption = "El personaje ya existe."
         Exit Sub
+
     End If
     
     IUser_Editation True
+
 End Sub
 
 Private Sub cmbClass_Click()
     UserClase = cmbClass.ListIndex + 1
     
     UpdateLabel
+
 End Sub
+
 Private Sub cmbGenero_Click()
     UserSexo = cmbGenero.ListIndex + 1
     
     UpdateLabel
+
 End Sub
+
 Private Sub cmbRaza_Click()
     UserRaza = cmbRaza.ListIndex + 1
   
     UpdateLabel
+
 End Sub
 
 Private Sub UpdateLabel()
     
-      lblPjs.Caption = vbNullString
-      If UserClase > 0 Then lblPjs.Caption = lblPjs.Caption & ListaClases(UserClase)
-      If UserRaza > 0 Then lblPjs.Caption = lblPjs.Caption & " " & ListaRazas(UserRaza)
-      If UserLvl > 0 Then lblPjs.Caption = lblPjs.Caption & " " & UserLvl
-      If UserUps > 0 Then lblPjs.Caption = lblPjs.Caption & " +" & UserUps
+    lblPjs.Caption = vbNullString
+
+    If UserClase > 0 Then lblPjs.Caption = lblPjs.Caption & ListaClases(UserClase)
+    If UserRaza > 0 Then lblPjs.Caption = lblPjs.Caption & " " & ListaRazas(UserRaza)
+    If UserLvl > 0 Then lblPjs.Caption = lblPjs.Caption & " " & UserLvl
+    If UserUps > 0 Then lblPjs.Caption = lblPjs.Caption & " +" & UserUps
+
 End Sub
 
 Private Sub Command1_Click()
-       If PersonajeExiste(txtName.Text) Then
+
+    If PersonajeExiste(txtName.Text) Then
         FrmPanelCreator.lblExito.Caption = "El personaje ya existe."
         Exit Sub
+
     End If
     
     IUser_Editation False
+
 End Sub
 
 Private Sub Form_Load()
@@ -429,29 +448,37 @@ Private Sub Form_Load()
     UserUps = 0
     UserGld = 0
     UserFrags = 0
+
 End Sub
 
 Private Sub txtElv_Change()
+
     If Not IsNumeric(txtElv.Text) Then
         txtElv.Text = "1"
+
     End If
     
     If val(txtElv) <= 0 Or val(txtElv) > STAT_MAXELV Then
         txtElv.Text = STAT_MAXELV
+
     End If
     
     UserLvl = val(txtElv.Text)
     
-     UpdateLabel
+    UpdateLabel
+
 End Sub
 
 Private Sub txtFrags_Change(Index As Integer)
+
     If Not IsNumeric(txtFrags(Index).Text) Then
         txtFrags(Index).Text = "1"
+
     End If
     
     If val(txtFrags(Index)) < 0 Or val(txtFrags(Index)) > 200 Then
         txtFrags(Index).Text = 200
+
     End If
     
     UserFrags = val(txtFrags(Index).Text)
@@ -459,93 +486,105 @@ Private Sub txtFrags_Change(Index As Integer)
 End Sub
 
 Private Sub txtGld_Change(Index As Integer)
- If Not IsNumeric(txtGld(Index).Text) Then
+
+    If Not IsNumeric(txtGld(Index).Text) Then
         txtGld(Index).Text = "1"
+
     End If
     
     If val(txtGld(Index)) <= 0 Or val(txtGld(Index)) > 5000000 Then
         txtGld(Index).Text = 0
+
     End If
     
     UserGld = val(txtGld(Index).Text)
+
 End Sub
 
 Private Sub txtUps_Change()
+
     If Not IsNumeric(txtUps.Text) Then
         txtUps.Text = "1"
+
     End If
     
     If val(txtUps) <= 0 Or val(txtUps) > 40 Then
         txtUps.Text = 40
+
     End If
     
     UserUps = val(txtUps.Text)
     
-     UpdateLabel
+    UpdateLabel
+
 End Sub
 
 Private Sub IUser_Editation(ByVal Publicar As Boolean)
-        '<EhHeader>
-        On Error GoTo IUser_Editation_Err
-        '</EhHeader>
 
-        Dim Temp     As User, CharShop As tShopChars
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo IUser_Editation_Err
+
+    '</EhHeader>
+
+    Dim Temp       As User, CharShop As tShopChars
+
+    Dim A          As Long
     
-        Dim UserName As String
-        Dim QuestIndex As Integer
+    Dim UserName   As String
+
+    Dim QuestIndex As Integer
     
-100     UserName = txtName.Text
+    UserName = txtName.Text
     
-102     Call ConnectNewUser(UserName, UserClase, UserRaza, UserSexo, 0, Temp)
-104     Temp.Pos = Ullathorpe
-106     'QuestIndex = 34
-108     'Temp.QuestStats.QuestIndex = QuestIndex
-        'HACER
-110    ' If QuestList(QuestIndex).RequiredNPCs > 0 Then ReDim Temp.QuestStats.NPCsKilled(1 To QuestList(QuestIndex).RequiredNPCs) As Long
-112    ' If QuestList(QuestIndex).RequiredChestOBJs > 0 Then ReDim Temp.QuestStats.ObjsPick(1 To QuestList(QuestIndex).RequiredChestOBJs) As Long
-114    ' If QuestList(QuestIndex).RequiredSaleOBJs > 0 Then ReDim Temp.QuestStats.ObjsSale(1 To QuestList(QuestIndex).RequiredSaleOBJs) As Long
+    Call ConnectNewUser(UserName, UserClase, UserRaza, UserSexo, 0, Temp)
+    Temp.Pos = Ullathorpe
+    'QuestIndex = 34
+    'Temp.QuestStats.QuestIndex = QuestIndex
+    'HACER
+    ' If QuestList(QuestIndex).RequiredNPCs > 0 Then ReDim Temp.QuestStats.NPCsKilled(1 To QuestList(QuestIndex).RequiredNPCs) As Long
+    ' If QuestList(QuestIndex).RequiredChestOBJs > 0 Then ReDim Temp.QuestStats.ObjsPick(1 To QuestList(QuestIndex).RequiredChestOBJs) As Long
+    ' If QuestList(QuestIndex).RequiredSaleOBJs > 0 Then ReDim Temp.QuestStats.ObjsSale(1 To QuestList(QuestIndex).RequiredSaleOBJs) As Long
     
-116     Call InitialUserStats(Temp)
-118     Call UserLevelEditation(Temp, UserLvl, UserUps)
-120     Call IUser_Editation_Skills(Temp)
-122     Call IUser_Editation_Reputacion_Frags(Temp, UserFrags)
-          If Temp.Stats.MaxMan > 0 Then Call IUser_Editation_Spells(Temp)
+    Call InitialUserStats(Temp)
+    Call UserLevelEditation(Temp, UserLvl, UserUps)
+    Call IUser_Editation_Skills(Temp)
+    Call IUser_Editation_Reputacion_Frags(Temp, UserFrags)
+
+    If Temp.Stats.MaxMan > 0 Then Call IUser_Editation_Spells(Temp)
           
-124     Temp.Stats.SkillPts = RandomNumber(0, 17)
+    Temp.Stats.SkillPts = RandomNumber(0, 17)
 
-126     Temp.UpTime = RandomNumber(19124, 354545)
-128     Temp.Stats.NPCsMuertos = RandomNumber(777, 2786)
+    Temp.UpTime = RandomNumber(19124, 354545)
+    Temp.Stats.NPCsMuertos = RandomNumber(777, 2786)
     
-130     Temp.flags.Desnudo = 1
-132     Temp.Stats.Gld = RandomNumber(val(txtGld(0).Text), val(txtGld(1).Text))
-134     Temp.Stats.Exp = RandomNumber(0, (Temp.Stats.Elu / 2.5))
+    Temp.flags.Desnudo = 1
+    Temp.Stats.Gld = RandomNumber(val(txtGld(0).Text), val(txtGld(1).Text))
+    Temp.Stats.Exp = RandomNumber(0, (Temp.Stats.Elu / 2.5))
 
-136     Call SaveUser(Temp, CharPath & UCase$(UserName) & ".chr")
-    
+    Call SaveUser(Temp, CharPath & UCase$(UserName) & ".chr")
         
-        If Publicar Then
-            ' Publicación de SHOP
-138         With CharShop
-140             .Name = UCase$(UserName)
-142             .Dsp = val(txtDsp.Text)
+    If Publicar Then
+
+        ' Publicación de SHOP
+        With CharShop
+            .Name = UCase$(UserName)
+            .Dsp = val(txtDsp.Text)
             
-144             Call Shop_CharAdd(CharShop)
-            End With
+            Call Shop_CharAdd(CharShop)
+
+        End With
         
-               FrmPanelCreator.lblExito.Caption = "Personaje publicado: " & UserName
-            Else
-                FrmPanelCreator.lblExito.Caption = "Personaje creado: " & UserName
+        FrmPanelCreator.lblExito.Caption = "Personaje publicado: " & UserName
+    Else
+        FrmPanelCreator.lblExito.Caption = "Personaje creado: " & UserName
             
-            End If
+    End If
             
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 IUser_Editation_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.FrmPanelCreator.IUser_Editation " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.FrmPanelCreator.IUser_Editation " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub

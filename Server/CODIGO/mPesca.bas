@@ -14,103 +14,107 @@ Public Pesca_NumItems As Byte
 Public PescaItem()    As tPesca
 
 Public Sub Pesca_LoadItems()
-        '<EhHeader>
-        On Error GoTo Pesca_LoadItems_Err
-        '</EhHeader>
 
-        Dim Manager As clsIniManager
+    '<EhHeader>
+    On Error GoTo Pesca_LoadItems_Err
 
-        Dim A       As Long
+    '</EhHeader>
 
-        Dim Temp    As String
-    
-100     Set Manager = New clsIniManager
-    
-102     Manager.Initialize DatPath & "PESCA.DAT"
-    
-104     Pesca_NumItems = val(Manager.GetValue("INIT", "ITEMS"))
-    
-106     ReDim PescaItem(1 To Pesca_NumItems) As tPesca
+    Dim Manager As clsIniManager
 
-108     For A = 1 To Pesca_NumItems
-110         Temp = Manager.GetValue("INIT", A)
+    Dim A       As Long
+
+    Dim Temp    As String
+    
+    Set Manager = New clsIniManager
+    
+    Manager.Initialize DatPath & "PESCA.DAT"
+    
+    Pesca_NumItems = val(Manager.GetValue("INIT", "ITEMS"))
+    
+    ReDim PescaItem(1 To Pesca_NumItems) As tPesca
+
+    For A = 1 To Pesca_NumItems
+        Temp = Manager.GetValue("INIT", A)
         
-112         With PescaItem(A)
-114             .ObjIndex = val(ReadField(1, Temp, 45))
-116             .Amount = val(ReadField(2, Temp, 45))
-118             .Probability = val(ReadField(3, Temp, 45))
-            End With
+        With PescaItem(A)
+            .ObjIndex = val(ReadField(1, Temp, 45))
+            .Amount = val(ReadField(2, Temp, 45))
+            .Probability = val(ReadField(3, Temp, 45))
 
-120     Next A
+        End With
+
+    Next A
     
-122     Set Manager = Nothing
-        '<EhFooter>
-        Exit Sub
+    Set Manager = Nothing
+    '<EhFooter>
+    Exit Sub
 
 Pesca_LoadItems_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mPesca.Pesca_LoadItems " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mPesca.Pesca_LoadItems " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Pesca_ExtractItem(ByVal UserIndex As Integer)
-        '<EhHeader>
-        On Error GoTo Pesca_ExtractItem_Err
-        '</EhHeader>
 
-        Dim A           As Long, B As Long
+    '<EhHeader>
+    On Error GoTo Pesca_ExtractItem_Err
 
-        Dim RandomItem  As Byte, Random As Byte
+    '</EhHeader>
 
-        Dim Probability As Byte
+    Dim A           As Long, B As Long
 
-        Dim Obj         As Obj
+    Dim RandomItem  As Byte, Random As Byte
+
+    Dim Probability As Byte
+
+    Dim Obj         As Obj
     
-100     For A = 1 To Pesca_NumItems
+    For A = 1 To Pesca_NumItems
         
-102         With PescaItem(A)
+        With PescaItem(A)
 
-104             For B = 1 To .Probability
+            For B = 1 To .Probability
 
-                    ' 10% de ir pasando de etapas
-106                 If RandomNumber(1, 100) <= 10 Then
-108                     Probability = Probability + 1
-                    Else
+                ' 10% de ir pasando de etapas
+                If RandomNumber(1, 100) <= 10 Then
+                    Probability = Probability + 1
+                Else
 
-                        Exit For
+                    Exit For
 
-                    End If
-
-110             Next B
-    
-                ' Si cumplimos con la etapa requerida:
-112             If Probability = .Probability Then
-114                 Obj.ObjIndex = .ObjIndex
-116                 Obj.Amount = .Amount
-                            
-118                 If Not MeterItemEnInventario(UserIndex, Obj) Then
-120                     Call TirarItemAlPiso(UserList(UserIndex).Pos, Obj)
-                    End If
-                
-122                 Call WriteConsoleMsg(UserIndex, "Has recolectado de las profundidades del mar " & ObjData(.ObjIndex).Name & " (x" & .Amount & ")", FontTypeNames.FONTTYPE_INFO)
-                    'Else
-                    ' Call WriteConsoleMsg(UserIndex, Probability & "/" & .Probability, FontTypeNames.FONTTYPE_INFO)
                 End If
+
+            Next B
+    
+            ' Si cumplimos con la etapa requerida:
+            If Probability = .Probability Then
+                Obj.ObjIndex = .ObjIndex
+                Obj.Amount = .Amount
+                            
+                If Not MeterItemEnInventario(UserIndex, Obj) Then
+                    Call TirarItemAlPiso(UserList(UserIndex).Pos, Obj)
+
+                End If
+                
+                Call WriteConsoleMsg(UserIndex, "Has recolectado de las profundidades del mar " & ObjData(.ObjIndex).Name & " (x" & .Amount & ")", FontTypeNames.FONTTYPE_INFO)
+
+                'Else
+                ' Call WriteConsoleMsg(UserIndex, Probability & "/" & .Probability, FontTypeNames.FONTTYPE_INFO)
+            End If
             
-124             Probability = 0
-            End With
+            Probability = 0
 
-126     Next A
+        End With
 
-        '<EhFooter>
-        Exit Sub
+    Next A
+
+    '<EhFooter>
+    Exit Sub
 
 Pesca_ExtractItem_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mPesca.Pesca_ExtractItem " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mPesca.Pesca_ExtractItem " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub

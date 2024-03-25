@@ -39,14 +39,17 @@ Attribute VB_Exposed = False
 Option Explicit
 
 ' Para los TwipsPerPixels del objeto Screen
-Private twX As Long, twY As Long
-' Para poder interceptar el mensaje WM_MOUSELEAVE
-Private mtTME As tTRACKMOUSEEVENT
+Private twX          As Long, twY As Long
 
-Private mWndType As Object              ' La ventana que se subclasifica
-Private mhWnd As Long                   ' El hWnd de la ventana subclasificada
+' Para poder interceptar el mensaje WM_MOUSELEAVE
+Private mtTME        As tTRACKMOUSEEVENT
+
+Private mWndType     As Object              ' La ventana que se subclasifica
+
+Private mhWnd        As Long                   ' El hWnd de la ventana subclasificada
+
 Private mPrevWndProc As Long            ' La función anterior de procesamiento
-                                        ' de mensajes de la ventana a subclasificar
+' de mensajes de la ventana a subclasificar
 
 '------------------------------------------------------------------------------
 ' Enumeración con los mensajes de windows (Window Messages)
@@ -322,9 +325,11 @@ Public Enum eWSCWM
     
     ' Private Window Messages Start Here:
     WM_USER = &H400
+
 End Enum
 
 Public Enum eWSCHitTest
+
     ' WM_NCHITTEST and MOUSEHOOKSTRUCT Mouse Position Codes
     HTERROR = (-2)
     HTTRANSPARENT = (-1)
@@ -352,9 +357,11 @@ Public Enum eWSCHitTest
     HTZOOM = HTMAXBUTTON
     HTSIZEFIRST = HTLEFT
     HTSIZELAST = HTBOTTOMRIGHT
+
 End Enum
 
 Public Enum eWSCMF
+
     ' Menú Flags para WM_MENUSELECT
     'MF_UNCHECKED = &H0&
     MF_GRAYED = &H1&
@@ -366,16 +373,20 @@ Public Enum eWSCMF
     MF_OWNERDRAW = &H100&
     MF_SYSMENU = &H2000&
     MF_MOUSESELECT = &H8000&
+
 End Enum
 
 ' Valores de fuSource para el mensaje WM_ENTERIDLE
 Public Enum eWSCMSFG
+
     MSGF_DIALOGBOX = 0
     MSGF_MENU = 2
+
 End Enum
 
 ' Mensajes varios
 Public Enum eWSCMisc
+
     ' WM_ACTIVATE state values
     WA_INACTIVE = 0
     WA_ACTIVE = 1
@@ -474,6 +485,7 @@ End Enum
 
 ' WM_WINDOWPOSCHANGING/CHANGED struct pointed to by lParam
 Private Type WINDOWPOS
+
     hWnd As Long
     hWndInsertAfter As Long
     X As Long
@@ -481,32 +493,38 @@ Private Type WINDOWPOS
     cx As Long
     cy As Long
     Flags As Long
+
 End Type
 
 Public Enum eTME
+
     ' Track Mouse Event
     TME_HOVER = &H1
     TME_LEAVE = &H2
     TME_QUERY = &H40000000
     TME_CANCEL = &H80000000
+
 End Enum
 
 Private Type tTRACKMOUSEEVENT
+
     cbSize As Long
     dwFlags As eTME 'Long
     hWndTrack As Long
     dwHoverTime As Long
+
 End Type
 
-Private Declare Function TrackMouseEvent Lib "user32" _
-    (lpEventTrack As tTRACKMOUSEEVENT) As Long
+Private Declare Function TrackMouseEvent _
+                Lib "user32" (lpEventTrack As tTRACKMOUSEEVENT) As Long
 
-'Private Declare Function DefWindowProc Lib "User32" Alias "DefWindowProcA" _
-    (ByVal hWnd As Long, ByVal wMsg As Long, _
-    ByVal wParam As Long, ByVal lParam As Long) As Long
+'Private Declare Function DefWindowProc Lib "User32" Alias "DefWindowProcA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" _
-    (Destination As Any, Source As Any, ByVal Length As Long)
+Private Declare Sub CopyMemory _
+                Lib "kernel32" _
+                Alias "RtlMoveMemory" (destination As Any, _
+                                       Source As Any, _
+                                       ByVal Length As Long)
 
 '------------------------------------------------------------------------------
 ' *** Los eventos producidos por la clase ***
@@ -519,10 +537,15 @@ Public Event msg(ByVal uMSG As eWSCWM, ByVal wParam As Long, ByVal lParam As Lon
 
 ' Indica el menú seleccionado
 Public Event MenuSelected(ByVal mnuItem As Long, mnuFlags As eWSCMF, ByVal hMenu As Long)
+
 ' Ha cambiado el tamaño del objeto Screen y/o el número de colores
-Public Event DisplayChange(ByVal BitsPerPixel As Long, ByVal cxScreen As Long, ByVal cyScreen As Long)
+Public Event DisplayChange(ByVal BitsPerPixel As Long, _
+                           ByVal cxScreen As Long, _
+                           ByVal cyScreen As Long)
+
 ' Se ha añadido o quitado alguna fuente del sistema
 Public Event FontChange()
+
 ' El sistema indica que hay pocos recursos disponibles
 Public Event LowMemory()
 ' Este evento se producirá mientras se está seleccionando un menú o en un diálogo
@@ -534,23 +557,40 @@ Public Event LowMemory()
 ' Eventos directamente relacionados con la ventana subclasificada
 
 ' La ventana ha cambiado de posición, indica la posición y tamaño
-Public Event WindowPosChanged(ByVal wLeft As Long, ByVal wTop As Long, ByVal wWidth As Long, ByVal wHeight As Long)
+Public Event WindowPosChanged(ByVal wLeft As Long, _
+                              ByVal wTop As Long, _
+                              ByVal wWidth As Long, _
+                              ByVal wHeight As Long)
+
 ' Se ha movido esta ventana, devuelve la posición en twips
 Public Event Move(ByVal wLeft As Long, ByVal wTop As Long)
+
 ' El ratón sale de la ventana subclasificada
 Public Event MouseLeave()
+
 ' Indica de que control sale, si la ventana contiene otros controles
 Public Event MouseLeaveOn(unControl As Object)
+
 ' El ratón entra en la ventana
 Public Event MouseEnter()
+
 ' Indica en que control entra, si la ventana contiene controles
 Public Event MouseEnterOn(unControl As Object)
+
 ' Indica si se ha movido la rueda del ratón y los parámetros correspondientes
-Public Event MouseWheel(ByVal wKeys As Long, ByVal zDelta As Long, ByVal xPos As Long, ByVal yPos As Long)
+Public Event MouseWheel(ByVal wKeys As Long, _
+                        ByVal zDelta As Long, _
+                        ByVal xPos As Long, _
+                        ByVal yPos As Long)
+
 '
-Public Event SetCursor(unControl As Object, ByVal HitTest As eWSCHitTest, ByVal MouseMsg As Long)
+Public Event SetCursor(unControl As Object, _
+                       ByVal HitTest As eWSCHitTest, _
+                       ByVal MouseMsg As Long)
+
 ' Se activa la ventana
 Public Event Activate()
+
 ' Se desactiva la ventana
 Public Event Deactivate()
 
@@ -570,14 +610,18 @@ Private Sub Class_Initialize()
     '--------------------------------------------------------------------------
     twX = Screen.TwipsPerPixelX
     twY = Screen.TwipsPerPixelY
+
 End Sub
 
 Private Sub Class_Terminate()
+
     ' Comprobar si están iniciadas las variables
     ' y de ser así dejar de subclasificar el formulario
     If mhWnd Then
         mMouse.unHook Me
+
     End If
+
 End Sub
 
 Public Sub Hook(Optional ByVal NewValue As Object = Nothing)
@@ -598,19 +642,24 @@ Public Sub Hook(Optional ByVal NewValue As Object = Nothing)
     On Local Error GoTo ErrHook
     
     If NewValue Is Nothing Then
+
         ' Quitar el 'gancho' del form
         If Me.hWnd <> 0 Then
             mMouse.unHook Me
+
         End If
     
-    ' Si no tiene hWnd producirá error
+        ' Si no tiene hWnd producirá error
     ElseIf NewValue.hWnd = 0 Then
         '
     Else
+
         ' Si ya había una copia funcionando, quitar el gancho       (08/Ago/99)
         If Me.hWnd <> 0 Then
             mMouse.unHook Me
+
         End If
+
         ' Asignar el nuevo gancho a la ventana a subclasificar
         mMouse.Hook Me, NewValue
         
@@ -623,33 +672,38 @@ ErrHook:
     ' Nada que hacer si se pasa un parámero erróneo.
     ' Devolver un error indicándolo
     On Local Error GoTo 0
+
     With err
-        .Description = "El parámetro debe ser una ventana (que tenga la propiedad hWnd) " & _
-                       "o Nothing para dejar de interceptar los mensajes." & _
-                       vbCrLf & vbCrLf & _
-                       "El tipo del parámetro es: " & TypeName(NewValue)
+        .Description = "El parámetro debe ser una ventana (que tenga la propiedad hWnd) " & "o Nothing para dejar de interceptar los mensajes." & vbCrLf & vbCrLf & "El tipo del parámetro es: " & TypeName(NewValue)
                        
         .Source = "cSubclass.Hook"
         .Raise .Number
+
     End With
+
 End Sub
 
 Friend Sub unMSG(ByVal uMSG As eWSCWM, ByVal wParam As Long, ByVal lParam As Long)
-        ' Este procedimiento será el que reciba los mensajes y se encargará
-        ' de producir los eventos correspondientes
-        '<EhHeader>
-        On Error GoTo unMSG_Err
-        '</EhHeader>
+
+    ' Este procedimiento será el que reciba los mensajes y se encargará
+    ' de producir los eventos correspondientes
+    '<EhHeader>
+    On Error GoTo unMSG_Err
+
+    '</EhHeader>
     
-        ' Usar variables estáticas para mayor rapidez
-        Static tWP As WINDOWPOS
-        Static bMouseEnter As Boolean
-        Static ControlAnt As Control        ' Control en el que se produjo el MouseMove
-                                            ' para los casos en los que la ventana
-                                            ' subclasificada tenga otros controles
+    ' Usar variables estáticas para mayor rapidez
+    Static tWP         As WINDOWPOS
+
+    Static bMouseEnter As Boolean
+
+    Static ControlAnt  As Control        ' Control en el que se produjo el MouseMove
+
+    ' para los casos en los que la ventana
+    ' subclasificada tenga otros controles
     
-        ' Si se produce un error que no se pare la aplicación...
-        On Error Resume Next
+    ' Si se produce un error que no se pare la aplicación...
+    On Error Resume Next
     
     '------------------------------------------------------------------------------
     ' Si está en modo IDLE (no hay mensajes)
@@ -676,90 +730,95 @@ Friend Sub unMSG(ByVal uMSG As eWSCWM, ByVal wParam As Long, ByVal lParam As Lon
     '    ' Indicar que ya no está en modo IDLE
     '    RaiseEvent EnterIDLE(False, 0&, 0&)
         
-        '--------------------------------------------------------------------------
-        ' Evento genérico
-100     RaiseEvent msg(uMSG, wParam, lParam)
+    '--------------------------------------------------------------------------
+    ' Evento genérico
+    RaiseEvent msg(uMSG, wParam, lParam)
     
+    ' Según el tipo de mensaje, producir eventos...
+    Select Case uMSG
     
-        ' Según el tipo de mensaje, producir eventos...
-102     Select Case uMSG
-    
-        '--------------------------------------------------------------------------
-        ' Selección de un menú
+            '--------------------------------------------------------------------------
+            ' Selección de un menú
         Case WM_MENUSELECT
             ' Los parámetros son:   mnuItem         mnuFlags        mnuHandle
-104         RaiseEvent MenuSelected(LoWord(wParam), HiWord(wParam), lParam)
+            RaiseEvent MenuSelected(LoWord(wParam), HiWord(wParam), lParam)
     
-        '--------------------------------------------------------------------------
-        ' Cambio en la posición y tamaño de la ventana
-        ' La posición y tamaño se indicará en twips
-106     Case WM_WINDOWPOSCHANGED 'WM_WINDOWPOSCHANGING
+            '--------------------------------------------------------------------------
+            ' Cambio en la posición y tamaño de la ventana
+            ' La posición y tamaño se indicará en twips
+        Case WM_WINDOWPOSCHANGED 'WM_WINDOWPOSCHANGING
             '----------------------------------------------------------------------
             ' Nota: Los valores de twX y twY se asignan en el evento Initialize
         
             '--------------------------------------------------------------------------
             ' Copiar el valor referenciado por lParam en un UDT
-108         CopyMemory tWP, ByVal lParam, Len(tWP)
-110         With tWP
+            CopyMemory tWP, ByVal lParam, Len(tWP)
+
+            With tWP
                 '                           Left      Top       Width      Height
-112             RaiseEvent WindowPosChanged(.X * twX, .Y * twY, .cx * twX, .cy * twY)
+                RaiseEvent WindowPosChanged(.X * twX, .Y * twY, .cx * twX, .cy * twY)
+
             End With
     
-        '--------------------------------------------------------------------------
-        ' Se ha movido la ventana
-        ' La posición se indicará en twips
-114     Case WM_MOVE
-116         With tWP
-118             .X = LoWord(lParam)
-120             .Y = HiWord(lParam)
-122             RaiseEvent Move(.X * twX, .Y * twY)
+            '--------------------------------------------------------------------------
+            ' Se ha movido la ventana
+            ' La posición se indicará en twips
+        Case WM_MOVE
+
+            With tWP
+                .X = LoWord(lParam)
+                .Y = HiWord(lParam)
+                RaiseEvent Move(.X * twX, .Y * twY)
+
             End With
     
-        '--------------------------------------------------------------------------
-        ' Ha cambiado la resolución de la pantalla o el número de colores
-124     Case WM_DISPLAYCHANGE
+            '--------------------------------------------------------------------------
+            ' Ha cambiado la resolución de la pantalla o el número de colores
+        Case WM_DISPLAYCHANGE
             '                         BitsPerPixels
             '                                 New horizontal resolution of the screen
             '                                                 New vertical resolution of the screen
-126         RaiseEvent DisplayChange(wParam, LoWord(lParam), HiWord(lParam))
+            RaiseEvent DisplayChange(wParam, LoWord(lParam), HiWord(lParam))
     
-        '--------------------------------------------------------------------------
-        ' Se han añadido o quitado fuentes del sistema
-128     Case WM_FONTCHANGE
-130         RaiseEvent FontChange
+            '--------------------------------------------------------------------------
+            ' Se han añadido o quitado fuentes del sistema
+        Case WM_FONTCHANGE
+            RaiseEvent FontChange
     
-        '--------------------------------------------------------------------------
-        ' El sistema está compactando la memoria porque tiene poca disponible
-132     Case WM_COMPACTING
-134         RaiseEvent LowMemory
+            '--------------------------------------------------------------------------
+            ' El sistema está compactando la memoria porque tiene poca disponible
+        Case WM_COMPACTING
+            RaiseEvent LowMemory
     
-        '--------------------------------------------------------------------------
-        ' The WM_ACTIVATEAPP message is sent when a window belonging to a different
-        ' application than the active window is about to be activated.
-        ' The message is sent to the application whose window is being activated
-        ' and to the application whose window is being deactivated.
-        ' fActive = (BOOL) wParam;        // activation flag
-        '
-        ' Specifies whether the window is being activated or deactivated.
-        ' This parameter is TRUE if the window is being activated;
-        ' it is FALSE if the window is being deactivated.
-        '
-        ' Si se activa o desactiva la ventana
-136     Case WM_ACTIVATEAPP
-138         If wParam Then
-140             RaiseEvent Activate
+            '--------------------------------------------------------------------------
+            ' The WM_ACTIVATEAPP message is sent when a window belonging to a different
+            ' application than the active window is about to be activated.
+            ' The message is sent to the application whose window is being activated
+            ' and to the application whose window is being deactivated.
+            ' fActive = (BOOL) wParam;        // activation flag
+            '
+            ' Specifies whether the window is being activated or deactivated.
+            ' This parameter is TRUE if the window is being activated;
+            ' it is FALSE if the window is being deactivated.
+            '
+            ' Si se activa o desactiva la ventana
+        Case WM_ACTIVATEAPP
+
+            If wParam Then
+                RaiseEvent Activate
             Else
-142             RaiseEvent Deactivate
+                RaiseEvent Deactivate
+
             End If
         
-        '--------------------------------------------------------------------------
-        ' Si se ha movido la rueda de los ratos con ruedas
-144     Case WM_MOUSEWHEEL
+            '--------------------------------------------------------------------------
+            ' Si se ha movido la rueda de los ratos con ruedas
+        Case WM_MOUSEWHEEL
             'fwKeys = LOWORD(wParam);    // key flags
             'zDelta = (short) HIWORD(wParam);    // wheel rotation
             'xPos = (short) LOWORD(lParam);    // horizontal position of pointer
             'yPos = (short) HIWORD(lParam);    // vertical position of pointer
-146         RaiseEvent MouseWheel(LoWord(wParam), HiWord(wParam), LoWord(lParam), HiWord(lParam))
+            RaiseEvent MouseWheel(LoWord(wParam), HiWord(wParam), LoWord(lParam), HiWord(lParam))
             '
             ' fwKeys:
             ' Indicates whether various virtual keys are down.
@@ -779,122 +838,151 @@ Friend Sub unMSG(ByVal uMSG As eWSCWM, ByVal wParam As Long, ByVal lParam As Lon
             ' a negative value indicates that the wheel was rotated backward,
             ' toward the user.
     
-        '--------------------------------------------------------------------------
-        ' Cuando el ratón sale del área de la ventana indicada
-148     Case WM_MOUSELEAVE
+            '--------------------------------------------------------------------------
+            ' Cuando el ratón sale del área de la ventana indicada
+        Case WM_MOUSELEAVE
             ' Si este mensaje se intercepta en un control incluido en el form
             ' además del propio form, cuando se entre en un control se producirá
             ' un MouseLeave en el form (y viceversa)
-150         RaiseEvent MouseLeave
-152         bMouseEnter = False
+            RaiseEvent MouseLeave
+            bMouseEnter = False
     
-        '--------------------------------------------------------------------------
-        ' Cuando el ratón se mueve, es porque está en la ventana,
-        ' comprobar si es la primera vez que entra y así lanzar el evento MouseEnter
-154     Case WM_MOUSEMOVE
+            '--------------------------------------------------------------------------
+            ' Cuando el ratón se mueve, es porque está en la ventana,
+            ' comprobar si es la primera vez que entra y así lanzar el evento MouseEnter
+        Case WM_MOUSEMOVE
+
             ' Cuando se produce un MouseMove, es decir que el mouse está en el control
             ' hay que indicar que se vuelva a detectar la salida del control
-156         If Not bMouseEnter Then
-158             bMouseEnter = True
-160             With mtTME
-162                 .dwFlags = TME_LEAVE
-164                 .cbSize = Len(mtTME)
-166                 .hWndTrack = mhWnd
+            If Not bMouseEnter Then
+                bMouseEnter = True
+
+                With mtTME
+                    .dwFlags = TME_LEAVE
+                    .cbSize = Len(mtTME)
+                    .hWndTrack = mhWnd
+
                 End With
-168             Call TrackMouseEvent(mtTME)
+
+                Call TrackMouseEvent(mtTME)
                 '
-170             RaiseEvent MouseEnter
+                RaiseEvent MouseEnter
+
                 '
                 ' Comprobar si está asignado el control anterior
-172             If Not (ControlAnt Is Nothing) Then
-174                 RaiseEvent MouseLeaveOn(ControlAnt)
+                If Not (ControlAnt Is Nothing) Then
+                    RaiseEvent MouseLeaveOn(ControlAnt)
+
                 End If
+
             End If
         
-        '--------------------------------------------------------------------------
-        ' The WM_SETCURSOR message is sent to a window if the mouse causes the cursor
-        ' to move within a window and mouse input is not captured.
-        ' Parámetros:
-        '   hwnd = (HWND) wParam;       // handle to window with cursor
-        '   nHittest = LOWORD(lParam);  // hit-test code
-        '   wMouseMsg = HIWORD(lParam); // mouse-message identifier
-176     Case WM_SETCURSOR
-            Dim I As Long
-            Dim tControl As Control
-            Dim nHittest As Long
+            '--------------------------------------------------------------------------
+            ' The WM_SETCURSOR message is sent to a window if the mouse causes the cursor
+            ' to move within a window and mouse input is not captured.
+            ' Parámetros:
+            '   hwnd = (HWND) wParam;       // handle to window with cursor
+            '   nHittest = LOWORD(lParam);  // hit-test code
+            '   wMouseMsg = HIWORD(lParam); // mouse-message identifier
+        Case WM_SETCURSOR
+
+            Dim i         As Long
+
+            Dim tControl  As Control
+
+            Dim nHittest  As Long
+
             Dim wMouseMsg As Long
         
-178         nHittest = LoWord(lParam)
-180         wMouseMsg = HiWord(lParam)
+            nHittest = LoWord(lParam)
+            wMouseMsg = HiWord(lParam)
         
             ' Este bucle sólo funcionará si la ventana subclasificada
             ' tiene una colección de controles, (por ejemplo un form)
-182         For Each tControl In mWndType.Controls
-184             With tControl
+            For Each tControl In mWndType.Controls
+
+                With tControl
+
                     ' Si no es este control o el control no soporta el hWnd
-186                 If .hWnd <> wParam Then
+                    If .hWnd <> wParam Then
                         '
                     Else
-188                     RaiseEvent SetCursor(tControl, nHittest, wMouseMsg)
+                        RaiseEvent SetCursor(tControl, nHittest, wMouseMsg)
+
                         ' Si el mensaje del ratón es que se mueve...
-190                     If wMouseMsg = WM_MOUSEMOVE Then
+                        If wMouseMsg = WM_MOUSEMOVE Then
+
                             ' Comprobar si ya había entrado en el control
-192                         If ControlAnt.hWnd <> wParam Then
+                            If ControlAnt.hWnd <> wParam Then
+
                                 ' Si ya se había asignado
-194                             If Not (ControlAnt Is Nothing) Then
+                                If Not (ControlAnt Is Nothing) Then
                                     ' Se ha salido de este control
-196                                 RaiseEvent MouseLeaveOn(ControlAnt)
+                                    RaiseEvent MouseLeaveOn(ControlAnt)
+
                                 End If
+
                             End If
+
                             ' Asignar este control para posteriores comprobaciones
-198                         Set ControlAnt = tControl
-200                         RaiseEvent MouseEnterOn(tControl)
+                            Set ControlAnt = tControl
+                            RaiseEvent MouseEnterOn(tControl)
+
                         End If
+
                         Exit For
+
                     End If
+
                 End With
+
             Next
     
-        End Select
+    End Select
     
     '    '
     'End If
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 unMSG_Err:
-        err.Raise vbObjectError + 100, _
-                  "ARGENTUM.clsMouse.unMSG", _
-                  "clsMouse component failure"
+    err.Raise vbObjectError + 100, "ARGENTUM.clsMouse.unMSG", "clsMouse component failure"
                   
-                   On Error Resume Next
-        '</EhFooter>
+    On Error Resume Next
+
+    '</EhFooter>
 End Sub
 
 Friend Property Get hWnd() As Long
     hWnd = mhWnd
+
 End Property
 
 Friend Property Let hWnd(ByVal NewValue As Long)
     mhWnd = NewValue
+
 End Property
 
 Friend Property Get PrevWndProc() As Long
     PrevWndProc = mPrevWndProc
+
 End Property
 
 Friend Property Let PrevWndProc(ByVal NewValue As Long)
     mPrevWndProc = NewValue
+
 End Property
 
 Private Function LoWord(ByVal Numero As Long) As Long
     ' Devuelve el LoWord del número pasado como parámetro
     LoWord = Numero And &HFFFF&
+
 End Function
 
 Private Function HiWord(ByVal Numero As Long) As Long
     ' Devuelve el HiWord del número pasado como parámetro
     HiWord = Numero \ &H10000 And &HFFFF&
+
 End Function
 

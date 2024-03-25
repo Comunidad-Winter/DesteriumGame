@@ -719,21 +719,29 @@ Option Explicit
 Private clsFormulario        As clsFormMovementManager
 
 Private picCheckBox          As Picture
-Private picCheckBoxNulo      As Picture
-Public LastButtonPressed           As clsGraphicalButton
-Private cBotonCerrar         As clsGraphicalButton
-Private cBotonPersonalizados As clsGraphicalButton
-Private cBotonColores        As clsGraphicalButton
-Private cBotonConfigTeclas   As clsGraphicalButton
-Private Loading              As Boolean
 
+Private picCheckBoxNulo      As Picture
+
+Public LastButtonPressed     As clsGraphicalButton
+
+Private cBotonCerrar         As clsGraphicalButton
+
+Private cBotonPersonalizados As clsGraphicalButton
+
+Private cBotonColores        As clsGraphicalButton
+
+Private cBotonConfigTeclas   As clsGraphicalButton
+
+Private Loading              As Boolean
 
 Private Sub Form_Click()
     Me.SetFocus
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     ISaveClientSetup
+
 End Sub
 
 Private Sub imgConfigTeclas_Click()
@@ -746,12 +754,25 @@ Private Sub imgConfigTeclas_Click()
     #End If
      
 End Sub
-Private Sub imgMas_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgMas_MouseMove(Index As Integer, _
+                             Button As Integer, _
+                             Shift As Integer, _
+                             X As Single, _
+                             Y As Single)
     imgMas(Index).Picture = LoadPicture(DirInterface & "menucompacto\buttons\mas.jpg")
+
 End Sub
-Private Sub imgMenos_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgMenos_MouseMove(Index As Integer, _
+                               Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     imgMenos(Index).Picture = LoadPicture(DirInterface & "menucompacto\buttons\menos.jpg")
+
 End Sub
+
 Private Sub imgMas_Click(Index As Integer)
     
     Call Audio.PlayInterface(SND_CLICK)
@@ -762,31 +783,40 @@ Private Sub imgMas_Click(Index As Integer)
     
         Case 0 ' Master
             ClientSetup.bValueSoundMaster = ClientSetup.bValueSoundMaster + 10
+
             If ClientSetup.bValueSoundMaster > 100 Then ClientSetup.bValueSoundMaster = 100
 
             Audio.MasterVolume = ClientSetup.bValueSoundMaster
             lblSound(Index).Caption = Audio.MasterVolume
+
         Case 1 ' Efecto
             ClientSetup.bValueSoundEffect = ClientSetup.bValueSoundEffect + 10
+
             If ClientSetup.bValueSoundEffect > 100 Then ClientSetup.bValueSoundEffect = 100
 
             Audio.EffectVolume = ClientSetup.bValueSoundEffect
             lblSound(Index).Caption = Audio.EffectVolume
+
         Case 2 ' Musica
             ClientSetup.bValueSoundMusic = ClientSetup.bValueSoundMusic + 10
+
             If ClientSetup.bValueSoundMusic > 100 Then ClientSetup.bValueSoundMusic = 100
 
             Audio.MusicVolume = ClientSetup.bValueSoundMusic
             lblSound(Index).Caption = Audio.MusicVolume
+
         Case 3 ' Interface
             ClientSetup.bValueSoundInterface = ClientSetup.bValueSoundInterface + 10
+
             If ClientSetup.bValueSoundInterface > 100 Then ClientSetup.bValueSoundInterface = 100
 
             Audio.InterfaceVolume = ClientSetup.bValueSoundInterface
             lblSound(Index).Caption = Audio.InterfaceVolume
+
     End Select
     
     FrmMain.SetFocus
+
 End Sub
 
 Private Sub imgMenos_Click(Index As Integer)
@@ -796,52 +826,65 @@ Private Sub imgMenos_Click(Index As Integer)
     Select Case Index
     
         Case 0 ' Master
+
             If ClientSetup.bValueSoundMaster < 10 Then
                 ClientSetup.bValueSoundMaster = 0
             Else
                 ClientSetup.bValueSoundMaster = ClientSetup.bValueSoundMaster - 10
+
             End If
             
             Audio.MasterVolume = ClientSetup.bValueSoundMaster
             lblSound(Index).Caption = Audio.MasterVolume
             
         Case 1 ' Efecto
+
             If ClientSetup.bValueSoundEffect < 10 Then
                 ClientSetup.bValueSoundEffect = 0
             Else
                 ClientSetup.bValueSoundEffect = ClientSetup.bValueSoundEffect - 10
+
             End If
 
             Audio.EffectVolume = ClientSetup.bValueSoundEffect
             lblSound(Index).Caption = Audio.EffectVolume
             
         Case 2 ' Musica
+
             If ClientSetup.bValueSoundMusic < 10 Then
                 ClientSetup.bValueSoundMusic = 0
             Else
                 ClientSetup.bValueSoundMusic = ClientSetup.bValueSoundMusic - 10
+
             End If
 
             Audio.MusicVolume = ClientSetup.bValueSoundMusic
             lblSound(Index).Caption = Audio.MusicVolume
+
         Case 3 ' Interface
+
             If ClientSetup.bValueSoundInterface < 10 Then
                 ClientSetup.bValueSoundInterface = 0
             Else
                 ClientSetup.bValueSoundInterface = ClientSetup.bValueSoundInterface - 10
+
             End If
             
             Audio.InterfaceVolume = ClientSetup.bValueSoundInterface
             lblSound(Index).Caption = Audio.InterfaceVolume
+
     End Select
     
     FrmMain.SetFocus
+
 End Sub
 
 Private Sub imgAlpha_Click(Index As Integer)
+
     Select Case Index
     
         Case 0
+
             If ClientSetup.bAlpha = 100 Then
                 ClientSetup.bAlpha = 255
             ElseIf ClientSetup.bAlpha = 150 Then
@@ -850,8 +893,11 @@ Private Sub imgAlpha_Click(Index As Integer)
                 ClientSetup.bAlpha = 150
             ElseIf ClientSetup.bAlpha = 255 Then
                 ClientSetup.bAlpha = 200
+
             End If
+
         Case 1
+
             If ClientSetup.bAlpha = 100 Then
                 ClientSetup.bAlpha = 150
             ElseIf ClientSetup.bAlpha = 150 Then
@@ -860,12 +906,15 @@ Private Sub imgAlpha_Click(Index As Integer)
                 ClientSetup.bAlpha = 255
             ElseIf ClientSetup.bAlpha = 255 Then
                 ClientSetup.bAlpha = 100
+
             End If
+
     End Select
     
     lblAlpha.Caption = CStr(ClientSetup.bAlpha)
     
     FrmMain.SetFocus
+
 End Sub
 
 Private Sub imgChkConfig_Click(Index As Integer)
@@ -884,41 +933,42 @@ Private Sub imgChkConfig_Click(Index As Integer)
     
     ' Cambio de Interfaz
     
-    
     #If ModoBig = 0 Then
-            If Index = eSetupMods.SETUP_INTERFAZMODERNA Then
-                If ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZMODERNA) = 1 Then
-                    ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZTDS) = 0
-                    Set imgChkConfig(eSetupMods.SETUP_INTERFAZTDS).Picture = picCheckBoxNulo
+
+        If Index = eSetupMods.SETUP_INTERFAZMODERNA Then
+            If ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZMODERNA) = 1 Then
+                ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZTDS) = 0
+                Set imgChkConfig(eSetupMods.SETUP_INTERFAZTDS).Picture = picCheckBoxNulo
                         
-                    ' LOAD MODERNA
+                ' LOAD MODERNA
                     
-                    FrmMain.Picture = LoadPicture(DirInterface & "main\VentanaClassic2.JPG")
-                    'AdaptateControlsToInterface (0)
-                    FrmMain.Label4_Click
+                FrmMain.Picture = LoadPicture(DirInterface & "main\VentanaClassic2.JPG")
+                'AdaptateControlsToInterface (0)
+                FrmMain.Label4_Click
                     
-                Else
-                    ClientSetup.bConfig(Index) = 1
-                     imgChkConfig(Index).Picture = picCheckBox
-                End If
-        
-            ElseIf Index = eSetupMods.SETUP_INTERFAZTDS Then
-        
-                If ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZTDS) = 1 Then
-                    ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZMODERNA) = 0
-                    Set imgChkConfig(eSetupMods.SETUP_INTERFAZMODERNA).Picture = picCheckBoxNulo
-                    
-                    ' LOAD TDS
-                    FrmMain.Picture = LoadPicture(DirInterface & "main\VentanaClassic.JPG")
-                    'AdaptateControlsToInterface (0)
-                    FrmMain.Label4_Click
-                Else
-                    ClientSetup.bConfig(Index) = 1
-                    imgChkConfig(Index).Picture = picCheckBox
-                End If
-        
+            Else
+                ClientSetup.bConfig(Index) = 1
+                imgChkConfig(Index).Picture = picCheckBox
+
             End If
-            
+        
+        ElseIf Index = eSetupMods.SETUP_INTERFAZTDS Then
+        
+            If ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZTDS) = 1 Then
+                ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZMODERNA) = 0
+                Set imgChkConfig(eSetupMods.SETUP_INTERFAZMODERNA).Picture = picCheckBoxNulo
+                    
+                ' LOAD TDS
+                FrmMain.Picture = LoadPicture(DirInterface & "main\VentanaClassic.JPG")
+                'AdaptateControlsToInterface (0)
+                FrmMain.Label4_Click
+            Else
+                ClientSetup.bConfig(Index) = 1
+                imgChkConfig(Index).Picture = picCheckBox
+
+            End If
+        
+        End If
     
     #End If
 
@@ -927,9 +977,9 @@ Private Sub imgChkConfig_Click(Index As Integer)
             Call mCursor.Cursores_ResotreDefault
         Else
 
-            Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
-            Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorSpell, IDC_CROSS)
-            Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorHand, IDC_HAND)
+            Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
+            Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorSpell, IDC_CROSS)
+            Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorHand, IDC_HAND)
 
         End If
         
@@ -947,7 +997,9 @@ Private Sub imgChkConfig_Click(Index As Integer)
         
         If Not Audio.Effect3D Then
             Call ShowConsoleMsg("¡Desactivaste el sonido 3D y producto de esto no escucharás la ambientación de los mapas! Es una lástima que prefieras no adentrarte a la fantasía desterium.")
+
         End If
+
     ElseIf Index = eSetupMods.SETUP_MASTERSOUND Then
 
         If ClientSetup.bConfig(eSetupMods.SETUP_MASTERSOUND) = 0 Then
@@ -955,6 +1007,7 @@ Private Sub imgChkConfig_Click(Index As Integer)
         Else
             Audio.MasterVolume = ClientSetup.bValueSoundMaster
             lblSound(0).Caption = Audio.MasterVolume
+
         End If
 
     End If
@@ -963,14 +1016,14 @@ Private Sub imgChkConfig_Click(Index As Integer)
 
 End Sub
 
-
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub lblCursor_Click(Index As Integer)
 
-    CommonDialog1.InitDir = App.path & "\resource\cursor"
+    CommonDialog1.InitDir = App.path & "\AO\resource\cursor"
     CommonDialog1.Filter = "Imagenes (*.cur|"
     '"Text Files(*.txt)|*.txt|All Files(*.*)|*.*"
     CommonDialog1.ShowOpen
@@ -978,6 +1031,7 @@ Private Sub lblCursor_Click(Index As Integer)
     '   imgCursor(Index).Picture = LoadPicture(CommonDialog1.FileName)
    
     Dim Temp As String
+
     Temp = CommonDialog1.FileName
     Temp = Replace(Temp, CommonDialog1.InitDir, vbNullString)
     lblCursor(Index).Caption = Temp
@@ -986,25 +1040,29 @@ Private Sub lblCursor_Click(Index As Integer)
     
         Case 0 ' Cursor General
             ClientSetup.CursorGeneral = Temp
-            Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
+            Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
+
         Case 1 ' Cursor de Lanzar Flechas/Hechizos
             ClientSetup.CursorSpell = Temp
-            Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorSpell, IDC_CROSS)
+            Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorSpell, IDC_CROSS)
+
         Case 2 ' Cursor del Inventario
             ClientSetup.CursorInv = Temp
+
         Case 3 ' Cursor de Hand
             ClientSetup.CursorHand = Temp
-            Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorHand, IDC_HAND)
+            Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorHand, IDC_HAND)
+
     End Select
-    
     
     If lblCursor(Index).Caption = vbNullString Then
         lblCursor(Index).Caption = "Seleccionar"
+
     End If
     
     FrmMain.SetFocus
-End Sub
 
+End Sub
 
 Private Sub imgChkMusica_Click()
     Call Audio.PlayInterface(SND_CLICK)
@@ -1017,6 +1075,7 @@ Private Sub imgChkMusica_Click()
         Set imgChkMusica.Picture = picCheckBoxNulo
     Else
         imgChkMusica.Picture = picCheckBox
+
     End If
     
     lblSound(2).Caption = Audio.MusicVolume
@@ -1024,6 +1083,7 @@ Private Sub imgChkMusica_Click()
     ClientSetup.bSoundMusic = IIf(Audio.MusicActivated = True, 1, 0)
     
     FrmMain.SetFocus
+
 End Sub
 
 Private Sub imgChkSonidos_Click()
@@ -1041,6 +1101,7 @@ Private Sub imgChkSonidos_Click()
     Else
               
         imgChkSonidos.Picture = picCheckBox
+
     End If
     
     lblSound(1).Caption = Audio.EffectVolume
@@ -1048,9 +1109,11 @@ Private Sub imgChkSonidos_Click()
     ClientSetup.bSoundEffect = IIf(Audio.EffectActivated = True, 1, 0)
     
     FrmMain.SetFocus
+
 End Sub
 
 Private Sub imgChkInterfaces_Click()
+
     If Loading Then Exit Sub
           
     Call Audio.PlayInterface(SND_CLICK)
@@ -1061,26 +1124,25 @@ Private Sub imgChkInterfaces_Click()
         Set imgChkInterfaces.Picture = picCheckBoxNulo
     Else
         imgChkInterfaces.Picture = picCheckBox
-    End If
 
+    End If
 
     lblSound(3).Caption = Audio.InterfaceVolume
     ClientSetup.bSoundInterface = IIf(Audio.InterfaceActivated = True, 1, 0)
     
     FrmMain.SetFocus
+
 End Sub
 
 Private Sub Form_Load()
 
-
     #If ModoBig = 0 Then
-    ' Handles Form movement (drag and drop).
-    Set clsFormulario = New clsFormMovementManager
-    clsFormulario.Initialize Me
+        ' Handles Form movement (drag and drop).
+        Set clsFormulario = New clsFormMovementManager
+        clsFormulario.Initialize Me
     #End If
-    
           
-    Me.Picture = LoadPicture(App.path & "\resource\interface\options\options.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\options\options.jpg")
     
     Hover_Disabled
     
@@ -1089,16 +1151,21 @@ Private Sub Form_Load()
     LoadUserConfig
     Loading = False     'Enable sounds when setting check's values
     
-    
     ' Tooltips
     imgFpsInfo.ToolTipText = "Frames por Segundo."
     imgAlphaInfo.ToolTipText = "Transparencia de los efectos como Apocalipsis & Meditaciones."
+
 End Sub
+
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
+
 Private Sub LoadButtons()
 
     Dim GrhPath As String
@@ -1128,7 +1195,6 @@ Private Sub LoadUserConfig()
     If Audio.MusicActivated Then
         imgChkMusica.Picture = picCheckBox
         
-        
     End If
     
     lblSound(0).Caption = Audio.MasterVolume
@@ -1139,20 +1205,25 @@ Private Sub LoadUserConfig()
     ' Load Sound config
     If Audio.EffectActivated Then
         imgChkSonidos.Picture = picCheckBox
+
     End If
     
     If Audio.InterfaceActivated Then
         imgChkInterfaces.Picture = picCheckBox
+
     End If
     
     Dim A As Long
         
     For A = 1 To MAX_SETUP_MODS
+
         If ClientSetup.bConfig(A) = 1 Then
             imgChkConfig(A).Picture = picCheckBox
         Else
             Set imgChkConfig(A).Picture = picCheckBoxNulo
+
         End If
+
     Next A
     
     lblAlpha.Caption = CStr(ClientSetup.bAlpha)
@@ -1164,25 +1235,27 @@ Private Sub LoadUserConfig()
 
     ' Cursores Predeterminados
     Dim filePath As String
-    filePath = App.path & "\resource\cursor"
+
+    filePath = App.path & "\AO\resource\cursor"
 
     lblCursor(0).Caption = Trim$(ClientSetup.CursorGeneral)
     lblCursor(1).Caption = Trim$(ClientSetup.CursorSpell)
     lblCursor(2).Caption = Trim$(ClientSetup.CursorInv)
     lblCursor(3).Caption = Trim$(ClientSetup.CursorHand)
     
-    
     For A = lblCursor.LBound To lblCursor.UBound
+
         If lblCursor(A).Caption = vbNullString Then
-             lblCursor(A).Caption = "Seleccionar"
+            lblCursor(A).Caption = "Seleccionar"
+
         End If
+
     Next A
     
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
-    
         
     Dim A As Long
     
@@ -1208,7 +1281,9 @@ End Sub
 Private Sub Hover_Activate(ByVal Index As Integer)
     Hover_Disabled
     lblMenu(Index).ForeColor = RGB(255, 116, 0)
+
 End Sub
+
 Private Sub lblMenu_Click(Index As Integer)
 
     Call Audio.PlayInterface(SND_CLICK)
@@ -1231,11 +1306,18 @@ Private Sub lblMenu_Click(Index As Integer)
         Case 3
             ' Manual del juego
             Call ShellExecute(hWnd, "open", "https://www.argentumgame.com/wiki/doku.php?id=Bienvenida", vbNullString, vbNullString, 1)
+
     End Select
+
 End Sub
 
-Private Sub lblMenu_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblMenu_MouseMove(Index As Integer, _
+                              Button As Integer, _
+                              Shift As Integer, _
+                              X As Single, _
+                              Y As Single)
     Hover_Activate Index
+
 End Sub
 
 Private Sub Fps_List_Disabled(ByVal Index As Integer)
@@ -1243,33 +1325,43 @@ Private Sub Fps_List_Disabled(ByVal Index As Integer)
     Dim A As Long
     
     For A = PicFPS.LBound To PicFPS.UBound
-         Set PicFPS(A).Picture = picCheckBoxNulo
+        Set PicFPS(A).Picture = picCheckBoxNulo
     Next A
     
     PicFPS(Index).Picture = picCheckBox
+
 End Sub
+
 Private Function Fps_Detect_Index() As Integer
+
     Select Case ClientSetup.bFps
+
         Case 144 ' 144
             Fps_Detect_Index = 0
+
         Case 244 ' 244
             Fps_Detect_Index = 1
+
         Case 2 ' Vsync
             Fps_Detect_Index = 2
+
         Case 1 ' Libres
             Fps_Detect_Index = 3
+
     End Select
 
 End Function
+
 Private Sub Alpha_List_Disabled(ByVal Index As Integer)
 
     Dim A As Long
     
     For A = PicAlpha.LBound To PicAlpha.UBound
-         Set PicAlpha(A).Picture = picCheckBoxNulo
+        Set PicAlpha(A).Picture = picCheckBoxNulo
     Next A
     
     PicAlpha(Index).Picture = picCheckBox
+
 End Sub
 
 Private Sub PicAlpha_Click(Index As Integer)
@@ -1279,31 +1371,41 @@ Private Sub PicAlpha_Click(Index As Integer)
     
         Case 0 '
             ClientSetup.bAlpha = 100
+
         Case 1 '
             ClientSetup.bAlpha = 150
+
         Case 2 '
             ClientSetup.bAlpha = 200
+
         Case 3 '
             ClientSetup.bAlpha = 255
+
     End Select
     
     Alpha_List_Disabled Index
 
 End Sub
+
 Private Function Alpha_Detect_Index() As Integer
+
     Select Case ClientSetup.bAlpha
+
         Case 100 '
             Alpha_Detect_Index = 0
+
         Case 150 '
             Alpha_Detect_Index = 1
+
         Case 200 '
             Alpha_Detect_Index = 2
+
         Case 255 '
             Alpha_Detect_Index = 3
+
     End Select
 
 End Function
-
 
 Private Sub PicFPS_Click(Index As Integer)
     
@@ -1313,21 +1415,23 @@ Private Sub PicFPS_Click(Index As Integer)
     
         Case 0 ' 144
             ClientSetup.bFps = 144
+
         Case 1 ' 244
             ClientSetup.bFps = 244
+
         Case 2 ' Vsync
             ClientSetup.bFps = 2
+
         Case 3 ' Libres
             ClientSetup.bFps = 1
+
     End Select
-    
     
     Fps_List_Disabled Index
     
-    
     If Index = 2 Then
         Call MsgBox("Debes reiniciar para poder apreciar los cambios. Te recordamos que esto depende de tu monitor y de los Ghz que tenga")
+
     End If
-    
     
 End Sub

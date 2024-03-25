@@ -326,7 +326,6 @@ Begin VB.Form FrmRetos
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       MultiLine       =   0   'False
       DisableNoScroll =   -1  'True
       Appearance      =   0
@@ -429,7 +428,7 @@ Begin VB.Form FrmRetos
    Begin VB.Image Image1 
       Height          =   315
       Left            =   4920
-      Picture         =   "FrmRetos.frx":1DF6B
+      Picture         =   "FrmRetos.frx":1DF74
       Top             =   0
       Width           =   330
    End
@@ -496,33 +495,39 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private clsFormulario As clsFormMovementManager
-Private MouseBoton As Integer
-Private MouseShift As Integer
+Private clsFormulario              As clsFormMovementManager
 
-Private Const MAX_ZONA As Byte = 8
+Private MouseBoton                 As Integer
+
+Private MouseShift                 As Integer
+
+Private Const MAX_ZONA             As Byte = 8
+
 Private Const MAX_RETOS_PERSONAJES As Byte = 6
 
-Dim Fight As tFight
+Dim Fight                          As tFight
 
 Public Enum eTypeFight
+
     eAccept = 1
     eSend = 2
+
 End Enum
 
-Public SelectedFight As Byte ' 1vs1,2vs2,3vs3,4vs4
+Public SelectedFight  As Byte ' 1vs1,2vs2,3vs3,4vs4
 
-Public TypeFight As eTypeFight
+Public TypeFight      As eTypeFight
 
-Public TexFight As Integer
+Public TexFight       As Integer
+
 Public TextUsers_Temp As Integer
-
 
 Public Sub ClicUser(ByVal Name As String)
     Call Audio.PlayInterface(SND_CLICK)
     
     Dim txtCopy() As String
-    Dim A As Long
+
+    Dim A         As Long
     
     ReDim txtCopy(txtUser.LBound To txtUser.UBound) As String
     
@@ -530,12 +535,12 @@ Public Sub ClicUser(ByVal Name As String)
         txtCopy(A) = txtUser(A).Text
     Next A
     
-   ' If HayRepetidos(txtCopy) Then Exit Sub
+    ' If HayRepetidos(txtCopy) Then Exit Sub
     If ExistUser(Name) Then Exit Sub
     
     txtUser(TextUsers_Temp).Text = Name
-End Sub
 
+End Sub
 
 Private Sub EffectTexture(Index As Integer)
 
@@ -548,14 +553,16 @@ Private Sub EffectTexture(Index As Integer)
     Next A
     
     Set ButtonTex(Index).Picture = LoadPicture(DirInterface & "fight\Tex" & TexFight & "_Clic.jpg")
+
 End Sub
+
 Private Sub ButtonTex_Click(Index As Integer)
+
     If SelectedFight = 4 Then Exit Sub
     
     Call Audio.PlayInterface(SND_CLICK)
 
     EffectTexture (Index)
-    
     
 End Sub
 
@@ -572,7 +579,6 @@ Private Sub ButtonTipo_Click(Index As Integer)
     
     Set ButtonTipo(Index).Picture = LoadPicture(DirInterface & "fight\Button" & SelectedFight & ".jpg")
     
-    
     ' · Recorrer los txt y poner Enabled=True-False
     For A = 1 To txtUser.UBound
         txtUser(A).Enabled = False
@@ -581,15 +587,16 @@ Private Sub ButtonTipo_Click(Index As Integer)
     Next A
     
     Select Case SelectedFight
+
         Case 1
             txtUser(3).Enabled = True
-            
 
         Case 2
             txtUser(1).Enabled = True
             
             txtUser(3).Enabled = True
             txtUser(4).Enabled = True
+
         Case 3
             txtUser(1).Enabled = True
             txtUser(2).Enabled = True
@@ -601,9 +608,8 @@ Private Sub ButtonTipo_Click(Index As Integer)
         Case 4 ' Plantes
             txtUser(3).Enabled = True
             EffectTexture (0)  ' Solo puede elegir esta textura de plante.
-    End Select
-    
 
+    End Select
     
 End Sub
 
@@ -613,7 +619,6 @@ Private Sub chkConfig_Click(Index As Integer)
 End Sub
 
 Private Sub Form_Load()
-    
     
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
@@ -635,7 +640,6 @@ Private Sub Form_Load()
     cmbTime.AddItem "30"
     cmbTime.AddItem "60"
     
-    
     cmbRounds.ListIndex = 1
     cmbTime.ListIndex = 1
     
@@ -655,10 +659,12 @@ Private Sub Form_Load()
     txtUser(0).Enabled = False
     
     MirandoRetos = True
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     MirandoRetos = False
+
 End Sub
 
 Private Sub Image1_Click()
@@ -666,14 +672,17 @@ Private Sub Image1_Click()
     
     If TypeFight = eTypeFight.eAccept Then
         Call WriteFight_CancelInvitation
+
     End If
 
     Unload Me
+
 End Sub
 
 ' Ir al TOP WEB
 Private Sub imgTop_Click()
     Call ShellExecute(hWnd, "open", "https://www.argentumgame.com/retos/", vbNullString, vbNullString, 1)
+
 End Sub
 
 ' Simulación del checkbox a través del label
@@ -682,50 +691,57 @@ Private Sub lblActionCheck_Click(Index As Integer)
     If chkConfig(Index).Enabled Then
         Call Audio.PlayInterface(SND_CLICK)
         chkConfig(Index) = IIf(chkConfig(Index).Value = 0, 1, 0)
+
     End If
+
 End Sub
 
-
-
-
 ' Efecto de Formulario (Cerrar el Formulario)
-Private Sub Form_MouseDown(Button As Integer, _
-                            Shift As Integer, _
-                            X As Single, _
-                            Y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     MouseBoton = Button
     MouseShift = Shift
     
 End Sub
 
 Public Function ExistUser(ByVal Name As String)
+
     Dim A As Long
     
     For A = txtUser.LBound To txtUser.UBound
+
         If txtUser(A).Text = Name Then
             ExistUser = True
             Exit Function
+
         End If
+
     Next A
+
 End Function
+
 Public Function HayRepetidos(Lista() As String) As Boolean
 
     On Error GoTo ErrHandler
     
-    Dim I As Integer
+    Dim i As Integer
+
     Dim j As Integer
     
     ' Recorrer la lista
-    For I = 0 To UBound(Lista) - 1
+    For i = 0 To UBound(Lista) - 1
+
         ' Verificar si el elemento actual está repetido en la lista
-        For j = I + 1 To UBound(Lista)
-            If StrComp(Lista(I), Lista(j), vbTextCompare) = 0 Then
+        For j = i + 1 To UBound(Lista)
+
+            If StrComp(Lista(i), Lista(j), vbTextCompare) = 0 Then
                 ' Elemento repetido encontrado, retornar False
                 HayRepetidos = True
                 Exit Function
+
             End If
+
         Next j
-    Next I
+    Next i
     
     ' No se encontraron elementos repetidos, retornar True
     HayRepetidos = False
@@ -737,63 +753,76 @@ End Function
 
 Private Function Retos_CheckData(ByRef Users() As String) As Boolean
     
-    Dim A As Long
-    Dim FoundChar As Boolean
+    Dim A         As Long
 
+    Dim FoundChar As Boolean
     
     If UBound(Users) = -1 Then
         Call MsgBox("Utiliza el Formato Player1-Player2 vs Enemigo1-Enemigo2.")
         Exit Function
+
     End If
     
     If HayRepetidos(Users) Then
         Call MsgBox("¡Has puesto un nombre repetido!")
         Exit Function
+
     End If
     
     For A = LBound(Users) To UBound(Users)
+
         If Users(A) = vbNullString Then
             Call MsgBox("Has introducido un nombre incorrecto. Fijate de elegir bien la cantidad de usuarios.")
             Exit Function
+
         End If
         
         If UCase$(Users(A)) = UCase$(FrmMain.Label8(0).Caption) Then
             FoundChar = True
+
         End If
+
     Next A
     
     If Not FoundChar Then
         Call MsgBox("¡Tú tambien debes participar del evento! Y ahora que ha hecho eso, pues mas le vale ganar.")
         Exit Function
+
     End If
     
     If UBound(Users) > (MAX_RETOS_PERSONAJES - 1) Then
         Call MsgBox("Se han encontrado más usuarios de los que tiene permitido el servidor.")
         Exit Function
+
     End If
     
     If Not (UBound(Users) + 1) Mod 2 = 0 Then
         Call MsgBox("La cantidad de miembros para enfrentarse es inválida.")
         Exit Function
+
     End If
     
     Retos_CheckData = True
+
 End Function
 
 ' # Chequea que no este nada vacio.
 Public Function CheckValidUsers_Txt() As Boolean
     
-    
     Select Case SelectedFight
+
         Case 1, 4
-                If Len(txtUser(0).Text) = 0 Or Len(txtUser(3).Text) = 0 Then Exit Function
+
+            If Len(txtUser(0).Text) = 0 Or Len(txtUser(3).Text) = 0 Then Exit Function
+
         Case 2
-                If Len(txtUser(0).Text) = 0 Or Len(txtUser(3).Text) = 0 Or _
-                    Len(txtUser(1).Text) = 0 Or Len(txtUser(4).Text) = 0 Then Exit Function
+
+            If Len(txtUser(0).Text) = 0 Or Len(txtUser(3).Text) = 0 Or Len(txtUser(1).Text) = 0 Or Len(txtUser(4).Text) = 0 Then Exit Function
+
         Case 3
-                If Len(txtUser(0).Text) = 0 Or Len(txtUser(3).Text) = 0 Or _
-                    Len(txtUser(1).Text) = 0 Or Len(txtUser(4).Text) = 0 Or _
-                    Len(txtUser(2).Text) = 0 Or Len(txtUser(5).Text) = 0 Then Exit Function
+
+            If Len(txtUser(0).Text) = 0 Or Len(txtUser(3).Text) = 0 Or Len(txtUser(1).Text) = 0 Or Len(txtUser(4).Text) = 0 Or Len(txtUser(2).Text) = 0 Or Len(txtUser(5).Text) = 0 Then Exit Function
+
         Case 4
         
     End Select
@@ -801,21 +830,28 @@ Public Function CheckValidUsers_Txt() As Boolean
     CheckValidUsers_Txt = True
     
 End Function
+
 Private Sub imgSend_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     If TypeFight = eTypeFight.eSend Then
+
         Dim Users() As String
-        Dim Temp As String
-        Dim A As Long
+
+        Dim Temp    As String
+
+        Dim A       As Long
 
         If Not CheckValidUsers_Txt Then Exit Sub
         
         ' Team n°1
         For A = txtUser.LBound To txtUser.UBound
+
             If Len(txtUser(A).Text) > 0 Then
                 Temp = Temp & txtUser(A).Text & "-"
+
             End If
+
         Next A
         
         Temp = Left$(Temp, Len(Temp) - 1)
@@ -848,21 +884,23 @@ Private Sub imgUnload_Click()
 
 End Sub
 
-
 Private Sub txtGld_Change()
+
     If Not IsNumeric(txtGld.Text) Then
         txtGld.Text = "30000"
         txtGld.SelStart = Len(txtGld.Text)
+
     End If
         
     If Val(txtGld.Text) < 30000 Or Val(txtGld.Text) > 200000000 Then
         txtGld.Text = "30000"
         txtGld.SelStart = Len(txtGld.Text)
+
     End If
 
     Fight.Gld = Val(txtGld.Text)
-End Sub
 
+End Sub
 
 Private Sub txtUser_Click(Index As Integer)
     TextUsers_Temp = Index

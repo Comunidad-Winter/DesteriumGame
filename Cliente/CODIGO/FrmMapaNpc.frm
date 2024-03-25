@@ -116,35 +116,38 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private clsFormulario   As clsFormMovementManager
 
-Private clsFormulario As clsFormMovementManager
-Private picCheckBox          As Picture
-Private picCheckBoxNulo      As Picture
+Private picCheckBox     As Picture
 
-Public NpcIndex As Integer
-Public Mirando As Byte
+Private picCheckBoxNulo As Picture
+
+Public NpcIndex         As Integer
+
+Public Mirando          As Byte
 
 Private Sub Button_Click(Index As Integer)
-
     
     Console.visible = False
-    
     
     Mirando = Index
     
     Select Case Index
+
         Case 0 ' Estadisticas
             Console.visible = True
             
             Call LoadStats
+
         Case 1 ' Drops
         
         Case 2 ' Info extra, descripciones
+
     End Select
+
 End Sub
 
 Private Sub LoadStats()
-
 
     Console.Text = vbNullString
     Console.SelStart = 0
@@ -156,26 +159,32 @@ Private Sub LoadStats()
         If .MaxHp > 0 Then
             Call AddtoRichTextBox(Console, "Vida: ", 255, 255, 255, True, False)
             Call AddtoRichTextBox(Console, PonerPuntos(.MaxHp), 255, 255, 0, True, False, False)
+
         End If
         
         ' Hit
         If .MinHit > 0 Then
             Call AddtoRichTextBox(Console, "Hit: ", 255, 255, 255, True, False)
             Call AddtoRichTextBox(Console, PonerPuntos(CLng(.MinHit)) & "/" & PonerPuntos(CLng(.MaxHit)), 255, 255, 0, True, False, False)
+
         End If
         
-         ' Defensa
-         If .Def > 0 Then
+        ' Defensa
+        If .Def > 0 Then
             Call AddtoRichTextBox(Console, "Defensa: ", 255, 255, 255, True, False)
             Call AddtoRichTextBox(Console, PonerPuntos(CLng(.Def)), 255, 255, 0, True, False, False)
+
         End If
         
         ' Exp
-         If .GiveExp > 0 Then
+        If .GiveExp > 0 Then
             Call AddtoRichTextBox(Console, "Experiencia: ", 255, 255, 255, True, False)
             Call AddtoRichTextBox(Console, PonerPuntos(CLng(.GiveExp)), 255, 255, 0, True, False, False)
+
         End If
+
     End With
+
 End Sub
 
 Public Sub UpdateNpc(ByVal INpc As Integer)
@@ -190,22 +199,21 @@ Public Sub UpdateNpc(ByVal INpc As Integer)
         
     End If
     
-    
     Render
+
 End Sub
+
 Private Sub Form_Load()
 
     g_Captions(eCaption.eMapaNpc) = wGL_Graphic.Create_Device_From_Display(PicNpc.hWnd, PicNpc.ScaleWidth, PicNpc.ScaleHeight)
         
-    Me.Picture = LoadPicture(App.path & "\resource\interface\menucompacto\VentanaNpc.jpg")
-        
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\menucompacto\VentanaNpc.jpg")
         
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
         Set clsFormulario = New clsFormMovementManager
         clsFormulario.Initialize Me
     #End If
-    
     
     Dim GrhPath As String
     
@@ -218,20 +226,21 @@ Private Sub Form_Load()
     
     NpcIndex = FrmMapa.NpcIndexSelected
     Call UpdateNpc(NpcIndex)
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
 
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.eMapaNpc))
     MirandoNpc = False
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Unload Me
+
 End Sub
-
-
 
 ' # Render
 
@@ -241,24 +250,27 @@ Private Sub Render()
     Call wGL_Graphic_Renderer.Update_Projection(&H0, PicNpc.ScaleWidth, PicNpc.ScaleHeight)
     Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
     
-    
     ' Personaje
     
-    Dim X As Long
-    Dim Y As Long
+    Dim X        As Long
+
+    Dim Y        As Long
+
     Dim GrhIndex As Long
-    Dim A As Long
-    
+
+    Dim A        As Long
         
     X = 80
     Y = 170
     
-    
-    Dim Width As Long
+    Dim Width  As Long
+
     Dim Height As Long
+
     Dim ChangeTamaño As Boolean
     
     If NpcIndex > 0 Then
+
         With NpcList(NpcIndex)
         
             If .Body > 0 Then
@@ -272,12 +284,11 @@ Private Sub Render()
                     Height = 200 * 0.7
 
                     ChangeTamaño = True
+
                 End If
-     
-                
               
-                Call Draw_Grh(BodyData(.Body).Walk(E_Heading.SOUTH), X + BodyData(.Body).BodyOffSet(E_Heading.SOUTH).X, Y + BodyData(.Body).BodyOffSet(E_Heading.SOUTH).Y, To_Depth(6), 1, 1, 0, , , eTechnique.t_Alpha, _
-                           Width, Height)
+                Call Draw_Grh(BodyData(.Body).Walk(E_Heading.SOUTH), X + BodyData(.Body).BodyOffSet(E_Heading.SOUTH).X, Y + BodyData(.Body).BodyOffSet(E_Heading.SOUTH).Y, To_Depth(6), 1, 1, 0, , , eTechnique.t_Alpha, Width, Height)
+
             End If
                 
             If .Head > 0 Then
@@ -286,15 +297,19 @@ Private Sub Render()
                 Width = IIf(ChangeTamaño, GrhData(GrhIndex).pixelWidth * 0.7, GrhData(GrhIndex).pixelWidth)
                 Height = IIf(ChangeTamaño, GrhData(GrhIndex).pixelHeight * 0.7, GrhData(GrhIndex).pixelHeight)
 
-                Call Draw_Grh(HeadData(.Head).Head(E_Heading.SOUTH), X + BodyData(.Body).HeadOffset.X, Y + BodyData(.Body).HeadOffset.Y, To_Depth(6), 1, 1, , , , , _
-                Width, Height)
+                Call Draw_Grh(HeadData(.Head).Head(E_Heading.SOUTH), X + BodyData(.Body).HeadOffset.X, Y + BodyData(.Body).HeadOffset.Y, To_Depth(6), 1, 1, , , , , Width, Height)
+
             End If
+
         End With
-   End If
+
+    End If
     
     Call wGL_Graphic_Renderer.Flush
+
 End Sub
 
 Private Sub tUpdate_Timer()
     Render
+
 End Sub

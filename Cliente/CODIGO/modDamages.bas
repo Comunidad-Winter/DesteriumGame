@@ -25,6 +25,7 @@ Enum EDType
     d_AddMagicWord = 16
     d_DañoNpc_Critico = 17
     d_Fallas = 18
+
 End Enum
  
 Type DList
@@ -43,7 +44,8 @@ Type DList
 End Type
 
 Public BytesEnviados As Long
-Public BytesTotal As Long
+
+Public BytesTotal    As Long
 
 Sub CreateDamage(ByVal X As Byte, _
                  ByVal Y As Byte, _
@@ -64,7 +66,6 @@ Sub CreateDamage(ByVal X As Byte, _
         .Downloading = 0
         .TimeDesvanecimiento = 255
         .Intervalo = FrameTime
-
         
         Select Case .DamageType
 
@@ -96,7 +97,9 @@ Sub CreateDamage(ByVal X As Byte, _
         
         If .OptionalText = vbNullString Then
             .OptionalText = Texto
+
         End If
+
     End With
        
 End Sub
@@ -113,19 +116,23 @@ Sub DrawDamage(ByVal X As Byte, _
         If (FrameTime - .Intervalo) >= 2000 Then
             ClearDamage X, Y
             Exit Sub
+
         End If
         
         If (.DamageVal > 0 Or .DamageVal = -1 Or .DamageVal = -2) Then
             
             If .TimeRendered < DAMAGE_TIME Then
+
                 'Sumo el contador del tiempo.
                 If FrameTime - .Intervalo > 15 Then
                     .TimeRendered = .TimeRendered + 1
                     .Intervalo = FrameTime
+
                 End If
 
                 If (.TimeRendered * 0.5) > 0 Then
                     .Downloading = (.TimeRendered * 0.5)
+
                 End If
                     
                 .ColorRGB = ModifyColour(255, .DamageType)
@@ -135,10 +142,12 @@ Sub DrawDamage(ByVal X As Byte, _
                 ElseIf .DamageVal = -2 Then
                     Mod_TileEngine.Draw_Text f_Medieval, 18, PixelX, PixelY - .Downloading, 0#, 0#, .ColorRGB, FONT_ALIGNMENT_BASELINE Or FONT_ALIGNMENT_CENTER, .OptionalText, False
                 Else
+
                     If .DamageType = d_AniquiladoPor Then
                         Mod_TileEngine.Draw_Text f_Tahoma, DAMAGE_FONT_S, PixelX, PixelY - .Downloading, 0#, 0#, .ColorRGB, FONT_ALIGNMENT_BASELINE, "¡" & CharList(.DamageVal).Nombre & " Fight!", True
                     Else
                         Mod_TileEngine.Draw_Text f_Tahoma, DAMAGE_FONT_S, PixelX, PixelY - .Downloading, 0#, 0#, .ColorRGB, FONT_ALIGNMENT_BASELINE, .OptionalText & " " & .DamageVal, True
+
                     End If
                     
                 End If
@@ -146,8 +155,11 @@ Sub DrawDamage(ByVal X As Byte, _
                 'Si llego al tiempo lo limpio
                 If .TimeRendered >= DAMAGE_TIME Then
                     ClearDamage X, Y
+
                 End If
+
             End If
+
         End If
              
     End With
@@ -157,6 +169,7 @@ End Sub
 Sub ClearDamage(ByVal X As Byte, ByVal Y As Byte)
     
     Dim NullDamage As DList
+
     MapData(X, Y).Damage = NullDamage
 
 End Sub
@@ -218,6 +231,7 @@ Function ModifyColour(ByVal Alpha As Byte, ByVal DamageType As Byte) As Long
             
         Case EDType.d_Fallas
             ModifyColour = ARGB(220, 220, 220, Alpha)
+
     End Select
        
 End Function

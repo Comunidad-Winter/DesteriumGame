@@ -83,6 +83,7 @@ Begin VB.Form FrmStatsUser
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
+      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True
@@ -422,12 +423,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Inventory     As clsGrapchicalInventory
 
-
-Private Inventory As clsGrapchicalInventory
 Private clsFormulario As clsFormMovementManager
 
 Private Enum eButtons
+
     eInventory = 0
     eSpells = 1
     eBank = 2
@@ -436,25 +437,30 @@ Private Enum eButtons
     ePenas = 5
     eSkins = 6
     eLogros = 7
+
 End Enum
 
-Private Const MAX_INVENTORY As Byte = 48
-Private Const MAX_PICS As Byte = 7
+Private Const MAX_INVENTORY    As Byte = 48
 
-Private picButtons(MAX_PICS) As Picture
+Private Const MAX_PICS         As Byte = 7
+
+Private picButtons(MAX_PICS)   As Picture
+
 Private ButtonActive(MAX_PICS) As Byte
 
 ' Define RGB colors for different types of text
-Dim TitleColor() As Variant
-Dim DescColor() As Variant
-Dim ValueColor() As Variant
-    
+Dim TitleColor()               As Variant
+
+Dim DescColor()                As Variant
+
+Dim ValueColor()               As Variant
  
 Private Sub Button_Click(Index As Integer)
     Call Audio.PlayInterface(SND_CLICK)
     
     If Not MainTimer.Check(TimersIndex.Packet500) Then Exit Sub
     Call Button_Selected(Index)
+
 End Sub
 
 Private Sub Button_Reset_All()
@@ -467,6 +473,7 @@ Private Sub Button_Reset_All()
     Next A
     
 End Sub
+
 Private Sub Button_Selected(Index As Integer)
     
     Call Button_Reset_All
@@ -474,24 +481,26 @@ Private Sub Button_Selected(Index As Integer)
     If ButtonActive(Index) = 0 Then
         Set Button(Index).Picture = picButtons(Index)
         Call Button_Action(Index)
+
     End If
     
 End Sub
 
 Private Sub Button_Action(Index As Integer)
 
-    PicInv.visible = False
+    picInv.visible = False
     ListView.visible = False
     
     Select Case Index
+
         Case eButtons.eInventory
-            PicInv.visible = True
+            picInv.visible = True
             
         Case eButtons.eSpells
             ListView.visible = True
             
         Case eButtons.eBank
-            PicInv.visible = True
+            picInv.visible = True
             
         Case eButtons.eAbilities
             ListView.visible = True
@@ -503,15 +512,17 @@ Private Sub Button_Action(Index As Integer)
             ListView.visible = True
             
         Case eButtons.eSkins
-            PicInv.visible = True
+            picInv.visible = True
             
         Case eButtons.eLogros
             ListView.visible = True
+
     End Select
     
     Call WriteRequiredStatsUser(Index, lblName.Caption)
     
 End Sub
+
 Private Sub Form_Load()
     TitleColor = Array(50, 205, 50)    ' Green
     DescColor = Array(70, 130, 180) ' Steel Blue
@@ -524,12 +535,12 @@ Private Sub Form_Load()
     Call Update_Info
     
     Set Inventory = New clsGrapchicalInventory
-    Call Inventory.Initialize(PicInv, MAX_INVENTORY, MAX_INVENTORY, eCaption.eMercader_Inv, 32, 32)
+    Call Inventory.Initialize(picInv, MAX_INVENTORY, MAX_INVENTORY, eCaption.eMercader_Inv, 32, 32)
     
     MirandoStatsUser = True
-    
         
-    g_Captions(eCaption.eMercader_Inv) = wGL_Graphic.Create_Device_From_Display(PicInv.hWnd, PicInv.ScaleWidth, PicInv.ScaleHeight)
+    g_Captions(eCaption.eMercader_Inv) = wGL_Graphic.Create_Device_From_Display(picInv.hWnd, picInv.ScaleWidth, picInv.ScaleHeight)
+
 End Sub
 
 Public Sub Update_Info()
@@ -539,19 +550,20 @@ Public Sub Update_Info()
     
     Call Load_Stats
     
-    
 End Sub
 
 ' # Seteamos las estadísticas básicas en los labels
 Private Sub Load_Stats()
     
     Dim ExpConverted As String
-    Dim TempUP As Single
-    Dim TempUPs As String
-    
+
+    Dim TempUP       As Single
+
+    Dim TempUPs      As String
     
     If InfoUser.Elu > 0 Then
         ExpConverted = Round(CDbl(InfoUser.Exp) * CDbl(100) / CDbl(InfoUser.Elu), 2) & "%"
+
     End If
     
     TempUP = UserCheckPromedy(InfoUser.Elv, InfoUser.Hp, InfoUser.Clase, ModRaza(InfoUser.Raza).Constitucion)
@@ -560,6 +572,7 @@ Private Sub Load_Stats()
         TempUPs = " +" & TempUP
     Else
         TempUPs = TempUP
+
     End If
 
     lblName.Caption = UCase$(InfoUser.UserName)
@@ -571,6 +584,7 @@ Private Sub Load_Stats()
         
     If InfoUser.Elv <> STAT_MAXELV Then
         lblElv.Caption = lblElv.Caption & " " & ExpConverted
+
     End If
         
     lblBlocked.Caption = IIf((InfoUser.Blocked = 1), "SI", "NO")
@@ -581,6 +595,7 @@ Private Sub Load_Stats()
         lblHasta.Caption = "Durante " & SecondsToHMS(InfoUser.BlockedHasta) ' Transformar a HH:MM
     Else
         lblHasta.visible = False
+
     End If
         
     lblGld.Caption = PonerPuntos(InfoUser.Gld)
@@ -595,53 +610,61 @@ Private Sub Load_Stats()
         lblMap = "Bloqueado"
     Else
         lblMap = InfoUser.Map & "-" & InfoUser.X & "-" & InfoUser.Y
-    End If
-End Sub
 
+    End If
+
+End Sub
 
 ' # Seteamos el inventario
 Public Sub Load_Inventory(ByVal IsBank As Boolean)
 
+    Dim A        As Long
 
-    Dim A As Long
     Dim ObjIndex As Integer
     
-    
     If Not IsBank Then
+
         For A = 1 To Inventory.MaxObjs
-            
             
             If A <= InfoUser.Inventory.NroItems Then
                 ObjIndex = InfoUser.Inventory.Object(A).ObjIndex
+
                 If ObjIndex > 0 Then
                     Call Inventory.SetItem(A, ObjIndex, InfoUser.Inventory.Object(A).Amount, InfoUser.Inventory.Object(A).Equipped, ObjData(ObjIndex).GrhIndex, 0, 0, 0, 0, 0, 0, ObjData(ObjIndex).Name, 0, True, 0, 0, 0, 0)
                 Else
                     Call Inventory.SetItem(A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, vbNullString, 0, True, 0, 0, 0, 0)
+
                 End If
+
             Else
                 Call Inventory.SetItem(A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, vbNullString, 0, True, 0, 0, 0, 0)
+
             End If
             
         Next A
+
     Else
         
         For A = 1 To Inventory.MaxObjs
             
-            
             If A <= InfoUser.Bank.NroItems Then
                 ObjIndex = InfoUser.Bank.Object(A).ObjIndex
+
                 If ObjIndex > 0 Then
                     Call Inventory.SetItem(A, ObjIndex, InfoUser.Bank.Object(A).Amount, InfoUser.Bank.Object(A).Equipped, ObjData(ObjIndex).GrhIndex, 0, 0, 0, 0, 0, 0, ObjData(ObjIndex).Name, 0, True, 0, 0, 0, 0)
                 Else
                     Call Inventory.SetItem(A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, vbNullString, 0, True, 0, 0, 0, 0)
+
                 End If
+
             Else
                 Call Inventory.SetItem(A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, vbNullString, 0, True, 0, 0, 0, 0)
+
             End If
             
         Next A
+
     End If
-    
     
     Inventory.DrawInventory
 
@@ -649,6 +672,7 @@ End Sub
 
 ' # Seteamos los hechizos
 Public Sub Load_Spells()
+
     Dim A As Long
     
     ListView.Text = vbNullString
@@ -657,17 +681,20 @@ Public Sub Load_Spells()
     AddtoRichTextBox ListView, "'Hechizos que posee el personaje'", TitleColor(0), TitleColor(1), TitleColor(2), False, False, True
     
     For A = 1 To MAXHECHI
+
         If InfoUser.Spells(A) > 0 Then
             AddtoRichTextBox ListView, "Hechizo: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox ListView, Hechizos(InfoUser.Spells(A)).Nombre, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
             
         End If
+
     Next A
     
 End Sub
 
 ' # Seteamos los Skils
 Public Sub Load_Skills()
+
     Dim A As Long
     
     ListView.Text = vbNullString
@@ -682,8 +709,10 @@ Public Sub Load_Skills()
     Next A
     
 End Sub
+
 ' # Seteamos las Penas
 Public Sub Load_Penas()
+
     Dim A As Long
     
     ListView.Text = vbNullString
@@ -700,25 +729,31 @@ End Sub
 
 ' # Seteamos los skins
 Public Sub Load_Skins()
-    Dim A As Long
+
+    Dim A        As Long
+
     Dim ObjIndex As Integer
     
     For A = 1 To Inventory.MaxObjs
+
         If A <= InfoUser.Skins.Last Then
             ObjIndex = InfoUser.Skins.ObjIndex(A)
             
             Call Inventory.SetItem(A, ObjIndex, 0, 0, ObjData(ObjIndex).GrhIndex, 0, 0, 0, 0, 0, ObjData(ObjIndex).ValueGLD, ObjData(ObjIndex).Name, ObjData(ObjIndex).ValueDSP, True, 0, 0, 0, 0)
         Else
             Call Inventory.SetItem(A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, vbNullString, 0, True, 0, 0, 0, 0)
+
         End If
+
     Next A
         
-        
     Inventory.DrawInventory
+
 End Sub
 
 ' # Seteamos los Logros()
 Public Sub Load_Logros()
+
     Dim A As Long
     
     ListView.Text = vbNullString
@@ -727,28 +762,31 @@ Public Sub Load_Logros()
     AddtoRichTextBox ListView, "'Logros que consiguió el personaje'", TitleColor(0), TitleColor(1), TitleColor(2), False, False, True
     
     'For A = 1 To MAXHECHI
-        'If InfoUser.Spells(A) > 0 Then
-            'AddtoRichTextBox ListView, "Hechizo: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
-            'AddtoRichTextBox ListView, Hechizos(InfoUser.Spells(A)).Nombre, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+    'If InfoUser.Spells(A) > 0 Then
+    'AddtoRichTextBox ListView, "Hechizo: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
+    'AddtoRichTextBox ListView, Hechizos(InfoUser.Spells(A)).Nombre, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
             
-        'End If
+    'End If
     'Next A
     
 End Sub
 
 ' # Seteamos las bonificaciones
 Public Sub Load_Bonus()
-    
      
-    Dim strTemp  As String
-    Dim A As Long
+    Dim strTemp As String
+
+    Dim A       As Long
 
     ListView.Text = vbNullString
     ListView.SelStart = 0
     
     For A = 1 To InfoUser.BonusLast
+
         With InfoUser.BonusUser(A)
+
             Select Case .Tipo
+
                 Case eBonusType.eObj
                     AddtoRichTextBox ListView, "'" & ObjData(.Value).Name & "'", TitleColor(0), TitleColor(1), TitleColor(2), False, False, True
                     
@@ -759,28 +797,24 @@ Public Sub Load_Bonus()
                         
                     ElseIf .DurationDate <> vbNullString Then
                         AddtoRichTextBox ListView, .DurationDate, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
                     End If
+
                 Case Else
+
             End Select
+
         End With
+
     Next A
     
-    
 End Sub
-
-
-
-
-
-
-
-
-
 
 Private Sub LoadInterface()
 
     Dim filePath As String
-    Dim A As Long
+
+    Dim A        As Long
     
     filePath = DirInterface & "menucompacto\"
     
@@ -794,14 +828,15 @@ Private Sub Form_Unload(Cancel As Integer)
     MirandoStatsUser = False
     
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.eMercader_Inv))
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Unload Me
-End Sub
 
+End Sub
 
 Private Function ConsoleTipe(ByRef Tipo As eBonusType) As String
   

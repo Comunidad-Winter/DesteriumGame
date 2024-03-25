@@ -103,8 +103,8 @@ Private clsFormulario As clsFormMovementManager
 
 Private Sub Command1_Click()
     Unload Me
-End Sub
 
+End Sub
 
 Private Sub Form_Load()
     ' Handles Form movement (drag and drop).
@@ -113,8 +113,8 @@ Private Sub Form_Load()
 
 End Sub
 
-
 Private Sub Image1_Click()
     Unload Me
+
 End Sub
 

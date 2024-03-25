@@ -77,17 +77,18 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-
 Private Const PIXEL_HEIGHT As Integer = 220
 
-Public pixelHeight As Long
+Public pixelHeight         As Long
 
-Private Height_Original As Integer
-Private Width_Original As Integer
+Private Height_Original    As Integer
 
-Public FormMovement As clsFormMovementManager
+Private Width_Original     As Integer
+
+Public FormMovement        As clsFormMovementManager
 
 Private Enum eAction
+
     ACTION_NONE = 0
     COMMERCE_NPC = 1                ' La criatura comercia
     BANK_INIT = 2                           ' Inicia el banco
@@ -97,25 +98,29 @@ Private Enum eAction
     RESU_NPC = 6
     
     INFO_NPC = 100 ' Criaturas hostiles del mundo.
+
 End Enum
         
 Private Type tLine
-        Text As String
-        Color As Long
-        Font As Integer
-        Size As Integer
-        Action As eAction
+
+    Text As String
+    Color As Long
+    Font As Integer
+    Size As Integer
+    Action As eAction
+
 End Type
 
+Public LastLine          As Integer
 
-Public LastLine As Integer
+Private Hover_Action()   As Boolean
 
-Private Hover_Action() As Boolean
-Private lines() As tLine
+Private lines()          As tLine
 
 Public NpcIndex_Selected As Integer
 
 Private Sub Hover_Reset()
+
     Dim A As Long
     
     For A = LBound(Hover_Action) To UBound(Hover_Action)
@@ -123,7 +128,12 @@ Private Sub Hover_Reset()
     Next A
     
 End Sub
-Private Sub Add_Line(ByVal Text As String, ByVal Color As Long, Font As Byte, Size As Byte, Optional ByRef Actione As eAction = ACTION_NONE)
+
+Private Sub Add_Line(ByVal Text As String, _
+                     ByVal Color As Long, _
+                     Font As Byte, _
+                     Size As Byte, _
+                     Optional ByRef Actione As eAction = ACTION_NONE)
     
     LastLine = LastLine + 1
     ReDim Preserve lines(0 To LastLine) As tLine
@@ -135,9 +145,11 @@ Private Sub Add_Line(ByVal Text As String, ByVal Color As Long, Font As Byte, Si
         .Font = Font
         .Size = Size
         .Action = Actione
+
     End With
     
     pixelHeight = pixelHeight + PIXEL_HEIGHT
+
 End Sub
 
 Private Sub Prepare_Npcs()
@@ -164,7 +176,6 @@ Private Sub Prepare_Npcs()
         Case eNPCType.Revividor, eNPCType.ResucitadorNewbie
             Call Add_Line("Curar Personaje", ARGB(255, 255, 255, 255), eFonts.f_Verdana, 14, RESU_NPC)
         
-        
         Case Else
 
             If Npc.Comercia = 1 Then
@@ -172,25 +183,25 @@ Private Sub Prepare_Npcs()
 
             End If
             
-            
             If Npc.Craft > 0 Then
                 Call Add_Line("Fabricación", ARGB(255, 255, 255, 255), eFonts.f_Verdana, 14, CRAFT_NPC)
 
             End If
             
-            
             If Npc.MaxHp > 0 Then
                 Call Add_Line("Vida: " & PonerPuntos(Npc.MaxHp), ARGB(255, 255, 255, 255), eFonts.f_Verdana, 14)
+
             End If
             
             If Npc.GiveExp > 0 Then
                 Call Add_Line("Exp: " & PonerPuntos(Npc.GiveExp), ARGB(255, 255, 255, 255), eFonts.f_Verdana, 14)
+
             End If
             
             If Npc.GiveGld > 0 Then
                 Call Add_Line("Oro: " & PonerPuntos(Npc.GiveGld), ARGB(255, 255, 255, 255), eFonts.f_Verdana, 14)
+
             End If
-            
             
             If Npc.MinHit > 0 Then
                 Call Add_Line("Hit: " & Npc.MinHit & "/" & Npc.MaxHit, ARGB(255, 255, 255, 255), eFonts.f_Verdana, 14)
@@ -215,7 +226,6 @@ Private Sub Prepare_Npcs()
 End Sub
 
 Public Sub Initial_Form()
-     
     
     Me.visible = False
 
@@ -227,6 +237,7 @@ Public Sub Initial_Form()
 
     If MirandoOpcionesNpc Then
         Close_Form
+
     End If
     
     Call Prepare_Npcs
@@ -236,15 +247,20 @@ Public Sub Initial_Form()
     FrmMain.SetFocus
     
 End Sub
+
 Public Sub Close_Form()
     MirandoOpcionesNpc = False
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.cCriaturaInfo))
+
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub Form_Load()
@@ -253,6 +269,7 @@ Private Sub Form_Load()
     Call FormMovement.Initialize(Me, 32)
     
     Initial_Form
+
 End Sub
 
 Public Sub Render_List()
@@ -292,16 +309,19 @@ End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Hover_Reset
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     Call Close_Form
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
-     Unload Me
+    Unload Me
+
 End Sub
 
 Private Sub Click_Action(ByRef Action As eAction)
@@ -342,8 +362,10 @@ Private Sub Click_Action(ByRef Action As eAction)
             End If
             
         Case eAction.RESU_NPC
+
             If CharIndex_MouseHover > 0 Then
                 Call ParseUserCommand("/RESUCITAR")
+
             End If
             
         Case eAction.INFO_NPC
@@ -362,15 +384,23 @@ Private Sub imgAction_Click(Index As Integer)
     
 End Sub
 
-Private Sub imgAction_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgAction_MouseMove(Index As Integer, _
+                                Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     Hover_Reset
     
-     If Index + 2 > UBound(lines) Then Exit Sub
+    If Index + 2 > UBound(lines) Then Exit Sub
     Hover_Action(Index + 2) = True
+
 End Sub
 
 Private Sub Timer1_Timer()
+
     If MirandoOpcionesNpc Then
         Render_List
+
     End If
+
 End Sub

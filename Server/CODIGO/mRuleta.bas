@@ -13,11 +13,11 @@ Public Type tRuletaItem
 End Type
 
 Public Type tRuletaConfig
+
     ItemLast As Integer
     Items() As tRuletaItem
     RuletaGld As Long
     RuletaDsp As Long
-    
 
 End Type
 
@@ -25,11 +25,11 @@ Public RuletaConfig As tRuletaConfig
 
 Public Sub Ruleta_LoadItems()
 
-    Dim Manager As clsIniManager
+    Dim Manager  As clsIniManager
 
-    Dim A       As Long
+    Dim A        As Long
 
-    Dim Temp    As String
+    Dim Temp     As String
     
     Dim FilePath As String
     
@@ -71,111 +71,117 @@ Public Sub Ruleta_LoadItems()
 End Sub
 
 Public Sub Ruleta_Tirada(ByVal UserIndex As Integer, ByVal Mode As Byte)
-        '<EhHeader>
-        On Error GoTo Ruleta_Tirada_Err
-        '</EhHeader>
 
-100     With UserList(UserIndex)
+    '<EhHeader>
+    On Error GoTo Ruleta_Tirada_Err
 
-            Exit Sub
+    '</EhHeader>
 
-102         If Mode = 1 Then ' Monedas de Oro
-104             If .Stats.Gld < RuletaConfig.RuletaGld Then
-106                 Call WriteConsoleMsg(UserIndex, "No tienes suficientes Monedas de Oro.", FontTypeNames.FONTTYPE_INFORED)
-                    'TODO: Enter task description here
-                    Exit Sub
+    With UserList(UserIndex)
 
-                End If
-            
-108             .Stats.Gld = .Stats.Gld - RuletaConfig.RuletaGld
-110             Call WriteUpdateGold(UserIndex)
-112         ElseIf Mode = 2 Then            ' Monedas DSP
-
-114             If .Stats.Eldhir < RuletaConfig.RuletaDsp Then
-116                 Call WriteConsoleMsg(UserIndex, "No tienes suficientes DSP.", FontTypeNames.FONTTYPE_INFORED)
-                    Exit Sub
-
-                End If
-            
-118             .Stats.Eldhir = .Stats.Eldhir - RuletaConfig.RuletaDsp
-120             Call WriteUpdateDsp(UserIndex)
-            End If
-        
-122         Call Ruleta_Tirada_Item(UserIndex)
-        End With
-
-        '<EhFooter>
         Exit Sub
 
+        If Mode = 1 Then ' Monedas de Oro
+            If .Stats.Gld < RuletaConfig.RuletaGld Then
+                Call WriteConsoleMsg(UserIndex, "No tienes suficientes Monedas de Oro.", FontTypeNames.FONTTYPE_INFORED)
+                'TODO: Enter task description here
+                Exit Sub
+
+            End If
+            
+            .Stats.Gld = .Stats.Gld - RuletaConfig.RuletaGld
+            Call WriteUpdateGold(UserIndex)
+        ElseIf Mode = 2 Then            ' Monedas DSP
+
+            If .Stats.Eldhir < RuletaConfig.RuletaDsp Then
+                Call WriteConsoleMsg(UserIndex, "No tienes suficientes DSP.", FontTypeNames.FONTTYPE_INFORED)
+                Exit Sub
+
+            End If
+            
+            .Stats.Eldhir = .Stats.Eldhir - RuletaConfig.RuletaDsp
+            Call WriteUpdateDsp(UserIndex)
+
+        End If
+        
+        Call Ruleta_Tirada_Item(UserIndex)
+
+    End With
+
+    '<EhFooter>
+    Exit Sub
+
 Ruleta_Tirada_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mRuleta.Ruleta_Tirada " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mRuleta.Ruleta_Tirada " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub
 
 Public Sub Ruleta_Tirada_Item(ByVal UserIndex As Integer)
-        '<EhHeader>
-        On Error GoTo Ruleta_Tirada_Item_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Ruleta_Tirada_Item_Err
+
+    '</EhHeader>
     
-        Dim RandItem    As Byte
+    Dim RandItem    As Byte
 
-        Dim A           As Long, S As Long
+    Dim A           As Long, S As Long
     
-        Dim Probability As Long, Sound As Long
+    Dim Probability As Long, Sound As Long
     
-        Dim MiObj As Obj
+    Dim MiObj       As Obj
     
-100     RandItem = RandomNumber(1, RuletaConfig.ItemLast)
+    RandItem = RandomNumber(1, RuletaConfig.ItemLast)
     
-102     With RuletaConfig.Items(RandItem)
+    With RuletaConfig.Items(RandItem)
 
-104         For A = 1 To .Prob
+        For A = 1 To .Prob
 
-106             If RandomNumber(1, 100) <= .ProbNum Then
-108                 Probability = Probability + 1
-
-                End If
-
-110         Next A
-                
-112         If Probability = .Prob Then
-114             MiObj.Amount = .Amount
-116             MiObj.ObjIndex = .ObjIndex
-
-118             If Not MeterItemEnInventario(UserIndex, MiObj, True) Then
-120                 Call TirarItemAlPiso(UserList(UserIndex).Pos, MiObj)
-
-                End If
-        
-                Exit Sub
-            
-122             S = RandomNumber(1, 100)
-        
-124             If S <= 25 Then
-126                 Sound = eSound.sChestDrop1
-128             ElseIf S <= 50 Then
-130                 Sound = eSound.sChestDrop2
-                Else
-132                 Sound = eSound.sChestDrop3
-
-                End If
-        
-134             Call SendData(SendTarget.ToOne, UserIndex, PrepareMessagePlayEffect(Sound, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
+            If RandomNumber(1, 100) <= .ProbNum Then
+                Probability = Probability + 1
 
             End If
-    
-        End With
 
-        '<EhFooter>
-        Exit Sub
+        Next A
+                
+        If Probability = .Prob Then
+            MiObj.Amount = .Amount
+            MiObj.ObjIndex = .ObjIndex
+
+            If Not MeterItemEnInventario(UserIndex, MiObj, True) Then
+                Call TirarItemAlPiso(UserList(UserIndex).Pos, MiObj)
+
+            End If
+        
+            Exit Sub
+            
+            S = RandomNumber(1, 100)
+        
+            If S <= 25 Then
+                Sound = eSound.sChestDrop1
+            ElseIf S <= 50 Then
+                Sound = eSound.sChestDrop2
+            Else
+                Sound = eSound.sChestDrop3
+
+            End If
+        
+            Call SendData(SendTarget.ToOne, UserIndex, PrepareMessagePlayEffect(Sound, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y))
+
+        End If
+    
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 Ruleta_Tirada_Item_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mRuleta.Ruleta_Tirada_Item " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mRuleta.Ruleta_Tirada_Item " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub

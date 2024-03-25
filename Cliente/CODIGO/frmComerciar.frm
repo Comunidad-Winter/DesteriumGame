@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmComerciar 
    BackColor       =   &H80000013&
    BorderStyle     =   0  'None
@@ -289,6 +289,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Type tChar
+
     Body As Integer
     Head As Integer
     Helm As Integer
@@ -296,14 +297,16 @@ Private Type tChar
     Shield As Integer
         
     Heading As E_Heading
+
 End Type
 
 Private Char As tChar
 
-
 Private Enum eSelectedPrice
+
     eGLD = 0
     eDSP = 1
+
 End Enum
 
 Private SelectedPrice As eSelectedPrice
@@ -320,53 +323,75 @@ Private ClickNpcInv   As Boolean
 
 Private lIndex        As Byte
 
-
 ' Consola Transparente
-Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+Private Declare Function SetWindowLong _
+                Lib "user32" _
+                Alias "SetWindowLongA" (ByVal hWnd As Long, _
+                                        ByVal nIndex As Long, _
+                                        ByVal dwNewLong As Long) As Long
+
 Private Const GWL_EXSTYLE = -20
+
 Private Const WS_EX_LAYERED = &H80000
+
 Private Const WS_EX_TRANSPARENT As Long = &H20&
 
-
 ' Botones Gráficos
-Private cBotonComprar     As clsGraphicalButton
-Private cBotonVender        As clsGraphicalButton
-Private cBotonMenos        As clsGraphicalButton
-Private cBotonMas      As clsGraphicalButton
-Public LastButtonPressed   As clsGraphicalButton
+Private cBotonComprar           As clsGraphicalButton
 
-Public MouseX As Long
-Public MouseY As Long
+Private cBotonVender            As clsGraphicalButton
+
+Private cBotonMenos             As clsGraphicalButton
+
+Private cBotonMas               As clsGraphicalButton
+
+Public LastButtonPressed        As clsGraphicalButton
+
+Public MouseX                   As Long
+
+Public MouseY                   As Long
 
 Const WM_NCMOUSEMOVE = &HA0
+
 Const HTCAPTION = 2
 
 Private Declare Function ReleaseCapture Lib "user32" () As Long
-Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+
+Private Declare Function SendMessage _
+                Lib "user32" _
+                Alias "SendMessageA" (ByVal hWnd As Long, _
+                                      ByVal wMsg As Long, _
+                                      ByVal wParam As Long, _
+                                      lParam As Any) As Long
 
 Public Enum eSolapa
+
     Npc = 1
     User = 2
+
 End Enum
 
 Public SolapaView As eSolapa
 
 Private Sub cantidad_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub Form_Click()
     InvComUser.DeselectItem
     InvComNpc.DeselectItem
-End Sub
 
+End Sub
 
 Private Sub Form_Load()
     cantidad.Text = "1"
     
-    Dim I As Long
+    Dim i As Long
     
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
@@ -380,12 +405,14 @@ Private Sub Form_Load()
     g_Captions(eCaption.Comercio_Npc) = wGL_Graphic.Create_Device_From_Display(frmComerciar.picInvNpc.hWnd, frmComerciar.picInvNpc.ScaleWidth, frmComerciar.picInvNpc.ScaleHeight)
     g_Captions(eCaption.Comercio_User) = wGL_Graphic.Create_Device_From_Display(frmComerciar.picInvUser.hWnd, frmComerciar.picInvUser.ScaleWidth, frmComerciar.picInvUser.ScaleHeight)
 
-    Me.Picture = LoadPicture(App.path & "\resource\interface\commerce\commerce.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\commerce\commerce.jpg")
     
 End Sub
 
 Private Sub LoadButtons()
+
     Dim GrhPath As String
+
     GrhPath = DirInterface
 
     Set cBotonComprar = New clsGraphicalButton
@@ -395,21 +422,21 @@ Private Sub LoadButtons()
    
     Set LastButtonPressed = New clsGraphicalButton
     'Call cBotonComprar.Initialize(imgComprar, vbNullString, GrhPath & "commerce\BotonComprarActivo.jpg", vbNullString, Me)
-'    Call cBotonVender.Initialize(imgVender, vbNullString, GrhPath & "commerce\BotonVenderActivo.jpg", vbNullString, Me)
-  '  Call cBotonMenos.Initialize(imgMenos, vbNullString, GrhPath & "commerce\BotonMenosActivo.jpg", vbNullString, Me)
-   ' Call cBotonMas.Initialize(imgMas, vbNullString, GrhPath & "commerce\BotonMasActivo.jpg", vbNullString, Me)
+    '    Call cBotonVender.Initialize(imgVender, vbNullString, GrhPath & "commerce\BotonVenderActivo.jpg", vbNullString, Me)
+    '  Call cBotonMenos.Initialize(imgMenos, vbNullString, GrhPath & "commerce\BotonMenosActivo.jpg", vbNullString, Me)
+    ' Call cBotonMas.Initialize(imgMas, vbNullString, GrhPath & "commerce\BotonMasActivo.jpg", vbNullString, Me)
 
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
      
-     MouseX = X
-     MouseY = Y
-     
+    MouseX = X
+    MouseY = Y
     
     If MirandoObjetos Then
         FrmObject_Info.Close_Form
+
     End If
      
 End Sub
@@ -423,10 +450,12 @@ Private Sub Form_Unload(Cancel As Integer)
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.Comercio_User))
     
     If MirandoObjetos Then
-       Call FrmObject_Info.Close_Form
+        Call FrmObject_Info.Close_Form
+
     End If
    
     FrmMain.SetFocus
+
 End Sub
 
 Public Function UpdatePrice() As Long
@@ -449,9 +478,6 @@ Public Function UpdatePrice() As Long
         UpdatePrice = CalculateBuyPrice(Inventario.Valor(ItemSlot), Val(cantidad.Text))
 
     End If
-    
-    
-    
 
 End Function
 
@@ -459,13 +485,16 @@ Private Sub cantidad_Change()
 
     If Val(cantidad.Text) < 1 Then
         cantidad.Text = 1
+
     End If
           
     If Val(cantidad.Text) > MAX_INVENTORY_OBJS Then
         cantidad.Text = MAX_INVENTORY_OBJS
+
     End If
 
     lblPrice.Caption = PonerPuntos(UpdatePrice)
+
 End Sub
 
 Private Sub cantidad_KeyPress(KeyAscii As Integer)
@@ -473,12 +502,12 @@ Private Sub cantidad_KeyPress(KeyAscii As Integer)
     If (KeyAscii <> 8) Then
         If (KeyAscii <> 6) And (KeyAscii < 48 Or KeyAscii > 57) Then
             KeyAscii = 0
+
         End If
+
     End If
 
 End Sub
-
-
 
 ''
 ' Calculates the buying price of an item (The price that a merchant will buy you the item)
@@ -503,6 +532,7 @@ Private Function CalculateBuyPrice(ByRef objValue As Single, _
 
 error:
     MsgBox err.Description, vbExclamation, "Error: " & err.Number
+
 End Function
 
 Private Sub imgComprar_Click()
@@ -525,17 +555,22 @@ Private Sub imgComprar_Click()
     Dim A As Long
     
     If ObjData(ObjIndex).Upgrade.RequiredCant > 0 Then
+
         For A = 1 To ObjData(ObjIndex).Upgrade.RequiredCant
+
             If TieneObjetos(ObjData(ObjIndex).Upgrade.Required(A).ObjIndex) < ObjData(ObjIndex).Upgrade.Required(A).Amount Then
                 Call ShowConsoleMsg("¡No tienes " & ObjData(ObjData(ObjIndex).Upgrade.Required(A).ObjIndex).Name & " (x" & ObjData(ObjIndex).Upgrade.Required(A).Amount & ")")
                 Exit Sub
+
             End If
+
         Next A
+
     End If
     
     If UserGLD >= CalculateSellPrice(NPCInventory(InvComNpc.SelectedItem).Valor, Val(cantidad.Text)) Then
         'If MsgBox("¿Estas seguro que deseas comprar este objeto?", vbYesNo) = vbYes Then
-            Call WriteCommerceBuy(InvComNpc.SelectedItem, Val(cantidad.Text), SelectedPrice)
+        Call WriteCommerceBuy(InvComNpc.SelectedItem, Val(cantidad.Text), SelectedPrice)
         'End If
     Else
         Call AddtoRichTextBox(FrmMain.RecTxt, "Se necesita más oro.", 2, 51, 223, 1, 1)
@@ -547,53 +582,65 @@ Private Sub imgComprar_Click()
     'InvComUser.DrawInventory
     'InvComNpc.DrawInventory
     Timer.Enabled = True
+
 End Sub
 
 Private Sub imgCross_Click()
 
-
 End Sub
 
 Private Function CheckAdding(ByVal Value As Long) As Long
+
     If Value <= 100 Then
-         CheckAdding = Value + 1
+        CheckAdding = Value + 1
     ElseIf Value <= 1000 Then
         CheckAdding = Value + 100
     ElseIf Value <= 10000 Then
         CheckAdding = Value + 1000
     Else
         CheckAdding = MAX_INVENTORY_OBJS
+
     End If
+
 End Function
+
 Private Sub imgMas_Click()
           
     cantidad.Text = CheckAdding(cantidad.Text)
     
     If Val(cantidad.Text) > MAX_INVENTORY_OBJS Then
         cantidad.Text = MAX_INVENTORY_OBJS
+
     End If
     
 End Sub
+
 Private Function CheckAdding_Menos(ByVal Value As Long) As Long
+
     If Value <= 100 Then
-         CheckAdding_Menos = Value - 1
+        CheckAdding_Menos = Value - 1
     ElseIf Value <= 1000 Then
         CheckAdding_Menos = Value - 100
     ElseIf Value <= 10000 Then
         CheckAdding_Menos = Value - 1000
     Else
         CheckAdding_Menos = 1
+
     End If
+
 End Function
+
 Private Sub imgMenos_Click()
           
     cantidad.Text = CheckAdding_Menos(cantidad.Text)
     
     If Val(cantidad.Text) < 1 Then
         cantidad.Text = 1
+
     End If
     
 End Sub
+
 Private Sub imgQuest_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
@@ -612,48 +659,64 @@ End Sub
 
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub imgValueDSP_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ValuePrize_Selected(eDSP)
+
 End Sub
 
 Private Sub imgValueGLD_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ValuePrize_Selected(eGLD)
+
 End Sub
+
 Private Sub lblPrice_Click()
     imgValueGLD_Click
+
 End Sub
 
 Private Sub lblPriceDSP_Click()
     imgValueDSP_Click
+
 End Sub
 
 Private Sub Detect_Prize()
+
     If InvComNpc.SelectedItem > 0 Then
         If InvComNpc.Valor(InvComNpc.SelectedItem) > 0 Then
             ValuePrize_Selected eGLD
             Exit Sub
+
         End If
         
         If InvComNpc.ValorAzul(InvComNpc.SelectedItem) > 0 Then
             ValuePrize_Selected eDSP
             Exit Sub
+
         End If
+
     ElseIf InvComUser.SelectedItem > 0 Then
+
         If InvComUser.Valor(InvComUser.SelectedItem) > 0 Then
             ValuePrize_Selected eGLD
             Exit Sub
+
         End If
         
         If InvComUser.ValorAzul(InvComUser.SelectedItem) > 0 Then
             ValuePrize_Selected eDSP
             Exit Sub
+
         End If
+
     End If
+
 End Sub
+
 Private Sub ValuePrize_Selected(ByRef Tipo As eSelectedPrice)
     
     Select Case Tipo
@@ -706,8 +769,6 @@ Private Sub imgVender_Click()
 
 End Sub
 
-
-
 Private Sub picInvNpc_Click()
 
     Dim ItemSlot As Byte
@@ -724,9 +785,9 @@ Private Sub picInvNpc_Click()
     lblPriceDSP = Format$(CalculateSellPrice(NPCInventory(ItemSlot).ValorAzul, Val(cantidad.Text)), "##,##")
     
     Call Detect_Prize
-   Call Char_PreSelected(NPCInventory(ItemSlot).ObjIndex)
+    Call Char_PreSelected(NPCInventory(ItemSlot).ObjIndex)
     
-   ' picInvView.visible = True
+    ' picInvView.visible = True
     
 End Sub
 
@@ -744,6 +805,7 @@ Private Sub Char_PreSelected(ByVal ObjIndex As Integer)
     
             Case eOBJType.otarmadura
                 Char.Body = .Anim
+
                 If (UserRaza = Gnomo Or UserRaza = Enano) And .AnimBajos > 0 Then Char.Body = .AnimBajos
                     
             Case eOBJType.otWeapon
@@ -754,14 +816,18 @@ Private Sub Char_PreSelected(ByVal ObjIndex As Integer)
                 
             Case eOBJType.otcasco
                 Char.Helm = .Anim
+
         End Select
     
     End With
  
 End Sub
+
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
     If KeyCode = vbKeyLeft Then
@@ -772,21 +838,26 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         Char.Heading = E_Heading.EAST
     ElseIf KeyCode = vbKeyUp Then
         Char.Heading = E_Heading.NORTH
+
     End If
     
 End Sub
 
 Private Sub picInvNpc_DblClick()
+
     Dim ItemSlot As Byte
+
     ItemSlot = InvComNpc.SelectedItem
 
     If ItemSlot = 0 Then Exit Sub
     SelectedObjIndex = NPCInventory(ItemSlot).ObjIndex
     SelectedObjIndex_Update
+
 End Sub
 
 Private Sub picInvNpc_KeyDown(KeyCode As Integer, Shift As Integer)
     Form_KeyDown KeyCode, Shift
+
 End Sub
 
 Private Sub picInvUser_Click()
@@ -803,51 +874,58 @@ Private Sub picInvUser_Click()
     lblPrice = Format$(CalculateBuyPrice(Inventario.Valor(ItemSlot), Val(cantidad.Text)), "##,##")
     lblPriceDSP = Format$(CalculateBuyPrice(Inventario.ValorAzul(ItemSlot), Val(cantidad.Text)), "##,##")
     
-    
     Detect_Prize
+
 End Sub
 
 Private Sub picInvUser_DblClick()
+
     Dim ItemSlot As Byte
+
     ItemSlot = InvComNpc.SelectedItem
 
     If ItemSlot = 0 Then Exit Sub
     SelectedObjIndex = Inventario.ObjIndex(ItemSlot)
     SelectedObjIndex_Update
+
 End Sub
 
 Private Sub picInvUser_KeyDown(KeyCode As Integer, Shift As Integer)
-Form_KeyDown KeyCode, Shift
+    Form_KeyDown KeyCode, Shift
+
 End Sub
 
 Private Sub picInvView_Click()
-   ' Me.picInvView.visible = False
+
+    ' Me.picInvView.visible = False
 End Sub
 
 Private Sub picInvView_KeyDown(KeyCode As Integer, Shift As Integer)
     Form_KeyDown KeyCode, Shift
+
 End Sub
 
 Private Sub Timer_Timer()
     Timer.Enabled = False
+
 End Sub
 
 ' Drag And Drop
 
 Private Function BuscarI(gh As Integer) As Integer
 
-    Dim I As Integer
+    Dim i As Integer
        
-    For I = 1 To frmComerciar.ImageList1.ListImages.Count
+    For i = 1 To frmComerciar.ImageList1.ListImages.Count
 
-        If frmComerciar.ImageList1.ListImages(I).Key = "g" & CStr(gh) Then
-            BuscarI = I
+        If frmComerciar.ImageList1.ListImages(i).Key = "g" & CStr(gh) Then
+            BuscarI = i
 
             Exit For
 
         End If
 
-    Next I
+    Next i
        
 End Function
 
@@ -860,7 +938,7 @@ Private Sub PicInvUser_MouseMove(Button As Integer, _
     
     Dim Position  As Integer
 
-    Dim I         As Long
+    Dim i         As Long
 
     Dim file_path As String
 
@@ -890,12 +968,13 @@ Private Sub PicInvUser_MouseMove(Button As Integer, _
                 Position = BuscarI(3057)
                   
                 If Position = 0 Then
-                    I = GrhData(InvComUser.GrhIndex(InvComUser.SelectedItem)).FileNum
+                    i = GrhData(InvComUser.GrhIndex(InvComUser.SelectedItem)).FileNum
                     Call Get_Image(DirGraficos & GRH_RESOURCE_FILE_DEFAULT, CStr(3057), data, False)
                     Set bmpData = ArrayToPicture(data(), 0, UBound(data) + 1)
                     ImageList1.ListImages.Add , "g3057", Picture:=bmpData
                     Position = ImageList1.ListImages.Count
                     Set bmpData = Nothing
+
                 End If
                   
                 '  InvComUsu.uMoveItem = True
@@ -906,9 +985,10 @@ Private Sub PicInvUser_MouseMove(Button As Integer, _
                 Exit Sub
 
             End If
+
         End If
+
     End If
-    
     
 End Sub
 
@@ -921,7 +1001,7 @@ Private Sub PicInvNpc_MouseMove(Button As Integer, _
     
     Dim Position  As Integer
 
-    Dim I         As Long
+    Dim i         As Long
 
     Dim file_path As String
 
@@ -934,11 +1014,10 @@ Private Sub PicInvNpc_MouseMove(Button As Integer, _
     Dim bmpData   As StdPicture
 
     Dim Last_I    As Long
-    
    
-     MouseX = X
-     MouseY = Y
-     SolapaView = Npc
+    MouseX = X
+    MouseY = Y
+    SolapaView = Npc
      
     If (Button = vbRightButton) Then
         If InvComNpc.SelectedItem = 0 Then Exit Sub
@@ -951,12 +1030,13 @@ Private Sub PicInvNpc_MouseMove(Button As Integer, _
                 Position = BuscarI(3057)
                   
                 If Position = 0 Then
-                    I = GrhData(InvComNpc.GrhIndex(InvComNpc.SelectedItem)).FileNum
+                    i = GrhData(InvComNpc.GrhIndex(InvComNpc.SelectedItem)).FileNum
                     Call Get_Image(DirGraficos & GRH_RESOURCE_FILE_DEFAULT, CStr(3057), data, False)
                     Set bmpData = ArrayToPicture(data(), 0, UBound(data) + 1) ' GSZAO ' GSZAO
                     ImageList1.ListImages.Add , "g3057", Picture:=bmpData
                     Position = ImageList1.ListImages.Count
                     Set bmpData = Nothing
+
                 End If
                   
                 '  InvComNpc.uMoveItem = True
@@ -967,8 +1047,8 @@ Private Sub PicInvNpc_MouseMove(Button As Integer, _
                 Exit Sub
 
             End If
+
         End If
-        
         
     Else
 
@@ -984,13 +1064,16 @@ Private Sub picInvNpc_MouseUp(Button As Integer, _
     If (Button = vbRightButton) Then
         If Not (X > 0 And X < picInvNpc.ScaleWidth And Y > 0 And Y < picInvNpc.ScaleHeight) Then
             Call imgComprar_Click
+
         End If
+
     End If
     
     picInvNpc.MousePointer = vbDefault
     
     InvComNpc.sMoveItem = False
     InvComNpc.uMoveItem = False
+
 End Sub
 
 Private Sub picInvUser_MouseUp(Button As Integer, _
@@ -1001,7 +1084,9 @@ Private Sub picInvUser_MouseUp(Button As Integer, _
     If (Button = vbRightButton) Then
         If Not (X > 0 And X < picInvUser.ScaleWidth And Y > 0 And Y < picInvUser.ScaleHeight) Then
             Call imgVender_Click
+
         End If
+
     End If
     
     picInvUser.MousePointer = vbDefault
@@ -1011,8 +1096,8 @@ Private Sub picInvUser_MouseUp(Button As Integer, _
        
 End Sub
 
-
 Private Sub tUpdate_Timer()
+
     If Not Me.visible Then Exit Sub
     InvComNpc.DrawInventory
     InvComUser.DrawInventory

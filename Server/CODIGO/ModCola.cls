@@ -70,256 +70,276 @@ Public Property Let MaxLenght(ByVal max As Integer)
     'Sets the max queue lenght.
     '***************************************************
     MAXELEM = max
+
 End Property
 
 Public Sub Reset()
-        '<EhHeader>
-        On Error GoTo Reset_Err
-        '</EhHeader>
 
-        Dim i As Integer
+    '<EhHeader>
+    On Error GoTo Reset_Err
 
-100     For i = 1 To Me.Longitud
-102         Cola.Remove FRENTE
-104     Next i
+    '</EhHeader>
 
-        '<EhFooter>
-        Exit Sub
+    Dim i As Integer
+
+    For i = 1 To Me.Longitud
+        Cola.Remove FRENTE
+    Next i
+
+    '<EhFooter>
+    Exit Sub
 
 Reset_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.Reset", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.Reset", "cCola component failure"
+
+    '</EhFooter>
 End Sub
 
 Public Property Get Longitud() As Integer
     Longitud = Cola.Count
+
 End Property
 
 Private Function IndexValido(ByVal i As Integer) As Boolean
     IndexValido = i >= 1 And i <= Me.Longitud
+
 End Function
 
 Private Sub Class_Initialize()
     Set Cola = New Collection
+
 End Sub
 
 Public Function VerElemento(ByVal Index As Integer, _
                             Optional ByVal ConvertUpper As Boolean = True) As String
-        '<EhHeader>
-        On Error GoTo VerElemento_Err
-        '</EhHeader>
 
-100     If IndexValido(Index) Then
+    '<EhHeader>
+    On Error GoTo VerElemento_Err
 
-            'Pablo
-102         If ConvertUpper Then
-104             VerElemento = UCase$(Cola.Item(Index))
-            Else
-106             VerElemento = Cola.Item(Index)
-            End If
-        
-            '/Pablo
-            'VerElemento = Cola(Index)
+    '</EhHeader>
+
+    If IndexValido(Index) Then
+
+        'Pablo
+        If ConvertUpper Then
+            VerElemento = UCase$(Cola.Item(Index))
         Else
-108         VerElemento = 0
-        End If
+            VerElemento = Cola.Item(Index)
 
-        '<EhFooter>
-        Exit Function
+        End If
+        
+        '/Pablo
+        'VerElemento = Cola(Index)
+    Else
+        VerElemento = 0
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 VerElemento_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.VerElemento", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.VerElemento", "cCola component failure"
+
+    '</EhFooter>
 End Function
 
 Public Sub Push(ByVal Detalle As String, Optional ByVal ConvertUpper As Boolean = True)
-        '<EhHeader>
-        On Error GoTo Push_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: 14/11/2010
-        '14/11/2010: ZaMa - Ahora se valida si supera un maximo previamente establecido.
-        '***************************************************
+    '<EhHeader>
+    On Error GoTo Push_Err
 
-        'Mete elemento en la cola
+    '</EhHeader>
+
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: 14/11/2010
+    '14/11/2010: ZaMa - Ahora se valida si supera un maximo previamente establecido.
+    '***************************************************
+
+    'Mete elemento en la cola
     
-        Dim aux As String
+    Dim aux As String
 
-100     aux = Time$ & " "
+    aux = Time$ & " "
     
-102     If ConvertUpper Then
-104         aux = aux & UCase$(Detalle)
-        Else
-106         aux = aux & Detalle
+    If ConvertUpper Then
+        aux = aux & UCase$(Detalle)
+    Else
+        aux = aux & Detalle
+
+    End If
+    
+    ' Validate that not exceed max lenght
+    If MAXELEM <> 0 Then
+        If Cola.Count = MAXELEM Then
+            Call Cola.Remove(FRENTE) ' Quito el primer elemento
+
         End If
+
+    End If
     
-        ' Validate that not exceed max lenght
-108     If MAXELEM <> 0 Then
-110         If Cola.Count = MAXELEM Then
-112             Call Cola.Remove(FRENTE) ' Quito el primer elemento
-            End If
-        End If
-    
-114     Call Cola.Add(aux)
+    Call Cola.Add(aux)
         
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Push_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.Push", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.Push", "cCola component failure"
+
+    '</EhFooter>
 End Sub
 
 Public Function Pop() As String
-        '<EhHeader>
-        On Error GoTo Pop_Err
-        '</EhHeader>
 
-        'Quita elemento de la cola
-100     If Cola.Count > 0 Then
-102         Pop = Cola(FRENTE)
-104         Call Cola.Remove(FRENTE)
-        Else
-106         Pop = 0
-        End If
+    '<EhHeader>
+    On Error GoTo Pop_Err
 
-        '<EhFooter>
-        Exit Function
+    '</EhHeader>
+
+    'Quita elemento de la cola
+    If Cola.Count > 0 Then
+        Pop = Cola(FRENTE)
+        Call Cola.Remove(FRENTE)
+    Else
+        Pop = 0
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Pop_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.Pop", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.Pop", "cCola component failure"
+
+    '</EhFooter>
 End Function
 
 Public Function PopByVal() As String
-        '<EhHeader>
-        On Error GoTo PopByVal_Err
-        '</EhHeader>
 
-        'Call LogTarea("PopByVal SOS")
+    '<EhHeader>
+    On Error GoTo PopByVal_Err
 
-        'Quita elemento de la cola
-100     If Cola.Count > 0 Then
-102         PopByVal = Cola.Item(1)
-        Else
-104         PopByVal = 0
-        End If
+    '</EhHeader>
 
-        '<EhFooter>
-        Exit Function
+    'Call LogTarea("PopByVal SOS")
+
+    'Quita elemento de la cola
+    If Cola.Count > 0 Then
+        PopByVal = Cola.Item(1)
+    Else
+        PopByVal = 0
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 PopByVal_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.PopByVal", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.PopByVal", "cCola component failure"
+
+    '</EhFooter>
 End Function
 
 Public Function Existe(ByVal Nombre As String) As Boolean
-        '<EhHeader>
-        On Error GoTo Existe_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Existe_Err
+
+    '</EhHeader>
   
-        Dim V                  As String
+    Dim V                  As String
 
-        Dim i                  As Integer
+    Dim i                  As Integer
 
-        Dim NombreEnMayusculas As String
+    Dim NombreEnMayusculas As String
 
-100     NombreEnMayusculas = UCase$(Nombre)
+    NombreEnMayusculas = UCase$(Nombre)
  
-102     For i = 1 To Me.Longitud
-            'Pablo
-104         V = mid$(Me.VerElemento(i), 10, Len(Me.VerElemento(i)))
+    For i = 1 To Me.Longitud
+        'Pablo
+        V = mid$(Me.VerElemento(i), 10, Len(Me.VerElemento(i)))
 
-            '/Pablo
-            'V = Me.VerElemento(i)
-106         If V = NombreEnMayusculas Then
-108             Existe = True
+        '/Pablo
+        'V = Me.VerElemento(i)
+        If V = NombreEnMayusculas Then
+            Existe = True
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
 
-        Next
+    Next
 
-110     Existe = False
+    Existe = False
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Existe_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.Existe", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.Existe", "cCola component failure"
+
+    '</EhFooter>
 End Function
 
 Public Sub Quitar(ByVal Nombre As String)
-        '<EhHeader>
-        On Error GoTo Quitar_Err
-        '</EhHeader>
 
-        Dim V                  As String
+    '<EhHeader>
+    On Error GoTo Quitar_Err
 
-        Dim i                  As Integer
+    '</EhHeader>
 
-        Dim NombreEnMayusculas As String
+    Dim V                  As String
+
+    Dim i                  As Integer
+
+    Dim NombreEnMayusculas As String
  
-100     NombreEnMayusculas = UCase$(Nombre)
+    NombreEnMayusculas = UCase$(Nombre)
  
-102     For i = 1 To Me.Longitud
-            'Pablo
-104         V = mid$(Me.VerElemento(i), 10, Len(Me.VerElemento(i)))
+    For i = 1 To Me.Longitud
+        'Pablo
+        V = mid$(Me.VerElemento(i), 10, Len(Me.VerElemento(i)))
 
-            '/Pablo
-            'V = Me.VerElemento(i)
-106         If V = NombreEnMayusculas Then
-108             Call Cola.Remove(i)
+        '/Pablo
+        'V = Me.VerElemento(i)
+        If V = NombreEnMayusculas Then
+            Call Cola.Remove(i)
 
-                Exit Sub
+            Exit Sub
 
-            End If
+        End If
 
-110     Next i
+    Next i
  
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Quitar_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.Quitar", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.Quitar", "cCola component failure"
+
+    '</EhFooter>
 End Sub
 
 Public Sub QuitarIndex(ByVal Index As Integer)
-        '<EhHeader>
-        On Error GoTo QuitarIndex_Err
-        '</EhHeader>
 
-100     If IndexValido(Index) Then Call Cola.Remove(Index)
-        '<EhFooter>
-        Exit Sub
+    '<EhHeader>
+    On Error GoTo QuitarIndex_Err
+
+    '</EhHeader>
+
+    If IndexValido(Index) Then Call Cola.Remove(Index)
+    '<EhFooter>
+    Exit Sub
 
 QuitarIndex_Err:
-        Err.Raise vbObjectError + 100, _
-                  "ServidorArgentum.cCola.QuitarIndex", _
-                  "cCola component failure"
-        '</EhFooter>
+    Err.Raise vbObjectError + 100, "ServidorArgentum.cCola.QuitarIndex", "cCola component failure"
+
+    '</EhFooter>
 End Sub
 
 Private Sub Class_Terminate()
     'Destruimos el objeto Cola
     Set Cola = Nothing
+
 End Sub

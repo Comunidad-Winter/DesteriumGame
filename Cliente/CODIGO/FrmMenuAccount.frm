@@ -74,11 +74,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Lista As clsGraphicalList
-Private clsFormulario          As clsFormMovementManager
+Private Lista         As clsGraphicalList
 
+Private clsFormulario As clsFormMovementManager
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         #If ModoBig = 1 Then
             dockForm FrmMenu.hWnd, FrmMain.PicMenu, True
@@ -87,12 +88,14 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
             FrmMain.SetFocus
             Unload Me
         #End If
+
     End If
+
 End Sub
 
 Private Sub Form_Load()
 
-    Dim A As Long
+    Dim A        As Long
     
     Dim filePath As String
     
@@ -119,54 +122,58 @@ Private Sub Form_Load()
 
         With ListPasswd(A)
             Lista.AddItem (.Account)
+
         End With
             
     Next A
-    
-    
 
 End Sub
 
 Private Sub imgConnect_Click()
-        '<EhHeader>
-        On Error GoTo imgConnect_Click_Err
-        '</EhHeader>
-            
-          If Lista.ListIndex < 0 Then Exit Sub
-          If Lista.List(Lista.ListIndex) = vbNullString Then Exit Sub
-100     If MsgBox("¿Estás seguro que deseas cambiar de cuenta?", vbYesNo) = vbYes Then
-102         LogearCuenta = True
-        
-            LastDataAccount = Lista.List(Lista.ListIndex)
-            LastDataPasswd = mDataPasswd.SearchPasswd(LastDataAccount)
-            'Call MsgBox("Logear cuenta: " & LastDataAccount & " PW: " & LastDataPasswd)
-104         'TempAccount.Email = Lista.List(Lista.ListIndex)
-106         'TempAccount.Passwd = mDataPasswd.SearchPasswd(TempAccount.Email)
-108         Call WriteQuit(True)
 
-        End If
+    '<EhHeader>
+    On Error GoTo imgConnect_Click_Err
+
+    '</EhHeader>
+            
+    If Lista.ListIndex < 0 Then Exit Sub
+    If Lista.List(Lista.ListIndex) = vbNullString Then Exit Sub
+    If MsgBox("¿Estás seguro que deseas cambiar de cuenta?", vbYesNo) = vbYes Then
+        LogearCuenta = True
+        
+        LastDataAccount = Lista.List(Lista.ListIndex)
+        LastDataPasswd = mDataPasswd.SearchPasswd(LastDataAccount)
+        'Call MsgBox("Logear cuenta: " & LastDataAccount & " PW: " & LastDataPasswd)
+        'TempAccount.Email = Lista.List(Lista.ListIndex)
+        'TempAccount.Passwd = mDataPasswd.SearchPasswd(TempAccount.Email)
+        Call WriteQuit(True)
+
+    End If
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 imgConnect_Click_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.FrmMenuAccount.imgConnect_Click " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ARGENTUM.FrmMenuAccount.imgConnect_Click " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub
 
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub picAccount_Click()
     imgConnect_Click
+
 End Sub
 
 Private Sub picAccount_KeyDown(KeyCode As Integer, Shift As Integer)
-   If KeyCode = vbKeyEscape Then
+
+    If KeyCode = vbKeyEscape Then
         #If ModoBig = 1 Then
             dockForm FrmMenu.hWnd, FrmMain.PicMenu, True
             Unload Me
@@ -175,44 +182,65 @@ Private Sub picAccount_KeyDown(KeyCode As Integer, Shift As Integer)
             Unload Me
   
         #End If
+
     End If
+
 End Sub
 
 ' Lista Gráfica de Hechizos
-Private Sub picAccount_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-If Y < 0 Then Y = 0
-If Y > Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1 Then Y = Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1
-If X < picAccount.ScaleWidth - 10 Then
-    Lista.ListIndex = Int(Y / Lista.Pixel_Alto) + Lista.Scroll
+Private Sub picAccount_MouseDown(Button As Integer, _
+                                 Shift As Integer, _
+                                 X As Single, _
+                                 Y As Single)
+
+    If Y < 0 Then Y = 0
+    If Y > Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1 Then Y = Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1
+    If X < picAccount.ScaleWidth - 10 Then
+        Lista.ListIndex = Int(Y / Lista.Pixel_Alto) + Lista.Scroll
+        Lista.DownBarrita = 0
+
+    Else
+        Lista.DownBarrita = Y - Lista.Scroll * (picAccount.ScaleHeight - Lista.BarraHeight) / (Lista.ListCount - Lista.VisibleCount)
+
+    End If
+
+End Sub
+
+Private Sub picAccount_MouseMove(Button As Integer, _
+                                 Shift As Integer, _
+                                 X As Single, _
+                                 Y As Single)
+
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
+
+        If yy < 0 Then yy = 0
+        If yy > Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1 Then yy = Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1
+        If Lista.DownBarrita > 0 Then
+            Lista.Scroll = (Y - Lista.DownBarrita) * (Lista.ListCount - Lista.VisibleCount) / (picAccount.ScaleHeight - Lista.BarraHeight)
+        Else
+            Lista.ListIndex = Int(yy / Lista.Pixel_Alto) + Lista.Scroll
+
+            '  If ScrollArrastrar = 0 Then
+            'If (Y < yy) Then Lista.Scroll = Lista.Scroll - 1
+            '  If (Y > yy) Then Lista.Scroll = Lista.Scroll + 1
+            'End If
+        End If
+
+    ElseIf Button = 0 Then
+        Lista.ShowBarrita = X > picAccount.ScaleWidth - Lista.BarraWidth * 2
+
+    End If
+
+End Sub
+
+Private Sub picAccount_MouseUp(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     Lista.DownBarrita = 0
 
-Else
-    Lista.DownBarrita = Y - Lista.Scroll * (picAccount.ScaleHeight - Lista.BarraHeight) / (Lista.ListCount - Lista.VisibleCount)
-End If
-End Sub
-
-Private Sub picAccount_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
-    If yy < 0 Then yy = 0
-    If yy > Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1 Then yy = Int(picAccount.ScaleHeight / Lista.Pixel_Alto) * Lista.Pixel_Alto - 1
-    If Lista.DownBarrita > 0 Then
-        Lista.Scroll = (Y - Lista.DownBarrita) * (Lista.ListCount - Lista.VisibleCount) / (picAccount.ScaleHeight - Lista.BarraHeight)
-    Else
-        Lista.ListIndex = Int(yy / Lista.Pixel_Alto) + Lista.Scroll
-
-      '  If ScrollArrastrar = 0 Then
-            'If (Y < yy) Then Lista.Scroll = Lista.Scroll - 1
-          '  If (Y > yy) Then Lista.Scroll = Lista.Scroll + 1
-        'End If
-    End If
-ElseIf Button = 0 Then
-    Lista.ShowBarrita = X > picAccount.ScaleWidth - Lista.BarraWidth * 2
-End If
-End Sub
-
-Private Sub picAccount_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-Lista.DownBarrita = 0
 End Sub

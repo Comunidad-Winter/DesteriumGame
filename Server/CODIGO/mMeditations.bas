@@ -2,11 +2,12 @@ Attribute VB_Name = "mMeditations"
 Option Explicit
 
 Public Const MAX_MEDITATION            As Byte = 39
+
 Public Const MEDITATION_NPC            As Integer = 18
+
 Public Meditation(0 To MAX_MEDITATION) As Integer
 
 Public Sub Meditation_LoadConfig()
-    
     
     Meditation(0) = 0
     Meditation(1) = 105
@@ -35,7 +36,6 @@ Public Sub Meditation_LoadConfig()
     Meditation(19) = 123
     Meditation(20) = 124
     
-    
     ' Las que son horrendas pero les gusta
     Meditation(21) = 31
     Meditation(22) = 32
@@ -60,48 +60,46 @@ Public Sub Meditation_LoadConfig()
     Meditation(37) = 67
     Meditation(38) = 68
     Meditation(39) = 69
+
 End Sub
 
 Public Sub Meditation_Select(ByVal UserIndex As Integer, ByVal Selected As Byte)
 
-        '<EhHeader>
-        On Error GoTo Meditation_Select_Err
+    '<EhHeader>
+    On Error GoTo Meditation_Select_Err
 
-        '</EhHeader>
+    '</EhHeader>
     
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
 
-102         If .MeditationSelected = Selected Then
-104             Call WriteErrorMsg(UserIndex, "Ya tienes elegida esa concentración.")
+        If .MeditationSelected = Selected Then
+            Call WriteErrorMsg(UserIndex, "Ya tienes elegida esa concentración.")
 
-                Exit Sub
+            Exit Sub
 
-            End If
-             
-106
+        End If
         
-108         If Selected Then
-                If .MeditationUser(Selected) = 0 Then Exit Sub  ' Como llego hasta aca
+        If Selected Then
+            If .MeditationUser(Selected) = 0 Then Exit Sub  ' Como llego hasta aca
 
-                .MeditationSelected = Selected
-110           Call WriteErrorMsg(UserIndex, "Has elegido usar la meditación n° " & Selected)
+            .MeditationSelected = Selected
+            Call WriteErrorMsg(UserIndex, "Has elegido usar la meditación n° " & Selected)
                 
-            Else
-                .MeditationSelected = 0
-112             Call WriteErrorMsg(UserIndex, "Has elegido usar la meditación por defecto.")
+        Else
+            .MeditationSelected = 0
+            Call WriteErrorMsg(UserIndex, "Has elegido usar la meditación por defecto.")
 
-            End If
+        End If
             
-            Call SendData(SendTarget.ToOne, UserIndex, PrepareMessageUpdateMeditation(UserList(UserIndex).MeditationUser, Meditation(Selected)))
-        End With
+        Call SendData(SendTarget.ToOne, UserIndex, PrepareMessageUpdateMeditation(UserList(UserIndex).MeditationUser, Meditation(Selected)))
+
+    End With
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Meditation_Select_Err:
-        LogError Err.description & vbCrLf & "in ServidorArgentum.mMeditations.Meditation_Select " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mMeditations.Meditation_Select " & "at line " & Erl
 
-        
-
-        '</EhFooter>
+    '</EhFooter>
 End Sub

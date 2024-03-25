@@ -45,23 +45,24 @@ Option Explicit
 Option Base 0
 
 Private Const FONT_SIZE       As Integer = 15
+
 Private Const FONT_SIZE_EMOJI As Integer = 32
 
 ''
 ' Maximum number of dialogs that can exist.
-Private Const MAX_DIALOGS  As Byte = 100
+Private Const MAX_DIALOGS     As Byte = 100
 
 ''
 ' Maximum length of any dialog line without having to split it.
-Private Const MAX_LENGTH   As Byte = 18
+Private Const MAX_LENGTH      As Byte = 18
 
 ''
 ' Number of milliseconds to add to the lifetime per dialog character
-Private Const MS_PER_CHAR  As Byte = 100
+Private Const MS_PER_CHAR     As Byte = 100
 
 ''
 ' Number of extra milliseconds to add to the lifetime of a new dialog
-Private Const MS_ADD_EXTRA As Integer = 5000
+Private Const MS_ADD_EXTRA    As Integer = 5000
 
 ''
 ' The dialog structure
@@ -95,8 +96,8 @@ Private Type DialoG
     
     Font As eFonts
     
-    
     MultValue As Single ' Valor de multiplicacion para escalados de pantalla
+
 End Type
 
 ''
@@ -119,12 +120,14 @@ Private Sub Class_Initialize()
     'Initializes the dialog instance
     '***************************************************
     dialogCount = 0
+
 End Sub
 
 ''
 ' Clean up and release resources
 
 Private Sub Class_Terminate()
+
     '***************************************************
     'Author: Juan Martín Sotuyo Dodero (Maraxus)
     'Last Modification: 07/28/07
@@ -169,6 +172,7 @@ Private Function BinarySearch(ByVal CharIndex As Integer) As Integer
     'Not found, return the negation of the position where it should be
     '(all higher values are to the right of the list and lower values are to the left)
     BinarySearch = Not min
+
 End Function
 
 ''
@@ -212,6 +216,7 @@ Public Sub CreateDialog(ByRef chat As String, _
         Next i
         
         dialogCount = dialogCount + 1
+
     End If
     
     With dialogs(Slot)
@@ -229,10 +234,10 @@ Public Sub CreateDialog(ByRef chat As String, _
         .Size = FONT_SIZE
         .Shadow = IIf((Tipo = 5), False, True)
         
-        
         If (IsEmote(chat)) Then
             .Size = FONT_SIZE_EMOJI
             .Shadow = False
+
         End If
         
         If Tipo = 5 Then
@@ -240,15 +245,18 @@ Public Sub CreateDialog(ByRef chat As String, _
             .lifeTime = 500
         Else
             .Font = f_Tahoma
+
         End If
         
-    #If ModoBig > 0 Then
-        '.Font = f_Morpheus
-        .Size = .Size * 2
-    #End If
+        #If ModoBig > 0 Then
+            '.Font = f_Morpheus
+            .Size = .Size * 2
+        #End If
+
     End With
     
     Call FotoD_SaveLastDialog(CharIndex, chat)
+
 End Sub
 
 ''
@@ -317,9 +325,11 @@ Private Function FormatChat(ByRef chat As String) As String()
                 chatLines(curLine) = chatLines(curLine) & " " & word
                 
                 lineLength = lineLength + wordLength + 1
+
             End If
             
             acumLength = acumLength + wordLength + 1
+
         End If
         
         'Increase to search for next word
@@ -332,6 +342,7 @@ Private Function FormatChat(ByRef chat As String) As String()
     ReDim Preserve chatLines(curLine) As String
     
     FormatChat = chatLines
+
 End Function
 
 ''
@@ -362,6 +373,7 @@ Public Sub UpdateDialogPos(ByVal X As Integer, _
             .Y = Y - (UBound(.textLine()) * .Size)
             .Z = Z
             .renderable = True
+
         End With
 
     End If
@@ -400,14 +412,15 @@ Public Sub Render()
                     Call RemoveDialog(.CharIndex)
                     
                     removedDialogs = removedDialogs + 1
+
                 End If
+
             End If
             
             If .renderable Then
                 offset = .Y
                 
                 'Render it
-
                 
                 For j = 0 To UBound(.textLine())
                     Draw_Text .Font, .Size, .X, offset, .Z, 0#, ARGB(.r, .g, .b, .Alpha), FONT_ALIGNMENT_BOTTOM Or FONT_ALIGNMENT_CENTER, .textLine(j), .Shadow, True
@@ -416,6 +429,7 @@ Public Sub Render()
                 
                 'Won't render it unless it's updated in next frmae
                 .renderable = False
+
             End If
 
         End With
@@ -449,6 +463,7 @@ Public Sub RemoveDialog(ByVal CharIndex As Integer)
     Next i
     
     dialogCount = dialogCount - 1
+
 End Sub
 
 ''
@@ -461,11 +476,13 @@ Public Sub RemoveAllDialogs()
     'Removes all dialogs from all chars.
     '**************************************************************
     dialogCount = 0
+
 End Sub
 
 Public Function IsEmote(ByVal Character As String) As Boolean
     
     Dim Unicode As Long
+
     Let Unicode = AscU(Character)
     
     IsEmote = True
@@ -473,13 +490,17 @@ Public Function IsEmote(ByVal Character As String) As Boolean
     If (Unicode >= &H20A0 And Unicode <= &H32FF) Then
         If (Len(Character) = 1) Then
             Exit Function
+
         End If
+
     End If
 
     If (Unicode >= &H1F000 And Unicode <= &H1FFFF) Then
         If (Len(Character) = 2) Then
             Exit Function
+
         End If
+
     End If
 
     IsEmote = False

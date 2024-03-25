@@ -1,0 +1,16 @@
+[History]
+1=#P0#=mb	#P1#=WriteConnectedMessage	#P2#=ServidorTDS/Protocol/WriteConnectedMessage	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325202229	#P7#=0	#P8#=8	.
+2=#P0#=mb	#P1#=cmdCrear_Click	#P2#=ServidorTDS/frmNewAcc/cmdCrear_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325200943	#P7#=0	#P8#=2	.
+3=#P0#=mb	#P1#=SaveDataNew	#P2#=ServidorTDS/mAccount/SaveDataNew	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325200915	#P7#=0	#P8#=19	.
+4=#P0#=mb	#P1#=LoadDataAccount	#P2#=ServidorTDS/mAccount/LoadDataAccount	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325211928	#P7#=0	#P8#=2	.
+5=#P0#=mb	#P1#=cmdNUEVACUENTA_Click	#P2#=ServidorTDS/frmMain/cmdNUEVACUENTA_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325200138	#P7#=0	#P8#=2	.
+6=#P0#=mb	#P1#=LoginAccount	#P2#=ServidorTDS/mAccount/LoginAccount	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325195710	#P7#=0	#P8#=102	.
+7=#P0#=mb	#P1#=HandleLoginAccount	#P2#=ServidorTDS/Protocol/HandleLoginAccount	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325195308	#P7#=0	#P8#=73	.
+8=#P0#=mb	#P1#=SendData	#P2#=ServidorTDS/modSendData/SendData	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325195138	#P7#=0	#P8#=16	.
+9=#P0#=mb	#P1#=HandleIncomingData	#P2#=ServidorTDS/Protocol/HandleIncomingData	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325194900	#P7#=0	#P8#=86	.
+10=#P0#=mb	#P1#=cmdLimpiar_Click	#P2#=ServidorTDS/frmMain/cmdLimpiar_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325194634	#P7#=0	#P8#=1	.
+11=#P0#=mb	#P1#=HandleIdentification	#P2#=ServidorTDS/ProtocolArchive/HandleIdentification	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325193631	#P7#=0	#P8#=9	.
+12=#P0#=mb	#P1#=ConnectUser	#P2#=ServidorTDS/TCP/ConnectUser	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325193329	#P7#=0	#P8#=102	.
+13=#P0#=mb	#P1#=Form_Unload	#P2#=ServidorTDS/frmMain/Form_Unload	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325193034	#P7#=0	#P8#=37	.
+14=#P0#=mb	#P1#=FX_Timer	#P2#=ServidorTDS/frmMain/FX_Timer	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325193033	#P7#=0	#P8#=-2	.
+15=#P0#=mb	#P1#=Main	#P2#=ServidorTDS/General/Main	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325191318	#P7#=0	#P8#=173	.

@@ -93,7 +93,6 @@ Private Declare Sub CopyMemory _
                                        
 'Public Declare Function DLL_USA_LECTOR Lib "amb25.dll" () As Integer
 
-
 Private Declare Function ShellExecute _
                 Lib "shell32" _
                 Alias "ShellExecuteA" (ByVal hWnd As Long, _
@@ -145,6 +144,7 @@ Public Sub EnableURLDetect(ByVal hWndRichTextbox As Long, ByVal hWndOwner As Lon
         
         hWndParent = hWndOwner
         hWndRTB = hWndRichTextbox
+
     End If
 
 End Sub
@@ -160,6 +160,7 @@ Public Sub DisableURLDetect()
     If lOldProc Then
         SendMessage hWndRTB, EM_AUTOURLDETECT, 0, ByVal 0
         StopCheckingLinks
+
     End If
 
 End Sub
@@ -173,6 +174,7 @@ Public Sub StartCheckingLinks()
     '***************************************************
     If lOldProc = 0 Then
         lOldProc = SetWindowLong(hWndParent, GWL_WNDPROC, AddressOf WndProc)
+
     End If
 
 End Sub
@@ -187,12 +189,13 @@ Public Sub StopCheckingLinks()
     If lOldProc Then
         SetWindowLong hWndParent, GWL_WNDPROC, lOldProc
         lOldProc = 0
+
     End If
 
 End Sub
 
 Public Function WndProc(ByVal hWnd As Long, _
-                        ByVal uMsg As Long, _
+                        ByVal uMSG As Long, _
                         ByVal wParam As Long, _
                         ByVal lParam As Long) As Long
 
@@ -212,7 +215,7 @@ Public Function WndProc(ByVal hWnd As Long, _
 
     Dim lLen  As Long
     
-    If uMsg = WM_NOTIFY Then
+    If uMSG = WM_NOTIFY Then
         CopyMemory uHead, ByVal lParam, Len(uHead)
 
         If (uHead.hWndFrom = hWndRTB) And (uHead.code = EN_LINK) Then
@@ -230,11 +233,14 @@ Public Function WndProc(ByVal hWnd As Long, _
 
                     sText = Left$(eText.lpstrText, lLen)
                     ShellExecute hWndParent, vbNullString, sText, vbNullString, vbNullString, SW_SHOW
+
             End Select
 
         End If
+
     End If
     
-    WndProc = CallWindowProc(lOldProc, hWnd, uMsg, wParam, lParam)
+    WndProc = CallWindowProc(lOldProc, hWnd, uMSG, wParam, lParam)
+
 End Function
 

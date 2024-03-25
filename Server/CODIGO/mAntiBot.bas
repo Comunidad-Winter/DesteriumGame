@@ -9,7 +9,6 @@ Private Const MAX_MAILS          As Byte = 200
 
 Private Const MAX_MAILS_FOR_DAY  As Byte = 10
 
-
 Public Enum TypeWorking
 
     eDS_AccountNew = 1

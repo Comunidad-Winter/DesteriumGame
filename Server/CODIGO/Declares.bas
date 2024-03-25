@@ -29,12 +29,13 @@ Attribute VB_Name = "Declaraciones"
 
 Option Explicit
 
-Public FrasesLastMap As Integer
+Public FrasesLastMap  As Integer
+
 Public FrasesOnFire() As String
 
-Public lastRunTime As String
+Public lastRunTime    As String
 
-Public AutoRestart As Boolean
+Public AutoRestart    As Boolean
 
 Public Enum e_EstadoMimetismo
 
@@ -173,43 +174,41 @@ Public Const CHAT_COLOR_GM_YELL   As Long = &HF82FF
 ' Coordinates for normal sounds (not 3D, like rain)
 Public Const NO_3D_SOUND          As Byte = 0
 
+Public Const iFragataFantasmal = 87
 
+Public Const iFragataReal = 87
 
-    Public Const iFragataFantasmal = 87
+Public Const iFragataCaos = 87
 
-    Public Const iFragataReal = 87
+Public Const iBarca = 84
 
-    Public Const iFragataCaos = 87
+Public Const iGalera = 85
 
-    Public Const iBarca = 84
+Public Const iGaleon = 86
 
-    Public Const iGalera = 85
+Public Const iBarcaCiuda = 84
 
-    Public Const iGaleon = 86
+Public Const iBarcaReal = 84
 
-    Public Const iBarcaCiuda = 84
+Public Const iBarcaPk = 84
 
-    Public Const iBarcaReal = 84
+Public Const iBarcaCaos = 84
 
-    Public Const iBarcaPk = 84
+Public Const iGaleraCiuda = 85
 
-    Public Const iBarcaCaos = 84
+Public Const iGaleraReal = 85
 
-    Public Const iGaleraCiuda = 85
+Public Const iGaleraPk = 85
 
-    Public Const iGaleraReal = 85
+Public Const iGaleraCaos = 85
 
-    Public Const iGaleraPk = 85
+Public Const iGaleonCiuda = 86
 
-    Public Const iGaleraCaos = 85
+Public Const iGaleonReal = 86
 
-    Public Const iGaleonCiuda = 86
+Public Const iGaleonPk = 86
 
-    Public Const iGaleonReal = 86
-
-    Public Const iGaleonPk = 86
-
-    Public Const iGaleonCaos = 86
+Public Const iGaleonCaos = 86
 
 Public Enum eMenues
 
@@ -285,7 +284,6 @@ Public Enum eClass
     Paladin = 7   'Paladín
     Hunter = 8   'Cazador
     Thief = 9     'Ladrón
-    
     
     ' OFF
     Workerer = 10    'Trabajador
@@ -367,12 +365,12 @@ Public Const VaraMataDragonesIndex   As Integer = 1037
 
 Public Const EspadaDiablo            As Integer = 1235
 
+Public Const LAUDMAGICO              As Integer = 167
 
-
-Public Const LAUDMAGICO   As Integer = 167
-Public Const ANILLOMAGICO As Integer = 168
+Public Const ANILLOMAGICO            As Integer = 168
 
 Public Const APOCALIPSIS_SPELL_INDEX As Integer = 25
+
 Public Const DESCARGA_SPELL_INDEX    As Integer = 23
 
 Public Const SLOTS_POR_FILA          As Byte = 5
@@ -408,9 +406,7 @@ Public Const MAXMASCOTASENTRENADOR As Byte = 7
 
     End Enum
 
-
 #Else
-
 
     Public Enum FXIDs
 
@@ -576,27 +572,32 @@ Public Const MAXEXP                         As Long = 2000083607
 
 Public Const MAXUSERMATADOS                 As Long = 65000
 
-Public Const MAXATRIBUTOS As Byte = 50
-Public Const MINATRIBUTOS  As Byte = 6
+Public Const MAXATRIBUTOS                   As Byte = 50
 
-Public Const LingoteHierro As Integer = 193
+Public Const MINATRIBUTOS                   As Byte = 6
 
-Public Const LingotePlata  As Integer = 194
+Public Const LingoteHierro                  As Integer = 193
 
-Public Const LingoteOro    As Integer = 195
+Public Const LingotePlata                   As Integer = 194
+
+Public Const LingoteOro                     As Integer = 195
 
 Public Const Leña As Integer = 196
+
 Public Const LeñaRoble As Integer = 198
+
 Public Const LeñaTejo As Integer = 197
 
 Public Const MAXNPCS  As Integer = 10000
 
 Public Const MAXCHARS As Integer = 10000
 
-
 Public Const HACHA_LEÑADOR As Integer = 200
+
 Public Const PIQUETE_MINERO As Integer = 199
+
 Public Const CAÑA_PESCA As Integer = 201
+
 Public Const RED_PESCA           As Integer = 399
 
 Public Const DAGA                As Integer = 15
@@ -616,6 +617,7 @@ Public Const MARTILLO_HERRERO    As Integer = 389
 Public Const SERRUCHO_CARPINTERO As Integer = 198
 
 Public Const ObjArboles          As Integer = 4
+
 Public Const CAÑA_COFRES As Integer = 1340
 
 Public Enum eNPCType
@@ -657,24 +659,22 @@ Public Const NUMATRIBUTOS      As Byte = 5
 ''
 ' Cantidad de Clases
 
-
-Public Const NUMCLASES As Byte = 9
-
+Public Const NUMCLASES         As Byte = 9
 
 ' Maximo de Auras sobre el Personaje, ubicadas en lugares estratégicos según el Index.
-Public Const MAX_AURAS      As Byte = 5
+Public Const MAX_AURAS         As Byte = 5
 
 ''
 ' Cantidad de Razas
-Public Const NUMRAZAS       As Byte = 5
+Public Const NUMRAZAS          As Byte = 5
 
 ''
 ' Valor maximo de cada skill
-Public Const MAXSKILLPOINTS As Byte = 100
+Public Const MAXSKILLPOINTS    As Byte = 100
 
 ''
 ' Cantidad de Ciudades
-Public Const NUMCIUDADES    As Byte = 8
+Public Const NUMCIUDADES       As Byte = 8
 
 ''
 'Direccion
@@ -714,15 +714,11 @@ Public Const vlProleta            As Integer = 2
 
 '%%%%%%%%%% CONSTANTES DE INDICES %%%%%%%%%%%%%%%
 
+Public Const iORO                 As Byte = 12
 
+Public Const iELDHIR              As Integer = 943
 
-
-
-Public Const iORO    As Byte = 12
-
-Public Const iELDHIR As Integer = 943
-
-Public Const Pescado As Byte = 139
+Public Const Pescado              As Byte = 139
 
 #If Classic = 0 Then
 
@@ -1090,7 +1086,6 @@ Public Const EXP_FALLO_SKILL          As Byte = 50
 ' **************************************************************
 ' **************************************************************
 
-
 Public Type tObservacion
 
     Creador As String
@@ -1429,10 +1424,10 @@ End Type
 
 'Tipos de objetos
 Public Type ObjData
+
     AntiFrio As Byte            ' Sistema de anti Frio en tunicas
     DurationDay As Integer     ' Agrega X cantidad de días
     Dead As Byte           ' Solo se puede usar
-    
     
     SkillNum As Byte
     Skill() As ObjData_Skills
@@ -1651,6 +1646,7 @@ Public Type ObjData
     
     VisualSkin As Byte              ' Determina si es cargado por el sistema de skins que visualiza TODOS los items del juego
     Porc As Byte
+
 End Type
 
 '[Pablo ToxicWaste]
@@ -1677,14 +1673,16 @@ Public Type ModRaza
 
 End Type
 
-
 ' BALANCE NUEVA ORGANIZACION
 
 Public Type tBalance_ClassObj
+
     Obj() As Integer
+
 End Type
 
 Public Type tBalance
+
     PASSIVE_MAX As Integer
     
     ModClase(1 To NUMCLASES)           As ModClase
@@ -1729,12 +1727,12 @@ Public Type tBalance
     
     Cooldown_Initial(1 To NUMCLASES) As Single
     Cooldown_Level(1 To NUMCLASES) As Single
+
 End Type
 
-Public Balance As tBalance
+Public Balance                        As tBalance
 
 ''''''''''''''''
-
 
 '[/Pablo ToxicWaste]
 
@@ -1796,8 +1794,6 @@ Public Type tCharacterStats
     
 End Type
 
-
-
 ' Estadisticas de los usuarios
 Public Type UserStats
 
@@ -1823,8 +1819,6 @@ Public Type UserStats
     Gld As Long 'Dinero
     Eldhir As Long 'Dinero
     
-
-    
     ' MOD TDS
     MinSta As Integer: MaxSta As Integer
     MinHam As Integer: MaxHam As Integer
@@ -1834,7 +1828,6 @@ Public Type UserStats
     
     MinHp As Integer: MaxHp As Integer
     MinMan As Integer: MaxMan As Integer
-    
     
     Damage As Single            ' Daño
     DamageMag As Single      ' Daño Mágico
@@ -1866,6 +1859,7 @@ End Type
 
 'Flags
 Public Type UserFlags
+
     Rachas As Integer       ' Rachas que tiene el personaje acumuladas historicamente.
     RachasTemp As Integer   ' Rachas que tiene en el momento para luego chequear por las historicas y reemplazar.
     RedValid As Boolean     ' Está en un evento que pide validación doe rjas.
@@ -2022,6 +2016,7 @@ Public Type t_ControlHechizos
 End Type
 
 Public Type UserCounters
+
     CaspeoTime As Long
     BuffoAceleration As Long
     TimerMeditar As Long
@@ -2734,6 +2729,7 @@ Public Type User
     
     TimeUseClicInitial As Long
     TimeUseClic As Long
+
 End Type
 
 Public MacroIterations(1 To MAX_PACKET_COUNTERS)      As Long
@@ -2909,6 +2905,7 @@ Public Enum ePretorianAI
 End Enum
 
 Public Type Npc
+
     CastleIndex As Integer
     CommerceChar As String          ' El comerciante pertenece a algun personaje
     CommerceIndex As Integer        ' Indice para identificar cual mercader es
@@ -3051,6 +3048,7 @@ End Type
 
 'Info del mapa
 Type MapInfo
+
     OnFire As Byte
     FreeAttack As Boolean
     CanTravel As Boolean
@@ -3104,7 +3102,6 @@ Type MapInfo
     
     Faction As Byte
     
-    
     AccessDays() As Byte ' 1=Lunes, 2=Martes, ..., 7=Domingo
     AccessTimeStarts() As Integer ' Representa HHMM, por ejemplo, 1700 para las 17:00
     accessTimeEnds() As Integer ' Representa HHMM, por ejemplo, 2300 para las 23:00
@@ -3114,8 +3111,8 @@ Type MapInfo
     UsersDead As Integer
     DeadTime As Long
     
-    
     Poder As Byte               ' # Mapas en los que funciona el poder
+
 End Type
 
 '********** V A R I A B L E S     P U B L I C A S ***********
@@ -3225,6 +3222,7 @@ Public Type tConfigServer
     ModoCrafting As Byte
     ModoSubastas As Byte
     ModoSkins As Byte
+
 End Type
 
 Public ConfigServer                              As tConfigServer
@@ -3285,33 +3283,33 @@ Type HomeDistance
 
 End Type
 
-Public Nix          As WorldPos
+Public Nix            As WorldPos
 
-Public Ullathorpe   As WorldPos
+Public Ullathorpe     As WorldPos
 
-Public Banderbill   As WorldPos
+Public Banderbill     As WorldPos
 
-Public Lindos       As WorldPos
+Public Lindos         As WorldPos
 
-Public Arghal       As WorldPos
+Public Arghal         As WorldPos
 
-Public Esperanza    As WorldPos
+Public Esperanza      As WorldPos
 
-Public Newbie       As WorldPos
+Public Newbie         As WorldPos
 
-Public CiudadFlotante       As WorldPos
+Public CiudadFlotante As WorldPos
 
-Public Arkhein      As WorldPos
+Public Arkhein        As WorldPos
 
-Public Nemahuak     As WorldPos
+Public Nemahuak       As WorldPos
 
-Public Prision      As WorldPos
+Public Prision        As WorldPos
 
-Public Libertad     As WorldPos
+Public Libertad       As WorldPos
 
-Public Denuncias    As cCola
+Public Denuncias      As cCola
 
-Public SonidosMapas As SoundMapInfo
+Public SonidosMapas   As SoundMapInfo
 
 Public Declare Function writeprivateprofilestring _
                Lib "kernel32" _
@@ -3332,7 +3330,7 @@ Public Declare Function GetPrivateProfileString _
 Public Declare Sub ZeroMemory _
                Lib "kernel32.dll" _
                Alias "RtlZeroMemory" (ByRef Destination As Any, _
-                                      ByVal Length As Long)
+                                      ByVal length As Long)
 
 Public Enum e_ObjetosCriticos
 
@@ -3497,6 +3495,7 @@ Public Enum eGMCommands
     
     StreamerBotSetting
     LotteryNew
+
 End Enum
 
 Public Const MATRIX_INITIAL_MAP As Integer = 1
@@ -3835,23 +3834,24 @@ Public Const VelocidadNormal As Single = 1
 
 Public Const VelocidadMuerto As Single = 1.4
 
-
-
 Public Function iCuerpoMuerto(ByVal Criminal As Boolean)
     
     If Not Criminal Then
         iCuerpoMuerto = 8
     Else
         iCuerpoMuerto = 145
+
     End If
 
 End Function
+
 Public Function iCabezaMuerto(ByVal Criminal As Boolean)
     
     If Not Criminal Then
         iCabezaMuerto = 500
     Else
         iCabezaMuerto = 501
+
     End If
 
 End Function

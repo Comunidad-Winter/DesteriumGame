@@ -81,7 +81,9 @@ Sub FotoD_Capturar(refString As String)
                 If FotoD_DialogIsInsult(LoopX) Then
                     'Save charDialogs and NickName here.
                     sendString = sendString & "," & .Nombre & " : " & .LastDialog
+
                 End If
+
             End If
 
         End With
@@ -92,6 +94,7 @@ Sub FotoD_Capturar(refString As String)
        
     If refString <> vbNullString Then
         FotoD_LastIN = FrameTime
+
     End If
        
 End Sub
@@ -129,6 +132,7 @@ Function FotoD_DialogIsInsult(ByVal CharIndex As Integer) As Boolean
                 Exit Function
     
             End If
+
         End If
         
     Next LoopX

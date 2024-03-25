@@ -2,23 +2,22 @@ Attribute VB_Name = "mBattle"
 Option Explicit
 
 #If Classic = 0 Then
-' Se viene la mejor revolucion del AO
+    ' Se viene la mejor revolucion del AO
 
+    Public ARENA_LAST As Long
 
-Public ARENA_LAST As Long
+    Public Type tBattleArena
 
-Public Type tBattleArena
         Name As String
         Maps() As Integer
         Limit As Byte
         
-        
         ' Reseteable
         Users As Byte
         
-End Type
+    End Type
 
-Public Battle_Arenas() As tBattleArena
+    Public Battle_Arenas() As tBattleArena
 
 Public Sub IBatle_LoadArenas()
         '<EhHeader>

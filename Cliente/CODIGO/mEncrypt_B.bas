@@ -7,11 +7,13 @@ Public Const XOR_CHARACTER As String = "6vmEL7VdvNkFi0iY6WLh"
 'Codigo fuente: https://www.freevbcode.com/ShowCode.asp?ID=5676
 Public Function XORDecryption(DataIn As String) As String
     
-    Dim lonDataPtr As Long
-    Dim strDataOut As String
+    Dim lonDataPtr   As Long
+
+    Dim strDataOut   As String
+
     Dim intXOrValue1 As Integer
+
     Dim intXOrValue2 As Integer
-    
 
     For lonDataPtr = 1 To (Len(DataIn) / 2)
         'The first value to be XOr-ed comes from the data to be encrypted
@@ -21,5 +23,7 @@ Public Function XORDecryption(DataIn As String) As String
         
         strDataOut = strDataOut + Chr(intXOrValue1 Xor intXOrValue2)
     Next lonDataPtr
-   XORDecryption = strDataOut
+
+    XORDecryption = strDataOut
+
 End Function

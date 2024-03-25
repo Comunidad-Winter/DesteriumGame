@@ -8,91 +8,98 @@ Private Enum eCofres
     cOro = 3
     cPremium = 4
     cStreamer = 5
+
 End Enum
 
 Public Function UseCofrePoder(ByVal UserIndex As Integer, _
                               ByVal CofreIndex As Byte) As Boolean
-        '<EhHeader>
-        On Error GoTo UseCofrePoder_Err
-        '</EhHeader>
 
-        Dim ObjRequired As Obj
+    '<EhHeader>
+    On Error GoTo UseCofrePoder_Err
 
-        Dim TempSTR     As String
+    '</EhHeader>
 
-        Dim Ft          As FontTypeNames
+    Dim ObjRequired As Obj
+
+    Dim TempSTR     As String
+
+    Dim Ft          As FontTypeNames
     
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
     
-            ' REQUISITOS
-102         Select Case CofreIndex
+        ' REQUISITOS
+        Select Case CofreIndex
             
-                Case eCofres.cStreamer
-104                 If .flags.Streamer = 1 Then
-106                     WriteConsoleMsg UserIndex, "Ya eres considerado un usuario Streamer", FontTypeNames.FONTTYPE_INFORED
-                        Exit Function
-                    End If
+            Case eCofres.cStreamer
+
+                If .flags.Streamer = 1 Then
+                    WriteConsoleMsg UserIndex, "Ya eres considerado un usuario Streamer", FontTypeNames.FONTTYPE_INFORED
+                    Exit Function
+
+                End If
                 
-108                 TempSTR = "Servidor> El usuario " & .Name & " ha sido considerado como streamer de la comunidad."
-110                 Ft = FontTypeNames.FONTTYPE_GUILD
+                TempSTR = "Servidor> El usuario " & .Name & " ha sido considerado como streamer de la comunidad."
+                Ft = FontTypeNames.FONTTYPE_GUILD
                 
-112             Case eCofres.cOro
+            Case eCofres.cOro
                 
-126                 TempSTR = "¡Te has convertido en una Leyenda!"
-128                 Ft = FontTypeNames.FONTTYPE_USERGOLD
+                TempSTR = "¡Te has convertido en una Leyenda!"
+                Ft = FontTypeNames.FONTTYPE_USERGOLD
                 
-130             Case eCofres.cBronce
+            Case eCofres.cBronce
                 
-136                 TempSTR = "¡Te has convertido en un Aventurero!"
-138                 Ft = FontTypeNames.FONTTYPE_USERBRONCE
+                TempSTR = "¡Te has convertido en un Aventurero!"
+                Ft = FontTypeNames.FONTTYPE_USERBRONCE
                 
-140             Case eCofres.cPlata
-150                 TempSTR = "¡Te vas convertido en un Héroe!"
-152                 Ft = FontTypeNames.FONTTYPE_USERPLATA
+            Case eCofres.cPlata
+                TempSTR = "¡Te vas convertido en un Héroe!"
+                Ft = FontTypeNames.FONTTYPE_USERPLATA
             
-154             Case eCofres.cPremium
+            Case eCofres.cPremium
 
-156                 If .flags.Premium = 1 Then
-158                     WriteConsoleMsg UserIndex, "Tu personaje ya posee el poder del cofre seleccionado.", FontTypeNames.FONTTYPE_INFO
+                If .flags.Premium = 1 Then
+                    WriteConsoleMsg UserIndex, "Tu personaje ya posee el poder del cofre seleccionado.", FontTypeNames.FONTTYPE_INFO
 
-                        Exit Function
+                    Exit Function
 
-                    End If
+                End If
                 
-160                 TempSTR = "Te has convertido en un PERSONAJE PREMIUM"
-162                 Ft = FontTypeNames.FONTTYPE_USERPREMIUM
-            End Select
+                TempSTR = "Te has convertido en un PERSONAJE PREMIUM"
+                Ft = FontTypeNames.FONTTYPE_USERPREMIUM
 
-            ' APLICAMOS
-164         Select Case CofreIndex
-                Case eCofres.cStreamer
-166                 .flags.Streamer = 1
+        End Select
+
+        ' APLICAMOS
+        Select Case CofreIndex
+
+            Case eCofres.cStreamer
+                .flags.Streamer = 1
                 
-168             Case eCofres.cOro
-170                 .flags.Oro = 1
+            Case eCofres.cOro
+                .flags.Oro = 1
 
-172             Case eCofres.cPremium
-174                 .flags.Premium = 1
+            Case eCofres.cPremium
+                .flags.Premium = 1
 
-176             Case eCofres.cPlata
-178                 .flags.Plata = 1
+            Case eCofres.cPlata
+                .flags.Plata = 1
 
-180             Case eCofres.cBronce
-182                 .flags.Bronce = 1
-            End Select
+            Case eCofres.cBronce
+                .flags.Bronce = 1
+
+        End Select
         
-                Call WriteConsoleMsg(UserIndex, TempSTR, Ft)
-184         'Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(TempSTR, Ft))
-186         UseCofrePoder = True
-        End With
+        Call WriteConsoleMsg(UserIndex, TempSTR, Ft)
+        'Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg(TempSTR, Ft))
+        UseCofrePoder = True
+
+    End With
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 UseCofrePoder_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mCofresPoderes.UseCofrePoder " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mCofresPoderes.UseCofrePoder " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function

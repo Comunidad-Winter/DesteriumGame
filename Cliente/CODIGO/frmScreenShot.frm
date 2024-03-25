@@ -37,10 +37,11 @@ Option Explicit
 
 Private Sub Form_Click()
 
-   ' Render_MapGrandev2
+    ' Render_MapGrandev2
     Call wGL_Graphic.Capture(frmScreenShot.hWnd, App.path & Maps_FilePath & "screenshots\" & UserMap & ".png")
     
     Unload Me
+
 End Sub
 
 Private Sub Form_Load()
@@ -51,7 +52,6 @@ Private Sub Form_Load()
     
 End Sub
 
-
 Private Sub Form_Unload(Cancel As Integer)
 
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.cMapGrande))
@@ -61,6 +61,7 @@ End Sub
 Private Sub tUpdate_Timer()
     'Call RenderScreen_Graphic
     Render_MapGrande
+
 End Sub
 
 Sub RenderScreen_Graphic()
@@ -70,20 +71,29 @@ Sub RenderScreen_Graphic()
     Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
     
     Dim ScreenMinY As Long  'Start Y pos on current screen
+
     Dim ScreenMaxY As Long  'End Y pos on current screen
+
     Dim ScreenMinX As Long  'Start X pos on current screen
+
     Dim ScreenMaxX As Long  'End X pos on current screen
 
     Dim MinY       As Long  'Start Y pos on current map
+
     Dim MaxY       As Long  'End Y pos on current map
+
     Dim MinX       As Long  'Start X pos on current map
+
     Dim MaxX       As Long  'End X pos on current map
 
     Dim X          As Long
+
     Dim Y          As Long
 
     Dim Drawable   As Long
+
     Dim DrawableX  As Long
+
     Dim DrawableY  As Long
 
     'Figure out Ends and Starts of screen
@@ -102,12 +112,14 @@ Sub RenderScreen_Graphic()
         MaxY = MaxY + 1
     ElseIf OffsetCounterY > 0 Then
         MinY = MinY - 1
+
     End If
 
     If OffsetCounterX < 0 Then
         MaxX = MaxX + 1
     ElseIf OffsetCounterX > 0 Then
         MinX = MinX - 1
+
     End If
     
     If MinY < YMinMapSize Then MinY = YMinMapSize
@@ -120,26 +132,35 @@ Sub RenderScreen_Graphic()
     
         For X = 1 To 100
             DrawableX = (X - ScreenMinX) * 4
+
             With MapData(X, Y)
+
                 If (.Graphic(1).GrhIndex <> 0) Then
                     Call Draw_Grh(.Graphic(1), DrawableX, DrawableY, To_Depth(1, X, Y), 0, 1, , , , , 4, 4)
+
                 End If
                     
-                 If (.Graphic(2).GrhIndex <> 0) Then
+                If (.Graphic(2).GrhIndex <> 0) Then
                     Call Draw_Grh(.Graphic(2), DrawableX, DrawableY, To_Depth(2, X, Y), 0, 1, , , , , 4, 4)
+
                 End If
                     
                 If (.Graphic(3).GrhIndex <> 0) Then
-                 Call Draw_Grh(.Graphic(3), DrawableX, DrawableY, To_Depth(3, X, Y), 0, 1, , , , , 4, 4)
+                    Call Draw_Grh(.Graphic(3), DrawableX, DrawableY, To_Depth(3, X, Y), 0, 1, , , , , 4, 4)
+
                 End If
                     
-                               If (.Graphic(4).GrhIndex <> 0) Then
-                 Call Draw_Grh(.Graphic(4), DrawableX, DrawableY, To_Depth(4, X, Y), 0, 1, , , , , 4, 4)
+                If (.Graphic(4).GrhIndex <> 0) Then
+                    Call Draw_Grh(.Graphic(4), DrawableX, DrawableY, To_Depth(4, X, Y), 0, 1, , , , , 4, 4)
+
                 End If
+
             End With
+
         Next X
     Next Y
 
-     Call wGL_Graphic_Renderer.Flush
+    Call wGL_Graphic_Renderer.Flush
+
 End Sub
 

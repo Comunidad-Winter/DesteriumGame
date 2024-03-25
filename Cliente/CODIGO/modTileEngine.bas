@@ -1,10 +1,11 @@
 Attribute VB_Name = "Mod_TileEngine"
 ' Externo
+' Reparado por Lorwik
 Option Explicit
 
 Private Declare Function timeGetTime Lib "winmm.dll" () As Long
 
-Public MaxGrh As Long
+Public MaxGrh               As Long
 
 Private Const TARGET_FPS_MS As Long = 1000
 
@@ -15,9 +16,11 @@ Public Declare Sub CopyMemory _
                                       ByVal cbCopy As Long)
 
 Public vSyncRun       As Boolean
+
 Public AmbientColor   As RGBA
 
 Public g_Last_OffsetX As Single
+
 Public g_Last_OffsetY As Single
 
 'Text width computation. Needed to center text.
@@ -45,16 +48,19 @@ Private Declare Function GetPixel _
 
 'Techos
 Public Const ROOF_ALPHA_SPEED = 0.3
+
 Public Const ROOF_ALPHA_MAX As Byte = 255
+
 Public Const ROOF_ALPHA_MIN As Byte = 0
-Public RoofAlpha As Single
+
+Public RoofAlpha            As Single
 
 ' CONSTANT GENERAL
 Public Const INFINITE_LOOPS As Integer = -1
 
-Private Const GrhFogata      As Long = 1521
+Private Const GrhFogata     As Long = 1521
 
-Private Const GrhFogata2      As Long = 70272
+Private Const GrhFogata2    As Long = 70272
 
 ' Colores de npc
 Public Enum eNPCType
@@ -78,103 +84,108 @@ Public Enum eNPCType
 End Enum
 
 ' Directorios
-Public IniPath                 As String
+Public IniPath               As String
 
-Public MapPath                 As String
+Public MapPath               As String
 
 'Bordes del mapa
-Public MinXBorder              As Byte
+Public MinXBorder            As Byte
 
-Public MaxXBorder              As Byte
+Public MaxXBorder            As Byte
 
-Public MinYBorder              As Byte
+Public MinYBorder            As Byte
 
-Public MaxYBorder              As Byte
+Public MaxYBorder            As Byte
 
 'Status del user
-Public CurMap                  As Integer 'Mapa actual
+Public CurMap                As Integer 'Mapa actual
 
-Public UserIndex               As Integer
+Public UserIndex             As Integer
+
 'Public WaitInput As Boolean
-Public UserMoving              As Boolean
+Public UserMoving            As Boolean
 
-Public UserBody                As Integer
+Public UserBody              As Integer
 
-Public UserHead                As Integer
+Public UserHead              As Integer
 
-Public UserPos                 As Position 'Posicion
+Public UserPos               As Position 'Posicion
 
-Public AddtoUserPos            As Position 'Si se mueve
+Public AddtoUserPos          As Position 'Si se mueve
 
-Public UserCharIndex           As Integer
+Public UserCharIndex         As Integer
 
 ' Engine andando
-Public EngineRun               As Boolean
+Public EngineRun             As Boolean
 
 ' Time FPS
-Public lFrameTimer             As Long
+Public lFrameTimer           As Long
+
 Public FrameTime             As Long
-Public FPS                     As Long
 
-Public UserFps As Long
+Public FPS                   As Long
 
+Public UserFps               As Long
 
-Private fpsLastCheck           As Long
+Private fpsLastCheck         As Long
 
 'Tamaño del la vista en Tiles
-Public WindowTileWidth        As Integer
+Public WindowTileWidth       As Integer
 
-Public WindowTileHeight       As Integer
+Public WindowTileHeight      As Integer
 
-Public HalfWindowTileWidth    As Integer
+Public HalfWindowTileWidth   As Integer
 
-Public HalfWindowTileHeight   As Integer
+Public HalfWindowTileHeight  As Integer
 
 'Offset del desde 0,0 del main view
 
-Public OffsetCounterX         As Single
+Public OffsetCounterX        As Single
 
-Public OffsetCounterY         As Single
+Public OffsetCounterY        As Single
 
 'Tamaño de los tiles en pixels
-Public TilePixelHeight         As Integer
+Public TilePixelHeight       As Integer
 
-Public TilePixelWidth          As Integer
+Public TilePixelWidth        As Integer
 
 'Number of pixels the engine scrolls per frame. MUST divide evenly into pixels per tile
-Public ScrollPixelsPerFrameX   As Single
+Public ScrollPixelsPerFrameX As Single
 
-Public ScrollPixelsPerFrameY   As Single
+Public ScrollPixelsPerFrameY As Single
 
-Private timerEngine            As Currency
-Dim timerElapsedTime           As Single
-Public timerTicksPerFrame         As Single
-Dim engineBaseSpeed            As Single
+Private timerEngine          As Currency
 
-Public NumBodies               As Integer
+Dim timerElapsedTime         As Single
 
-Public Numheads                As Integer
+Public timerTicksPerFrame    As Single
 
-Public NumFxs                  As Integer
+Dim engineBaseSpeed          As Single
 
-Public NUMCHARS                As Integer
+Public NumBodies             As Integer
 
-Public LastChar                As Integer
+Public Numheads              As Integer
 
-Public NumWeaponAnims          As Integer
+Public NumFxs                As Integer
 
-Public NumShieldAnims          As Integer
+Public NUMCHARS              As Integer
 
-Private MouseTileX             As Byte
+Public LastChar              As Integer
 
-Private MouseTileY             As Byte
+Public NumWeaponAnims        As Integer
 
-Public MapInfo                 As MapInfo ' Info acerca del mapa en uso
+Public NumShieldAnims        As Integer
+
+Private MouseTileX           As Byte
+
+Private MouseTileY           As Byte
+
+Public MapInfo               As MapInfo ' Info acerca del mapa en uso
 '¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?
 
-Public bTecho                  As Boolean 'hay techo?
+Public bTecho                As Boolean 'hay techo?
 
-Public brstTick                As Long
+Public brstTick              As Long
 
 ' Used by GetTextExtentPoint32
 Private Type Size
@@ -187,12 +198,11 @@ End Type
 ' Wgl_Client.DLL
 ' CONSTANT
 
-
 Public MAX_TEXTURE               As Long
 
 Public Const MAX_TEXTURE_GUI     As Long = 500
 
-Public Const MAX_TEXTURE_AVATARS    As Long = 157
+Public Const MAX_TEXTURE_AVATARS As Long = 157
 
 Public Const MAX_CAPTION         As Long = 52
 
@@ -201,9 +211,12 @@ Public Const MAX_FONT            As Long = 6
 Public Const MAX_TECHNIQUE       As Long = 1
 
 Public g_Textures()              As Integer
-Public g_Textures_Gui()              As Integer
-Public g_Textures_MiniMapa()              As Integer
-Public g_Textures_Avatars()              As Integer
+
+Public g_Textures_Gui()          As Integer
+
+Public g_Textures_MiniMapa()     As Integer
+
+Public g_Textures_Avatars()      As Integer
 
 Public g_Captions(MAX_CAPTION)   As Integer
 
@@ -252,9 +265,6 @@ Public Enum eCaption
     cStats = 25
     cMapGrande = 26
 
-
-
-
     cInvCofre1 = 31
     cInvCofre2 = 32
     cInvMapa = 33
@@ -266,7 +276,7 @@ Public Enum eCaption
     eCommerceChar = 37
     eInvSkin1 = 38
     eguildpanel = 39
-     eInvSkin2 = 40
+    eInvSkin2 = 40
     eMapa = 41
     eMapaNpc = 42
     eMapaObj = 43
@@ -284,6 +294,7 @@ Public Enum eCaption
     
     e_Perfil = 51
     e_Objetivos = 52
+
 End Enum
 
 ' Fuentes disponibles
@@ -309,7 +320,9 @@ End Enum
 
 Public Sub Set_engineBaseSpeed(ByVal Value As Single)
     engineBaseSpeed = Value
+
 End Sub
+
 Public Function InitTileEngine(ByVal setTilePixelHeight As Integer, _
                                ByVal setTilePixelWidth As Integer, _
                                ByVal setWindowTileHeight As Integer, _
@@ -317,96 +330,92 @@ Public Function InitTileEngine(ByVal setTilePixelHeight As Integer, _
                                ByVal pixelsToScrollPerFrameX As Single, _
                                ByVal pixelsToScrollPerFrameY As Single, _
                                ByVal engineSpeed As Single) As Boolean
-        '<EhHeader>
-        On Error GoTo InitTileEngine_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo InitTileEngine_Err
+
+    '</EhHeader>
                                 
-        '***************************************************
-        'Author: WAICON
-        'Last Modification: 05-05-2019
-        '
-        'Creates all DX objects and configures the engine to start running.
-        '***************************************************
+    '***************************************************
+    'Author: WAICON
+    'Last Modification: 05-05-2019
+    '
+    'Creates all DX objects and configures the engine to start running.
+    '***************************************************
     
-        'Fill startup variables
-100     TilePixelWidth = setTilePixelWidth
-102     TilePixelHeight = setTilePixelHeight
-104     WindowTileHeight = setWindowTileHeight
-106     WindowTileWidth = setWindowTileWidth
+    'Fill startup variables
+    TilePixelWidth = setTilePixelWidth
+    TilePixelHeight = setTilePixelHeight
+    WindowTileHeight = setWindowTileHeight
+    WindowTileWidth = setWindowTileWidth
     
-108     HalfWindowTileHeight = setWindowTileHeight \ 2
-110     HalfWindowTileWidth = setWindowTileWidth \ 2
+    HalfWindowTileHeight = setWindowTileHeight \ 2
+    HalfWindowTileWidth = setWindowTileWidth \ 2
     
-112     engineBaseSpeed = engineSpeed
+    engineBaseSpeed = engineSpeed
     
-        'Set FPS value to 60 for startup
-114     FPS = 60
+    'Set FPS value to 60 for startup
+    FPS = 60
     
-118     MinXBorder = XMinMapSize + (WindowTileWidth \ 2)
-120     MaxXBorder = XMaxMapSize - (WindowTileWidth \ 2)
-122     MinYBorder = YMinMapSize + (WindowTileHeight \ 2)
-124     MaxYBorder = YMaxMapSize - (WindowTileHeight \ 2)
+    MinXBorder = XMinMapSize + (WindowTileWidth \ 2)
+    MaxXBorder = XMaxMapSize - (WindowTileWidth \ 2)
+    MinYBorder = YMinMapSize + (WindowTileHeight \ 2)
+    MaxYBorder = YMaxMapSize - (WindowTileHeight \ 2)
     
-        'Resize mapdata array
-130     ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
-132     ReDim MapData_Copy(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
+    'Resize mapdata array
+    ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
+    ReDim MapData_Copy(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
   
-        'Set intial user position
-134     UserPos.X = MinXBorder
-136     UserPos.Y = MinYBorder
+    'Set intial user position
+    UserPos.X = MinXBorder
+    UserPos.Y = MinYBorder
     
-        'Set scroll pixels per frame
-138     ScrollPixelsPerFrameX = pixelsToScrollPerFrameX
-140     ScrollPixelsPerFrameY = pixelsToScrollPerFrameY
+    'Set scroll pixels per frame
+    ScrollPixelsPerFrameX = pixelsToScrollPerFrameX
+    ScrollPixelsPerFrameY = pixelsToScrollPerFrameY
 
-        Dim Engine As Boolean
+    Dim Engine As Boolean
 
-        Dim Modo   As wGL_Graphic_Mode
+    Dim Modo   As wGL_Graphic_Mode
     
-142     If ClientSetup.bFps = 2 Then
-144         Modo = MODE_SYNCHRONISED Or MODE_COMPATIBLE
+    If ClientSetup.bFps = 2 Then
+        Modo = MODE_SYNCHRONISED Or MODE_COMPATIBLE
 
-        Else
-146         Modo = MODE_COMPATIBLE
+    Else
+        Modo = MODE_COMPATIBLE
 
-        End If
+    End If
     
-    
-        Dim Mult As Byte
+    Dim Mult As Byte
         
-        #If ModoBig = 0 Then
-148     Mult = 1
-        #Else
-          Mult = 2
-        #End If
+    #If ModoBig = 0 Then
+        Mult = 1
+    #Else
+        Mult = 2
+    #End If
             
-            
-            Dim A As Long
-            
+    Dim A As Long
 
-             Engine = wGL_Graphic.Create_Driver(DRIVER_DIRECT3D9, Modo, FrmMain.MainViewPic.hWnd, FrmMain.MainViewPic.ScaleWidth, FrmMain.MainViewPic.ScaleHeight)
-
-        
+    Engine = wGL_Graphic.Create_Driver(DRIVER_DIRECT3D9, Modo, FrmMain.MainViewPic.hWnd, FrmMain.MainViewPic.ScaleWidth, FrmMain.MainViewPic.ScaleHeight)
          
-150     If (Not Engine) Then
-152         MsgBox "Parece ser que su PC no es compatible con Aurora.Multimedia."
-154         CloseClient
-        End If
+    If (Not Engine) Then
+        MsgBox "Parece ser que su PC no es compatible con Aurora.Multimedia."
+        CloseClient
+
+    End If
     
-156     Call Load_Technique
-158     Call Load_Font
-160     Call Load_Captions
+    Call Load_Technique
+    Call Load_Font
+    Call Load_Captions
     
-162     InitTileEngine = True
-        '<EhFooter>
-        Exit Function
+    InitTileEngine = True
+    '<EhFooter>
+    Exit Function
 
 InitTileEngine_Err:
-        LogError err.Description & vbCrLf & _
-               "in InitTileEngine " & _
-               "at line " & Erl
+    LogError err.Description & vbCrLf & "in InitTileEngine " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub Draw_InventoryCaption(ByVal GrhIndex As Long, _
@@ -430,7 +439,8 @@ End Sub
 Private Sub Load_Captions()
     ' Seteamos todas las ventanas que tengamos
     
-    Dim Mult As Byte
+    Dim Mult  As Byte
+
     Dim Width As Integer, Height As Integer
     
     ' Inventario
@@ -452,7 +462,6 @@ Private Sub Load_Captions()
     g_Captions(eCaption.MainPicture) = wGL_Graphic.Create_Device_From_Display(FrmMain.PicInv.hWnd, FrmMain.PicInv.ScaleWidth, FrmMain.PicInv.ScaleHeight)
     Call Inventario.Initialize(FrmMain.PicInv, MAX_INVENTORY_SLOTS, MAX_INVENTORY_SLOTS, eCaption.MainPicture, Width, Height, , , , , , True, , , True, True)
     g_Captions(eCaption.cMiniMapa) = wGL_Graphic.Create_Device_From_Display(FrmMain.MiniMapa.hWnd, FrmMain.MiniMapa.ScaleWidth, FrmMain.MiniMapa.ScaleHeight)
-
     
     'Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.cMiniMapa))
     'Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.MainPicture))
@@ -461,7 +470,7 @@ End Sub
 
 Private Sub Load_Font()
 
-    Const filePath As String = "\resource\FONT\"
+    Const filePath As String = "\AO\resource\FONT\"
     
     ' esto es para el cliente
     ' pero todavia no, le falta testeo a despues te lo explico otro dia xD
@@ -474,14 +483,13 @@ Private Sub Load_Font()
     Fonts(eFonts.f_Medieval) = wGL_Graphic_Renderer.Create_Font(LoadBytes(filePath & "Medieval.ttf"))
     Fonts(eFonts.f_Verdana) = wGL_Graphic_Renderer.Create_Font(LoadBytes(filePath & "Verdana.ttf"))
     
-    
     ' Todas las fuentes excepto emoji van a chequear los emoji en f_Emoji
     Call wGL_Graphic_Renderer.Update_Font_Fallback(Fonts(eFonts.f_Chat), Fonts(eFonts.f_Emoji))
     'Call wGL_Graphic_Renderer.Update_Font_Fallback(Fonts(eFonts.f_Morpheus), Fonts(eFonts.f_Emoji))
     
-    
     'Call AddFont(App.path & FilePath & "booterfz.ttf")
     Fonts(eFonts.f_Booter) = wGL_Graphic_Renderer.Create_Font(LoadBytes(filePath & "booterfz2.ttf"))
+
 End Sub
 
 Private Sub Load_Technique()
@@ -498,13 +506,13 @@ Private Sub Load_Technique()
 
     Dim Program As Integer
 
-    Program = wGL_Graphic.Create_Program(LoadBytes("\resource\shader\VsSprite.bin"), LoadBytes("\resource\shader\PsSpriteOpaque.bin"))
+    Program = wGL_Graphic.Create_Program(LoadBytes("\AO\resource\shader\VsSprite.bin"), LoadBytes("\AO\resource\shader\PsSpriteOpaque.bin"))
     
     Call wGL_Graphic_Renderer.Update_Technique_Descriptor(Techniques(eTechnique.t_Default), Descriptor)
     Call wGL_Graphic_Renderer.Update_Technique_Program(Techniques(eTechnique.t_Default), Program)
         
     Techniques(eTechnique.t_Alpha) = wGL_Graphic_Renderer.Create_Technique
-    Program = wGL_Graphic.Create_Program(LoadBytes("\resource\shader\VsSprite.bin"), LoadBytes("\resource\shader\PsSpriteTransparent.bin"))
+    Program = wGL_Graphic.Create_Program(LoadBytes("\AO\resource\shader\VsSprite.bin"), LoadBytes("\AO\resource\shader\PsSpriteTransparent.bin"))
 
     Descriptor.Depth_Mask = False
     Descriptor.Blend_Color_Source = BLEND_FACTOR_SRC_ALPHA
@@ -547,6 +555,7 @@ Public Sub RenderStarted()
 
         If ShowNextFrame() Then
             FPS = FPS + 1
+
         End If
         
         If FrmMain.PicInv.visible Then
@@ -554,14 +563,15 @@ Public Sub RenderStarted()
 
         End If
         
-       ' Value = Value + 1
+        ' Value = Value + 1
         
-       ' If Value = 10 Then
+        ' If Value = 10 Then
         'Sleep 1
-           ' Value = 0
-      '  End If
+        ' Value = 0
+        '  End If
     Else
         Sleep 1
+
     End If
     
     DoEvents
@@ -585,10 +595,12 @@ Sub ConvertCPtoTP(ByVal viewPortX As Integer, _
                   ByVal viewPortY As Integer, _
                   ByRef tX As Byte, _
                   ByRef tY As Byte)
+
     '******************************************
     'Converts where the mouse is in the main window to a tile position. MUST be called eveytime the mouse moves.
     '******************************************
     On Error Resume Next
+
     'tX = UserPos.X + viewPortX \ TilePixelWidth - WindowTileWidth \ 2
     'tY = UserPos.Y + viewPortY \ TilePixelHeight - WindowTileHeight \ 2
     'tX = (UserPos.X - HalfWindowTileWidth) + viewPortX \ TilePixelWidth
@@ -615,98 +627,96 @@ Sub MakeChar(ByVal CharIndex As Integer, _
              ByRef AuraIndex() As Byte, _
              ByVal NpcIndex As Integer)
 
-        '<EhHeader>
-        On Error GoTo MakeChar_Err
+    '<EhHeader>
+    On Error GoTo MakeChar_Err
 
-        '</EhHeader>
+    '</EhHeader>
 
-        'Apuntamos al ultimo Char
-100     If CharIndex > LastChar Then LastChar = CharIndex
+    'Apuntamos al ultimo Char
+    If CharIndex > LastChar Then LastChar = CharIndex
     
-102     With CharList(CharIndex)
+    With CharList(CharIndex)
 
-            'If the char wasn't allready active (we are rewritting it) don't increase char count
-104         'If .Active = 0 Then NUMCHARS = NUMCHARS + 1
+        'If the char wasn't allready active (we are rewritting it) don't increase char count
+        'If .Active = 0 Then NUMCHARS = NUMCHARS + 1
         
-106         If Arma = 0 Then Arma = 2
-108         If Escudo = 0 Then Escudo = 2
-110         If Casco = 0 Then Casco = 2
-112
+        If Arma = 0 Then Arma = 2
+        If Escudo = 0 Then Escudo = 2
+        If Casco = 0 Then Casco = 2
         
-114         .iHead = Head
-116         .iBody = Body
-118         .Head = HeadData(Head)
-120         .Body = BodyData(Body)
-122         .BodyAttack = BodyDataAttack(BodyAttack)
-124         .Arma = WeaponAnimData(Arma)
+        .iHead = Head
+        .iBody = Body
+        .Head = HeadData(Head)
+        .Body = BodyData(Body)
+        .BodyAttack = BodyDataAttack(BodyAttack)
+        .Arma = WeaponAnimData(Arma)
 
-            Dim A As Long
+        Dim A As Long
 
-            For A = 1 To MAX_AURAS
+        For A = 1 To MAX_AURAS
 
-                If AuraIndex(A) = 0 Then AuraIndex(A) = 2
-126             .Aura(A) = AuraAnimData(AuraIndex(A))
-            Next A
+            If AuraIndex(A) = 0 Then AuraIndex(A) = 2
+            .Aura(A) = AuraAnimData(AuraIndex(A))
+        Next A
               
-128         .Escudo = ShieldAnimData(Escudo)
-130         .Casco = CascoAnimData(Casco)
-            .NpcIndex = NpcIndex
+        .Escudo = ShieldAnimData(Escudo)
+        .Casco = CascoAnimData(Casco)
+        .NpcIndex = NpcIndex
             
-132         If Casco = 54 Then
-134             .OffsetY = -15
-            Else
-136             .OffsetY = 0
+        If Casco = 54 Then
+            .OffsetY = -15
+        Else
+            .OffsetY = 0
 
-            End If
+        End If
         
-138         .Heading = Heading
+        .Heading = Heading
         
-            'Reset moving stats
-            If Not CharIndex = UserCharIndex Then
-                .Moving = False
-                .MoveOffsetX = 0
-                .MoveOffsetY = 0
+        'Reset moving stats
+        If Not CharIndex = UserCharIndex Then
+            .Moving = False
+            .MoveOffsetX = 0
+            .MoveOffsetY = 0
 
-            End If
+        End If
         
-            'Reset moving stats
-140         If (CharIndex = UserCharIndex) Then
-142             .MoveOffsetX = g_Last_OffsetX
-144             .MoveOffsetY = g_Last_OffsetY
-146             g_Last_OffsetX = 0
-148             g_Last_OffsetY = 0
+        'Reset moving stats
+        If (CharIndex = UserCharIndex) Then
+            .MoveOffsetX = g_Last_OffsetX
+            .MoveOffsetY = g_Last_OffsetY
+            g_Last_OffsetX = 0
+            g_Last_OffsetY = 0
 
-            End If
+        End If
 
-            'Update position
-166         .Pos.X = X
-168         .Pos.Y = Y
+        'Update position
+        .Pos.X = X
+        .Pos.Y = Y
                     
-            ' Create virtual sound source
-            .SoundSource = Audio.CreateSource(X, Y)
+        ' Create virtual sound source
+        .SoundSource = Audio.CreateSource(X, Y)
             
-            'Make active
-170         .Active = 1
+        'Make active
+        .Active = 1
         
-            ' Update QuadTree
-            Dim RangeX As Single, RangeY As Single
+        ' Update QuadTree
+        Dim RangeX As Single, RangeY As Single
 
-172         Call GetCharacterDimension(CharIndex, RangeX, RangeY)
-174         Call g_Swarm.Insert(5, CharIndex, X, Y, RangeX, RangeY)
+        Call GetCharacterDimension(CharIndex, RangeX, RangeY)
+        Call g_Swarm.Insert(5, CharIndex, X, Y, RangeX, RangeY)
         
-        
-        End With
+    End With
     
-        'Plot on map
-176     MapData(X, Y).CharIndex = CharIndex
+    'Plot on map
+    MapData(X, Y).CharIndex = CharIndex
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 MakeChar_Err:
-        LogError err.Description & vbCrLf & "in MakeChar " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in MakeChar " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Sub ResetCharInfo(ByVal CharIndex As Integer)
@@ -740,211 +750,214 @@ Sub ResetCharInfo(ByVal CharIndex As Integer)
         .MaxHp = 0
         .MinMan = 0
         .MaxMan = 0
+
     End With
     
 End Sub
 
 Sub EraseChar(ByVal CharIndex As Integer)
-        '<EhHeader>
-        On Error GoTo EraseChar_Err
-        '</EhHeader>
 
-        '*****************************************************************
-        'Erases a character from CharList and map
-        '*****************************************************************
+    '<EhHeader>
+    On Error GoTo EraseChar_Err
 
-100     CharList(CharIndex).Active = 0
-    
-        'Update lastchar
-102     If CharIndex = LastChar Then
+    '</EhHeader>
 
-104         Do Until CharList(LastChar).Active = 1
-106             LastChar = LastChar - 1
+    '*****************************************************************
+    'Erases a character from CharList and map
+    '*****************************************************************
 
-108             If LastChar = 0 Then Exit Do
-            Loop
+    CharList(CharIndex).Active = 0
+    
+    'Update lastchar
+    If CharIndex = LastChar Then
 
-        End If
+        Do Until CharList(LastChar).Active = 1
+            LastChar = LastChar - 1
+
+            If LastChar = 0 Then Exit Do
+        Loop
+
+    End If
     
-110     If CharList(CharIndex).Pos.X > 0 Then
-112         MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).CharIndex = 0
-        End If
+    If CharList(CharIndex).Pos.X > 0 Then
+        MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).CharIndex = 0
+
+    End If
     
-114     Call g_Swarm.Remove(5, CharIndex, 0, 0, 0, 0)
+    Call g_Swarm.Remove(5, CharIndex, 0, 0, 0, 0)
     
-        'Remove char's dialog
-116     Call Dialogos.RemoveDialog(CharIndex)
+    'Remove char's dialog
+    Call Dialogos.RemoveDialog(CharIndex)
     
-118     Call ResetCharInfo(CharIndex)
+    Call ResetCharInfo(CharIndex)
                 
-        ' Destroy virtual sound source
-        Call Audio.DeleteSource(CharList(CharIndex).SoundSource, False)
+    ' Destroy virtual sound source
+    Call Audio.DeleteSource(CharList(CharIndex).SoundSource, False)
             
-        'Update NumChars
-120     'NUMCHARS = NUMCHARS - 1
-        '<EhFooter>
-        Exit Sub
+    'Update NumChars
+    'NUMCHARS = NUMCHARS - 1
+    '<EhFooter>
+    Exit Sub
 
 EraseChar_Err:
-        LogError err.Description & vbCrLf & _
-           "in EraseChar " & _
-           "at line " & Erl
+    LogError err.Description & vbCrLf & "in EraseChar " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub InitGrh(ByRef grh As grh, _
                    ByVal GrhIndex As Long, _
                    Optional ByVal started As Long = -1, _
                    Optional ByVal Loops As Integer = INFINITE_LOOPS)
-        '<EhHeader>
-        On Error GoTo InitGrh_Err
-        '</EhHeader>
 
-100     If GrhIndex = 0 Or GrhIndex > MaxGrh Then Exit Sub
+    '<EhHeader>
+    On Error GoTo InitGrh_Err
+
+    '</EhHeader>
+
+    If GrhIndex = 0 Or GrhIndex > MaxGrh Then Exit Sub
     
-102     grh.GrhIndex = GrhIndex
+    grh.GrhIndex = GrhIndex
 
-104     If GrhData(GrhIndex).NumFrames > 1 Then
-106         If started >= 0 Then
-108             grh.started = started
-            Else
-110             grh.started = FrameTime
-
-            End If
-        
-112         grh.Loops = Loops
-114         grh.Speed = GrhData(GrhIndex).Speed / GrhData(GrhIndex).NumFrames
-
-
+    If GrhData(GrhIndex).NumFrames > 1 Then
+        If started >= 0 Then
+            grh.started = started
         Else
-116         grh.started = 0
-118         grh.Speed = 1
+            grh.started = FrameTime
 
         End If
+        
+        grh.Loops = Loops
+        grh.Speed = GrhData(GrhIndex).Speed / GrhData(GrhIndex).NumFrames
+
+    Else
+        grh.started = 0
+        grh.Speed = 1
+
+    End If
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 InitGrh_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.Mod_TileEngine.InitGrh " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ARGENTUM.Mod_TileEngine.InitGrh " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub
 
 Sub MoveCharbyHead(ByVal CharIndex As Integer, ByVal nHeading As E_Heading)
-        '*****************************************************************
+    '*****************************************************************
         
-        'Starts the movement of a character in nHeading direction
-        '*****************************************************************
-        '<EhHeader>
-        On Error GoTo MoveCharbyHead_Err
+    'Starts the movement of a character in nHeading direction
+    '*****************************************************************
+    '<EhHeader>
+    On Error GoTo MoveCharbyHead_Err
 
-        '</EhHeader>
-        Dim AddX As Integer
+    '</EhHeader>
+    Dim AddX As Integer
 
-        Dim AddY As Integer
+    Dim AddY As Integer
 
-        Dim X    As Integer
+    Dim X    As Integer
 
-        Dim Y    As Integer
+    Dim Y    As Integer
 
-        Dim nX   As Integer
+    Dim nX   As Integer
 
-        Dim nY   As Integer
+    Dim nY   As Integer
     
-100     With CharList(CharIndex)
-102         X = .Pos.X
-104         Y = .Pos.Y
+    With CharList(CharIndex)
+        X = .Pos.X
+        Y = .Pos.Y
         
-            'Figure out which way to move
-106         Select Case nHeading
+        'Figure out which way to move
+        Select Case nHeading
 
-                Case E_Heading.NORTH
-108                 AddY = -1
+            Case E_Heading.NORTH
+                AddY = -1
         
-110             Case E_Heading.EAST
-112                 AddX = 1
+            Case E_Heading.EAST
+                AddX = 1
         
-114             Case E_Heading.SOUTH
-116                 AddY = 1
+            Case E_Heading.SOUTH
+                AddY = 1
             
-118             Case E_Heading.WEST
-120                 AddX = -1
+            Case E_Heading.WEST
+                AddX = -1
 
-            End Select
+        End Select
         
-122         nX = X + AddX
-124         nY = Y + AddY
+        nX = X + AddX
+        nY = Y + AddY
                 
-126         MapData(nX, nY).CharIndex = CharIndex
-128         .Pos.X = nX
-130         .Pos.Y = nY
+        MapData(nX, nY).CharIndex = CharIndex
+        .Pos.X = nX
+        .Pos.Y = nY
         
-132         If (MapData(X, Y).CharIndex = CharIndex) Then
-134             MapData(X, Y).CharIndex = 0
+        If (MapData(X, Y).CharIndex = CharIndex) Then
+            MapData(X, Y).CharIndex = 0
 
-            End If
+        End If
         
-136         Call g_Swarm.Move(CharIndex, nX, nY)
+        Call g_Swarm.Move(CharIndex, nX, nY)
             
-138         .MoveOffsetX = -1 * (TilePixelWidth * AddX)
-140         .MoveOffsetY = -1 * (TilePixelHeight * AddY)
+        .MoveOffsetX = -1 * (TilePixelWidth * AddX)
+        .MoveOffsetY = -1 * (TilePixelHeight * AddY)
         
-            Call Audio.UpdateSource(.SoundSource, nX, nY)
+        Call Audio.UpdateSource(.SoundSource, nX, nY)
 
-144         .Heading = nHeading
+        .Heading = nHeading
             
-            ' Sistema de Escaleras 65562 65563
-            If MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).Graphic(2).GrhIndex = 65562 Or MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).Graphic(2).GrhIndex = 65563 Then
+        ' Sistema de Escaleras 65562 65563
+        If MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).Graphic(2).GrhIndex = 65562 Or MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).Graphic(2).GrhIndex = 65563 Then
                 
-                CharList(CharIndex).Heading = NORTH
+            CharList(CharIndex).Heading = NORTH
+
+        End If
+
+        .scrollDirectionX = AddX
+        .scrollDirectionY = AddY
+
+        Draw_MiniMap
+
+        .Idle = False
+            
+        If Not .Moving Then
+
+            'If .Muerto Then
+            '.Body = BodyData(CASPER_BODY)
+
+            'End If
+
+            'Start animations
+            If .Body.Walk(.Heading).started = 0 Then
+                .Body.Walk(.Heading).started = FrameTime
+                .Arma.WeaponWalk(.Heading).started = FrameTime
+                .Escudo.ShieldWalk(.Heading).started = FrameTime
+
+                .Arma.WeaponWalk(.Heading).Loops = INFINITE_LOOPS
+                .Escudo.ShieldWalk(.Heading).Loops = INFINITE_LOOPS
 
             End If
-
-156         .scrollDirectionX = AddX
-158         .scrollDirectionY = AddY
-
-            Draw_MiniMap
-
-            .Idle = False
             
-            If Not .Moving Then
+            .MovArmaEscudo = False
+            .Moving = True
 
-                'If .Muerto Then
-                    '.Body = BodyData(CASPER_BODY)
+        End If
 
-                'End If
-
-                'Start animations
-                If .Body.Walk(.Heading).started = 0 Then
-                    .Body.Walk(.Heading).started = FrameTime
-                    .Arma.WeaponWalk(.Heading).started = FrameTime
-                    .Escudo.ShieldWalk(.Heading).started = FrameTime
-
-                    .Arma.WeaponWalk(.Heading).Loops = INFINITE_LOOPS
-                    .Escudo.ShieldWalk(.Heading).Loops = INFINITE_LOOPS
-
-                End If
-            
-                .MovArmaEscudo = False
-                .Moving = True
-
-            End If
-
-        End With
+    End With
     
-160     If UserEstado = 0 Then Call DoPasosFx(CharIndex)
+    If UserEstado = 0 Then Call DoPasosFx(CharIndex)
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 MoveCharbyHead_Err:
-        LogError err.Description & vbCrLf & "in MoveCharbyHead " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in MoveCharbyHead " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Function EstaPCarea(ByVal CharIndex As Integer) As Boolean
@@ -956,6 +969,7 @@ Public Function EstaPCarea(ByVal CharIndex As Integer) As Boolean
     '***************************************************
     With CharList(CharIndex).Pos
         EstaPCarea = .X > UserPos.X - MinXBorder And .X < UserPos.X + MinXBorder And .Y > UserPos.Y - MinYBorder And .Y < UserPos.Y + MinYBorder
+
     End With
 
 End Function
@@ -969,175 +983,183 @@ Sub DoPasosFx(ByVal CharIndex As Integer)
                 .Pie = Not .Pie
 
                 Call Audio.PlayEffect(IIf(.Pie, SND_PASOS1, SND_PASOS2), .SoundSource)
+
             End If
+
         Else
             ' TODO : Actually we would have to check if the CharIndex char is in the water or not....
             Call Audio.PlayEffect(SND_NAVEGANDO, .SoundSource)
+
         End If
+
     End With
 
 End Sub
 
 Sub MoveCharbyPos(ByVal CharIndex As Integer, ByVal nX As Integer, ByVal nY As Integer)
 
-        '<EhHeader>
-        On Error GoTo MoveCharbyPos_Err
+    '<EhHeader>
+    On Error GoTo MoveCharbyPos_Err
 
-        '</EhHeader>
+    '</EhHeader>
 
-        Dim X        As Integer
+    Dim X        As Integer
 
-        Dim Y        As Integer
+    Dim Y        As Integer
 
-        Dim AddX     As Integer
+    Dim AddX     As Integer
 
-        Dim AddY     As Integer
+    Dim AddY     As Integer
 
-        Dim nHeading As E_Heading
+    Dim nHeading As E_Heading
     
-100     With CharList(CharIndex)
-102         X = .Pos.X
-104         Y = .Pos.Y
+    With CharList(CharIndex)
+        X = .Pos.X
+        Y = .Pos.Y
             
-            If X > 0 Then
-106             If (MapData(X, Y).CharIndex = CharIndex) Then
-108                 MapData(X, Y).CharIndex = 0
+        If X > 0 Then
+            If (MapData(X, Y).CharIndex = CharIndex) Then
+                MapData(X, Y).CharIndex = 0
     
-                End If
             End If
+
+        End If
             
-110         AddX = nX - X
-112         AddY = nY - Y
+        AddX = nX - X
+        AddY = nY - Y
         
-114         If Sgn(AddX) = 1 Then
-116             nHeading = E_Heading.EAST
-118         ElseIf Sgn(AddX) = -1 Then
-120             nHeading = E_Heading.WEST
-122         ElseIf Sgn(AddY) = -1 Then
-124             nHeading = E_Heading.NORTH
-126         ElseIf Sgn(AddY) = 1 Then
-128             nHeading = E_Heading.SOUTH
+        If Sgn(AddX) = 1 Then
+            nHeading = E_Heading.EAST
+        ElseIf Sgn(AddX) = -1 Then
+            nHeading = E_Heading.WEST
+        ElseIf Sgn(AddY) = -1 Then
+            nHeading = E_Heading.NORTH
+        ElseIf Sgn(AddY) = 1 Then
+            nHeading = E_Heading.SOUTH
 
-            End If
+        End If
             
-            If nHeading = 0 Then Exit Sub
+        If nHeading = 0 Then Exit Sub
              
-130         MapData(nX, nY).CharIndex = CharIndex
+        MapData(nX, nY).CharIndex = CharIndex
 
-132         .Pos.X = nX
-134         .Pos.Y = nY
+        .Pos.X = nX
+        .Pos.Y = nY
         
-136         Call g_Swarm.Move(CharIndex, nX, nY)
+        Call g_Swarm.Move(CharIndex, nX, nY)
 
-138         .MoveOffsetX = -1 * (TilePixelWidth * AddX)
-140         .MoveOffsetY = -1 * (TilePixelHeight * AddY)
+        .MoveOffsetX = -1 * (TilePixelWidth * AddX)
+        .MoveOffsetY = -1 * (TilePixelHeight * AddY)
             
-              Call Audio.UpdateSource(.SoundSource, nX, nY)
+        Call Audio.UpdateSource(.SoundSource, nX, nY)
 
-144         .Heading = nHeading
+        .Heading = nHeading
             
-146         .scrollDirectionX = Sgn(AddX)
-148         .scrollDirectionY = Sgn(AddY)
-            .LastStep = FrameTime
+        .scrollDirectionX = Sgn(AddX)
+        .scrollDirectionY = Sgn(AddY)
+        .LastStep = FrameTime
             
-            .Idle = False
+        .Idle = False
             
-            If Not .Moving Then
+        If Not .Moving Then
         
-                'If .Muerto Then
-                    '.Body = BodyData(CASPER_BODY)
+            'If .Muerto Then
+            '.Body = BodyData(CASPER_BODY)
 
-                'End If
+            'End If
         
-                'Start animations
-                If .Body.Walk(.Heading).started = 0 Then
-                    .Body.Walk(.Heading).started = FrameTime
-                    .Arma.WeaponWalk(.Heading).started = FrameTime
-                    .Escudo.ShieldWalk(.Heading).started = FrameTime
+            'Start animations
+            If .Body.Walk(.Heading).started = 0 Then
+                .Body.Walk(.Heading).started = FrameTime
+                .Arma.WeaponWalk(.Heading).started = FrameTime
+                .Escudo.ShieldWalk(.Heading).started = FrameTime
 
-                    .Arma.WeaponWalk(.Heading).Loops = INFINITE_LOOPS
-                    .Escudo.ShieldWalk(.Heading).Loops = INFINITE_LOOPS
-
-                End If
-            
-                .MovArmaEscudo = False
-                .Moving = True
+                .Arma.WeaponWalk(.Heading).Loops = INFINITE_LOOPS
+                .Escudo.ShieldWalk(.Heading).Loops = INFINITE_LOOPS
 
             End If
+            
+            .MovArmaEscudo = False
+            .Moving = True
 
-        End With
+        End If
+
+    End With
     
-164     If Not EstaPCarea(CharIndex) Then Call Dialogos.RemoveDialog(CharIndex)
+    If Not EstaPCarea(CharIndex) Then Call Dialogos.RemoveDialog(CharIndex)
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 MoveCharbyPos_Err:
-        LogError err.Description & vbCrLf & "in MoveCharbyPos " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in MoveCharbyPos " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Sub MoveScreen(ByVal nHeading As E_Heading)
-        '<EhHeader>
-        On Error GoTo MoveScreen_Err
-        '</EhHeader>
 
-        '******************************************
-        'Starts the screen moving in a direction
-        '******************************************
-        Dim X  As Integer
-        Dim Y  As Integer
-        Dim tX As Integer
-        Dim tY As Integer
+    '<EhHeader>
+    On Error GoTo MoveScreen_Err
+
+    '</EhHeader>
+
+    '******************************************
+    'Starts the screen moving in a direction
+    '******************************************
+    Dim X  As Integer
+
+    Dim Y  As Integer
+
+    Dim tX As Integer
+
+    Dim tY As Integer
     
-        'Figure out which way to move
-100     Select Case nHeading
+    'Figure out which way to move
+    Select Case nHeading
 
-            Case E_Heading.NORTH
-102             Y = -1
+        Case E_Heading.NORTH
+            Y = -1
         
-104         Case E_Heading.EAST
-106             X = 1
+        Case E_Heading.EAST
+            X = 1
         
-108         Case E_Heading.SOUTH
-110             Y = 1
+        Case E_Heading.SOUTH
+            Y = 1
         
-112         Case E_Heading.WEST
-114             X = -1
-        End Select
+        Case E_Heading.WEST
+            X = -1
+
+    End Select
     
+    'Fill temp pos
+    tX = UserPos.X + X
+    tY = UserPos.Y + Y
     
-        'Fill temp pos
-116     tX = UserPos.X + X
-118     tY = UserPos.Y + Y
-    
-        'Check to see if its out of bounds
-120     If tX < MinXBorder Or tX > MaxXBorder Or tY < MinYBorder Or tY > MaxYBorder Then
+    'Check to see if its out of bounds
+    If tX < MinXBorder Or tX > MaxXBorder Or tY < MinYBorder Or tY > MaxYBorder Then
 
-            Exit Sub
-
-        Else
-            'Start moving... MainLoop does the rest
-122         AddtoUserPos.X = X
-124         UserPos.X = tX
-126         AddtoUserPos.Y = Y
-128         UserPos.Y = tY
-130         UserMoving = True
-        
-132         bTecho = IIf(MapData(UserPos.X, UserPos.Y).Trigger = 1 Or MapData(UserPos.X, UserPos.Y).Trigger = 2 Or MapData(UserPos.X, UserPos.Y).Trigger = 4, True, False)
-        End If
-
-        
-        '<EhFooter>
         Exit Sub
 
-MoveScreen_Err:
-        LogError err.Description & vbCrLf & _
-           "in MoveScreen " & _
-           "at line " & Erl
+    Else
+        'Start moving... MainLoop does the rest
+        AddtoUserPos.X = X
+        UserPos.X = tX
+        AddtoUserPos.Y = Y
+        UserPos.Y = tY
+        UserMoving = True
+        
+        bTecho = IIf(MapData(UserPos.X, UserPos.Y).Trigger = 1 Or MapData(UserPos.X, UserPos.Y).Trigger = 2 Or MapData(UserPos.X, UserPos.Y).Trigger = 4, True, False)
 
-        '</EhFooter>
+    End If
+        
+    '<EhFooter>
+    Exit Sub
+
+MoveScreen_Err:
+    LogError err.Description & vbCrLf & "in MoveScreen " & "at line " & Erl
+
+    '</EhFooter>
 End Sub
 
 Function NextOpenChar() As Integer
@@ -1157,6 +1179,7 @@ Function NextOpenChar() As Integer
     Loop
     
     NextOpenChar = LoopC
+
 End Function
 
 Public Function Graphic_Is_Alpha(ByVal Graphic As Long) As Boolean
@@ -1164,177 +1187,100 @@ Public Function Graphic_Is_Alpha(ByVal Graphic As Long) As Boolean
     If Graphic >= 60 And Graphic <= 76 Then
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
     If Graphic >= 259 And Graphic <= 269 Then
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
     If Graphic >= 2527 And Graphic <= 2531 Then
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If Graphic = 408 Or Graphic = 409 Or Graphic = 2483 Or Graphic = 2497 Or _
-       Graphic = 2498 Or Graphic = 2528 Or Graphic = 2519 Or Graphic = 2522 Or Graphic = 25075 Then
+    If Graphic = 408 Or Graphic = 409 Or Graphic = 2483 Or Graphic = 2497 Or Graphic = 2498 Or Graphic = 2528 Or Graphic = 2519 Or Graphic = 2522 Or Graphic = 25075 Then
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If Graphic = 742 Or Graphic = 818 Or Graphic = 888 Or Graphic = 990 Or Graphic = 991 Or Graphic = 1036 Or Graphic = 1037 Or _
-       Graphic = 1041 Or Graphic = 1639 Or Graphic = 1640 Or Graphic = 1641 Or Graphic = 1907 Or Graphic = 2522 Or Graphic = 2562 Or _
-       Graphic = 2563 Or Graphic = 2564 Or Graphic = 2567 Or Graphic = 2568 Or Graphic = 2569 Or Graphic = 3045 Or Graphic = 3046 Or _
-       Graphic = 6041 Or Graphic = 6057 Or Graphic = 6267 Or Graphic = 6270 Or Graphic = 6271 Or Graphic = 6279 Or Graphic = 6280 Or _
-       Graphic = 6283 Or Graphic = 6336 Then
+    If Graphic = 742 Or Graphic = 818 Or Graphic = 888 Or Graphic = 990 Or Graphic = 991 Or Graphic = 1036 Or Graphic = 1037 Or Graphic = 1041 Or Graphic = 1639 Or Graphic = 1640 Or Graphic = 1641 Or Graphic = 1907 Or Graphic = 2522 Or Graphic = 2562 Or Graphic = 2563 Or Graphic = 2564 Or Graphic = 2567 Or Graphic = 2568 Or Graphic = 2569 Or Graphic = 3045 Or Graphic = 3046 Or Graphic = 6041 Or Graphic = 6057 Or Graphic = 6267 Or Graphic = 6270 Or Graphic = 6271 Or Graphic = 6279 Or Graphic = 6280 Or Graphic = 6283 Or Graphic = 6336 Then
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If (Graphic >= 4 And Graphic <= 19) Or _
-       (Graphic >= 26 And Graphic <= 34) Or _
-       (Graphic >= 441 And Graphic <= 451) Or _
-       (Graphic >= 457 And Graphic <= 459) Or _
-       (Graphic >= 464 And Graphic <= 499) Or _
-       (Graphic >= 858 And Graphic <= 865) Or _
-       (Graphic >= 901 And Graphic <= 909) Or _
-       (Graphic >= 996 And Graphic <= 1005) Or _
-       (Graphic >= 1535 And Graphic <= 1635) Or _
-       (Graphic >= 1645 And Graphic <= 1693) Or _
-       (Graphic >= 1698 And Graphic <= 1704) Or _
-       (Graphic >= 1710 And Graphic <= 1713) Or _
-       (Graphic >= 1886 And Graphic <= 1898) Or _
-       (Graphic >= 1922 And Graphic <= 1927) Or _
-       (Graphic >= 1935 And Graphic <= 1949) Or _
-       (Graphic >= 1951 And Graphic <= 1956) Or _
-       (Graphic >= 1968 And Graphic <= 1972) Or _
-       (Graphic >= 1983 And Graphic <= 1995) Or _
-       (Graphic >= 2414 And Graphic <= 2518) Or _
-       (Graphic >= 2570 And Graphic <= 2578) Or _
-       (Graphic >= 2581 And Graphic <= 2586) Or _
-       (Graphic >= 2997 And Graphic <= 3008) Or _
-       (Graphic >= 3011 And Graphic <= 3014) Or _
-       (Graphic >= 3027 And Graphic <= 3042) Or _
-       (Graphic >= 6014 And Graphic <= 6017) Then
+    If (Graphic >= 4 And Graphic <= 19) Or (Graphic >= 26 And Graphic <= 34) Or (Graphic >= 441 And Graphic <= 451) Or (Graphic >= 457 And Graphic <= 459) Or (Graphic >= 464 And Graphic <= 499) Or (Graphic >= 858 And Graphic <= 865) Or (Graphic >= 901 And Graphic <= 909) Or (Graphic >= 996 And Graphic <= 1005) Or (Graphic >= 1535 And Graphic <= 1635) Or (Graphic >= 1645 And Graphic <= 1693) Or (Graphic >= 1698 And Graphic <= 1704) Or (Graphic >= 1710 And Graphic <= 1713) Or (Graphic >= 1886 And Graphic <= 1898) Or (Graphic >= 1922 And Graphic <= 1927) Or (Graphic >= 1935 And Graphic <= 1949) Or (Graphic >= 1951 And Graphic <= 1956) Or (Graphic >= 1968 And Graphic <= 1972) Or (Graphic >= 1983 And Graphic <= 1995) Or (Graphic >= 2414 And Graphic <= 2518) Or (Graphic >= 2570 And Graphic <= 2578) Or (Graphic >= 2581 And Graphic <= 2586) Or (Graphic >= 2997 And Graphic <= 3008) Or (Graphic >= 3011 And Graphic <= 3014) Or (Graphic >= 3027 And Graphic <= 3042) Or (Graphic >= 6014 And Graphic <= 6017) Then
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
 
-    If (Graphic >= 6046 And Graphic <= 6054) Or _
-       (Graphic >= 6061 And Graphic <= 6098) Or _
-       (Graphic >= 6110 And Graphic <= 6126) Or _
-       (Graphic >= 6154 And Graphic <= 6216) Or _
-       (Graphic >= 6227 And Graphic <= 6261) Or _
-       (Graphic >= 6312 And Graphic <= 6331) Or _
-       (Graphic >= 6340 And Graphic <= 6369) Or _
-       (Graphic >= 6821 And Graphic <= 6843) Then
+    If (Graphic >= 6046 And Graphic <= 6054) Or (Graphic >= 6061 And Graphic <= 6098) Or (Graphic >= 6110 And Graphic <= 6126) Or (Graphic >= 6154 And Graphic <= 6216) Or (Graphic >= 6227 And Graphic <= 6261) Or (Graphic >= 6312 And Graphic <= 6331) Or (Graphic >= 6340 And Graphic <= 6369) Or (Graphic >= 6821 And Graphic <= 6843) Then
         Graphic_Is_Alpha = True
         Exit Function
     
     End If
 
-    If (Graphic >= 1171 And Graphic <= 1177) Or _
-       (Graphic >= 6052 And Graphic <= 6096) Or _
-       (Graphic >= 6892 And Graphic <= 6896) Or _
-       (Graphic >= 1213 And Graphic <= 1218) Or _
-       (Graphic >= 1923 And Graphic <= 1927) Or _
-       (Graphic >= 4252 And Graphic <= 4269) Then
+    If (Graphic >= 1171 And Graphic <= 1177) Or (Graphic >= 6052 And Graphic <= 6096) Or (Graphic >= 6892 And Graphic <= 6896) Or (Graphic >= 1213 And Graphic <= 1218) Or (Graphic >= 1923 And Graphic <= 1927) Or (Graphic >= 4252 And Graphic <= 4269) Then
         Graphic_Is_Alpha = True
         Exit Function
     
     End If
     
-    If Graphic = 1168 Or Graphic = 1179 Or Graphic = 1181 Or Graphic = 1183 Or _
-       Graphic = 1184 Or Graphic = 1086 Or Graphic = 1087 Or Graphic = 4958 Or Graphic = 4957 Or _
-       Graphic = 1193 Or Graphic = 1194 Or Graphic = 1195 Or _
-       Graphic = 1198 Or Graphic = 1199 Or Graphic = 1200 Or _
-       Graphic = 6052 Or Graphic = 6063 Or Graphic = 6064 Or _
-       Graphic = 6065 Or Graphic = 6066 Or Graphic = 6067 Or _
-       Graphic = 6069 Or Graphic = 6071 Or Graphic = 6072 Or Graphic = 6073 Or Graphic = 6074 Or _
-       Graphic = 6075 Or Graphic = 6078 Or Graphic = 6079 Or Graphic = 6081 Or Graphic = 6082 Or _
-       Graphic = 6083 Or Graphic = 6084 Then
+    If Graphic = 1168 Or Graphic = 1179 Or Graphic = 1181 Or Graphic = 1183 Or Graphic = 1184 Or Graphic = 1086 Or Graphic = 1087 Or Graphic = 4958 Or Graphic = 4957 Or Graphic = 1193 Or Graphic = 1194 Or Graphic = 1195 Or Graphic = 1198 Or Graphic = 1199 Or Graphic = 1200 Or Graphic = 6052 Or Graphic = 6063 Or Graphic = 6064 Or Graphic = 6065 Or Graphic = 6066 Or Graphic = 6067 Or Graphic = 6069 Or Graphic = 6071 Or Graphic = 6072 Or Graphic = 6073 Or Graphic = 6074 Or Graphic = 6075 Or Graphic = 6078 Or Graphic = 6079 Or Graphic = 6081 Or Graphic = 6082 Or Graphic = 6083 Or Graphic = 6084 Then
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    
-    If Graphic = 6085 Or Graphic = 6086 Or Graphic = 6087 Or Graphic = 6088 Or _
-       Graphic = 6103 Or Graphic = 6117 Or Graphic = 6154 Or Graphic = 4912 Or _
-       Graphic = 6155 Or Graphic = 6156 Or Graphic = 6157 Or _
-       Graphic = 6518 Or Graphic = 6160 Or Graphic = 6161 Or _
-       Graphic = 6162 Or Graphic = 6163 Or Graphic = 6164 Or _
-       Graphic = 6165 Or Graphic = 6166 Or Graphic = 6167 Or Graphic = 5043 Or _
-       Graphic = 6168 Or Graphic = 6174 Or Graphic = 6175 Or Graphic = 6176 Or _
-       Graphic = 6177 Or Graphic = 6178 Or Graphic = 6193 Or Graphic = 6194 Or Graphic = 6197 Or _
-       Graphic = 6227 Or Graphic = 6228 Then
+    If Graphic = 6085 Or Graphic = 6086 Or Graphic = 6087 Or Graphic = 6088 Or Graphic = 6103 Or Graphic = 6117 Or Graphic = 6154 Or Graphic = 4912 Or Graphic = 6155 Or Graphic = 6156 Or Graphic = 6157 Or Graphic = 6518 Or Graphic = 6160 Or Graphic = 6161 Or Graphic = 6162 Or Graphic = 6163 Or Graphic = 6164 Or Graphic = 6165 Or Graphic = 6166 Or Graphic = 6167 Or Graphic = 5043 Or Graphic = 6168 Or Graphic = 6174 Or Graphic = 6175 Or Graphic = 6176 Or Graphic = 6177 Or Graphic = 6178 Or Graphic = 6193 Or Graphic = 6194 Or Graphic = 6197 Or Graphic = 6227 Or Graphic = 6228 Then
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If Graphic = 6229 Or Graphic = 888 Or Graphic = 997 Or Graphic = 1005 Or _
-       Graphic = 996 Or Graphic = 1212 Or Graphic = 1602 Or _
-       Graphic = 1605 Or Graphic = 1922 Or Graphic = 1944 Or _
-       Graphic = 1951 Or Graphic = 1952 Or Graphic = 1949 Or _
-       Graphic = 2569 Or Graphic = 3689 Or Graphic = 3690 Or _
-       Graphic = 4193 Or Graphic = 4251 Or Graphic = 4282 Or _
-       Graphic = 4283 Or Graphic = 6169 Or Graphic = 4282 Or Graphic = 4283 Or _
-       Graphic = 4284 Or Graphic = 4360 Or Graphic = 4374 Or Graphic = 4376 Or Graphic = 4440 Or _
-       Graphic = 4753 Or Graphic = 4754 Then
+    If Graphic = 6229 Or Graphic = 888 Or Graphic = 997 Or Graphic = 1005 Or Graphic = 996 Or Graphic = 1212 Or Graphic = 1602 Or Graphic = 1605 Or Graphic = 1922 Or Graphic = 1944 Or Graphic = 1951 Or Graphic = 1952 Or Graphic = 1949 Or Graphic = 2569 Or Graphic = 3689 Or Graphic = 3690 Or Graphic = 4193 Or Graphic = 4251 Or Graphic = 4282 Or Graphic = 4283 Or Graphic = 6169 Or Graphic = 4282 Or Graphic = 4283 Or Graphic = 4284 Or Graphic = 4360 Or Graphic = 4374 Or Graphic = 4376 Or Graphic = 4440 Or Graphic = 4753 Or Graphic = 4754 Then
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If Graphic = 4759 Or Graphic = 4760 Or Graphic = 4761 Or Graphic = 4801 Or _
-       Graphic = 4802 Or Graphic = 4718 Then
+    If Graphic = 4759 Or Graphic = 4760 Or Graphic = 4761 Or Graphic = 4801 Or Graphic = 4802 Or Graphic = 4718 Then
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If Graphic = 1910 Or Graphic = 1928 Or Graphic = 1929 Or Graphic = 1930 Or _
-       Graphic = 1931 Or Graphic = 3017 Or Graphic = 3019 Or _
-       Graphic = 3024 Or Graphic = 3495 Or Graphic = 3669 Or _
-       Graphic = 3722 Or Graphic = 4234 Or Graphic = 4235 Or _
-       Graphic = 4275 Or Graphic = 4286 Or Graphic = 4287 Or _
-       Graphic = 4734 Or Graphic = 4735 Or Graphic = 4736 Or _
-       Graphic = 4737 Or Graphic = 4969 Or Graphic = 4971 Or Graphic = 4972 Or _
-       Graphic = 4973 Or Graphic = 4976 Or Graphic = 5185 Or Graphic = 5186 Or Graphic = 5207 Or _
-       Graphic = 4753 Or Graphic = 4754 Then
+    If Graphic = 1910 Or Graphic = 1928 Or Graphic = 1929 Or Graphic = 1930 Or Graphic = 1931 Or Graphic = 3017 Or Graphic = 3019 Or Graphic = 3024 Or Graphic = 3495 Or Graphic = 3669 Or Graphic = 3722 Or Graphic = 4234 Or Graphic = 4235 Or Graphic = 4275 Or Graphic = 4286 Or Graphic = 4287 Or Graphic = 4734 Or Graphic = 4735 Or Graphic = 4736 Or Graphic = 4737 Or Graphic = 4969 Or Graphic = 4971 Or Graphic = 4972 Or Graphic = 4973 Or Graphic = 4976 Or Graphic = 5185 Or Graphic = 5186 Or Graphic = 5207 Or Graphic = 4753 Or Graphic = 4754 Then
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    
-    If Graphic = 5271 Or Graphic = 5272 Or Graphic = 5292 Or Graphic = 5323 Or _
-       Graphic = 5324 Or Graphic = 5325 Or Graphic = 3019 Or _
-       Graphic = 3024 Or Graphic = 3495 Or Graphic = 3669 Or _
-       Graphic = 3722 Or Graphic = 4234 Or Graphic = 4235 Or _
-       Graphic = 4275 Or Graphic = 4286 Or Graphic = 4287 Or _
-       Graphic = 4734 Or Graphic = 4735 Or Graphic = 4736 Or _
-       Graphic = 4737 Or Graphic = 4969 Or Graphic = 4971 Or Graphic = 4972 Or _
-       Graphic = 4973 Or Graphic = 4976 Or Graphic = 4977 Or Graphic = 5185 Or Graphic = 5186 Or Graphic = 5207 Or _
-       Graphic = 4753 Or Graphic = 4754 Or Graphic = 5271 Or Graphic = 5272 Or Graphic = 5292 Or _
-       Graphic = 6097 Or Graphic = 6281 Or Graphic = 6278 Or Graphic = 1168 Or Graphic = 1174 Or Graphic = 1175 Or _
-       Graphic = 1185 Or Graphic = 1186 Or Graphic = 1187 Or Graphic = 1198 Or Graphic = 2001 Then
+    If Graphic = 5271 Or Graphic = 5272 Or Graphic = 5292 Or Graphic = 5323 Or Graphic = 5324 Or Graphic = 5325 Or Graphic = 3019 Or Graphic = 3024 Or Graphic = 3495 Or Graphic = 3669 Or Graphic = 3722 Or Graphic = 4234 Or Graphic = 4235 Or Graphic = 4275 Or Graphic = 4286 Or Graphic = 4287 Or Graphic = 4734 Or Graphic = 4735 Or Graphic = 4736 Or Graphic = 4737 Or Graphic = 4969 Or Graphic = 4971 Or Graphic = 4972 Or Graphic = 4973 Or Graphic = 4976 Or Graphic = 4977 Or Graphic = 5185 Or Graphic = 5186 Or Graphic = 5207 Or Graphic = 4753 Or Graphic = 4754 Or Graphic = 5271 Or Graphic = 5272 Or Graphic = 5292 Or Graphic = 6097 Or Graphic = 6281 Or Graphic = 6278 Or Graphic = 1168 Or Graphic = 1174 Or Graphic = 1175 Or Graphic = 1185 Or Graphic = 1186 Or Graphic = 1187 Or Graphic = 1198 Or Graphic = 2001 Then
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If (Graphic >= 5323 And Graphic <= 5339) Or _
-        (Graphic >= 6128 And Graphic <= 6153) Then
+    If (Graphic >= 5323 And Graphic <= 5339) Or (Graphic >= 6128 And Graphic <= 6153) Then
         Graphic_Is_Alpha = True
         Exit Function
     
     End If
     
-    
-    
-     If Graphic = 212 Or Graphic = 1213 Or Graphic = 1214 Or Graphic = 1215 Or Graphic = 1216 Or Graphic = 1217 Or _
+    If Graphic = 212 Or Graphic = 1213 Or Graphic = 1214 Or Graphic = 1215 Or Graphic = 1216 Or Graphic = 1217 Or _
        Graphic = 1714 Or Graphic = 1715 Or Graphic = 1716 Or Graphic = 1717 Or Graphic = 1718 Or Graphic = 1719 Or _
        Graphic = 1730 Or Graphic = 1731 Or Graphic = 1732 Or Graphic = 1733 Or Graphic = 1735 Or Graphic = 1736 Or _
        Graphic = 1737 Or Graphic = 1738 Or Graphic = 1739 Or _
@@ -1353,35 +1299,31 @@ Public Function Graphic_Is_Alpha(ByVal Graphic As Long) As Boolean
         
         Graphic_Is_Alpha = True
         Exit Function
+
     End If
     
-    If (Graphic >= 4602 And Graphic <= 4615) Or _
-        (Graphic >= 4882 And Graphic <= 4914) Or _
-        (Graphic >= 4940 And Graphic <= 4949) Or _
-        (Graphic >= 4957 And Graphic <= 4969) Or _
-        (Graphic >= 5036 And Graphic <= 5053) Or _
-        (Graphic >= 4857 And Graphic <= 4871) Then
+    If (Graphic >= 4602 And Graphic <= 4615) Or (Graphic >= 4882 And Graphic <= 4914) Or (Graphic >= 4940 And Graphic <= 4949) Or (Graphic >= 4957 And Graphic <= 4969) Or (Graphic >= 5036 And Graphic <= 5053) Or (Graphic >= 4857 And Graphic <= 4871) Then
         Graphic_Is_Alpha = True
         Exit Function
     
     End If
-    
 
 End Function
 
 Public Function GrhData_Type(ByVal GrhIndex As Long) As eGrhType
         
-        Dim Temp As eGrhType
+    Dim Temp As eGrhType
 
+    ' Arboles Transparentes
+    Select Case GrhIndex
 
-            ' Arboles Transparentes
-            Select Case GrhIndex
-                Case 7000, 7001, 7002, 647, 70
-                    Temp = eGrhType.eArbol
+        Case 7000, 7001, 7002, 647, 70
+            Temp = eGrhType.eArbol
                 
-                Case Else
-                    Temp = eGrhType.eNone
-            End Select
+        Case Else
+            Temp = eGrhType.eNone
+
+    End Select
     
     GrhData_Type = Temp
         
@@ -1443,6 +1385,7 @@ Public Function LoadGrhData() As Boolean
                 'Get number of frames
                 Get handle, , .NumFrames
                 GrhDataDefault(grh).NumFrames = .NumFrames
+
                 If .NumFrames <= 0 Then GoTo ErrorHandler
                 
                 ReDim .Frames(1 To .NumFrames)
@@ -1464,8 +1407,8 @@ Public Function LoadGrhData() As Boolean
                     
                     Get handle, , .Speed
                     GrhDataDefault(grh).Speed = .Speed
+
                     If .Speed <= 0 Then GoTo ErrorHandler
-                    
                     
                     'Compute width and height
                     GrhDataDefault(grh).pixelHeight = GrhData(.Frames(1)).pixelHeight
@@ -1491,6 +1434,7 @@ Public Function LoadGrhData() As Boolean
                     'Read in normal GRH data
                     Get handle, , .FileNum
                     GrhDataDefault(grh).FileNum = .FileNum
+
                     If MAX_TEXTURE < .FileNum Then
                         MAX_TEXTURE = .FileNum
 
@@ -1527,13 +1471,13 @@ Public Function LoadGrhData() As Boolean
                     
                     Get handle, , .src.x1
                     Get handle, , .src.y1
-                    Get handle, , .src.X2
-                    Get handle, , .src.Y2
+                    Get handle, , .src.x2
+                    Get handle, , .src.y2
                     
                     .src.x1 = .src.x1
                     .src.y1 = .src.y1
-                    .src.X2 = .src.X2
-                    .src.Y2 = .src.Y2
+                    .src.x2 = .src.x2
+                    .src.y2 = .src.y2
                     GrhDataDefault(grh).src = .src
                     
                     'Compute width and height
@@ -1545,6 +1489,7 @@ Public Function LoadGrhData() As Boolean
                     GrhDataDefault(grh).TileWidth = .TileWidth
                     GrhDataDefault(grh).TileHeight = .TileHeight
                     GrhDataDefault(grh).Frames(1) = grh
+
                 End If
 
             End With
@@ -1605,6 +1550,7 @@ Function LegalPos(ByVal X As Integer, ByVal Y As Integer) As Boolean
     'End If
     
     LegalPos = True
+
 End Function
 
 Function MoveToLegalPos(ByVal X As Integer, ByVal Y As Integer) As Boolean
@@ -1651,13 +1597,14 @@ Function MoveToLegalPos(ByVal X As Integer, ByVal Y As Integer) As Boolean
 
             End If
             
-            
             ' Caspers no pueden ser ser pasados si estan "meditando"
             If .iBody = iCuerpoMuerto Or .iBody = FRAGATA_FANTASMAL Or .iBody <> iCuerpoMuerto_Legion Then
                 
                 If .FxIndex > 0 Then
                     Exit Function
+
                 End If
+
             End If
             
             ' Si no es casper, no puede pasar
@@ -1710,9 +1657,11 @@ Function InMapBounds(ByVal X As Integer, ByVal Y As Integer) As Boolean
     '*****************************************************************
     If X < XMinMapSize Or X > XMaxMapSize Or Y < YMinMapSize Or Y > YMaxMapSize Then
         Exit Function
+
     End If
     
     InMapBounds = True
+
 End Function
 
 Sub RenderScreen_FullScreen()
@@ -1723,17 +1672,15 @@ Sub RenderScreen_FullScreen()
     
     ' fps
     Mult = 2
-    
 
     Draw_Text f_Tahoma, 12, X * Mult, Y * Mult, To_Depth(9), 0, ARGB(255, 255, 255, 100), FONT_ALIGNMENT_CENTER, UserFps, False
     
-    
-    Dim Width As Long
+    Dim Width  As Long
+
     Dim Height As Long
     
     Width = FrmMain.MainViewPic.ScaleWidth
     Height = FrmMain.MainViewPic.ScaleHeight
-    
     
     ' Mapa
     X = Width - 320
@@ -1751,7 +1698,7 @@ Sub RenderScreen_FullScreen()
     X = 750 * Mult
     Y = 50 * Mult
     ' Draw_Text f_Verdana, 15, X, Y, To_Depth(9), 0, ARGB(45, 255, 70, 100), FONT_ALIGNMENT_CENTER, UsuariosOnline, False
-  '  Draw_Text f_Medieval, 30, X, Y, To_Depth(9), 0, ARGB(45, 255, 70, 255), FONT_ALIGNMENT_RIGHT, "Online: " & UsuariosOnline, True
+    '  Draw_Text f_Medieval, 30, X, Y, To_Depth(9), 0, ARGB(45, 255, 70, 255), FONT_ALIGNMENT_RIGHT, "Online: " & UsuariosOnline, True
     'Call Draw_Texture_Graphic_Gui(8, X - 360, Y - 42, To_Depth(8), 415, 60, 0, 0, 415, 60, ARGB(200, 6, 6, 120), 0, eTechnique.t_Alpha)
     
     ' comando !LIVE
@@ -1797,13 +1744,12 @@ Sub RenderScreen_MiniMap()
     #Else
         Mult = 1
     #End If
-    
         
-     Call wGL_Graphic.Use_Device(g_Captions(eCaption.cMiniMapa))
-     Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmMain.MiniMapa.ScaleWidth * 4, FrmMain.MiniMapa.ScaleHeight * 4)
-     Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
+    Call wGL_Graphic.Use_Device(g_Captions(eCaption.cMiniMapa))
+    Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmMain.MiniMapa.ScaleWidth * 4, FrmMain.MiniMapa.ScaleHeight * 4)
+    Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
      
-  If UserMoving Then
+    If UserMoving Then
         If AddtoUserPos.X <> 0 Then
             OffsetCounterX = OffsetCounterX - ScrollPixelsPerFrameX * AddtoUserPos.X * timerTicksPerFrame * CharList(UserCharIndex).Speeding
 
@@ -1895,20 +1841,20 @@ Sub RenderScreen_MiniMap()
             Select Case (.Layer)
 
                 Case 1
-                   ' Call Draw_Grh(MapData(.X, .Y).Graphic(2), DrawableX, DrawableY, To_Depth(2, .X, .Y), 1, 1, , , , eTechnique.t_Alpha)
+                    ' Call Draw_Grh(MapData(.X, .Y).Graphic(2), DrawableX, DrawableY, To_Depth(2, .X, .Y), 1, 1, , , , eTechnique.t_Alpha)
 
                 Case 2
 
                     If GrhData(MapData(.X, .Y).Graphic(3).GrhIndex).GrhType = eGrhType.eArbol Then
                         If CharList(UserCharIndex).Pos.X >= .X - 3 And CharList(UserCharIndex).Pos.X <= .Y + 3 Then
-                          '  Call Draw_Grh(MapData(.X, .Y).Graphic(3), DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , ARGB(255, 255, 255, 80), , eTechnique.t_Alpha)
+                            '  Call Draw_Grh(MapData(.X, .Y).Graphic(3), DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , ARGB(255, 255, 255, 80), , eTechnique.t_Alpha)
                         Else
-                           ' Call Draw_Grh(MapData(.X, .Y).Graphic(3), DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , , , eTechnique.t_Alpha)
+                            ' Call Draw_Grh(MapData(.X, .Y).Graphic(3), DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , , , eTechnique.t_Alpha)
 
                         End If
 
                     Else
-                       ' Call Draw_Grh(MapData(.X, .Y).Graphic(3), DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , , , eTechnique.t_Alpha)
+                        ' Call Draw_Grh(MapData(.X, .Y).Graphic(3), DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , , , eTechnique.t_Alpha)
 
                     End If
 
@@ -1920,14 +1866,15 @@ Sub RenderScreen_MiniMap()
 
                     If GrhData(MapData(.X, .Y).ObjGrh.GrhIndex).GrhType = eGrhType.eArbol Then
                         If CharList(UserCharIndex).Pos.X >= .X - 3 And CharList(UserCharIndex).Pos.X <= .Y + 3 Then
-                         '   Call Draw_Grh(MapData(.X, .Y).ObjGrh, DrawableX, DrawableY, To_Depth(3, .X, .Y, 1), 1, 1, , ARGB(255, 255, 255, 120), , eTechnique.t_Alpha)
+                            '   Call Draw_Grh(MapData(.X, .Y).ObjGrh, DrawableX, DrawableY, To_Depth(3, .X, .Y, 1), 1, 1, , ARGB(255, 255, 255, 120), , eTechnique.t_Alpha)
                         Else
                             'Call Draw_Grh(MapData(.X, .Y).ObjGrh, DrawableX, DrawableY, To_Depth(3, .X, .Y, 1), 1, 1, , , , eTechnique.t_Alpha)
 
                         End If
 
                     Else
-                       ' Call Draw_Grh(MapData(.X, .Y).ObjGrh, DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , , , eTechnique.t_Alpha)
+
+                        ' Call Draw_Grh(MapData(.X, .Y).ObjGrh, DrawableX, DrawableY, To_Depth(3, .X, .Y, 2), 1, 1, , , , eTechnique.t_Alpha)
                     End If
 
                 Case 5
@@ -1945,8 +1892,8 @@ Sub RenderScreen_MiniMap()
 
     Next Drawable
 
-
     Call wGL_Graphic_Renderer.Flush
+
 End Sub
 
 Sub RenderScreen()
@@ -1984,9 +1931,8 @@ Sub RenderScreen()
     #Else
         Mult = 1
     #End If
-
     
-  If UserMoving Then
+    If UserMoving Then
         If AddtoUserPos.X <> 0 Then
             OffsetCounterX = OffsetCounterX - ScrollPixelsPerFrameX * AddtoUserPos.X * timerTicksPerFrame * CharList(UserCharIndex).Speeding
 
@@ -2170,7 +2116,6 @@ Sub RenderScreen()
 
     Next Drawable
     
-    
     ' Consola Flotante
     Call RenderText_Console
         
@@ -2179,7 +2124,6 @@ Sub RenderScreen()
     Dim Y_Temp As Integer
 
     X_Temp = -70
-
 
     If CountDownTime > 0 Then
         If CountDownTime_Fight Then
@@ -2211,8 +2155,6 @@ Sub RenderScreen()
         
     Call Anuncio_Update_Render
         
-        
-        
     #If FullScreen = 1 Then
         
         'Call RenderScreen_FullScreen
@@ -2220,16 +2162,25 @@ Sub RenderScreen()
     
 End Sub
 
-Public Sub SetAlpha(ByRef Alpha As Single, ByVal IsActive As Boolean, ByVal min As Byte, ByVal max As Byte, ByVal Speed As Single)
-        Dim Value As Single
+Public Sub SetAlpha(ByRef Alpha As Single, _
+                    ByVal IsActive As Boolean, _
+                    ByVal min As Byte, _
+                    ByVal max As Byte, _
+                    ByVal Speed As Single)
+
+    Dim Value As Single
         
-        If (IsActive) Then
-            Value = Alpha - Speed * timerElapsedTime
-            If (Value < min) Then Alpha = min Else Alpha = Value
-        Else
-            Value = Alpha + Speed * timerElapsedTime
-            If (Value > max) Then Alpha = max Else Alpha = Value
-        End If
+    If (IsActive) Then
+        Value = Alpha - Speed * timerElapsedTime
+
+        If (Value < min) Then Alpha = min Else Alpha = Value
+    Else
+        Value = Alpha + Speed * timerElapsedTime
+
+        If (Value > max) Then Alpha = max Else Alpha = Value
+
+    End If
+
 End Sub
 
 '
@@ -2250,193 +2201,195 @@ Public Sub Draw_Grh(ByRef grh As grh, _
                     Optional ByVal FxSlot As Byte = 0, _
                     Optional NotBig As Boolean = False, _
                     Optional ByVal SoloBig As Boolean = False)
-        '<EhHeader>
-        On Error GoTo Draw_Grh_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Draw_Grh_Err
+
+    '</EhHeader>
     
-        Dim CurrentGrhIndex As Long
+    Dim CurrentGrhIndex As Long
 
-100     If grh.GrhIndex = 0 Or grh.GrhIndex > MaxGrh Then Exit Sub
+    If grh.GrhIndex = 0 Or grh.GrhIndex > MaxGrh Then Exit Sub
     
-        Dim CurrentFrame As Integer
+    Dim CurrentFrame As Integer
 
-102     CurrentFrame = 1
+    CurrentFrame = 1
 
-104     If Animate Then
-106         If grh.started > 0 Then
+    If Animate Then
+        If grh.started > 0 Then
 
-                Dim ElapsedFrames As Long
+            Dim ElapsedFrames As Long
 
-108             ElapsedFrames = Fix(0.5 * (FrameTime - grh.started) / grh.Speed)
+            ElapsedFrames = Fix(0.5 * (FrameTime - grh.started) / grh.Speed)
 
-110             If grh.Loops = INFINITE_LOOPS Or ElapsedFrames < GrhData(grh.GrhIndex).NumFrames * (grh.Loops + 1) Then
-112                 CurrentFrame = ElapsedFrames Mod GrhData(grh.GrhIndex).NumFrames + 1
+            If grh.Loops = INFINITE_LOOPS Or ElapsedFrames < GrhData(grh.GrhIndex).NumFrames * (grh.Loops + 1) Then
+                CurrentFrame = ElapsedFrames Mod GrhData(grh.GrhIndex).NumFrames + 1
 
-                Else
-114                 grh.started = 0
-
-                End If
+            Else
+                grh.started = 0
 
             End If
 
         End If
 
-        'Figure out what frame to draw (always 1 if not animated)
-116     CurrentGrhIndex = GrhData(grh.GrhIndex).Frames(CurrentFrame)
+    End If
+
+    'Figure out what frame to draw (always 1 if not animated)
+    CurrentGrhIndex = GrhData(grh.GrhIndex).Frames(CurrentFrame)
     
-        Dim W As Long
+    Dim W As Long
 
-        Dim H As Long
+    Dim H As Long
 
-118     W = TilePixelWidth
-120     H = TilePixelHeight
+    W = TilePixelWidth
+    H = TilePixelHeight
             
-122     With GrhData(CurrentGrhIndex)
-            #If ModoBig > 0 Then
+    With GrhData(CurrentGrhIndex)
+        #If ModoBig > 0 Then
 
-124             If NotBig Then
-126                 W = TilePixelWidth / 2
-128                 H = TilePixelHeight / 2
+            If NotBig Then
+                W = TilePixelWidth / 2
+                H = TilePixelHeight / 2
                 
-                End If
+            End If
             
-            #Else
+        #Else
 
-130             If SoloBig = True Then
+            If SoloBig = True Then
 
-                    ' W = TilePixelWidth * 2
-                    ' H = TilePixelHeight * 2
-                End If
+                ' W = TilePixelWidth * 2
+                ' H = TilePixelHeight * 2
+            End If
 
-            #End If
+        #End If
         
-132         If Center Then
-134             If .TileWidth <> 1 Then
-136                 X = X - Int(.TileWidth * W * 0.5) + W * 0.5
+        If Center Then
+            If .TileWidth <> 1 Then
+                X = X - Int(.TileWidth * W * 0.5) + W * 0.5
 
-                End If
+            End If
                 
-138             If .TileHeight <> 1 Then
-140                 Y = Y - Int(.TileHeight * H) + H
-
-                End If
+            If .TileHeight <> 1 Then
+                Y = Y - Int(.TileHeight * H) + H
 
             End If
 
-142         If pixelWidth <> 0 And pixelHeight <> 0 Then
-144             Draw_Texture CurrentGrhIndex, X, Y, Z, pixelWidth, pixelHeight, Colour, Rotation, Technique
-            Else
-146             Draw_Texture CurrentGrhIndex, X, Y, Z, .pixelWidth, .pixelHeight, Colour, Rotation, Technique
+        End If
 
-            End If
+        If pixelWidth <> 0 And pixelHeight <> 0 Then
+            Draw_Texture CurrentGrhIndex, X, Y, Z, pixelWidth, pixelHeight, Colour, Rotation, Technique
+        Else
+            Draw_Texture CurrentGrhIndex, X, Y, Z, .pixelWidth, .pixelHeight, Colour, Rotation, Technique
 
-        End With
+        End If
 
+    End With
 
-
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Grh_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.Mod_TileEngine.Draw_Grh " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ARGENTUM.Mod_TileEngine.Draw_Grh " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub
+
 '
 ' Dibujamos un Grh en x1
 '
 Public Sub Draw_Grh_Default(ByRef grh As grh, _
-                    ByVal X As Integer, _
-                    ByVal Y As Integer, _
-                    ByVal Z As Single, _
-                    ByVal Center As Byte, _
-                    Optional ByVal Animate As Byte = 0, _
-                    Optional ByVal killAtEnd As Byte = 0, _
-                    Optional ByVal Colour As Long = -1, _
-                    Optional ByVal Rotation As Single = 0, _
-                    Optional ByVal Technique As Integer = eTechnique.t_Default, _
-                    Optional ByVal pixelWidth As Integer = 0, _
-                    Optional ByVal pixelHeight As Integer = 0, _
-                    Optional ByVal FxSlot As Byte = 0)
-        '<EhHeader>
-        On Error GoTo Draw_Grh_Default_Err
-        '</EhHeader>
+                            ByVal X As Integer, _
+                            ByVal Y As Integer, _
+                            ByVal Z As Single, _
+                            ByVal Center As Byte, _
+                            Optional ByVal Animate As Byte = 0, _
+                            Optional ByVal killAtEnd As Byte = 0, _
+                            Optional ByVal Colour As Long = -1, _
+                            Optional ByVal Rotation As Single = 0, _
+                            Optional ByVal Technique As Integer = eTechnique.t_Default, _
+                            Optional ByVal pixelWidth As Integer = 0, _
+                            Optional ByVal pixelHeight As Integer = 0, _
+                            Optional ByVal FxSlot As Byte = 0)
+
+    '<EhHeader>
+    On Error GoTo Draw_Grh_Default_Err
+
+    '</EhHeader>
     
-        Dim CurrentGrhIndex As Long
+    Dim CurrentGrhIndex As Long
 
-100     If grh.GrhIndex = 0 Or grh.GrhIndex > MaxGrh Then Exit Sub
+    If grh.GrhIndex = 0 Or grh.GrhIndex > MaxGrh Then Exit Sub
     
-        Dim CurrentFrame As Integer
+    Dim CurrentFrame As Integer
 
-102     CurrentFrame = 1
+    CurrentFrame = 1
 
-104     If Animate Then
-106         If grh.started > 0 Then
+    If Animate Then
+        If grh.started > 0 Then
 
-                Dim ElapsedFrames As Long
+            Dim ElapsedFrames As Long
 
-108             ElapsedFrames = Fix(0.5 * (FrameTime - grh.started) / grh.Speed)
+            ElapsedFrames = Fix(0.5 * (FrameTime - grh.started) / grh.Speed)
 
-110             If grh.Loops = INFINITE_LOOPS Or ElapsedFrames < GrhDataDefault(grh.GrhIndex).NumFrames * (grh.Loops + 1) Then
-112                 CurrentFrame = ElapsedFrames Mod GrhDataDefault(grh.GrhIndex).NumFrames + 1
+            If grh.Loops = INFINITE_LOOPS Or ElapsedFrames < GrhDataDefault(grh.GrhIndex).NumFrames * (grh.Loops + 1) Then
+                CurrentFrame = ElapsedFrames Mod GrhDataDefault(grh.GrhIndex).NumFrames + 1
 
-                Else
-114                 grh.started = 0
-
-                End If
+            Else
+                grh.started = 0
 
             End If
 
         End If
 
-        'Figure out what frame to draw (always 1 if not animated)
-116     CurrentGrhIndex = GrhDataDefault(grh.GrhIndex).Frames(CurrentFrame)
+    End If
+
+    'Figure out what frame to draw (always 1 if not animated)
+    CurrentGrhIndex = GrhDataDefault(grh.GrhIndex).Frames(CurrentFrame)
     
-        Dim W As Long
+    Dim W As Long
 
-        Dim H As Long
+    Dim H As Long
 
-118     W = TilePixelWidth
-120     H = TilePixelHeight
+    W = TilePixelWidth
+    H = TilePixelHeight
             
-122     With GrhDataDefault(CurrentGrhIndex)
+    With GrhDataDefault(CurrentGrhIndex)
         
-132         If Center Then
-134             If .TileWidth <> 1 Then
-136                 X = X - Int(.TileWidth * W * 0.5) + W * 0.5
+        If Center Then
+            If .TileWidth <> 1 Then
+                X = X - Int(.TileWidth * W * 0.5) + W * 0.5
 
-                End If
+            End If
                 
-138             If .TileHeight <> 1 Then
-140                 Y = Y - Int(.TileHeight * H) + H
-
-                End If
+            If .TileHeight <> 1 Then
+                Y = Y - Int(.TileHeight * H) + H
 
             End If
 
-142         If pixelWidth <> 0 And pixelHeight <> 0 Then
-144             Draw_Texture_Default CurrentGrhIndex, X, Y, Z, pixelWidth, pixelHeight, Colour, Rotation, Technique
-            Else
-146             Draw_Texture_Default CurrentGrhIndex, X, Y, Z, .pixelWidth, .pixelHeight, Colour, Rotation, Technique
+        End If
 
-            End If
+        If pixelWidth <> 0 And pixelHeight <> 0 Then
+            Draw_Texture_Default CurrentGrhIndex, X, Y, Z, pixelWidth, pixelHeight, Colour, Rotation, Technique
+        Else
+            Draw_Texture_Default CurrentGrhIndex, X, Y, Z, .pixelWidth, .pixelHeight, Colour, Rotation, Technique
 
-        End With
+        End If
 
+    End With
 
-
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Grh_Default_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.Mod_TileEngine.Draw_Grh_Default " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ARGENTUM.Mod_TileEngine.Draw_Grh_Default " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub
+
 Public Sub Draw_GrhFX(ByVal CharIndex As Integer, _
                       ByVal FxSlot As Byte, _
                       ByRef grh As grh, _
@@ -2499,6 +2452,7 @@ Public Sub Draw_GrhFX(ByVal CharIndex As Integer, _
                 CharList(CharIndex).FxList(FxSlot).started = 0
             Else
                 CharList(CharIndex).fX.started = 0
+
             End If
             
             Exit Sub
@@ -2508,7 +2462,7 @@ Public Sub Draw_GrhFX(ByVal CharIndex As Integer, _
     End If
     
     If grh.AnimacionContador > grh.CantAnim * 0.6 Then
-       If grh.Alpha < 220 Then
+        If grh.Alpha < 220 Then
             grh.Alpha = grh.Alpha + 1
 
         End If
@@ -2598,14 +2552,17 @@ Public Sub Draw_Grh_Menu(ByRef grh As grh, _
 
     On Error GoTo error
 
-      If grh.GrhIndex = 0 Or grh.GrhIndex > MaxGrh Then Exit Sub
+    If grh.GrhIndex = 0 Or grh.GrhIndex > MaxGrh Then Exit Sub
     
     Dim CurrentFrame As Integer
+
     CurrentFrame = 1
 
     If Animate Then
         If grh.started > 0 Then
+
             Dim ElapsedFrames As Long
+
             ElapsedFrames = Fix(0.5 * (FrameTime - grh.started) / grh.Speed)
 
             If grh.Loops = INFINITE_LOOPS Or ElapsedFrames < GrhData(grh.GrhIndex).NumFrames * (grh.Loops + 1) Then
@@ -2613,6 +2570,7 @@ Public Sub Draw_Grh_Menu(ByRef grh As grh, _
 
             Else
                 grh.started = 0
+
             End If
 
         End If
@@ -2668,9 +2626,10 @@ Public Sub Draw_Grh_Menu(ByRef grh As grh, _
 
 error:
 
-        'MsgBox "Ocurrió un error inesperado, por favor comuniquelo a los administradores del juego." & vbCrLf & "Descripción del error: " & vbCrLf & err.Description, vbExclamation, "[ " & err.Number & " ] Error"
+    'MsgBox "Ocurrió un error inesperado, por favor comuniquelo a los administradores del juego." & vbCrLf & "Descripción del error: " & vbCrLf & err.Description, vbExclamation, "[ " & err.Number & " ] Error"
 
 End Sub
+
 '
 ' Dibujamos una textura
 '
@@ -2685,130 +2644,141 @@ Public Sub Draw_Texture(ByVal GrhIndex As Long, _
                         ByVal Technique As eTechnique, _
                         Optional ByVal NotBig As Boolean = False)
 
-        '<EhHeader>
-        On Error GoTo Draw_Texture_Err
+    '<EhHeader>
+    On Error GoTo Draw_Texture_Err
 
-        '</EhHeader>
+    '</EhHeader>
                    
-        Dim destination As wGL_Rectangle, Source As wGL_Rectangle
+    Dim destination As wGL_Rectangle, Source As wGL_Rectangle
 
-        Dim data()      As Byte
+    Dim data()      As Byte
     
-        On Error GoTo ErrHandler
+    On Error GoTo ErrHandler
     
-100     With GrhData(GrhIndex)
+    With GrhData(GrhIndex)
 
-            If .Alpha Then
-                Technique = eTechnique.t_Alpha
+        If .Alpha Then
+            Technique = eTechnique.t_Alpha
 
-            End If
+        End If
              
-            If .FileNum = 5443 Then
-                Debug.Print .FileNum
-            End If
+        ' LwK
+        'If .FileNum = 5443 Then
+        '    Debug.Print .FileNum
+
+        'End If
             
-106         If g_Textures(.FileNum) = 0 Then
+        If g_Textures(.FileNum) = 0 Then
               
-              
-                #If Testeo = 1 Then
-                    
-                    #If ModoBig = 0 Then
-                        data = LoadBytes("resource\pngs1\" & CStr(.FileNum) & ".PNG")
-                    #Else
-                        data = LoadBytes("resource\pngs2\" & CStr(.FileNum) & ".PNG")
-                    #End If
+            #If Testeo = 1 Then
 
+                #If ModoBig = 0 Then
+                    data = LoadBytes("AO\resource\pngs1\" & CStr(.FileNum) & ".PNG")
                 #Else
-                    Call Get_Image(DirGraficos & GRH_RESOURCE_FILE, CStr(.FileNum), data)
+                    data = LoadBytes("AO\resource\pngs2\" & CStr(.FileNum) & ".PNG")
                 #End If
+
+            #Else
+                Call Get_Image(DirGraficos & GRH_RESOURCE_FILE, CStr(.FileNum), data)
+            #End If
                     
-                '#End If
+            '#End If
+            
                 
-                Dim Material As Integer
+            Dim Material As Integer
 
-110             Material = wGL_Graphic_Renderer.Create_Material
-112             g_Textures(.FileNum) = Material
-114             Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
+            Material = wGL_Graphic_Renderer.Create_Material
+            g_Textures(.FileNum) = Material
+            Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
                 
-            End If
+        End If
         
-116         destination.x1 = X: destination.y1 = Y: destination.X2 = X + Width: destination.Y2 = Y + Height
+        destination.x1 = X: destination.y1 = Y: destination.x2 = X + Width: destination.y2 = Y + Height
         
-118         Call wGL_Graphic_Renderer.Draw(destination, .src, Depth, Rotation, Colour, g_Textures(.FileNum), Techniques(Technique))
+        Call wGL_Graphic_Renderer.Draw(destination, .src, Depth, Rotation, Colour, g_Textures(.FileNum), Techniques(Technique))
 
-        End With
+    End With
     
-        Exit Sub
+    Exit Sub
 
 ErrHandler:
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Texture_Err:
-        LogError err.Description & vbCrLf & "in Draw_Texture " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in Draw_Texture " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Draw_Texture_Default(ByVal GrhIndex As Long, _
-                        ByVal X As Integer, _
-                        ByVal Y As Integer, _
-                        ByVal Depth As Single, _
-                        ByVal Width As Long, _
-                        ByVal Height As Long, _
-                        ByVal Colour As Long, _
-                        ByVal Rotation As Single, _
-                        ByVal Technique As eTechnique)
+                                ByVal X As Integer, _
+                                ByVal Y As Integer, _
+                                ByVal Depth As Single, _
+                                ByVal Width As Long, _
+                                ByVal Height As Long, _
+                                ByVal Colour As Long, _
+                                ByVal Rotation As Single, _
+                                ByVal Technique As eTechnique)
 
-        '<EhHeader>
-        On Error GoTo Draw_Texture_Err
+    '<EhHeader>
+    On Error GoTo Draw_Texture_Err
 
-        '</EhHeader>
+    '</EhHeader>
                    
-        Dim destination As wGL_Rectangle, Source As wGL_Rectangle
+    Dim destination As wGL_Rectangle, Source As wGL_Rectangle
 
-        Dim data()      As Byte
+    Dim data()      As Byte
     
-        On Error GoTo ErrHandler
+    On Error GoTo ErrHandler
     
-100     With GrhDataDefault(GrhIndex)
+    With GrhDataDefault(GrhIndex)
 
-            If .Alpha Then
-                Technique = eTechnique.t_Alpha
+        If .Alpha Then
+            Technique = eTechnique.t_Alpha
 
-            End If
-             
+        End If
             
-106         If g_Textures(.FileNum) = 0 Then
-              
+        If g_Textures(.FileNum) = 0 Then
+            
+            #If Testeo = 1 Then
+                    
+                #If ModoBig = 0 Then
+                    data = LoadBytes("AO\resource\pngs1\" & CStr(.FileNum) & ".PNG")
+                #Else
+                    data = LoadBytes("AO\resource\pngs2\" & CStr(.FileNum) & ".PNG")
+                #End If
+
+            #Else
                 Call Get_Image(DirGraficos & GRH_RESOURCE_FILE_DEFAULT, CStr(.FileNum), data)
+            #End If
                 
-                Dim Material As Integer
+            Dim Material As Integer
 
-110             Material = wGL_Graphic_Renderer.Create_Material
-112             g_Textures(.FileNum) = Material
-114             Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
+            Material = wGL_Graphic_Renderer.Create_Material
+            g_Textures(.FileNum) = Material
+            Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
                 
-            End If
+        End If
         
-116         destination.x1 = X: destination.y1 = Y: destination.X2 = X + Width: destination.Y2 = Y + Height
+        destination.x1 = X: destination.y1 = Y: destination.x2 = X + Width: destination.y2 = Y + Height
         
-118         Call wGL_Graphic_Renderer.Draw(destination, .src, Depth, Rotation, Colour, g_Textures(.FileNum), Techniques(Technique))
+        Call wGL_Graphic_Renderer.Draw(destination, .src, Depth, Rotation, Colour, g_Textures(.FileNum), Techniques(Technique))
 
-        End With
+    End With
     
-        Exit Sub
+    Exit Sub
 
 ErrHandler:
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Texture_Err:
-        LogError err.Description & vbCrLf & "in Draw_Texture " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in Draw_Texture " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Draw_Texture_Graphic(ByVal FileNum As Long, _
@@ -2825,54 +2795,62 @@ Public Sub Draw_Texture_Graphic(ByVal FileNum As Long, _
                                 ByVal Rotation As Single, _
                                 ByVal Technique As Integer)
 
-        '<EhHeader>
-        On Error GoTo Draw_Texture_Graphic_Err
+    '<EhHeader>
+    On Error GoTo Draw_Texture_Graphic_Err
 
-        '</EhHeader>
+    '</EhHeader>
                    
-        Dim destination As wGL_Rectangle, Source As wGL_Rectangle
+    Dim destination As wGL_Rectangle, Source As wGL_Rectangle
                    
-        Dim sX1         As Single, sX2 As Single
+    Dim sX1         As Single, sX2 As Single
 
-        Dim sY1         As Single, sY2 As Single
+    Dim sY1         As Single, sY2 As Single
 
-        Dim data()      As Byte
+    Dim data()      As Byte
 
-        Dim Material    As Integer
+    Dim Material    As Integer
     
-        On Error GoTo ErrHandler
+    On Error GoTo ErrHandler
 
-100     If g_Textures(FileNum) = 0 Then
+    If g_Textures(FileNum) = 0 Then
+        
+        #If Testeo = 1 Then
+                    
+            #If ModoBig = 0 Then
+                data = LoadBytes("AO\resource\pngs1\" & CStr(FileNum) & ".PNG")
+            #Else
+                data = LoadBytes("AO\resource\pngs2\" & CStr(FileNum) & ".PNG")
+            #End If
 
-            
+        #Else
             Call Get_Image(DirGraficos & GRH_RESOURCE_FILE, CStr(FileNum), data)
-
+        #End If
         
-104         Material = wGL_Graphic_Renderer.Create_Material
-106         g_Textures(FileNum) = Material
+        Material = wGL_Graphic_Renderer.Create_Material
+        g_Textures(FileNum) = Material
    
-108         Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
+        Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
 
-        End If
+    End If
         
-110     sX1 = sX / Width
-112     sY1 = sY / Height
+    sX1 = sX / Width
+    sY1 = sY / Height
     
-114     destination.x1 = X: destination.y1 = Y: destination.X2 = X + Width: destination.Y2 = Y + Height
-116     Source.x1 = sX1: Source.y1 = sY1: Source.X2 = sY1 + pixelWidth / Width: Source.Y2 = sX1 + pixelHeight / Height
+    destination.x1 = X: destination.y1 = Y: destination.x2 = X + Width: destination.y2 = Y + Height
+    Source.x1 = sX1: Source.y1 = sY1: Source.x2 = sY1 + pixelWidth / Width: Source.y2 = sX1 + pixelHeight / Height
         
-118     Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures(FileNum), Techniques(Technique))
+    Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures(FileNum), Techniques(Technique))
     
-        Exit Sub
+    Exit Sub
 ErrHandler:
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Texture_Graphic_Err:
-        LogError err.Description & vbCrLf & "in Draw_Texture_Graphic " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in Draw_Texture_Graphic " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Draw_Texture_Graphic_Gui(ByVal FileNum As Long, _
@@ -2889,166 +2867,169 @@ Public Sub Draw_Texture_Graphic_Gui(ByVal FileNum As Long, _
                                     ByVal Rotation As Single, _
                                     ByVal Technique As eTechnique)
 
-        '<EhHeader>
-        On Error GoTo Draw_Texture_Graphic_Err
+    '<EhHeader>
+    On Error GoTo Draw_Texture_Graphic_Err
 
-        '</EhHeader>
+    '</EhHeader>
                    
-        Dim destination As wGL_Rectangle, Source As wGL_Rectangle
+    Dim destination As wGL_Rectangle, Source As wGL_Rectangle
                    
-        Dim sX1         As Single, sX2 As Single
+    Dim sX1         As Single, sX2 As Single
 
-        Dim sY1         As Single, sY2 As Single
+    Dim sY1         As Single, sY2 As Single
 
-        Dim data()      As Byte
+    Dim data()      As Byte
 
-        Dim Material    As Integer
+    Dim Material    As Integer
         
-        On Error GoTo ErrHandler
+    On Error GoTo ErrHandler
 
-100     If g_Textures_Gui(FileNum) = 0 Then
-            data = LoadBytes("\resource\interface\gui\" & CStr(FileNum) & ".png")
-104         Material = wGL_Graphic_Renderer.Create_Material
-106         g_Textures_Gui(FileNum) = Material
-108         Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
+    If g_Textures_Gui(FileNum) = 0 Then
+        data = LoadBytes("\AO\resource\interface\gui\" & CStr(FileNum) & ".png")
+        Material = wGL_Graphic_Renderer.Create_Material
+        g_Textures_Gui(FileNum) = Material
+        Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
 
-        End If
+    End If
         
-110     sX1 = sX / Width
-112     sY1 = sY / Height
+    sX1 = sX / Width
+    sY1 = sY / Height
     
-114      destination.x1 = X: destination.y1 = Y: destination.X2 = X + Width: destination.Y2 = Y + Height
-116     Source.x1 = sX1: Source.y1 = sY1: Source.X2 = sY1 + pixelWidth / Width: Source.Y2 = sX1 + pixelHeight / Height
+    destination.x1 = X: destination.y1 = Y: destination.x2 = X + Width: destination.y2 = Y + Height
+    Source.x1 = sX1: Source.y1 = sY1: Source.x2 = sY1 + pixelWidth / Width: Source.y2 = sX1 + pixelHeight / Height
         
-118     Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures_Gui(FileNum), Techniques(Technique))
+    Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures_Gui(FileNum), Techniques(Technique))
     
-        Exit Sub
+    Exit Sub
 ErrHandler:
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Texture_Graphic_Err:
-        LogError err.Description & vbCrLf & "in Draw_Texture_Graphic " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in Draw_Texture_Graphic " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Draw_Avatar(ByVal FileNum As Long, _
-                                ByVal X As Integer, _
-                                ByVal Y As Integer, _
-                                ByVal Depth As Single, _
-                                ByVal Width As Integer, _
-                                ByVal Height As Integer, _
-                                ByVal sX As Single, _
-                                ByVal sY As Single, _
-                                ByVal pixelWidth As Integer, _
-                                ByVal pixelHeight As Integer, _
-                                ByVal Colour As Long, _
-                                ByVal Rotation As Single, _
-                                ByVal Technique As eTechnique)
-        '<EhHeader>
-        On Error GoTo Draw_Avatar_Err
-        '</EhHeader>
+                       ByVal X As Integer, _
+                       ByVal Y As Integer, _
+                       ByVal Depth As Single, _
+                       ByVal Width As Integer, _
+                       ByVal Height As Integer, _
+                       ByVal sX As Single, _
+                       ByVal sY As Single, _
+                       ByVal pixelWidth As Integer, _
+                       ByVal pixelHeight As Integer, _
+                       ByVal Colour As Long, _
+                       ByVal Rotation As Single, _
+                       ByVal Technique As eTechnique)
+
+    '<EhHeader>
+    On Error GoTo Draw_Avatar_Err
+
+    '</EhHeader>
                    
-        Dim destination As wGL_Rectangle, Source As wGL_Rectangle
+    Dim destination As wGL_Rectangle, Source As wGL_Rectangle
                    
-        Dim sX1         As Single, sX2 As Single
-        Dim sY1         As Single, sY2 As Single
-        Dim data()      As Byte
-        Dim Material    As Integer
+    Dim sX1         As Single, sX2 As Single
+
+    Dim sY1         As Single, sY2 As Single
+
+    Dim data()      As Byte
+
+    Dim Material    As Integer
         
-        On Error GoTo ErrHandler
-100     If g_Textures_Avatars(FileNum) = 0 Then
-              Call Get_Image(DirGraficos & AVATARS_RESOURCE_FILE, CStr(FileNum), data, True)
-104         Material = wGL_Graphic_Renderer.Create_Material
-106         g_Textures_Avatars(FileNum) = Material
-108         Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
-        End If
+    On Error GoTo ErrHandler
+
+    If g_Textures_Avatars(FileNum) = 0 Then
+        Call Get_Image(DirGraficos & AVATARS_RESOURCE_FILE, CStr(FileNum), data, True)
+        Material = wGL_Graphic_Renderer.Create_Material
+        g_Textures_Avatars(FileNum) = Material
+        Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
+
+    End If
         
-110     sX1 = sX / Width
-112     sY1 = sY / Height
+    sX1 = sX / Width
+    sY1 = sY / Height
     
-114     destination.x1 = X: destination.y1 = Y: destination.X2 = X + Width: destination.Y2 = Y + Height
-116     Source.x1 = sX1: Source.y1 = sY1: Source.X2 = sY1 + pixelWidth / Width: Source.Y2 = sX1 + pixelHeight / Height
+    destination.x1 = X: destination.y1 = Y: destination.x2 = X + Width: destination.y2 = Y + Height
+    Source.x1 = sX1: Source.y1 = sY1: Source.x2 = sY1 + pixelWidth / Width: Source.y2 = sX1 + pixelHeight / Height
         
-118     Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures_Avatars(FileNum), Techniques(Technique))
+    Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures_Avatars(FileNum), Techniques(Technique))
     
-        Exit Sub
+    Exit Sub
 ErrHandler:
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Avatar_Err:
-        LogError err.Description & vbCrLf & _
-           "in Draw_Avatar " & _
-           "at line " & Erl
+    LogError err.Description & vbCrLf & "in Draw_Avatar " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Draw_Texture_Graphic_MiniMap(ByVal FileNum As Long, _
-   ByVal X As Integer, _
-   ByVal Y As Integer, _
-   ByVal Depth As Single, _
-   ByVal Width As Integer, _
-   ByVal Height As Integer, _
-   ByVal sX As Single, _
-   ByVal sY As Single, _
-   ByVal pixelWidth As Integer, _
-   ByVal pixelHeight As Integer, _
-   ByVal Colour As Long, _
-   ByVal Rotation As Single, _
-   ByVal Technique As eTechnique)
+                                        ByVal X As Integer, _
+                                        ByVal Y As Integer, _
+                                        ByVal Depth As Single, _
+                                        ByVal Width As Integer, _
+                                        ByVal Height As Integer, _
+                                        ByVal sX As Single, _
+                                        ByVal sY As Single, _
+                                        ByVal pixelWidth As Integer, _
+                                        ByVal pixelHeight As Integer, _
+                                        ByVal Colour As Long, _
+                                        ByVal Rotation As Single, _
+                                        ByVal Technique As eTechnique)
 
-        '<EhHeader>
-        On Error GoTo Draw_Texture_Graphic_Err
+    '<EhHeader>
+    On Error GoTo Draw_Texture_Graphic_Err
 
-        '</EhHeader>
+    '</EhHeader>
                    
-        Dim destination As wGL_Rectangle, Source As wGL_Rectangle
+    Dim destination As wGL_Rectangle, Source As wGL_Rectangle
                    
-        Dim sX1         As Single, sX2 As Single
+    Dim sX1         As Single, sX2 As Single
 
-        Dim sY1         As Single, sY2 As Single
+    Dim sY1         As Single, sY2 As Single
 
-        Dim data()      As Byte
+    Dim data()      As Byte
 
-        Dim Material    As Integer
+    Dim Material    As Integer
 
-        Dim filePath As String
+    Dim filePath    As String
         
-        On Error GoTo ErrHandler
+    On Error GoTo ErrHandler
         
-100     If g_Textures_MiniMapa(FileNum) = 0 Then
-            data = LoadBytes(Replace(MiniMap_FilePath, App.path, vbNullString) & CStr(FileNum) & ".png")
-104         Material = wGL_Graphic_Renderer.Create_Material
-106         g_Textures_MiniMapa(FileNum) = Material
-108         Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
+    If g_Textures_MiniMapa(FileNum) = 0 Then
+        data = LoadBytes(Replace(MiniMap_FilePath, App.path, vbNullString) & CStr(FileNum) & ".png")
+        Material = wGL_Graphic_Renderer.Create_Material
+        g_Textures_MiniMapa(FileNum) = Material
+        Call wGL_Graphic_Renderer.Update_Material_Texture(Material, 0, wGL_Graphic.Create_Texture_From_Image(data))
 
-        End If
+    End If
         
-110     sX1 = sX / Width
-112     sY1 = sY / Height
+    sX1 = sX / Width
+    sY1 = sY / Height
     
-114     destination.x1 = X: destination.y1 = Y: destination.X2 = X + Width: destination.Y2 = Y + Height
-116     Source.x1 = sX1: Source.y1 = sY1: Source.X2 = sY1 + pixelWidth / Width: Source.Y2 = sX1 + pixelHeight / Height
+    destination.x1 = X: destination.y1 = Y: destination.x2 = X + Width: destination.y2 = Y + Height
+    Source.x1 = sX1: Source.y1 = sY1: Source.x2 = sY1 + pixelWidth / Width: Source.y2 = sX1 + pixelHeight / Height
         
-118     Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures_MiniMapa(FileNum), Techniques(Technique))
+    Call wGL_Graphic_Renderer.Draw(destination, Source, Depth, Rotation, Colour, g_Textures_MiniMapa(FileNum), Techniques(Technique))
     
-        Exit Sub
+    Exit Sub
 ErrHandler:
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Draw_Texture_Graphic_Err:
-        LogError err.Description & vbCrLf & _
-           "in Draw_Texture_Graphic " & _
-           "at line " & Erl
+    LogError err.Description & vbCrLf & "in Draw_Texture_Graphic " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' Dibujamos un Texto
@@ -3068,23 +3049,26 @@ Public Sub Draw_Text(ByVal Font As eFonts, _
 
     If Text = vbNullString Then Exit Sub
     
-    
     #If ModoBig > 0 Then
+
         If NotBig = False Then
             Size = (Size * 2)
+
         End If
-      '  Font = eFonts.f_Booter
+
+        '  Font = eFonts.f_Booter
     #End If
-    
     
     If Shadow Then
         Call wGL_Graphic_Renderer.Draw_Text(Font, Size, X - 1, Y, Depth - 0.0000001, &HFF212121, Alineation, Text)
         Call wGL_Graphic_Renderer.Draw_Text(Font, Size, X + 1, Y, Depth - 0.0000001, &HFF212121, Alineation, Text)
         Call wGL_Graphic_Renderer.Draw_Text(Font, Size, X, Y - 1, Depth - 0.0000001, &HFF212121, Alineation, Text)
         Call wGL_Graphic_Renderer.Draw_Text(Font, Size, X, Y + 1, Depth - 0.0000001, &HFF212121, Alineation, Text)
+
     End If
 
     Call wGL_Graphic_Renderer.Draw_Text(Font, Size, X, Y, Depth, Colour, Alineation, Text)
+
 End Sub
 
 Function ShowNextFrame() As Boolean
@@ -3100,21 +3084,22 @@ Function ShowNextFrame() As Boolean
 
     If ClientSetup.bFps = 0 Then ClientSetup.bFps = 255
     
-      If ((GetTickCount() - FrameTime >= TARGET_FPS_MS / ClientSetup.bFps) Or (ClientSetup.bFps = 1)) Or (ClientSetup.bFps = 2) Then
+    If ((GetTickCount() - FrameTime >= TARGET_FPS_MS / ClientSetup.bFps) Or (ClientSetup.bFps = 1)) Or (ClientSetup.bFps = 2) Then
         
         If Not MirandoCuenta Then
             Call wGL_Graphic.Use_Device(&H0)
             Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, &H0, 1#, 0)
             
             Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmMain.MainViewPic.ScaleWidth, FrmMain.MainViewPic.ScaleHeight)
-
             
             If (ModoNoche) Then
                 Call SetAmbientColor(96, 96, 96, 255)
+
             End If
             
             If Not UserCiego Then
                 Call RenderScreen
+
             End If
             
             Call Dialogos.Render
@@ -3122,17 +3107,19 @@ Function ShowNextFrame() As Boolean
     
             If (ModoNoche) Then
                 Call SetAmbientColor(255, 255, 255, 255)
+
             End If
             
             Call wGL_Graphic_Renderer.Flush
+
         End If
         
         FrameTime = GetTickCount
         timerElapsedTime = GetElapsedTime
         timerTicksPerFrame = timerElapsedTime * engineBaseSpeed
-
         
         ShowNextFrame = True
+
     End If
 
 End Function
@@ -3164,6 +3151,7 @@ Private Function CharIsGuild(ByVal Char As Integer) As Boolean
         End If
         
         CharIsGuild = False
+
     End With
 
 End Function
@@ -3284,9 +3272,12 @@ Private Sub CharRender(ByVal CharIndex As Long, _
                     If NpcIndex_MouseHover <> .NpcIndex Then
                         NpcIndex_MouseHover = .NpcIndex
                         CharIndex_MouseHover = CharIndex
+
                     End If
+
                 Else
                     NpcIndex_MouseHover = 0
+
                 End If
                 
                 If .ColorNick = eNickColor.ieCastleGuild Then
@@ -3637,35 +3628,35 @@ Private Sub CharRender(ByVal CharIndex As Long, _
 
         End If
                 
-           Dim Colour As Long
+        Dim Colour As Long
 
-            Colour = ARGB(255, 255, 255, ClientSetup.bAlpha)
+        Colour = ARGB(255, 255, 255, ClientSetup.bAlpha)
             
         ' Draw Meditation
         If .FxIndex <> 0 And .fX.started <> 0 Then
             Call Draw_GrhFX(CharIndex, 0, .fX, PixelOffsetX + FxData(.FxIndex).OffsetX, PixelOffsetY + (FxData(.FxIndex).OffsetY * Mult), To_Depth(3, PosX, PosY, 10), 1, 1, 1, Colour, , eTechnique.t_Alpha)
+
         End If
         
-        
-        Dim I As Long
+        Dim i As Long
         
         ' Draw Effects
         If .FxCount > 0 Then
 
-            For I = 1 To .FxCount
+            For i = 1 To .FxCount
 
-                If .FxList(I).FxIndex > 0 And .FxList(I).started <> 0 Then
+                If .FxList(i).FxIndex > 0 And .FxList(i).started <> 0 Then
     
-                    Call Draw_GrhFX(CharIndex, I, .FxList(I), PixelOffsetX + FxData(.FxList(I).FxIndex).OffsetX, PixelOffsetY + (FxData(.FxList(I).FxIndex).OffsetY * Mult), To_Depth(3, PosX, PosY, 10 + A), 1, 1, 1, Colour, , eTechnique.t_Alpha)
+                    Call Draw_GrhFX(CharIndex, i, .FxList(i), PixelOffsetX + FxData(.FxList(i).FxIndex).OffsetX, PixelOffsetY + (FxData(.FxList(i).FxIndex).OffsetY * Mult), To_Depth(3, PosX, PosY, 10 + A), 1, 1, 1, Colour, , eTechnique.t_Alpha)
 
                 End If
 
-                If .FxList(I).started = 0 Then
-                    .FxList(I).FxIndex = 0
+                If .FxList(i).started = 0 Then
+                    .FxList(i).FxIndex = 0
 
                 End If
 
-            Next I
+            Next i
 
             If .FxList(.FxCount).started = 0 Then
                 .FxCount = .FxCount - 1
@@ -3673,17 +3664,16 @@ Private Sub CharRender(ByVal CharIndex As Long, _
             End If
 
         End If
-        
-
 
     End With
 
 End Sub
 
-Public Sub SetCharacterFx(ByVal CharIndex As Integer, ByVal fX As Integer, ByVal Loops As Integer)
+Public Sub SetCharacterFx(ByVal CharIndex As Integer, _
+                          ByVal fX As Integer, _
+                          ByVal Loops As Integer)
     
     On Error GoTo SetCharacterFx_Err
-    
 
     If fX = 0 Then Exit Sub
 
@@ -3703,14 +3693,15 @@ Public Sub SetCharacterFx(ByVal CharIndex As Integer, ByVal fX As Integer, ByVal
         Call InitGrh(.FxList(indice), FxData(fX).Animacion, , Loops)
             
     End With
-
     
     Exit Sub
 
 SetCharacterFx_Err:
+
     Resume Next
     
 End Sub
+
 Public Function Char_FX_Group_Next_Open(ByVal char_index As Integer) As Integer
 
     '*****************************************************************
@@ -3752,6 +3743,7 @@ ErrorHandler:
     Char_FX_Group_Next_Open = 1
 
 End Function
+
 Public Sub SetCharacterFxMap(ByVal X As Integer, _
                              ByVal Y As Integer, _
                              ByVal fX As Integer, _
@@ -3769,6 +3761,7 @@ Public Sub SetCharacterFxMap(ByVal X As Integer, _
             Call InitGrh(.fX, FxData(fX).Animacion)
         
             .fX.Loops = Loops
+
         End If
 
     End With
@@ -3779,36 +3772,39 @@ End Sub
 Public Function GetCharacterDimension(ByVal CharIndex As Integer, _
                                       ByRef RangeX As Single, _
                                       ByRef RangeY As Single)
-        '<EhHeader>
-        On Error GoTo GetCharacterDimension_Err
-        '</EhHeader>
 
-100     With CharList(CharIndex)
+    '<EhHeader>
+    On Error GoTo GetCharacterDimension_Err
+
+    '</EhHeader>
+
+    With CharList(CharIndex)
     
-102         If (.iBody <> 0) Then
-104             RangeX = GrhData(.Body.Walk(.Heading).GrhIndex).TileWidth
-106             RangeY = GrhData(.Body.Walk(.Heading).GrhIndex).TileHeight
-            End If
+        If (.iBody <> 0) Then
+            RangeX = GrhData(.Body.Walk(.Heading).GrhIndex).TileWidth
+            RangeY = GrhData(.Body.Walk(.Heading).GrhIndex).TileHeight
+
+        End If
             
-108         If (.iHead <> 0) Then
-110             If (GrhData(.Head.Head(.Heading).GrhIndex).TileWidth > RangeX) Then
-112                 RangeX = GrhData(.Head.Head(.Heading).GrhIndex).TileWidth
-                End If
+        If (.iHead <> 0) Then
+            If (GrhData(.Head.Head(.Heading).GrhIndex).TileWidth > RangeX) Then
+                RangeX = GrhData(.Head.Head(.Heading).GrhIndex).TileWidth
+
+            End If
                 
-114             RangeY = RangeY + GrhData(.Head.Head(.Heading).GrhIndex).TileHeight + 2# 'Name + Guild
-            End If
+            RangeY = RangeY + GrhData(.Head.Head(.Heading).GrhIndex).TileHeight + 2# 'Name + Guild
+
+        End If
             
-        End With
+    End With
         
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 GetCharacterDimension_Err:
-        LogError err.Description & vbCrLf & _
-           "in GetCharacterDimension " & _
-           "at line " & Erl
+    LogError err.Description & vbCrLf & "in GetCharacterDimension " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 '######################
@@ -3817,12 +3813,18 @@ End Function
 '######################
 '######################
 
-Public Function ARGB(ByVal red As Long, ByVal green As Long, ByVal blue As Long, ByVal Alpha As Long) As Long
+Public Function ARGB(ByVal red As Long, _
+                     ByVal green As Long, _
+                     ByVal blue As Long, _
+                     ByVal Alpha As Long) As Long
+
     If Alpha > 127 Then
-       ARGB = ((Alpha - 128) * &H1000000 Or &H80000000) Or blue Or (green * &H100&) Or (red * &H10000)
+        ARGB = ((Alpha - 128) * &H1000000 Or &H80000000) Or blue Or (green * &H100&) Or (red * &H10000)
     Else
-       ARGB = (Alpha * &H1000000) Or blue Or (green * &H100&) Or (red * &H10000)
+        ARGB = (Alpha * &H1000000) Or blue Or (green * &H100&) Or (red * &H10000)
+
     End If
+
 End Function
 
 Public Function To_Depth(ByVal Layer As Single, _
@@ -3835,19 +3837,22 @@ Public Function To_Depth(ByVal Layer As Single, _
 End Function
 
 Public Function LoadBytes(ByVal FileName As String) As Byte()
-    Debug.Print FileName
+    'Debug.Print FileName
     Open App.path + "\" + FileName For Binary Access Read Lock Read As #1
     ReDim LoadBytes(LOF(1) - 1)
     Get #1, , LoadBytes
     Close #1
+
 End Function
+
 Public Sub SaveBytes(ByVal FileName As String, ByRef Biteritos() As Byte)
    
-    Open App.path + "\RESOURCE\MELKOR_PNGS\" + FileName For Binary Access Write Lock Write As #1
+    Open App.path + "\AO\resource\MELKOR_PNGS\" + FileName For Binary Access Write Lock Write As #1
     Put #1, , Biteritos
     Close #1
     
 End Sub
+
 Private Sub SetAmbientColor(ByVal red As Byte, _
                             ByVal green As Byte, _
                             ByVal blue As Byte, _
@@ -3871,7 +3876,6 @@ End Sub
 Public Function GetElapsedTime() As Single
     
     On Error GoTo GetElapsedTime_Err
-    
 
     '**************************************************************
     'Author: Aaron Perkins
@@ -3879,7 +3883,9 @@ Public Function GetElapsedTime() As Single
     'Gets the time that past since the last call
     '**************************************************************
     Dim Start_Time    As Currency
+
     Static end_time   As Currency
+
     Static timer_freq As Currency
 
     'Get the timer frequency
@@ -3893,13 +3899,15 @@ Public Function GetElapsedTime() As Single
     
     'Get next end time
     Call QueryPerformanceCounter(end_time)
-
     
     Exit Function
 
 GetElapsedTime_Err:
+
     Resume Next
+
 End Function
+
 Public Function GetTickCount() As Long
     ' Devolvemos el valor absoluto de la cantidad de ticks que paso desde que prendimos la PC
     

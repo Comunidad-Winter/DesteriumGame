@@ -163,6 +163,7 @@ Private Sub Command2_Click()
             Call WriteDisconnect(LoopC)
             Call FlushBuffer(LoopC)
             Call CloseSocket(LoopC)
+
         End If
 
     Next LoopC
@@ -183,9 +184,11 @@ Private Sub List1_Click()
                 Text1.Text = Text1.Text & "IdleCount: " & .Counters.IdleCount & vbCrLf
 
                 Text1.Text = Text1.Text & "ConnIDValida: " & .ConnIDValida & vbCrLf
+
             End With
 
         End If
+
     End If
 
 End Sub

@@ -5,40 +5,40 @@ Attribute VB_Name = "mViajes"
 Option Explicit
 
 Public Const TRAVEL_MAX_NPCS As Byte = 50
+
 Public Const TRAVEL_NPC      As Integer = 17
 
 Public Const TRAVEL_NPC_HOME As Integer = 916
 
-
 Private Function SearchRepeat(ByVal NpcIndex As Integer, ByRef Npcs() As tNpc) As Integer
-        '<EhHeader>
-        On Error GoTo SearchRepeat_Err
-        '</EhHeader>
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo SearchRepeat_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     SearchRepeat = -1
+    SearchRepeat = -1
 
-102     For A = LBound(Npcs) To UBound(Npcs)
+    For A = LBound(Npcs) To UBound(Npcs)
 
-104         If Npcs(A).NpcIndex = NpcIndex Then
-106             SearchRepeat = A
+        If Npcs(A).NpcIndex = NpcIndex Then
+            SearchRepeat = A
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
 
-108     Next A
+    Next A
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 SearchRepeat_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mViajes.SearchRepeat " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mViajes.SearchRepeat " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub MiniMap_SetChest(ByVal Map As Integer, ByVal ObjIndex As Integer)
@@ -46,7 +46,9 @@ Public Sub MiniMap_SetChest(ByVal Map As Integer, ByVal ObjIndex As Integer)
     
     ReDim Preserve MiniMap(Map).Chest(1 To MiniMap(Map).ChestLast) As Integer
     MiniMap(Map).Chest(MiniMap(Map).ChestLast) = ObjIndex
+
 End Sub
+
 Public Sub MiniMap_SetInfo(ByVal Map As Integer)
     MiniMap(Map).Name = MapInfo(Map).Name
     MiniMap(Map).Pk = IIf(MapInfo(Map).Pk = True, 1, 0)
@@ -62,7 +64,9 @@ Public Sub MiniMap_SetInfo(ByVal Map As Integer)
     
     If MiniMap(Map).Sub_Maps > 0 Then
         MiniMap(Map).Maps = MapInfo(Map).Maps
+
     End If
+
 End Sub
 
 Public Sub UpdateInfoNpcs(ByVal Map As Integer, ByVal NpcIndex As Integer)
@@ -71,7 +75,7 @@ Public Sub UpdateInfoNpcs(ByVal Map As Integer, ByVal NpcIndex As Integer)
 
     Dim X          As Long, Y As Long, Z As Long
 
-    Dim A          As Long, B As Long, c As Long
+    Dim A          As Long, B As Long, C As Long
 
     Dim bkNpcs()   As Integer
 
@@ -81,7 +85,7 @@ Public Sub UpdateInfoNpcs(ByVal Map As Integer, ByVal NpcIndex As Integer)
 
     Dim SlotRepeat As Integer
     
-    SlotRepeat = SearchRepeat(Npclist(NpcIndex).Numero, MiniMap(Map).Npcs)
+    SlotRepeat = SearchRepeat(Npclist(NpcIndex).numero, MiniMap(Map).Npcs)
     
     If SlotRepeat = -1 Then
         MiniMap(Map).NpcsNum = MiniMap(Map).NpcsNum + 1
@@ -92,7 +96,7 @@ Public Sub UpdateInfoNpcs(ByVal Map As Integer, ByVal NpcIndex As Integer)
      
             .Exp = Npclist(NpcIndex).GiveEXP
             .Gld = Npclist(NpcIndex).GiveGLD
-            .NpcIndex = Npclist(NpcIndex).Numero
+            .NpcIndex = Npclist(NpcIndex).numero
             'If .cant < 1000 Then
             '.cant = .cant + 1
             ' End If
@@ -118,28 +122,28 @@ Public Sub UpdateInfoNpcs(ByVal Map As Integer, ByVal NpcIndex As Integer)
             
             For B = 1 To .NroDrops
                 .Drop(B) = Npclist(NpcIndex).Drop(B)
-               ' Text = Text & vbCrLf & .Name & " NRO: " & Npclist(NpcIndex).Numero & " Drop: " & ObjData(Npclist(NpcIndex).Drop(B).ObjIndex).Name & " x" & Npclist(NpcIndex).Drop(B).Amount
+                ' Text = Text & vbCrLf & .Name & " NRO: " & Npclist(NpcIndex).Numero & " Drop: " & ObjData(Npclist(NpcIndex).Drop(B).ObjIndex).Name & " x" & Npclist(NpcIndex).Drop(B).Amount
                 
             Next B
             
-          '  Debug.Print Text
+            '  Debug.Print Text
             
             For B = 1 To .NroItems
                 .Invent.Object(B) = Npclist(NpcIndex).Invent.Object(B)
                 'Text = Text & vbCrLf & .Name & " NRO: " & Npclist(NpcIndex).Numero & " Drop: " & ObjData(.Invent.Object(B).ObjIndex).Name & " x" & Npclist(NpcIndex).Invent.Object(B).Amount
                 
-                
                 If Map = 1 Then
                     If Npclist(NpcIndex).Comercia = 1 Then
                         Call DataServer_AddObjSkin(.Invent.Object(B).ObjIndex)
+
                     End If
+
                 End If
+
             Next B
             
-        '    Text = Left$(Text, Len(Text) - 1)
-           ' Debug.Print Text
-
-            
+            '    Text = Left$(Text, Len(Text) - 1)
+            ' Debug.Print Text
 
             .NroSpells = Npclist(NpcIndex).flags.LanzaSpells
                 

@@ -23,19 +23,30 @@ Option Explicit
 ' Un array de la clase que se usará para subclasificar ventanas
 ' y el último elemento de clases en el array; empieza a contar por uno
 Private mWSC() As clsMouse          ' Array de clases
-Private mnWSC As Long                   ' Número de ventanas subclasificadas
+
+Private mnWSC  As Long                   ' Número de ventanas subclasificadas
 
 Private Const GWL_WNDPROC = (-4&)
 
-Public Declare Function CallWindowProc Lib "User32" Alias "CallWindowProcA" _
-    (ByVal lpPrevWndFunc As Long, ByVal hWnd As Long, _
-    ByVal msg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Public Declare Function CallWindowProc _
+               Lib "user32" _
+               Alias "CallWindowProcA" (ByVal lpPrevWndFunc As Long, _
+                                        ByVal hWnd As Long, _
+                                        ByVal msg As Long, _
+                                        ByVal wParam As Long, _
+                                        ByVal lParam As Long) As Long
 
-Public Declare Function SetWindowLong Lib "User32" Alias "SetWindowLongA" _
-    (ByVal hWnd As Long, ByVal nIndex As Long, _
-    ByVal dwNewLong As Long) As Long
+Public Declare Function SetWindowLong _
+               Lib "user32" _
+               Alias "SetWindowLongA" (ByVal hWnd As Long, _
+                                       ByVal nIndex As Long, _
+                                       ByVal dwNewLong As Long) As Long
 
-Public Function WndProc(ByVal hWnd As Long, ByVal uMSG As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Public Function WndProc(ByVal hWnd As Long, _
+                        ByVal uMSG As Long, _
+                        ByVal wParam As Long, _
+                        ByVal lParam As Long) As Long
+
     ' Los mensajes de windows llegarán aquí.
     ' Lo que hay que hacer es "capturar" los que se necesiten,
     ' en este caso se devuelven los mensajes a la clase, usando para
@@ -56,12 +67,16 @@ Public Function WndProc(ByVal hWnd As Long, ByVal uMSG As Long, ByVal wParam As 
     i = IndiceClase(hWnd)
     
     If i Then
+
         With mWSC(i)
             WndProc = CallWindowProc(.PrevWndProc, hWnd, uMSG, wParam, lParam)
             ' Producir el evento del mensaje recibido
             .unMSG uMSG, wParam, lParam
+
         End With
+
     End If
+
 End Function
 
 Public Sub Hook(ByVal WSC As clsMouse, ByVal unControl As Object)
@@ -77,13 +92,15 @@ Public Sub Hook(ByVal WSC As clsMouse, ByVal unControl As Object)
     
     ' Comprobar si ya está subclasificada esta ventana
     Dim claseActual As Long
-    Dim claseLibre As Long
+
+    Dim claseLibre  As Long
     
     ' Buscar el índice de esta clase en el array
     ' y si hay alguna clase liberada anteriormente
     claseActual = IndiceClase(unControl.hWnd, claseLibre)
     
     If claseActual = 0 Then
+
         ' Si hay un índice que ya no se usa...
         If claseLibre Then
             ' se usará ese índice
@@ -93,7 +110,9 @@ Public Sub Hook(ByVal WSC As clsMouse, ByVal unControl As Object)
             mnWSC = mnWSC + 1
             ReDim Preserve mWSC(1 To mnWSC)
             claseActual = mnWSC
+
         End If
+
     End If
     
     ' Aquí se está haciendo referencia a una clase ya existente,
@@ -125,10 +144,13 @@ Public Sub Hook(ByVal WSC As clsMouse, ByVal unControl As Object)
     With mWSC(claseActual)
         .hWnd = unControl.hWnd
         .PrevWndProc = SetWindowLong(.hWnd, GWL_WNDPROC, AddressOf WndProc)
+
     End With
+
 End Sub
 
 Public Sub unHook(ByVal WSC As clsMouse)
+
     ' Des-subclasificar la clase indicada
     Static claseActual As Long
     
@@ -137,11 +159,13 @@ Public Sub unHook(ByVal WSC As clsMouse)
     
     ' Si ya estaba subclasificada esta clase
     If claseActual Then
+
         With mWSC(claseActual)
             ' Restaurar la función anterior de procesamiento de mensajes
             Call SetWindowLong(.hWnd, GWL_WNDPROC, .PrevWndProc)
             ' Poner a cero el indicador de que se está usando
             .hWnd = 0&
+
         End With
         
         ' Quitar la referencia a esta clase
@@ -151,18 +175,25 @@ Public Sub unHook(ByVal WSC As clsMouse)
         If mnWSC = claseActual Then
             ' Eliminar este item y ajustar el array
             mnWSC = mnWSC - 1
+
             ' Si no hay más, eliminar el array
             If mnWSC = 0 Then
                 Erase mWSC
             Else
                 ' Ajustar el número de elementos del array
                 ReDim Preserve mWSC(1 To mnWSC)
+
             End If
+
         End If
+
     End If
+
 End Sub
 
-Private Function IndiceClase(ByVal elhWnd As Long, Optional ByRef Libre As Long = 0) As Long
+Private Function IndiceClase(ByVal elhWnd As Long, _
+                             Optional ByRef Libre As Long = 0) As Long
+
     ' Este procedimiento buscará el índice de la clase que tiene el hWnd indicado
     ' También, si se especifica, devolverá el índice de una clase que esté libre.
     ' Nota: Es importante que el último parámetro sea por referencia,
@@ -174,26 +205,35 @@ Private Function IndiceClase(ByVal elhWnd As Long, Optional ByRef Libre As Long 
     
     ' Recorrer todo el array
     For i = 1 To mnWSC
+
         With mWSC(i)
+
             ' Si coinciden los hWnd, es que ya se está usando una subclasificación
             If .hWnd = elhWnd Then
+
                 ' usar esta misma clase
                 ' pero si el hWnd es cero, será uno libre
                 If elhWnd = 0 Then
                     Libre = i
                 Else
                     IndiceClase = i
+
                 End If
+
                 Exit For
                 
-            ' Comprobar si hay algún "hueco" en el array,
-            ' por ejemplo de una clase previamente liberada.
-            ' Hay que tener en cuenta que estos procedimientos están en un BAS
-            ' y sus valores se mantienen entre varias llamadas a las clases.
+                ' Comprobar si hay algún "hueco" en el array,
+                ' por ejemplo de una clase previamente liberada.
+                ' Hay que tener en cuenta que estos procedimientos están en un BAS
+                ' y sus valores se mantienen entre varias llamadas a las clases.
             ElseIf .hWnd = 0& Then
                 Libre = i
+
             End If
+
         End With
+
     Next
+
 End Function
 

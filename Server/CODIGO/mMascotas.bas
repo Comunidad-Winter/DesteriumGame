@@ -20,209 +20,211 @@ End Type
 Public Mascotas() As tMascota
 
 Public Function Mascota_Index(ByVal UserIndex As Integer) As Integer
-        '<EhHeader>
-        On Error GoTo Mascota_Index_Err
-        '</EhHeader>
 
-100     With UserList(UserIndex)
-            'Druidas
-102         If .Clase = eClass.Druid Then
+    '<EhHeader>
+    On Error GoTo Mascota_Index_Err
 
-104             Select Case .Raza
+    '</EhHeader>
 
-                    Case eRaza.Humano, eRaza.Gnomo, eRaza.Enano
-106                     Mascota_Index = 78
+    With UserList(UserIndex)
 
-                        Exit Function
+        'Druidas
+        If .Clase = eClass.Druid Then
 
-108                 Case eRaza.Elfo, eRaza.Drow
-110                     Mascota_Index = 96
+            Select Case .Raza
 
-                        Exit Function
+                Case eRaza.Humano, eRaza.Gnomo, eRaza.Enano
+                    Mascota_Index = 78
 
-                End Select
+                    Exit Function
 
-            End If
+                Case eRaza.Elfo, eRaza.Drow
+                    Mascota_Index = 96
+
+                    Exit Function
+
+            End Select
+
+        End If
         
-            ' Clerigos
-112         If .Clase = eClass.Cleric Then
-114             Mascota_Index = 92
+        ' Clerigos
+        If .Clase = eClass.Cleric Then
+            Mascota_Index = 92
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
         
-            ' Bardos
-116         If .Clase = eClass.Bard Then
-118             Mascota_Index = 94
+        ' Bardos
+        If .Clase = eClass.Bard Then
+            Mascota_Index = 94
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
         
-            ' Magos
-120         If .Clase = eClass.Mage Then
-122             Mascota_Index = 93
+        ' Magos
+        If .Clase = eClass.Mage Then
+            Mascota_Index = 93
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
         
-            ' Paladines-Asesinos
-124         If .Clase = eClass.Assasin Or .Clase = eClass.Paladin Then
-126             Mascota_Index = 115
-            End If
+        ' Paladines-Asesinos
+        If .Clase = eClass.Assasin Or .Clase = eClass.Paladin Then
+            Mascota_Index = 115
+
+        End If
     
-        End With
+    End With
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Mascota_Index_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mMascotas.Mascota_Index " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mMascotas.Mascota_Index " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub Mascotas_AddNew(ByVal UserIndex As Integer, ByVal NpcIndex As Integer)
-        '<EhHeader>
-        On Error GoTo Mascotas_AddNew_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Mascotas_AddNew_Err
+
+    '</EhHeader>
     
-        Dim Slot As Byte
+    Dim Slot As Byte
 
-        Dim Obj  As Obj
+    Dim Obj  As Obj
 
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
         
-            'Slot = Mascota_FreeSlot(UserIndex)
+        'Slot = Mascota_FreeSlot(UserIndex)
         
-102         WriteConsoleMsg UserIndex, "Sabemos lo importante que es este sistema para vos. Te prometemos un nuevo sistema de domar mascotas, donde podrás entrenarlas. Estamos trabajando en ello. Mientras tanto tendrás los hechizos para invocar mascotas momentaneas.", FontTypeNames.FONTTYPE_INFO
+        WriteConsoleMsg UserIndex, "Sabemos lo importante que es este sistema para vos. Te prometemos un nuevo sistema de domar mascotas, donde podrás entrenarlas. Estamos trabajando en ello. Mientras tanto tendrás los hechizos para invocar mascotas momentaneas.", FontTypeNames.FONTTYPE_INFO
+
+        Exit Sub
+        
+        If Slot = 0 Then
+
+            'WriteConsoleMsg UserIndex, "No tienes lugar para mas mascotas.", FontTypeNames.FONTTYPE_INFO
+            'Exit Sub
+        End If
+        
+        If RandomNumber(1, 100) <= 77 Then
+            WriteConsoleMsg UserIndex, "No has logrado domar a la criatura.", FontTypeNames.FONTTYPE_INFO
 
             Exit Sub
-        
-104         If Slot = 0 Then
-                'WriteConsoleMsg UserIndex, "No tienes lugar para mas mascotas.", FontTypeNames.FONTTYPE_INFO
-                'Exit Sub
-            End If
-        
-106         If RandomNumber(1, 100) <= 77 Then
-108             WriteConsoleMsg UserIndex, "No has logrado domar a la criatura.", FontTypeNames.FONTTYPE_INFO
 
-                Exit Sub
-
-            End If
+        End If
         
-110         Obj.ObjIndex = Npclist(NpcIndex).MonturaIndex
-112         Obj.Amount = 1
+        Obj.ObjIndex = Npclist(NpcIndex).MonturaIndex
+        Obj.Amount = 1
         
-114         If Not MeterItemEnInventario(UserIndex, Obj) Then
-116             WriteConsoleMsg UserIndex, "No tienes lugar en tu inventario. SI o SI debes tenerla en él.", FontTypeNames.FONTTYPE_INFO
+        If Not MeterItemEnInventario(UserIndex, Obj) Then
+            WriteConsoleMsg UserIndex, "No tienes lugar en tu inventario. SI o SI debes tenerla en él.", FontTypeNames.FONTTYPE_INFO
 
-                Exit Sub
+            Exit Sub
 
-            End If
+        End If
         
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Mascotas_AddNew_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mMascotas.Mascotas_AddNew " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mMascotas.Mascotas_AddNew " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub DoEquita(ByVal UserIndex As Integer, _
                     ByRef Montura As ObjData, _
                     ByVal Slot As Integer)
 
-        '<EhHeader>
-        On Error GoTo DoEquita_Err
+    '<EhHeader>
+    On Error GoTo DoEquita_Err
 
-        '</EhHeader>
+    '</EhHeader>
 
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
         
-102         If .flags.Montando = 0 Then
-104             .Invent.MonturaObjIndex = .Invent.Object(Slot).ObjIndex
-106             .Invent.MonturaSlot = Slot
-108             .Char.Head = 0
+        If .flags.Montando = 0 Then
+            .Invent.MonturaObjIndex = .Invent.Object(Slot).ObjIndex
+            .Invent.MonturaSlot = Slot
+            .Char.Head = 0
 
-110             If .flags.Muerto = 0 Then
-112                 .Char.Body = Montura.Ropaje
-                Else
-114                 .Char.Body = iCuerpoMuerto(Escriminal(UserIndex))
-116                 .Char.Head = iCabezaMuerto(Escriminal(UserIndex))
-
-                End If
-
-118             .Char.Head = UserList(UserIndex).OrigChar.Head
-120             .Char.ShieldAnim = NingunEscudo
-122             .Char.WeaponAnim = NingunArma
-124             .Char.CascoAnim = .Char.CascoAnim
-126             .flags.Montando = 1
-128             .Invent.Object(Slot).Equipped = 1
+            If .flags.Muerto = 0 Then
+                .Char.Body = Montura.Ropaje
             Else
-
-130             If .Invent.MonturaObjIndex <> .Invent.Object(Slot).ObjIndex Then
-132                 Call WriteConsoleMsg(UserIndex, "Esta no es la montura a la que estabas subido.", FontTypeNames.FONTTYPE_INFORED)
-
-                    Exit Sub
-
-                End If
-            
-134             .Invent.Object(Slot).Equipped = 0
-136             .flags.Montando = 0
-            
-138             If .flags.Muerto = 0 Then
-140                 .Char.Head = UserList(UserIndex).OrigChar.Head
-
-142                 If .Invent.ArmourEqpObjIndex > 0 Then
-144                     .Char.Body = GetArmourAnim(UserIndex, .Invent.ArmourEqpObjIndex)
-                    Else
-146                     Call DarCuerpoDesnudo(UserIndex)
-
-                    End If
-
-148                 If .Invent.EscudoEqpObjIndex > 0 Then .Char.ShieldAnim = ObjData(UserList(UserIndex).Invent.EscudoEqpObjIndex).ShieldAnim
-150                 If .Invent.WeaponEqpObjIndex > 0 Then .Char.WeaponAnim = ObjData(UserList(UserIndex).Invent.WeaponEqpObjIndex).WeaponAnim
-152                 If .Invent.CascoEqpObjIndex > 0 Then .Char.CascoAnim = ObjData(UserList(UserIndex).Invent.CascoEqpObjIndex).CascoAnim
-                Else
-154                 .Char.Body = iCuerpoMuerto(Escriminal(UserIndex))
-156                 .Char.Head = iCabezaMuerto(Escriminal(UserIndex))
-                    
-158                 .Char.ShieldAnim = NingunEscudo
-160                 .Char.WeaponAnim = NingunArma
-162                 .Char.CascoAnim = NingunCasco
-                      
-                      Dim A As Long
-                      
-                      For A = 1 To MAX_AURAS
-164                     .Char.AuraIndex(A) = NingunAura
-                     Next A
-                End If
+                .Char.Body = iCuerpoMuerto(Escriminal(UserIndex))
+                .Char.Head = iCabezaMuerto(Escriminal(UserIndex))
 
             End If
+
+            .Char.Head = UserList(UserIndex).OrigChar.Head
+            .Char.ShieldAnim = NingunEscudo
+            .Char.WeaponAnim = NingunArma
+            .Char.CascoAnim = .Char.CascoAnim
+            .flags.Montando = 1
+            .Invent.Object(Slot).Equipped = 1
+        Else
+
+            If .Invent.MonturaObjIndex <> .Invent.Object(Slot).ObjIndex Then
+                Call WriteConsoleMsg(UserIndex, "Esta no es la montura a la que estabas subido.", FontTypeNames.FONTTYPE_INFORED)
+
+                Exit Sub
+
+            End If
+            
+            .Invent.Object(Slot).Equipped = 0
+            .flags.Montando = 0
+            
+            If .flags.Muerto = 0 Then
+                .Char.Head = UserList(UserIndex).OrigChar.Head
+
+                If .Invent.ArmourEqpObjIndex > 0 Then
+                    .Char.Body = GetArmourAnim(UserIndex, .Invent.ArmourEqpObjIndex)
+                Else
+                    Call DarCuerpoDesnudo(UserIndex)
+
+                End If
+
+                If .Invent.EscudoEqpObjIndex > 0 Then .Char.ShieldAnim = ObjData(UserList(UserIndex).Invent.EscudoEqpObjIndex).ShieldAnim
+                If .Invent.WeaponEqpObjIndex > 0 Then .Char.WeaponAnim = ObjData(UserList(UserIndex).Invent.WeaponEqpObjIndex).WeaponAnim
+                If .Invent.CascoEqpObjIndex > 0 Then .Char.CascoAnim = ObjData(UserList(UserIndex).Invent.CascoEqpObjIndex).CascoAnim
+            Else
+                .Char.Body = iCuerpoMuerto(Escriminal(UserIndex))
+                .Char.Head = iCabezaMuerto(Escriminal(UserIndex))
+                    
+                .Char.ShieldAnim = NingunEscudo
+                .Char.WeaponAnim = NingunArma
+                .Char.CascoAnim = NingunCasco
+                      
+                Dim A As Long
+                      
+                For A = 1 To MAX_AURAS
+                    .Char.AuraIndex(A) = NingunAura
+                Next A
+
+            End If
+
+        End If
       
-166         Call WriteChangeInventorySlot(UserIndex, Slot)
-168         Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.Heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.AuraIndex)
-170         Call WriteMontateToggle(UserIndex)
+        Call WriteChangeInventorySlot(UserIndex, Slot)
+        Call ChangeUserChar(UserIndex, .Char.Body, .Char.Head, .Char.Heading, .Char.WeaponAnim, .Char.ShieldAnim, .Char.CascoAnim, .Char.AuraIndex)
+        Call WriteMontateToggle(UserIndex)
 
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 DoEquita_Err:
-        LogError Err.description & vbCrLf & "in ServidorArgentum.mMascotas.DoEquita " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mMascotas.DoEquita " & "at line " & Erl
 
-        
-
-        '</EhFooter>
+    '</EhFooter>
 End Sub

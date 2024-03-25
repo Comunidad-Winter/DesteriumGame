@@ -45,7 +45,7 @@ Public Type tGameIni
 
     Puerto As Long
     Musica As Byte
-    FX As Byte
+    fX As Byte
     tip As Byte
     Password As String
     Name As String
@@ -58,10 +58,10 @@ Public Type tGameIni
 
 End Type
 
-
 Public Const MAX_SETUP_MODS As Byte = 11
 
 Public Enum eSetupMods
+
     SETUP_MODOVSYNC = 1   ' Activa Modo vsync
     SETUP_CURSORES = 2 ' Desactiva los cursores Gráficos
     SETUP_SOUND3D = 3 ' Fuerza a realizar efectos 3D sobre los efectos principales del juego
@@ -73,10 +73,10 @@ Public Enum eSetupMods
     SETUP_PANTALLACOMPLETA = 9  'Pantalla Completa
     SETUP_INTERFAZTDS = 10          'Interfaz TDS
     SETUP_INTERFAZMODERNA = 11  'Interfaz Moderna
+
 End Enum
 
 Public Type tSetupMods
-
     
     bMasterSound As Byte
     bSoundMusic     As Byte
@@ -98,6 +98,7 @@ Public Type tSetupMods
     CursorSpell As String
     CursorInv As String
     CursorHand As String
+
 End Type
 
 Public ClientSetup   As tSetupMods
@@ -110,6 +111,7 @@ Public Sub IniciarCabecera(ByRef Cabecera As tCabecera)
     Cabecera.Desc = "Exodo Online by Lautaro"
     Cabecera.CRC = Rnd * 100
     Cabecera.MagicWord = Rnd * 10
+
 End Sub
 
 Public Function LeerGameIni() As tGameIni
@@ -126,6 +128,7 @@ Public Function LeerGameIni() As tGameIni
     
     Close #N
     LeerGameIni = GameIni
+
 End Function
 
 Public Sub EscribirGameIni(ByRef GameIniConfiguration As tGameIni)
@@ -138,5 +141,6 @@ Public Sub EscribirGameIni(ByRef GameIniConfiguration As tGameIni)
     Put #N, , MiCabecera
     Put #N, , GameIniConfiguration
     Close #N
+
 End Sub
 

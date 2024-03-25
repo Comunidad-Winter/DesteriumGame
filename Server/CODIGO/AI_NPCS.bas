@@ -340,154 +340,162 @@ Public Sub GreedyWalkTo(ByVal NpcIndex As Integer, _
     Exit Sub
 
 ErrHandler:
-    LogError ("Error en GreedyWalkTo. Error: " & Err.Number & " - " & Err.description)
+    LogError ("Error en GreedyWalkTo. Error: " & Err.number & " - " & Err.description)
 
 End Sub
 
 Public Function AI_BestTarget(ByVal NpcIndex As Integer) As Integer
+
     On Error GoTo ErrHandler
     
-    Dim BestTarget As Integer
+    Dim BestTarget         As Integer
         
-        Dim mapa               As Integer
+    Dim mapa               As Integer
 
-        Dim NPCPosX            As Integer
+    Dim NPCPosX            As Integer
 
-        Dim NPCPosY            As Integer
+    Dim NPCPosY            As Integer
         
-        Dim UserIndex          As Integer
+    Dim UserIndex          As Integer
 
-        Dim Counter            As Long
+    Dim Counter            As Long
         
-        Dim BestTargetDistance As Integer
+    Dim BestTargetDistance As Integer
 
-        Dim Distance           As Integer
+    Dim Distance           As Integer
         
-        With Npclist(NpcIndex).Pos
-            mapa = .Map
-            NPCPosX = .X
-            NPCPosY = .Y
-        End With
+    With Npclist(NpcIndex).Pos
+        mapa = .Map
+        NPCPosX = .X
+        NPCPosY = .Y
+
+    End With
         
-        Dim CounterStart As Long
+    Dim CounterStart As Long
 
-        Dim CounterEnd   As Long
+    Dim CounterEnd   As Long
 
-        Dim CounterStep  As Long
+    Dim CounterStep  As Long
         
-             Dim query() As Collision.UUID
-        Call ModAreas.QueryEntities(NpcIndex, ENTITY_TYPE_NPC, query, ENTITY_TYPE_PLAYER)
+    Dim query()      As Collision.UUID
 
+    Call ModAreas.QueryEntities(NpcIndex, ENTITY_TYPE_NPC, query, ENTITY_TYPE_PLAYER)
         
-        ' To avoid that all attack the same target
-        CounterStep = RandomNumber(0, 1)
+    ' To avoid that all attack the same target
+    CounterStep = RandomNumber(0, 1)
 
-       If CounterStep = 1 Then
-            CounterStart = 1
-            CounterEnd = UBound(query)
-        Else
-            CounterStart = UBound(query)
-            CounterEnd = 1
-            CounterStep = -1
-        End If
+    If CounterStep = 1 Then
+        CounterStart = 1
+        CounterEnd = UBound(query)
+    Else
+        CounterStart = UBound(query)
+        CounterEnd = 1
+        CounterStep = -1
+
+    End If
         
-        ' Search for the best user target
-        For Counter = CounterStart To CounterEnd Step CounterStep
+    ' Search for the best user target
+    For Counter = CounterStart To CounterEnd Step CounterStep
         
-             UserIndex = query(Counter).Name
-            
-  
+        UserIndex = query(Counter).Name
 
-                ' Can be atacked? If it's blinded, doesn't count.
-                If UserAtacable(UserIndex, NpcIndex) And UserList(UserIndex).flags.Ceguera = 0 Then
+        ' Can be atacked? If it's blinded, doesn't count.
+        If UserAtacable(UserIndex, NpcIndex) And UserList(UserIndex).flags.Ceguera = 0 Then
 
-                    ' if previous user choosen, select the better
-                    If BestTarget <> 0 Then
-                        ' Has priority to attack the nearest
-                        Distance = UserDistance(UserIndex, NPCPosX, NPCPosY)
+            ' if previous user choosen, select the better
+            If BestTarget <> 0 Then
+                ' Has priority to attack the nearest
+                Distance = UserDistance(UserIndex, NPCPosX, NPCPosY)
                         
-                        If Distance < BestTargetDistance Then
-                            BestTarget = UserIndex
-                            BestTargetDistance = Distance
-                        End If
+                If Distance < BestTargetDistance Then
+                    BestTarget = UserIndex
+                    BestTargetDistance = Distance
 
-                    Else
-                        BestTarget = UserIndex
-                        BestTargetDistance = UserDistance(UserIndex, NPCPosX, NPCPosY)
-                    End If
-              
+                End If
+
+            Else
+                BestTarget = UserIndex
+                BestTargetDistance = UserDistance(UserIndex, NPCPosX, NPCPosY)
+
             End If
+              
+        End If
                 
-        Next Counter
+    Next Counter
 
     AI_BestTarget = BestTarget
 
     Exit Function
 
 ErrHandler:
-    LogError ("Error en KingBestTarget. Error: " & Err.Number & " - " & Err.description)
+    LogError ("Error en KingBestTarget. Error: " & Err.number & " - " & Err.description)
+
 End Function
+
 Private Function UserDistance(ByVal UserIndex As Integer, _
                               ByVal X As Integer, _
                               ByVal Y As Integer) As Integer
-        '***************************************************
-        'Author: ZaMa
-        'Last Modification: 24/06/2010
-        'Calculates the user distance according to the given coords.
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo UserDistance_Err
-        '</EhHeader>
 
-100     With UserList(UserIndex)
-102         UserDistance = Abs(X - .Pos.X) + Abs(Y - .Pos.Y)
-        End With
+    '***************************************************
+    'Author: ZaMa
+    'Last Modification: 24/06/2010
+    'Calculates the user distance according to the given coords.
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo UserDistance_Err
+
+    '</EhHeader>
+
+    With UserList(UserIndex)
+        UserDistance = Abs(X - .Pos.X) + Abs(Y - .Pos.Y)
+
+    End With
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 UserDistance_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.AI_NPCS.UserDistance " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.AI_NPCS.UserDistance " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Private Function UserAtacable(ByVal UserIndex As Integer, _
                               ByVal NpcIndex As Integer, _
                               Optional ByVal CheckVisibility As Boolean = True, _
                               Optional ByVal AttackAdmin As Boolean = True) As Boolean
-        '***************************************************
-        'Author: ZaMa
-        'Last Modification: 05/10/2010
-        'DEtermines whether the user can be atacked or not
-        '05/10/2010: ZaMa - Now doesn't allow to attack admins sometimes.
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo UserAtacable_Err
-        '</EhHeader>
 
-100     With UserList(UserIndex).flags
-102         UserAtacable = Not .EnConsulta And .AdminInvisible = 0 And .AdminPerseguible And .Muerto = 0
+    '***************************************************
+    'Author: ZaMa
+    'Last Modification: 05/10/2010
+    'DEtermines whether the user can be atacked or not
+    '05/10/2010: ZaMa - Now doesn't allow to attack admins sometimes.
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo UserAtacable_Err
+
+    '</EhHeader>
+
+    With UserList(UserIndex).flags
+        UserAtacable = Not .EnConsulta And .AdminInvisible = 0 And .AdminPerseguible And .Muerto = 0
                        
-104         If CheckVisibility Then
-106             UserAtacable = UserAtacable And .Oculto = 0 And .Invisible = 0
-            End If
-        
-108         If Not AttackAdmin Then
-110             UserAtacable = UserAtacable And (Not EsGm(UserIndex))
-            End If
+        If CheckVisibility Then
+            UserAtacable = UserAtacable And .Oculto = 0 And .Invisible = 0
 
-        End With
+        End If
+        
+        If Not AttackAdmin Then
+            UserAtacable = UserAtacable And (Not EsGm(UserIndex))
+
+        End If
+
+    End With
                         
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 UserAtacable_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.AI_NPCS.UserAtacable " & _
-           "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.AI_NPCS.UserAtacable " & "at line " & Erl
     
     '</EhFooter>
 End Function

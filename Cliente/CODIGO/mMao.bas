@@ -4,17 +4,21 @@ Option Explicit
 Public Sub Mercader_OrdenClass()
 
     Dim A    As Long, b As Long
+
     Dim Temp As tMercader
     
     For A = 1 To MERCADER_MAX_LIST
         For b = 1 To MERCADER_MAX_LIST - A
 
             With MercaderList(b)
+
                 If .Chars(1).Class < MercaderList(b + 1).Chars(1).Class Then
                     Temp = MercaderList(b)
                     MercaderList(b) = MercaderList(b + 1)
                     MercaderList(b + 1) = Temp
+
                 End If
+
             End With
             
             DoEvents
@@ -24,20 +28,25 @@ Public Sub Mercader_OrdenClass()
     Next A
                 
 End Sub
+
 Public Sub Mercader_OrdenLevel()
 
     Dim A    As Long, b As Long
+
     Dim Temp As tMercader
     
     For A = 1 To MERCADER_MAX_LIST
         For b = 1 To MERCADER_MAX_LIST - A
 
             With MercaderList(b)
+
                 If .Chars(1).Elv < MercaderList(b + 1).Chars(1).Elv Then
                     Temp = MercaderList(b)
                     MercaderList(b) = MercaderList(b + 1)
                     MercaderList(b + 1) = Temp
+
                 End If
+
             End With
             
             DoEvents
@@ -47,14 +56,15 @@ Public Sub Mercader_OrdenLevel()
     Next A
                 
 End Sub
+
 Public Function Mercader_GenerateText(ByRef Char As tMercaderChar, _
                                       Optional ByVal ShortText As Boolean = False) As String
 
     On Error GoTo ErrHandler
     
     Dim Temp   As String
+
     Dim TempUP As Single
-    
     
     With Char
         TempUP = UserCheckPromedy(.Elv, .Hp, .Class, .Constitucion)
@@ -63,12 +73,12 @@ Public Function Mercader_GenerateText(ByRef Char As tMercaderChar, _
         
         If .Elv <> STAT_MAXELV Then
             .DescShort = .DescShort & " (" & Round(CDbl(.Exp) * CDbl(100) / CDbl(.Elu), 0) & "%)"
+
         End If
             
         .Desc = "» " & .DescShort
     
     End With
-    
   
     Exit Function
 
@@ -77,12 +87,13 @@ ErrHandler:
 End Function
 
 Public Function Mercader_GenerateText1(ByVal MercaderSlot As Integer, _
-                                      ByVal Slot As Byte, _
-                                      Optional ByVal ShortText As Boolean = False) As String
+                                       ByVal Slot As Byte, _
+                                       Optional ByVal ShortText As Boolean = False) As String
 
     On Error GoTo ErrHandler
     
     Dim Temp   As String
+
     Dim TempUP As Single
     
     With MercaderList_Copy(MercaderSlot).Chars(Slot)
@@ -92,13 +103,13 @@ Public Function Mercader_GenerateText1(ByVal MercaderSlot As Integer, _
         
         If .Elv <> STAT_MAXELV Then
             .DescShort = .DescShort & " (" & Round(CDbl(.Exp) * CDbl(100) / CDbl(.Elu), 0) & "%)"
+
         End If
             
         'UCase$(.Name) &
         .Desc = "» " & .DescShort
         
     End With
-    
   
     Exit Function
 
@@ -121,7 +132,6 @@ Public Function UserCheckPromedy(ByVal Elv As Byte, ByVal Hp As Integer, ByVal C
     
 End Function
 
-
 Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConstitucion As Byte) As Single
 
     On Error GoTo Balance_AumentoHP_Initial_Error
@@ -141,6 +151,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 9 ' RandomNumber(7, 11)
 
                 Case Else: Balance_AumentoHP_Initial = 8 'RandomNumber(6, UserConstitucion \ 2) + AdicionalHPGuerrero
+
             End Select
 
         Case eClass.Hunter
@@ -156,6 +167,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 8 'RandomNumber(6, 10)
 
                 Case Else: Balance_AumentoHP_Initial = 7 'RandomNumber(6, UserConstitucion \ 2)
+
             End Select
 
         Case eClass.Paladin
@@ -171,6 +183,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 8 'RandomNumber(6, 11)
 
                 Case Else: Balance_AumentoHP_Initial = 7 'RandomNumber(4, UserConstitucion \ 2) + AdicionalHPCazador
+
             End Select
 
         Case eClass.Thief
@@ -186,6 +199,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 6 'RandomNumber(4, 8)
 
                 Case Else: Balance_AumentoHP_Initial = RandomNumber(4, UserConstitucion \ 2)
+
             End Select
                        
         Case eClass.Mage
@@ -201,10 +215,10 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 5.5 'RandomNumber(3, 8)
 
                 Case Else: Balance_AumentoHP_Initial = 4 'RandomNumber(5, UserConstitucion \ 2) - AdicionalHPCazador
+
             End Select
                     
             If Balance_AumentoHP_Initial < 1 Then Balance_AumentoHP_Initial = 4
-                    
                     
         Case eClass.Cleric
 
@@ -219,6 +233,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 7 'RandomNumber(5, 9)
 
                 Case Else: Balance_AumentoHP_Initial = 6 'RandomNumber(4, UserConstitucion \ 2)
+
             End Select
                     
         Case eClass.Druid
@@ -234,6 +249,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 7 'RandomNumber(5, 9)
 
                 Case Else: Balance_AumentoHP_Initial = 6 'RandomNumber(4, UserConstitucion \ 2)
+
             End Select
                      
         Case eClass.Assasin
@@ -249,6 +265,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 7 'RandomNumber(5, 9)
 
                 Case Else: Balance_AumentoHP_Initial = 6 'RandomNumber(4, UserConstitucion \ 2)
+
             End Select
 
         Case eClass.Bard
@@ -264,6 +281,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 7 'RandomNumber(5, 9)
 
                 Case Else: Balance_AumentoHP_Initial = 6 'RandomNumber(4, UserConstitucion \ 2)
+
             End Select
                     
         Case Else
@@ -279,6 +297,7 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
                 Case 18: Balance_AumentoHP_Initial = 5 'RandomNumber(6, 8)
 
                 Case Else: Balance_AumentoHP_Initial = 4 'RandomNumber(5, UserConstitucion \ 2) - AdicionalHPCazador
+
             End Select
                     
     End Select
@@ -290,41 +309,57 @@ Public Function Balance_AumentoHP_Initial(ByVal Class As eClass, ByVal UserConst
 Balance_AumentoHP_Initial_Error:
 
     LogError "Error " & err.Number & " (" & err.Description & ") in procedure Balance_AumentoHP_Initial of Módulo mBalance in line " & Erl
+
 End Function
 
 Public Function Mercader_Range_Armada(ByVal FactionRange As Byte) As String
+
     Select Case FactionRange
                     
         Case 0
             Mercader_Range_Armada = "<Aprendiz>"
+
         Case 1
             Mercader_Range_Armada = "<Noble>"
+
         Case 2
             Mercader_Range_Armada = "<Caballero>"
+
         Case 3
             Mercader_Range_Armada = "<Capitán>"
+
         Case 4
             Mercader_Range_Armada = "<Guardián>"
+
         Case 5
             Mercader_Range_Armada = "<Campeón de la Luz"
+
     End Select
     
 End Function
 
 Public Function Mercader_Range_Legion(ByVal FactionRange As Byte) As String
+
     Select Case FactionRange
+
         Case 0
             Mercader_Range_Legion = "<Esbirro>"
+
         Case 1
             Mercader_Range_Legion = "<Sanguinario>"
+
         Case 2
             Mercader_Range_Legion = "<Condenado>"
+
         Case 3
             Mercader_Range_Legion = "<Caballero de la Oscuridad>"
+
         Case 4
             Mercader_Range_Legion = "<Demonio Infernal>"
+
         Case 5
             Mercader_Range_Legion = "<Devorador de Almas>"
+
     End Select
     
 End Function

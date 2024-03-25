@@ -7,15 +7,20 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
     
     ' Cargamos el personaje
     Dim Userfile As clsIniManager
+
     Set Userfile = New clsIniManager
     
     Call Userfile.Initialize(CharPath & UCase$(Name) & ".chr")
     
     Dim TempUser As User
-    Dim ln As String
-    Dim LoopC As Long
-    Dim A As Long
-    Dim Temp As String
+
+    Dim ln       As String
+
+    Dim LoopC    As Long
+
+    Dim A        As Long
+
+    Dim Temp     As String
     
     With TempUser
         .Name = UCase$(Name)
@@ -28,7 +33,7 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
                 .UserSkillsEspecial(LoopC) = val(Userfile.GetValue("SKILLSESPECIAL", "SKESP" & LoopC))
             Next LoopC
             
-             For LoopC = 1 To NUMSKILLS
+            For LoopC = 1 To NUMSKILLS
                 .UserSkills(LoopC) = val(Userfile.GetValue("SKILLS", "SK" & LoopC))
                 .EluSkills(LoopC) = val(Userfile.GetValue("SKILLS", "ELUSK" & LoopC))
                 .ExpSkills(LoopC) = val(Userfile.GetValue("SKILLS", "EXPSK" & LoopC))
@@ -49,8 +54,6 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
             .Exp = CDbl(Userfile.GetValue("STATS", "EXP"))
             .Elu = CLng(Userfile.GetValue("STATS", "ELU"))
             .Elv = CByte(Userfile.GetValue("STATS", "ELV"))
-            
-            
         
             ' # Bonificaciones del personaje
             .BonusLast = CInt(Userfile.GetValue("BONUS", "BONUSLAST"))
@@ -66,7 +69,9 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
                     .Bonus(A).DurationSeconds = val(ReadField(4, Temp, Asc("|")))
                     .Bonus(A).DurationDate = ReadField(5, Temp, Asc("|"))
                 Next A
+
             End If
+
         End With
         
         ' # Faction
@@ -84,7 +89,7 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
         End With
             
         ' # Skins
-         With .Skins
+        With .Skins
             .Last = CByte(Userfile.GetValue("SKINS", "LAST"))
             .ArmourIndex = CInt(Userfile.GetValue("SKINS", "ARMOUR"))
             .ShieldIndex = CInt(Userfile.GetValue("SKINS", "SHIELD"))
@@ -104,6 +109,7 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
         ' # Bloqueo
         With .flags
             .Blocked = CByte(Userfile.GetValue("FLAGS", "BLOCKED"))
+
         End With
                 
         ' # Apariencia y stats base
@@ -123,7 +129,6 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
             .Heading = eHeading.SOUTH
 
         End With
-        
         
         .Desc = Userfile.GetValue("INIT", "Desc")
         .Pos.Map = CInt(ReadField(1, Userfile.GetValue("INIT", "Position"), 45))
@@ -156,15 +161,15 @@ Public Function Load_UserList_Offline(ByVal Name As String) As User
             .GuildIndex = CInt(ln)
         Else
             .GuildIndex = 0
+
         End If
+
     End With
-    
     
     Load_UserList_Offline = TempUser
     
     Exit Function
 ErrHandler:
     Call LogError("Error en la funcion Load_UserList_Offline")
-    
     
 End Function

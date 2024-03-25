@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmDialogos 
    Caption         =   "Dialogos"
    ClientHeight    =   3090
@@ -204,6 +204,7 @@ Private indice As Byte
 
 Private Sub b_Change()
     lblPrueba.BackColor = RGB(r.Value, g.Value, b.Value)
+
 End Sub
 
 Private Sub Command1_Click()
@@ -216,16 +217,19 @@ Private Sub Command1_Click()
     Call GrabarColores
     
     Unload frmDialogos
+
 End Sub
 
 Private Sub Command2_Click()
     ColoresDialogos(indice).r = r.Value
     ColoresDialogos(indice).g = g.Value
     ColoresDialogos(indice).b = b.Value
+
 End Sub
 
 Private Sub Command3_Click()
     Call PorDefecto(indice)
+
 End Sub
 
 Private Sub Command4_Click()
@@ -236,6 +240,7 @@ Private Sub Command4_Click()
     b.Value = ColoresDialogos(indice).b
     
     lblPrueba.BackColor = RGB(r.Value, g.Value, b.Value)
+
 End Sub
 
 Private Sub Form_Load()
@@ -249,6 +254,7 @@ End Sub
 
 Private Sub g_Change()
     lblPrueba.BackColor = RGB(r.Value, g.Value, b.Value)
+
 End Sub
 
 Private Sub Option1_Click(Index As Integer)
@@ -256,36 +262,39 @@ Private Sub Option1_Click(Index As Integer)
     g.Value = ColoresDialogos(Index).g
     b.Value = ColoresDialogos(Index).b
     indice = Index
+
 End Sub
 
 Private Sub r_Change()
     lblPrueba.BackColor = RGB(r.Value, g.Value, b.Value)
+
 End Sub
 
-Private Sub PorDefecto(ByVal I As Byte)
+Private Sub PorDefecto(ByVal i As Byte)
 
     Dim archivoC As String
 
     archivoC = IniPath & "DialogosBACKUP.dat"
     
-    ColoresDialogos(I).r = CByte(GetVar(archivoC, CStr(I), "R"))
-    ColoresDialogos(I).g = CByte(GetVar(archivoC, CStr(I), "G"))
-    ColoresDialogos(I).b = CByte(GetVar(archivoC, CStr(I), "B"))
+    ColoresDialogos(i).r = CByte(GetVar(archivoC, CStr(i), "R"))
+    ColoresDialogos(i).g = CByte(GetVar(archivoC, CStr(i), "G"))
+    ColoresDialogos(i).b = CByte(GetVar(archivoC, CStr(i), "B"))
     
-    r.Value = ColoresDialogos(I).r
-    g.Value = ColoresDialogos(I).g
-    b.Value = ColoresDialogos(I).b
+    r.Value = ColoresDialogos(i).r
+    g.Value = ColoresDialogos(i).g
+    b.Value = ColoresDialogos(i).b
     
     lblPrueba.BackColor = RGB(r.Value, g.Value, b.Value)
+
 End Sub
 
 Private Sub TodosPorDefecto()
 
-    Dim I As Byte
+    Dim i As Byte
     
-    For I = 1 To MAXCOLORESDIALOGOS
-        Call PorDefecto(I)
-    Next I
+    For i = 1 To MAXCOLORESDIALOGOS
+        Call PorDefecto(i)
+    Next i
 
 End Sub
 
@@ -293,14 +302,14 @@ Private Sub GrabarColores()
 
     Dim archivoC As String
 
-    Dim I        As Byte
+    Dim i        As Byte
 
     archivoC = IniPath & "Dialogos.dat"
     
-    For I = 1 To MAXCOLORESDIALOGOS
-        Call WriteVar(archivoC, I, "R", ColoresDialogos(I).r)
-        Call WriteVar(archivoC, I, "G", ColoresDialogos(I).g)
-        Call WriteVar(archivoC, I, "B", ColoresDialogos(I).b)
-    Next I
+    For i = 1 To MAXCOLORESDIALOGOS
+        Call WriteVar(archivoC, i, "R", ColoresDialogos(i).r)
+        Call WriteVar(archivoC, i, "G", ColoresDialogos(i).g)
+        Call WriteVar(archivoC, i, "B", ColoresDialogos(i).b)
+    Next i
     
 End Sub

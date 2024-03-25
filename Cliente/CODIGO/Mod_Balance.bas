@@ -32,55 +32,57 @@ Public Const AumentoSTMago       As Byte = AumentoSTDef - 1
 
 Public Const AumentoSTTrabajador As Byte = AumentoSTDef + 25
 
-Public ModRaza(1 To NUMRAZAS)             As ModRaza
-
+Public ModRaza(1 To NUMRAZAS)    As ModRaza
 
 Public Sub Load_Balance()
     
-    Dim I As Long
+    Dim i As Long
     
     'Modificadores de Raza
-    For I = 1 To NUMRAZAS
+    For i = 1 To NUMRAZAS
 
-        With ModRaza(I)
-            .Fuerza = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(I) + "Fuerza"))
-            .Agilidad = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(I) + "Agilidad"))
-            .Inteligencia = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(I) + "Inteligencia"))
-            .Carisma = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(I) + "Carisma"))
-            .Constitucion = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(I) + "Constitucion"))
+        With ModRaza(i)
+            .Fuerza = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(i) + "Fuerza"))
+            .Agilidad = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(i) + "Agilidad"))
+            .Inteligencia = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(i) + "Inteligencia"))
+            .Carisma = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(i) + "Carisma"))
+            .Constitucion = 18 + Val(GetVar(IniPath & "Balance.dat", "MODRAZA", ListaRazas(i) + "Constitucion"))
+
         End With
 
-    Next I
+    Next i
+
 End Sub
 
-
 Public Function getVidaIdeal(ByVal Elv As Byte, ByVal Class As Byte, ByVal Constitucion As Byte) As Single
-        '<EhHeader>
-        On Error GoTo getVidaIdeal_Err
-        '</EhHeader>
 
-        Dim promedio     As Single
+    '<EhHeader>
+    On Error GoTo getVidaIdeal_Err
 
-        Dim vidaBase     As Integer
+    '</EhHeader>
 
-        Dim rangoAumento As tRango
+    Dim promedio     As Single
+
+    Dim vidaBase     As Integer
+
+    Dim rangoAumento As tRango
     
-100     vidaBase = 20 '+ Int(getPromedioAumentoVida(Class, Constitucion) + 0.5)
+    vidaBase = 20 '+ Int(getPromedioAumentoVida(Class, Constitucion) + 0.5)
     
-102     rangoAumento = getRangoAumentoVida(Class, Constitucion)
-104     promedio = (rangoAumento.minimo + rangoAumento.maximo) / 2
+    rangoAumento = getRangoAumentoVida(Class, Constitucion)
+    promedio = (rangoAumento.minimo + rangoAumento.maximo) / 2
     
-106     getVidaIdeal = vidaBase + (Elv - 1) * promedio
+    getVidaIdeal = vidaBase + (Elv - 1) * promedio
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 getVidaIdeal_Err:
-        LogError err.Description & vbCrLf & _
-               "in ServidorArgentum.Mod_Balance.getVidaIdeal " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ServidorArgentum.Mod_Balance.getVidaIdeal " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Function
 
 ' Retrona el minimo/maximo de puntos de vida que pude subir este usuario por nivel.
@@ -249,7 +251,6 @@ Public Function getRangoAumentoVida(ByVal Class As Byte, ByVal Constitucion As B
 
             End Select
 
-
         Case eClass.Cleric
 
             Select Case Constitucion
@@ -382,89 +383,91 @@ End Function
 
 Public Function Balance_AumentoMANA(ByVal Class As Byte, ByVal Raze As Byte) As Integer
 
-        ' Aumento de maná según clase
-        '<EhHeader>
-        On Error GoTo Balance_AumentoMANA_Err
+    ' Aumento de maná según clase
+    '<EhHeader>
+    On Error GoTo Balance_AumentoMANA_Err
 
-        '</EhHeader>
+    '</EhHeader>
     
-        Dim UserInteligencia As Byte
+    Dim UserInteligencia As Byte
 
-        Dim Elv              As Byte
+    Dim Elv              As Byte
 
-        Dim A                As Long
+    Dim A                As Long
         
-        Dim TempMan As Long
+    Dim TempMan          As Long
         
-        Elv = 47
+    Elv = 47
         
-100     UserInteligencia = ModRaza(Raze).Inteligencia
+    UserInteligencia = ModRaza(Raze).Inteligencia
     
-        On Error GoTo Balance_AumentoMANA_Error
+    On Error GoTo Balance_AumentoMANA_Error
         
-        For A = 2 To Elv
+    For A = 2 To Elv
 
-102         Select Case Class
+        Select Case Class
                     
-                Case eClass.Paladin
+            Case eClass.Paladin
                       
-104                 TempMan = TempMan + UserInteligencia
+                TempMan = TempMan + UserInteligencia
                          
-106             Case eClass.Mage
+            Case eClass.Mage
                       
-108                 If Raze = Enano Then
-110                     TempMan = TempMan + 2 * UserInteligencia
-112                 ElseIf (TempMan >= 2000) Then
-114                     TempMan = TempMan + (3 * UserInteligencia) / 2
-                    Else
-116                     TempMan = TempMan + 3 * UserInteligencia
+                If Raze = Enano Then
+                    TempMan = TempMan + 2 * UserInteligencia
+                ElseIf (TempMan >= 2000) Then
+                    TempMan = TempMan + (3 * UserInteligencia) / 2
+                Else
+                    TempMan = TempMan + 3 * UserInteligencia
 
-                    End If
+                End If
                     
-                    If A = 2 Then
-                        TempMan = TempMan + 103
-                    End If
+                If A = 2 Then
+                    TempMan = TempMan + 103
+
+                End If
                    
-118             Case eClass.Druid, eClass.Bard, eClass.Cleric
-120                 TempMan = TempMan + (2 * UserInteligencia)
+            Case eClass.Druid, eClass.Bard, eClass.Cleric
+                TempMan = TempMan + (2 * UserInteligencia)
                   
-                  If A = 2 Then
+                If A = 2 Then
                     TempMan = TempMan + 50
-                  End If
-                  
-122             Case eClass.Assasin
-124                 TempMan = TempMan + UserInteligencia
-                  
-                  If A = 2 Then
-                        A = 20
-                  End If
-                  
-126             Case Else
-128                 TempMan = 0
 
-            End Select
-        
-        Next A
-        
-        
-        Balance_AumentoMANA = TempMan
+                End If
+                  
+            Case eClass.Assasin
+                TempMan = TempMan + UserInteligencia
+                  
+                If A = 2 Then
+                    A = 20
 
-        On Error GoTo Balance_AumentoMANA_Err
+                End If
+                  
+            Case Else
+                TempMan = 0
 
-        Exit Function
+        End Select
+        
+    Next A
+        
+    Balance_AumentoMANA = TempMan
+
+    On Error GoTo Balance_AumentoMANA_Err
+
+    Exit Function
 
 Balance_AumentoMANA_Error:
 
-130     LogError "Error " & err.Number & " (" & err.Description & ") in procedure Balance_AumentoMANA of Módulo mBalance in line " & Erl
+    LogError "Error " & err.Number & " (" & err.Description & ") in procedure Balance_AumentoMANA of Módulo mBalance in line " & Erl
 
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Balance_AumentoMANA_Err:
-        LogError err.Description & vbCrLf & "in ServidorArgentum.Mod_Balance.Balance_AumentoMANA " & "at line " & Erl
+    LogError err.Description & vbCrLf & "in ServidorArgentum.Mod_Balance.Balance_AumentoMANA " & "at line " & Erl
 
-        Resume Next
+    Resume Next
 
-        '</EhFooter>
+    '</EhFooter>
 End Function
 

@@ -30,16 +30,20 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub Form_Load()
     Me.Picture = LoadPicture(DirInterface & "menucompacto\guilds_levels.jpg")
+
 End Sub
 
 Private Sub imgReturn_Click()
     imgUnload_Click
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call WriteGuilds_Required(0)
     Unload Me
+
 End Sub

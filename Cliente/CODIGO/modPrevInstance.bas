@@ -68,11 +68,13 @@ Private Function CreateNamedMutex(ByRef mutexName As String) As Boolean
         .bInheritHandle = 0
         .lpSecurityDescriptor = 0
         .nLength = LenB(sa)
+
     End With
     
     mutexHID = CreateMutex(sa, False, "Global\" & mutexName)
     
     CreateNamedMutex = Not (err.LastDllError = ERROR_ALREADY_EXISTS) 'check if the mutex already existed
+
 End Function
 
 ''
@@ -92,6 +94,7 @@ Public Function FindPreviousInstance() As Boolean
     Else
         'There's another instance running
         FindPreviousInstance = True
+
     End If
 
 End Function
@@ -107,4 +110,5 @@ Public Sub ReleaseInstance()
     '***************************************************
     Call ReleaseMutex(mutexHID)
     Call CloseHandle(mutexHID)
+
 End Sub

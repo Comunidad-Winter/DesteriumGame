@@ -15,28 +15,28 @@ Public AutoBan()                    As tAutoBan
 Public LastAutoBan                  As Integer
 
 Private Const AUTOBAN_MAX_TOLERANCE As Byte = 10
+
 Private Const AUTOBAN_TIME          As Long = 14400 ' 4 HORAS
 
 Public Sub AutoBan_Initialize()
-        '<EhHeader>
-        On Error GoTo AutoBan_Initialize_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo AutoBan_Initialize_Err
+
+    '</EhHeader>
     
-100     ReDim AutoBan(0) As tAutoBan
+    ReDim AutoBan(0) As tAutoBan
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 AutoBan_Initialize_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mAutoBan.AutoBan_Initialize " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mAutoBan.AutoBan_Initialize " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
-Public Sub AutoBan_AddUser(ByVal UserName As String, _
-   ByVal Reason As String)
+Public Sub AutoBan_AddUser(ByVal UserName As String, ByVal Reason As String)
                             
     On Error GoTo ErrHandler
     
@@ -64,6 +64,7 @@ Public Sub AutoBan_AddUser(ByVal UserName As String, _
         If Slot = 0 Then
             ReDim Preserve AutoBan(LBound(AutoBan) To UBound(AutoBan) + 1) As tAutoBan
             Slot = UBound(AutoBan)
+
         End If
         
         With AutoBan(Slot)
@@ -71,6 +72,7 @@ Public Sub AutoBan_AddUser(ByVal UserName As String, _
             .cant = 1
             .Time = 0
             .Reason = Reason
+
         End With
 
     End If
@@ -83,168 +85,172 @@ ErrHandler:
 End Sub
 
 Public Sub AutoBan_RemoveUser(ByVal Slot As Long)
-        '<EhHeader>
-        On Error GoTo AutoBan_RemoveUser_Err
-        '</EhHeader>
 
-100     With AutoBan(Slot)
-102         .Name = vbNullString
-104         .cant = 0
-106         .Time = 0
-108         .Reason = vbNullString
-        End With
+    '<EhHeader>
+    On Error GoTo AutoBan_RemoveUser_Err
 
-        '<EhFooter>
-        Exit Sub
+    '</EhHeader>
+
+    With AutoBan(Slot)
+        .Name = vbNullString
+        .cant = 0
+        .Time = 0
+        .Reason = vbNullString
+
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 AutoBan_RemoveUser_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mAutoBan.AutoBan_RemoveUser " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mAutoBan.AutoBan_RemoveUser " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
-Public Sub AutoBan_Character(ByVal UserName As String, _
-   ByVal Reason As String)
-        '<EhHeader>
-        On Error GoTo AutoBan_Character_Err
-        '</EhHeader>
+Public Sub AutoBan_Character(ByVal UserName As String, ByVal Reason As String)
 
-        Dim tUser As Integer
+    '<EhHeader>
+    On Error GoTo AutoBan_Character_Err
 
-        Dim Penas As Integer
+    '</EhHeader>
+
+    Dim tUser As Integer
+
+    Dim Penas As Integer
     
-100     tUser = NameIndex(UserName)
+    tUser = NameIndex(UserName)
     
-102     Call WriteVar(CharPath & UserName & ".chr", "FLAGS", "Ban", "1")
+    Call WriteVar(CharPath & UserName & ".chr", "FLAGS", "Ban", "1")
     
-104     Penas = val(GetVar(CharPath & UserName & ".chr", "PENAS", "Cant"))
-106     Call WriteVar(CharPath & UserName & ".chr", "PENAS", "Cant", Penas + 1)
-108     Call WriteVar(CharPath & UserName & ".chr", "PENAS", "P" & Penas + 1, ": BAN POR Macro Externo " & Date & " " & Time)
+    Penas = val(GetVar(CharPath & UserName & ".chr", "PENAS", "Cant"))
+    Call WriteVar(CharPath & UserName & ".chr", "PENAS", "Cant", Penas + 1)
+    Call WriteVar(CharPath & UserName & ".chr", "PENAS", "P" & Penas + 1, ": BAN POR Macro Externo " & Date & " " & Time)
     
-110     If tUser > 0 Then
-112         UserList(tUser).flags.Ban = 1
-            'Call FlushBuffer(tUser)
-            'Call CloseSocket(tUser)
+    If tUser > 0 Then
+        UserList(tUser).flags.Ban = 1
+        'Call FlushBuffer(tUser)
+        'Call CloseSocket(tUser)
         
-114         Call WriteDisconnect(tUser)
-116         Call FlushBuffer(tUser)
+        Call WriteDisconnect(tUser)
+        Call FlushBuffer(tUser)
                         
-118         Call CloseSocket(tUser)
-        End If
+        Call CloseSocket(tUser)
+
+    End If
     
-120     Call Logs_Security(eSecurity, eAutoBan, "Personaje " & UserName & " BAN por AntiCheat automático. Razon Real: " & Reason)
+    Call Logs_Security(eSecurity, eAutoBan, "Personaje " & UserName & " BAN por AntiCheat automático. Razon Real: " & Reason)
     
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 AutoBan_Character_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mAutoBan.AutoBan_Character " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mAutoBan.AutoBan_Character " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub AutoBan_Loop()
-        '<EhHeader>
-        On Error GoTo AutoBan_Loop_Err
-        '</EhHeader>
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo AutoBan_Loop_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     For A = LBound(AutoBan) To UBound(AutoBan)
+    For A = LBound(AutoBan) To UBound(AutoBan)
 
-102         With AutoBan(A)
+        With AutoBan(A)
 
-104             If .Time > 0 Then
-106                 .Time = .Time - 1
+            If .Time > 0 Then
+                .Time = .Time - 1
                 
-108                 If .Time = 0 Then
-110                     If GetVar(CharPath & .Name & ".chr", "FLAGS", "Ban") = "0" Then
-112                         Call AutoBan_Character(.Name, .Reason)
-                        End If
-                    
-114                     Call AutoBan_RemoveUser(A)
-                    End If
-                End If
-        
-            End With
-    
-116     Next A
+                If .Time = 0 Then
+                    If GetVar(CharPath & .Name & ".chr", "FLAGS", "Ban") = "0" Then
+                        Call AutoBan_Character(.Name, .Reason)
 
-        '<EhFooter>
-        Exit Sub
+                    End If
+                    
+                    Call AutoBan_RemoveUser(A)
+
+                End If
+
+            End If
+        
+        End With
+    
+    Next A
+
+    '<EhFooter>
+    Exit Sub
 
 AutoBan_Loop_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mAutoBan.AutoBan_Loop " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mAutoBan.AutoBan_Loop " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 ' FUNCIONES
 Private Function AutoBan_Repeat(ByVal UserName As String)
-        '<EhHeader>
-        On Error GoTo AutoBan_Repeat_Err
-        '</EhHeader>
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo AutoBan_Repeat_Err
+
+    '</EhHeader>
+
+    Dim A As Long
     
-100     For A = LBound(AutoBan) To UBound(AutoBan)
+    For A = LBound(AutoBan) To UBound(AutoBan)
 
-102         With AutoBan(A)
+        With AutoBan(A)
 
-104             If StrComp(UserName, .Name) = 0 Then
-106                 AutoBan_Repeat = A
-
-                    Exit Function
-
-                End If
-
-            End With
-
-108     Next A
-    
-        '<EhFooter>
-        Exit Function
-
-AutoBan_Repeat_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mAutoBan.AutoBan_Repeat " & _
-               "at line " & Erl
-        
-        '</EhFooter>
-End Function
-
-Private Function AutoBan_SlotFree()
-        '<EhHeader>
-        On Error GoTo AutoBan_SlotFree_Err
-        '</EhHeader>
-
-        Dim A As Long
-    
-100     For A = 1 To UBound(AutoBan)
-
-102         If AutoBan(A).Name = vbNullString Then
-104             AutoBan_SlotFree = A
+            If StrComp(UserName, .Name) = 0 Then
+                AutoBan_Repeat = A
 
                 Exit Function
 
             End If
 
-106     Next A
+        End With
+
+    Next A
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
+
+AutoBan_Repeat_Err:
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mAutoBan.AutoBan_Repeat " & "at line " & Erl
+        
+    '</EhFooter>
+End Function
+
+Private Function AutoBan_SlotFree()
+
+    '<EhHeader>
+    On Error GoTo AutoBan_SlotFree_Err
+
+    '</EhHeader>
+
+    Dim A As Long
+    
+    For A = 1 To UBound(AutoBan)
+
+        If AutoBan(A).Name = vbNullString Then
+            AutoBan_SlotFree = A
+
+            Exit Function
+
+        End If
+
+    Next A
+    
+    '<EhFooter>
+    Exit Function
 
 AutoBan_SlotFree_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.mAutoBan.AutoBan_SlotFree " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.mAutoBan.AutoBan_SlotFree " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 

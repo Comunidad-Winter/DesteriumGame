@@ -1,396 +1,407 @@
 Attribute VB_Name = "modPrivateMessages"
+' Reparado por Lorwik
+
 Option Explicit
 
 Public Sub AgregarMensaje(ByVal UserIndex As Integer, _
                           ByRef Autor As String, _
                           ByRef Mensaje As String)
-        '<EhHeader>
-        On Error GoTo AgregarMensaje_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Agrega un nuevo mensaje privado a un usuario online.
-        '***************************************************
-        Dim LoopC As Long
+    '<EhHeader>
+    On Error GoTo AgregarMensaje_Err
 
-100     With UserList(UserIndex)
+    '</EhHeader>
 
-102         If .UltimoMensaje < MAX_PRIVATE_MESSAGES Then
-104             .UltimoMensaje = .UltimoMensaje + 1
-            Else
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Agrega un nuevo mensaje privado a un usuario online.
+    '***************************************************
+    Dim LoopC As Long
 
-106             For LoopC = 1 To MAX_PRIVATE_MESSAGES - 1
-108                 .Mensajes(LoopC) = .Mensajes(LoopC + 1)
-                Next
+    With UserList(UserIndex)
 
-            End If
+        If .UltimoMensaje < MAX_PRIVATE_MESSAGES Then
+            .UltimoMensaje = .UltimoMensaje + 1
+        Else
+
+            For LoopC = 1 To MAX_PRIVATE_MESSAGES - 1
+                .Mensajes(LoopC) = .Mensajes(LoopC + 1)
+            Next
+
+        End If
         
-110         With .Mensajes(.UltimoMensaje)
-112             .Contenido = UCase$(Autor) & ": " & Mensaje & " (" & Now & ")"
-114             .Nuevo = True
-            End With
-        
-116         Call WriteConsoleMsg(UserIndex, "¡Has recibido un mensaje privado de un Game Master!", FontTypeNames.FONTTYPE_GM)
+        With .Mensajes(.UltimoMensaje)
+            .Contenido = UCase$(Autor) & ": " & Mensaje & " (" & Now & ")"
+            .Nuevo = True
+
         End With
+        
+        Call WriteConsoleMsg(UserIndex, "¡Has recibido un mensaje privado de un Game Master!", FontTypeNames.FONTTYPE_GM)
 
-        '<EhFooter>
-        Exit Sub
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 AgregarMensaje_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.AgregarMensaje " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.AgregarMensaje " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub AgregarMensajeOFF(ByRef Destinatario As String, _
                              ByRef Autor As String, _
                              ByRef Mensaje As String)
-        '<EhHeader>
-        On Error GoTo AgregarMensajeOFF_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Agrega un nuevo mensaje privado a un usuario offline.
-        '***************************************************
-        Dim UltimoMensaje As Byte
+    '<EhHeader>
+    On Error GoTo AgregarMensajeOFF_Err
 
-        Dim Charfile      As String
+    '</EhHeader>
 
-        Dim Contenido     As String
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Agrega un nuevo mensaje privado a un usuario offline.
+    '***************************************************
+    Dim UltimoMensaje As Byte
 
-        Dim LoopC         As Long
+    Dim Charfile      As String
 
-100     Charfile = CharPath & Destinatario & ".chr"
-102     UltimoMensaje = CByte(GetVar(Charfile, "MENSAJES", "UltimoMensaje"))
-104     Contenido = UCase$(Autor) & ": " & Mensaje & " (" & Now & ")"
+    Dim Contenido     As String
 
-106     If UltimoMensaje < MAX_PRIVATE_MESSAGES Then
-108         UltimoMensaje = UltimoMensaje + 1
-        Else
+    Dim LoopC         As Long
 
-110         For LoopC = 1 To MAX_PRIVATE_MESSAGES - 1
-112             Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC, GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1))
-114             Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC & "_NUEVO", GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1 & "_NUEVO"))
-116         Next LoopC
+    Charfile = CharPath & Destinatario & ".chr"
+    UltimoMensaje = CByte(GetVar(Charfile, "MENSAJES", "UltimoMensaje"))
+    Contenido = UCase$(Autor) & ": " & Mensaje & " (" & Now & ")"
 
-        End If
+    If UltimoMensaje < MAX_PRIVATE_MESSAGES Then
+        UltimoMensaje = UltimoMensaje + 1
+    Else
+
+        For LoopC = 1 To MAX_PRIVATE_MESSAGES - 1
+            Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC, GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1))
+            Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC & "_NUEVO", GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1 & "_NUEVO"))
+        Next LoopC
+
+    End If
         
-118     Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje, Contenido)
-120     Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje & "_NUEVO", 1)
+    Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje, Contenido)
+    Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje & "_NUEVO", 1)
     
-122     Call WriteVar(Charfile, "MENSAJES", "UltimoMensaje", UltimoMensaje)
-        '<EhFooter>
-        Exit Sub
+    Call WriteVar(Charfile, "MENSAJES", "UltimoMensaje", UltimoMensaje)
+    '<EhFooter>
+    Exit Sub
 
 AgregarMensajeOFF_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.AgregarMensajeOFF " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.AgregarMensajeOFF " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Function TieneMensajesNuevos(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo TieneMensajesNuevos_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Determina si el usuario tiene mensajes nuevos.
-        '***************************************************
-        Dim LoopC As Long
+    '<EhHeader>
+    On Error GoTo TieneMensajesNuevos_Err
 
-100     For LoopC = 1 To MAX_PRIVATE_MESSAGES
+    '</EhHeader>
 
-102         If UserList(UserIndex).Mensajes(LoopC).Nuevo Then
-104             TieneMensajesNuevos = True
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Determina si el usuario tiene mensajes nuevos.
+    '***************************************************
+    Dim LoopC As Long
 
-                Exit Function
+    For LoopC = 1 To MAX_PRIVATE_MESSAGES
 
-            End If
+        If UserList(UserIndex).Mensajes(LoopC).Nuevo Then
+            TieneMensajesNuevos = True
 
-106     Next LoopC
+            Exit Function
+
+        End If
+
+    Next LoopC
     
-108     TieneMensajesNuevos = False
-        '<EhFooter>
-        Exit Function
+    TieneMensajesNuevos = False
+    '<EhFooter>
+    Exit Function
 
 TieneMensajesNuevos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.TieneMensajesNuevos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.TieneMensajesNuevos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub GuardarMensajes(ByRef IUser As User, ByRef Manager As clsIniManager)
-        '<EhHeader>
-        On Error GoTo GuardarMensajes_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Guarda los mensajes del usuario.
-        '***************************************************
-        Dim LoopC As Long
+    '<EhHeader>
+    On Error GoTo GuardarMensajes_Err
+
+    '</EhHeader>
+
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Guarda los mensajes del usuario.
+    '***************************************************
+    Dim LoopC As Long
     
-100     With IUser
-102         Call Manager.ChangeValue("MENSAJES", "UltimoMensaje", CStr(.UltimoMensaje))
+    With IUser
+        Call Manager.ChangeValue("MENSAJES", "UltimoMensaje", CStr(.UltimoMensaje))
         
-104         For LoopC = 1 To MAX_PRIVATE_MESSAGES
-106             Call Manager.ChangeValue("MENSAJES", "MSJ" & LoopC, .Mensajes(LoopC).Contenido)
+        For LoopC = 1 To MAX_PRIVATE_MESSAGES
+            Call Manager.ChangeValue("MENSAJES", "MSJ" & LoopC, .Mensajes(LoopC).Contenido)
 
-108             If .Mensajes(LoopC).Nuevo Then
-110                 Call Manager.ChangeValue("MENSAJES", "MSJ" & LoopC & "_NUEVO", 1)
-                Else
-112                 Call Manager.ChangeValue("MENSAJES", "MSJ" & LoopC & "_NUEVO", 0)
-                End If
+            If .Mensajes(LoopC).Nuevo Then
+                Call Manager.ChangeValue("MENSAJES", "MSJ" & LoopC & "_NUEVO", 1)
+            Else
+                Call Manager.ChangeValue("MENSAJES", "MSJ" & LoopC & "_NUEVO", 0)
 
-114         Next LoopC
+            End If
 
-        End With
+        Next LoopC
 
-        '<EhFooter>
-        Exit Sub
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 GuardarMensajes_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.GuardarMensajes " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.GuardarMensajes " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub CargarMensajes(ByVal UserIndex As Integer, ByRef Manager As clsIniManager)
-        '<EhHeader>
-        On Error GoTo CargarMensajes_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Carga los mensajes del usuario.
-        '***************************************************
-        Dim LoopC As Long
+    '<EhHeader>
+    On Error GoTo CargarMensajes_Err
 
-100     With UserList(UserIndex)
-102         .UltimoMensaje = val(Manager.GetValue("MENSAJES", "UltimoMensaje"))
+    '</EhHeader>
+
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Carga los mensajes del usuario.
+    '***************************************************
+    Dim LoopC As Long
+
+    With UserList(UserIndex)
+        .UltimoMensaje = val(Manager.GetValue("MENSAJES", "UltimoMensaje"))
         
-104         For LoopC = 1 To MAX_PRIVATE_MESSAGES
+        For LoopC = 1 To MAX_PRIVATE_MESSAGES
 
-106             With .Mensajes(LoopC)
-108                 .Nuevo = val(Manager.GetValue("MENSAJES", "MSJ" & LoopC & "_NUEVO"))
-110                 .Contenido = CStr(Manager.GetValue("MENSAJES", "MSJ" & LoopC))
-                End With
+            With .Mensajes(LoopC)
+                .Nuevo = val(Manager.GetValue("MENSAJES", "MSJ" & LoopC & "_NUEVO"))
+                .Contenido = CStr(Manager.GetValue("MENSAJES", "MSJ" & LoopC))
 
-112         Next LoopC
+            End With
 
-        End With
+        Next LoopC
 
-        '<EhFooter>
-        Exit Sub
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 CargarMensajes_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.CargarMensajes " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.CargarMensajes " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Private Sub LimpiarMensajeSlot(ByVal UserIndex As Integer, ByVal Slot As Byte)
-        '<EhHeader>
-        On Error GoTo LimpiarMensajeSlot_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Limpia el un mensaje de un usuario online.
-        '***************************************************
-100     With UserList(UserIndex).Mensajes(Slot)
-102         .Contenido = vbNullString
-104         .Nuevo = False
-        End With
+    '<EhHeader>
+    On Error GoTo LimpiarMensajeSlot_Err
 
-        '<EhFooter>
-        Exit Sub
+    '</EhHeader>
+
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Limpia el un mensaje de un usuario online.
+    '***************************************************
+    With UserList(UserIndex).Mensajes(Slot)
+        .Contenido = vbNullString
+        .Nuevo = False
+
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 LimpiarMensajeSlot_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.LimpiarMensajeSlot " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.LimpiarMensajeSlot " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub LimpiarMensajes(ByVal UserIndex As Integer)
-        '<EhHeader>
-        On Error GoTo LimpiarMensajes_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Limpia los mensajes del slot.
-        '***************************************************
-        Dim LoopC As Long
+    '<EhHeader>
+    On Error GoTo LimpiarMensajes_Err
 
-100     With UserList(UserIndex)
-102         .UltimoMensaje = 0
+    '</EhHeader>
+
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Limpia los mensajes del slot.
+    '***************************************************
+    Dim LoopC As Long
+
+    With UserList(UserIndex)
+        .UltimoMensaje = 0
         
-104         For LoopC = 1 To MAX_PRIVATE_MESSAGES
-106             Call LimpiarMensajeSlot(UserIndex, LoopC)
-108         Next LoopC
+        For LoopC = 1 To MAX_PRIVATE_MESSAGES
+            Call LimpiarMensajeSlot(UserIndex, LoopC)
+        Next LoopC
 
-        End With
+    End With
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 LimpiarMensajes_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.LimpiarMensajes " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.LimpiarMensajes " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub BorrarMensaje(ByVal UserIndex As Integer, ByVal Slot As Byte)
-        '<EhHeader>
-        On Error GoTo BorrarMensaje_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Borra un mensaje de un usuario.
-        '***************************************************
-        Dim LoopC As Long
+    '<EhHeader>
+    On Error GoTo BorrarMensaje_Err
 
-100     With UserList(UserIndex)
+    '</EhHeader>
 
-102         If Slot > .UltimoMensaje Or Slot < 1 Then Exit Sub
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Borra un mensaje de un usuario.
+    '***************************************************
+    Dim LoopC As Long
 
-104         If Slot = .UltimoMensaje Then
-106             Call LimpiarMensajeSlot(UserIndex, Slot)
-            Else
+    With UserList(UserIndex)
 
-108             For LoopC = Slot To MAX_PRIVATE_MESSAGES - 1
-110                 .Mensajes(LoopC) = .Mensajes(LoopC + 1)
-112             Next LoopC
+        If Slot > .UltimoMensaje Or Slot < 1 Then Exit Sub
 
-114             Call LimpiarMensajeSlot(UserIndex, .UltimoMensaje)
-            End If
+        If Slot = .UltimoMensaje Then
+            Call LimpiarMensajeSlot(UserIndex, Slot)
+        Else
+
+            For LoopC = Slot To MAX_PRIVATE_MESSAGES - 1
+                .Mensajes(LoopC) = .Mensajes(LoopC + 1)
+            Next LoopC
+
+            Call LimpiarMensajeSlot(UserIndex, .UltimoMensaje)
+
+        End If
         
-116         .UltimoMensaje = .UltimoMensaje - 1
-        End With
+        .UltimoMensaje = .UltimoMensaje - 1
 
-        '<EhFooter>
-        Exit Sub
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 BorrarMensaje_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.BorrarMensaje " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.BorrarMensaje " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub BorrarMensajeOFF(ByVal UserName As String, ByVal Slot As Byte)
-        '<EhHeader>
-        On Error GoTo BorrarMensajeOFF_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 04/08/2011
-        'Borra un mensaje de un usuario.
-        '***************************************************
-        Dim Charfile      As String
+    '<EhHeader>
+    On Error GoTo BorrarMensajeOFF_Err
 
-        Dim UltimoMensaje As Byte
+    '</EhHeader>
 
-        Dim LoopC         As Long
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 04/08/2011
+    'Borra un mensaje de un usuario.
+    '***************************************************
+    Dim Charfile      As String
 
-100     Charfile = CharPath & UserName & ".chr"
+    Dim UltimoMensaje As Byte
+
+    Dim LoopC         As Long
+
+    Charfile = CharPath & UserName & ".chr"
     
-102     UltimoMensaje = GetVar(Charfile, "MENSAJES", "UltimoMensaje")
+    UltimoMensaje = GetVar(Charfile, "MENSAJES", "UltimoMensaje")
     
-104     If Slot > UltimoMensaje Or Slot < 1 Then Exit Sub
+    If Slot > UltimoMensaje Or Slot < 1 Then Exit Sub
     
-106     If Slot = UltimoMensaje Then
-108         Call WriteVar(Charfile, "MENSAJES", "MSJ" & Slot, vbNullString)
-110         Call WriteVar(Charfile, "MENSAJES", "MSJ" & Slot & "_Nuevo", vbNullString)
-        Else
+    If Slot = UltimoMensaje Then
+        Call WriteVar(Charfile, "MENSAJES", "MSJ" & Slot, vbNullString)
+        Call WriteVar(Charfile, "MENSAJES", "MSJ" & Slot & "_Nuevo", vbNullString)
+    Else
 
-112         For LoopC = Slot To UltimoMensaje - 1
-114             Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC, GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1))
-116             Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC & "_NUEVO", GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1 & "_NUEVO"))
-118         Next LoopC
+        For LoopC = Slot To UltimoMensaje - 1
+            Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC, GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1))
+            Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC & "_NUEVO", GetVar(Charfile, "MENSAJES", "MSJ" & LoopC + 1 & "_NUEVO"))
+        Next LoopC
 
-120         Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje, vbNullString)
-122         Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje & "_Nuevo", vbNullString)
-        End If
+        Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje, vbNullString)
+        Call WriteVar(Charfile, "MENSAJES", "MSJ" & UltimoMensaje & "_Nuevo", vbNullString)
+
+    End If
     
-124     Call WriteVar(Charfile, "MENSAJES", "UltimoMensaje", UltimoMensaje - 1)
-        '<EhFooter>
-        Exit Sub
+    Call WriteVar(Charfile, "MENSAJES", "UltimoMensaje", UltimoMensaje - 1)
+    '<EhFooter>
+    Exit Sub
 
 BorrarMensajeOFF_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.BorrarMensajeOFF " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.BorrarMensajeOFF " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub LimpiarMensajesOFF(ByVal UserName As String)
-        '<EhHeader>
-        On Error GoTo LimpiarMensajesOFF_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Amraphen
-        'Last Modification: 18/08/2011
-        'Borra los mensajes de un usuario offline.
-        '***************************************************
-        Dim Charfile      As String
+    '<EhHeader>
+    On Error GoTo LimpiarMensajesOFF_Err
 
-        Dim UltimoMensaje As Byte
+    '</EhHeader>
 
-        Dim LoopC         As Long
+    '***************************************************
+    'Author: Amraphen
+    'Last Modification: 18/08/2011
+    'Borra los mensajes de un usuario offline.
+    '***************************************************
+    Dim Charfile      As String
 
-100     Charfile = CharPath & UserName & ".chr"
+    Dim UltimoMensaje As Byte
+
+    Dim LoopC         As Long
+
+    Charfile = CharPath & UserName & ".chr"
     
-102     UltimoMensaje = GetVar(Charfile, "MENSAJES", "UltimoMensaje")
+    UltimoMensaje = GetVar(Charfile, "MENSAJES", "UltimoMensaje")
     
-104     If UltimoMensaje > 0 Then
+    If UltimoMensaje > 0 Then
 
-106         For LoopC = 1 To UltimoMensaje
-108             Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC, vbNullString)
-110             Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC & "_NUEVO", vbNullString)
-112         Next LoopC
+        For LoopC = 1 To UltimoMensaje
+            Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC, vbNullString)
+            Call WriteVar(Charfile, "MENSAJES", "MSJ" & LoopC & "_NUEVO", vbNullString)
+        Next LoopC
         
-114         Call WriteVar(Charfile, "MENSAJES", "UltimoMensaje", 0)
-        End If
+        Call WriteVar(Charfile, "MENSAJES", "UltimoMensaje", 0)
 
-        '<EhFooter>
-        Exit Sub
+    End If
+
+    '<EhFooter>
+    Exit Sub
 
 LimpiarMensajesOFF_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modPrivateMessages.LimpiarMensajesOFF " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modPrivateMessages.LimpiarMensajesOFF " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub

@@ -4,12 +4,11 @@ Attribute VB_Name = "Mod_TileData"
 
 Option Explicit
 
-
 Sub CargarCabezas()
 
     Dim N            As Integer
 
-    Dim I            As Long
+    Dim i            As Long
 
     Dim Numheads     As Integer
 
@@ -28,25 +27,28 @@ Sub CargarCabezas()
     ReDim HeadData(0 To Numheads) As HeadData
     ReDim Miscabezas(0 To Numheads) As tIndiceCabeza
     
-    For I = 1 To Numheads
-        Get #N, , Miscabezas(I)
+    For i = 1 To Numheads
+        Get #N, , Miscabezas(i)
         
-        If Miscabezas(I).Head(1) Then
-            Call InitGrh(HeadData(I).Head(1), Miscabezas(I).Head(1), 0)
-            Call InitGrh(HeadData(I).Head(2), Miscabezas(I).Head(2), 0)
-            Call InitGrh(HeadData(I).Head(3), Miscabezas(I).Head(3), 0)
-            Call InitGrh(HeadData(I).Head(4), Miscabezas(I).Head(4), 0)
+        If Miscabezas(i).Head(1) Then
+            Call InitGrh(HeadData(i).Head(1), Miscabezas(i).Head(1), 0)
+            Call InitGrh(HeadData(i).Head(2), Miscabezas(i).Head(2), 0)
+            Call InitGrh(HeadData(i).Head(3), Miscabezas(i).Head(3), 0)
+            Call InitGrh(HeadData(i).Head(4), Miscabezas(i).Head(4), 0)
+
         End If
 
-    Next I
+    Next i
     
     Close #N
+
 End Sub
 
 Sub CargarAuras()
 
-    Dim A As Long
-    Dim b As Long
+    Dim A          As Long
+
+    Dim b          As Long
     
     Dim NumAuras   As Integer
 
@@ -77,6 +79,7 @@ Sub CargarAuras()
                 Call InitGrh(AuraAnimData(A).Walk(b), MisAuras(A).Head(b), 0)
     
             End If
+
         Next b
     Next A
     
@@ -88,7 +91,7 @@ Sub CargarCascos()
 
     Dim N            As Integer
 
-    Dim I            As Long
+    Dim i            As Long
 
     Dim NumCascos    As Integer
 
@@ -107,26 +110,28 @@ Sub CargarCascos()
     ReDim CascoAnimData(0 To NumCascos) As HeadData
     ReDim Miscabezas(0 To NumCascos) As tIndiceCabeza
     
-    For I = 1 To NumCascos
-        Get #N, , Miscabezas(I)
+    For i = 1 To NumCascos
+        Get #N, , Miscabezas(i)
         
-        If Miscabezas(I).Head(1) Then
-            Call InitGrh(CascoAnimData(I).Head(1), Miscabezas(I).Head(1), 0)
-            Call InitGrh(CascoAnimData(I).Head(2), Miscabezas(I).Head(2), 0)
-            Call InitGrh(CascoAnimData(I).Head(3), Miscabezas(I).Head(3), 0)
-            Call InitGrh(CascoAnimData(I).Head(4), Miscabezas(I).Head(4), 0)
+        If Miscabezas(i).Head(1) Then
+            Call InitGrh(CascoAnimData(i).Head(1), Miscabezas(i).Head(1), 0)
+            Call InitGrh(CascoAnimData(i).Head(2), Miscabezas(i).Head(2), 0)
+            Call InitGrh(CascoAnimData(i).Head(3), Miscabezas(i).Head(3), 0)
+            Call InitGrh(CascoAnimData(i).Head(4), Miscabezas(i).Head(4), 0)
+
         End If
 
-    Next I
+    Next i
     
     Close #N
+
 End Sub
 
 Sub CargarCuerpos()
 
     Dim N            As Integer
 
-    Dim I            As Long, b As Long
+    Dim i            As Long, b As Long
 
     Dim NumCuerpos   As Integer
 
@@ -145,35 +150,38 @@ Sub CargarCuerpos()
     ReDim BodyData(0 To NumCuerpos) As BodyData
     ReDim MisCuerpos(0 To NumCuerpos) As tIndiceCuerpo
     
-    For I = 1 To NumCuerpos
-        Get #N, , MisCuerpos(I)
+    For i = 1 To NumCuerpos
+        Get #N, , MisCuerpos(i)
         
-        If MisCuerpos(I).Body(1) Then
+        If MisCuerpos(i).Body(1) Then
+
             For b = 1 To 4
-                InitGrh BodyData(I).Walk(b), MisCuerpos(I).Body(b), 0
+                InitGrh BodyData(i).Walk(b), MisCuerpos(i).Body(b), 0
                 
-                BodyData(I).BodyOffSet(b).X = MisCuerpos(I).BodyOffSetX(b)
-                BodyData(I).BodyOffSet(b).Y = MisCuerpos(I).BodyOffSetY(b)
+                BodyData(i).BodyOffSet(b).X = MisCuerpos(i).BodyOffSetX(b)
+                BodyData(i).BodyOffSet(b).Y = MisCuerpos(i).BodyOffSetY(b)
             Next b
             
-            BodyData(I).HeadOffset.X = MisCuerpos(I).HeadOffsetX
-            BodyData(I).HeadOffset.Y = MisCuerpos(I).HeadOffsetY
+            BodyData(i).HeadOffset.X = MisCuerpos(i).HeadOffsetX
+            BodyData(i).HeadOffset.Y = MisCuerpos(i).HeadOffsetY
             
             #If ModoBig > 0 Then
-                    BodyData(I).HeadOffset.Y = BodyData(I).HeadOffset.Y * 2
+                BodyData(i).HeadOffset.Y = BodyData(i).HeadOffset.Y * 2
             #End If
+
         End If
 
-    Next I
+    Next i
     
     Close #N
+
 End Sub
 
 Sub CargarCuerposAttack()
 
     Dim N            As Integer
 
-    Dim I            As Long
+    Dim i            As Long
 
     Dim NumCuerpos   As Integer
 
@@ -192,29 +200,31 @@ Sub CargarCuerposAttack()
     ReDim BodyDataAttack(0 To NumCuerpos) As BodyData
     ReDim MisCuerpos(0 To NumCuerpos) As tIndiceCuerpo
     
-    For I = 1 To NumCuerpos
-        Get #N, , MisCuerpos(I)
+    For i = 1 To NumCuerpos
+        Get #N, , MisCuerpos(i)
         
-        If MisCuerpos(I).Body(1) Then
-            InitGrh BodyDataAttack(I).Walk(1), MisCuerpos(I).Body(1), 0
-            InitGrh BodyDataAttack(I).Walk(2), MisCuerpos(I).Body(2), 0
-            InitGrh BodyDataAttack(I).Walk(3), MisCuerpos(I).Body(3), 0
-            InitGrh BodyDataAttack(I).Walk(4), MisCuerpos(I).Body(4), 0
+        If MisCuerpos(i).Body(1) Then
+            InitGrh BodyDataAttack(i).Walk(1), MisCuerpos(i).Body(1), 0
+            InitGrh BodyDataAttack(i).Walk(2), MisCuerpos(i).Body(2), 0
+            InitGrh BodyDataAttack(i).Walk(3), MisCuerpos(i).Body(3), 0
+            InitGrh BodyDataAttack(i).Walk(4), MisCuerpos(i).Body(4), 0
             
-            BodyDataAttack(I).HeadOffset.X = MisCuerpos(I).HeadOffsetX
-            BodyDataAttack(I).HeadOffset.Y = MisCuerpos(I).HeadOffsetY
+            BodyDataAttack(i).HeadOffset.X = MisCuerpos(i).HeadOffsetX
+            BodyDataAttack(i).HeadOffset.Y = MisCuerpos(i).HeadOffsetY
+
         End If
 
-    Next I
+    Next i
     
     Close #N
+
 End Sub
 
 Sub CargarFxs()
 
     Dim N      As Integer
 
-    Dim I      As Long
+    Dim i      As Long
 
     Dim NumFxs As Integer
     
@@ -230,12 +240,11 @@ Sub CargarFxs()
     'Resize array
     ReDim FxData(1 To NumFxs) As tIndiceFx
     
-    For I = 1 To NumFxs
-        Get #N, , FxData(I)
-    Next I
+    For i = 1 To NumFxs
+        Get #N, , FxData(i)
+    Next i
     
     Close #N
+
 End Sub
-
-
 

@@ -136,10 +136,12 @@ Option Explicit
 
 Private Sub cboPjs_Change()
     Call ActualizaPjInfo
+
 End Sub
 
 Private Sub cboPjs_Click()
     Call ActualizaPjInfo
+
 End Sub
 
 Private Sub Command1_Click()
@@ -151,6 +153,7 @@ Private Sub Command1_Click()
     If tIndex > 0 Then
         Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Servidor> " & UserList(tIndex).Name & " ha sido echado.", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
         Call Protocol.Kick(tIndex)
+
     End If
 
 End Sub
@@ -168,7 +171,9 @@ Public Sub ActualizaListaPjs()
                 If UserList(LoopC).flags.Privilegios And PlayerType.User Then
                     .AddItem UserList(LoopC).Name
                     .ItemData(.NewIndex) = LoopC
+
                 End If
+
             End If
 
         Next LoopC
@@ -179,6 +184,7 @@ End Sub
 
 Private Sub Command3_Click()
     Call EcharPjsNoPrivilegiados
+
 End Sub
 
 Private Sub ActualizaPjInfo()
@@ -190,6 +196,7 @@ Private Sub ActualizaPjInfo()
     If tIndex > 0 Then
 
         With UserList(tIndex)
+
             ' ADAPTAR WOLFTEIN
             'Text1.Text = .outgoingData.length & " elementos en cola." & vbCrLf
         End With

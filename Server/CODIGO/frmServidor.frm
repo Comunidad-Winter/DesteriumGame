@@ -524,64 +524,79 @@ Option Explicit
 
 Private Sub chkCastillo_Click()
     ConfigServer.ModoCastillo = chkCastillo.Value
+
 End Sub
 
 Private Sub chkCrafting_Click()
     ConfigServer.ModoCrafting = chkCrafting.Value
+
 End Sub
 
 Private Sub chkEvents_Click()
+
     If Events_Automatic.Events_Automatic_Active = 0 Then
         Events_Automatic.Events_Automatic_Active = 1
     Else
         Events_Automatic.Events_Automatic_Active = 0
+
     End If
     
- '   If Events_Automatic.Events_Automatic_Active Then
-        'Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Jarvis ha comenzado a hacer eventos automáticos. ¡Cada 15 MINUTOS te sorprenderá!", FontTypeNames.FONTTYPE_CRITICO))
-   ' End If
+    '   If Events_Automatic.Events_Automatic_Active Then
+    'Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Jarvis ha comenzado a hacer eventos automáticos. ¡Cada 15 MINUTOS te sorprenderá!", FontTypeNames.FONTTYPE_CRITICO))
+    ' End If
     
 End Sub
 
 Private Sub chkInvocaciones_Click()
     ConfigServer.ModoInvocaciones = chkInvocaciones.Value
+
 End Sub
 
 Private Sub chkMao_Click()
     MercaderActivate = Not MercaderActivate
+
 End Sub
 
 Private Sub chkRetos_Click()
     ConfigServer.ModoRetos = chkRetos.Value
+
 End Sub
 
 Private Sub chkRetosFast_Click()
     ConfigServer.ModoRetosFast = chkRetosFast.Value
+
 End Sub
 
 Private Sub chkServerHabilitado_Click()
     ServerSoloGMs = chkServerHabilitado.Value
+
 End Sub
 
 Private Sub chkSubastas_Click()
     ConfigServer.ModoSubastas = chkSubastas.Value
+
 End Sub
+
 Private Sub chkSkins_Click()
     ConfigServer.ModoSkins = chkSkins.Value
+
 End Sub
+
 Private Sub chkValidation_Click()
     ValidacionDePjs = chkValidation.Value
+
 End Sub
 
 Private Sub cmbCharsShop_Click()
     Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Shop» ¡Hay Nuevos Personajes a la Venta! Utiliza el Comando /SHOP para verlos.", FontTypeNames.FONTTYPE_INFOGREEN))
     Shop_Load_Chars
+
 End Sub
 
 Private Sub cmbCofres_Click()
     Call mDrop.Drops_Load
-End Sub
 
+End Sub
 
 Private Sub cmdResetSockets_Click()
 
@@ -590,10 +605,11 @@ End Sub
 Private Sub cmbShop_Click()
     Call Shop_Load
     Call SendData(SendTarget.ToAll, 0, PrepareMessageConsoleMsg("Shop» La Tienda ha sido actualizada. Utiliza el Comando /SHOP para verla.", FontTypeNames.FONTTYPE_INFOGREEN))
+
 End Sub
 
 Private Sub cmdMessages_Click()
-   mMessages.MessageSpam_Load
+    mMessages.MessageSpam_Load
     
     ' Testing
     'MessageSpam_SelectedRandom
@@ -606,35 +622,42 @@ End Sub
 
 Private Sub Command2_Click()
     Call mGuilds.Guilds_Save_All
+
 End Sub
 
 Private Sub Command3_Click()
     Call mGuilds.Guilds_Load
-End Sub
 
+End Sub
 
 Private Sub Command5_Click()
     Call LoadQuests
+
 End Sub
 
 Private Sub Command6_Click()
     Call mDrop.Drops_Load
+
 End Sub
 
 Private Sub Command7_Click()
     Invations_Load
+
 End Sub
 
 Private Sub Command8_Click()
     FrmPanelCreator.Show
+
 End Sub
 
 Private Sub cmbEvents_Click()
-EventsAI.Events_Load_PreConfig
+    EventsAI.Events_Load_PreConfig
+
 End Sub
 
 Private Sub Form_Load()
     cmdResetListen.Visible = True
+
 End Sub
 
 Private Sub cmdApagarServer_Click()
@@ -679,6 +702,7 @@ End Sub
 
 Private Sub cmdCerrar_Click()
     frmServidor.Visible = False
+
 End Sub
 
 Private Sub cmdCharBackup_Click()
@@ -687,18 +711,22 @@ Private Sub cmdCharBackup_Click()
     Call GuardarUsuarios(False)
     Me.MousePointer = 0
     MsgBox "Grabado de personajes OK!"
+
 End Sub
 
 Private Sub cmdConfigIntervalos_Click()
     FrmInterv.Show
+
 End Sub
 
 Private Sub cmdDebugUserlist_Click()
     frmUserList.Show
+
 End Sub
 
 Private Sub cmdLoadWorldBackup_Click()
     Call CargarBackUp
+
 End Sub
 
 Private Sub cmdPausarServidor_Click()
@@ -711,41 +739,50 @@ Private Sub cmdPausarServidor_Click()
         EnPausa = False
         Call SendData(SendTarget.ToAll, 0, PrepareMessagePauseToggle())
         cmdPausarServidor.Caption = "Pausar el servidor"
+
     End If
 
 End Sub
 
 Private Sub cmdRecargarBalance_Click()
     Call LoadBalance
+
 End Sub
 
 Private Sub cmdRecargarGuardiasPosOrig_Click()
     Call ReSpawnOrigPosNpcs
+
 End Sub
 
 Private Sub cmdRecargarHechizos_Click()
     Call CargarHechizos
+
 End Sub
 
 Private Sub cmdRecargarMOTD_Click()
     Call LoadMotd
+
 End Sub
 
 Private Sub cmdRecargarNombresInvalidos_Click()
     Call CargarForbidenWords
+
 End Sub
 
 Private Sub cmdRecargarNPCs_Click()
     Call CargaNpcsDat
+
 End Sub
 
 Private Sub cmdRecargarObjetos_Click()
     Call Crafting_Reset
     Call LoadOBJData
+
 End Sub
 
 Private Sub cmdRecargarServerIni_Click()
     Call LoadSini
+
 End Sub
 
 Private Sub cmdReiniciar_Click()
@@ -764,6 +801,7 @@ Private Sub cmdResetListen_Click()
     
     'Inicia el socket de escucha
     Call SocketConfig
+
 End Sub
 
 Private Sub cmdWorldBackup_Click()
@@ -780,18 +818,22 @@ Private Sub cmdWorldBackup_Click()
 
 ErrHandler:
     Call LogError("Error en WORLDSAVE")
+
 End Sub
 
 Private Sub Form_Deactivate()
     frmServidor.Visible = False
+
 End Sub
 
 Private Sub frmAdministracion_Click()
     Me.Visible = False
     frmAdmin.Show
+
 End Sub
 
 Private Sub cmdRecargarAdministradores_Click()
     loadAdministrativeUsers
+
 End Sub
 

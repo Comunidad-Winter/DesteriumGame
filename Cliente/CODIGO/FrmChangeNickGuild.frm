@@ -41,7 +41,7 @@ Begin VB.Form FrmChangeNickGuild
       BackStyle       =   0  'Transparent
       Caption         =   "Label1"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   15.75
          Charset         =   0
          Weight          =   400
@@ -60,7 +60,7 @@ Begin VB.Form FrmChangeNickGuild
       BackStyle       =   0  'Transparent
       Caption         =   "Nombre del Personaje:"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   15.75
          Charset         =   0
          Weight          =   400
@@ -83,12 +83,14 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub cmbConfirm_Click()
+
     Dim UserName As String
     
     UserName = txtName.Text
     
     If Right$(UserName, 1) = " " Then
         UserName = RTrim$(UserName)
+
     End If
     
     If Not CheckNickValid(UserName) Then Exit Sub
@@ -96,10 +98,12 @@ Private Sub cmbConfirm_Click()
     If Not TieneObjetos(ESCRITURAS_CLAN) > 0 Then
         Call MsgBox("¡No tienes las escrituras del clan para cambiar el liderazgo!")
         Exit Sub
+
     End If
     
     Call WriteChangeNick(UserName, True)
     Unload Me
+
 End Sub
 
 Private Sub Form_Load()
@@ -107,28 +111,34 @@ Private Sub Form_Load()
     
 End Sub
 
-
 Public Function CheckNickValid(ByVal UserName As String) As Boolean
 
     If Len(UserName) < ACCOUNT_MIN_CHARACTER_CHAR Then
         Call MsgBox("Nick inválido")
         Exit Function
+
     End If
     
     If Len(UserName) > ACCOUNT_MAX_CHARACTER_CHAR Then
         Call MsgBox("Nick inválido")
         Exit Function
+
     End If
 
     CheckNickValid = True
+
 End Function
 
 Private Sub txtName_Change()
+
     If txtName.Text <> vbNullString Then
         If Not ValidarNombre(txtName.Text) Then
-             txtName.Text = Left(txtName.Text, Len(txtName.Text) - 1)
-             txtName.SelStart = Len(txtName.Text)
+            txtName.Text = Left(txtName.Text, Len(txtName.Text) - 1)
+            txtName.SelStart = Len(txtName.Text)
+
         End If
+
     End If
+
 End Sub
 

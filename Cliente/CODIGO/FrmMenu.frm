@@ -46,7 +46,7 @@ Begin VB.Form FrmMenu
       BackStyle       =   0  'Transparent
       Caption         =   "Descripcion"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   14.25
          Charset         =   0
          Weight          =   700
@@ -147,30 +147,46 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private ButtonClose As clsGraphicalButton
-Private ButtonMinimice As clsGraphicalButton
+Private ButtonClose         As clsGraphicalButton
+
+Private ButtonMinimice      As clsGraphicalButton
+
 Private ButtonChangeAccount As clsGraphicalButton
-Private ButtonChangeChar As clsGraphicalButton
 
-Private ButtonParty As clsGraphicalButton
-Private ButtonSkills As clsGraphicalButton
-Private ButtonQuest As clsGraphicalButton
-Private ButtonRetos As clsGraphicalButton
-Private ButtonEventos As clsGraphicalButton
-Private ButtonRanking As clsGraphicalButton
-Private ButtonOpciones As clsGraphicalButton
-Private ButtonStats As clsGraphicalButton
-Private ButtonClanes As clsGraphicalButton
-Private ButtonManual As clsGraphicalButton
-Private ButtonMercado As clsGraphicalButton
-Private ButtonShop As clsGraphicalButton
+Private ButtonChangeChar    As clsGraphicalButton
 
-Public LastButtonPressed As clsGraphicalButton
-Private clsFormulario          As clsFormMovementManager
+Private ButtonParty         As clsGraphicalButton
 
+Private ButtonSkills        As clsGraphicalButton
+
+Private ButtonQuest         As clsGraphicalButton
+
+Private ButtonRetos         As clsGraphicalButton
+
+Private ButtonEventos       As clsGraphicalButton
+
+Private ButtonRanking       As clsGraphicalButton
+
+Private ButtonOpciones      As clsGraphicalButton
+
+Private ButtonStats         As clsGraphicalButton
+
+Private ButtonClanes        As clsGraphicalButton
+
+Private ButtonManual        As clsGraphicalButton
+
+Private ButtonMercado       As clsGraphicalButton
+
+Private ButtonShop          As clsGraphicalButton
+
+Public LastButtonPressed    As clsGraphicalButton
+
+Private clsFormulario       As clsFormMovementManager
 
 Private Sub LoadButtons()
+
     Dim GrhPath As String
+
     GrhPath = DirInterface & "menucompacto\Buttons\"
 
     Set ButtonClose = New clsGraphicalButton
@@ -210,25 +226,28 @@ Private Sub LoadButtons()
     Call ButtonManual.Initialize(imgManual, vbNullString, GrhPath & "ManualActivo.jpg", vbNullString, Me)
     Call ButtonMercado.Initialize(imgMercado, vbNullString, GrhPath & "MercadoActivo.jpg", vbNullString, Me)
     Call ButtonShop.Initialize(imgShop, vbNullString, GrhPath & "ShopActivo.jpg", vbNullString, Me)
-End Sub
 
+End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
     
     lblMenuDesc.visible = False
+
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     #If ModoBig = 0 Then
-    If KeyCode = vbKeyEscape Then
-        FrmMain.SetFocus
-        Unload Me
-        
-    End If
-    #End If
-End Sub
 
+        If KeyCode = vbKeyEscape Then
+            FrmMain.SetFocus
+            Unload Me
+        
+        End If
+
+    #End If
+
+End Sub
 
 Private Sub Form_Load()
     
@@ -237,7 +256,6 @@ Private Sub Form_Load()
     filePath = DirInterface & "menucompacto\"
     Me.Picture = LoadPicture(filePath & "menu.jpg")
     
-    
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
         Set clsFormulario = New clsFormMovementManager
@@ -245,6 +263,7 @@ Private Sub Form_Load()
     #End If
     
     LoadButtons
+
 End Sub
 
 Private Sub imgCerrarJuego_Click()
@@ -252,6 +271,7 @@ Private Sub imgCerrarJuego_Click()
      
     If MsgBox("¿Estás seguro que deseas cerrar el Juego por Completo?", vbYesNo) = vbYes Then
         prgRun = False
+
     End If
     
     #If ModoBig = 0 Then
@@ -265,11 +285,10 @@ Private Sub imgChangeAccount_Click()
     
     #If ModoBig = 0 Then
         Call FrmMenuAccount.Show(, FrmMain)
-         Unload Me
+        Unload Me
     #Else
         dockForm FrmMenuAccount.hWnd, FrmMain.PicMenu, True
     #End If
-
 
 End Sub
 
@@ -283,12 +302,6 @@ Private Sub imgChangeChar_Click()
     
 End Sub
 
-
-
-
-
-
-
 Private Sub imgMinimice_Click()
     Call Audio.PlayInterface(SND_CLICK)
     FrmMain.WindowState = 1
@@ -296,68 +309,122 @@ Private Sub imgMinimice_Click()
     #If ModoBig = 0 Then
         Unload Me
     #End If
+
 End Sub
 
-
-Private Sub imgGrupo_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgGrupo_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Forma grupos con los usuarios"
+
 End Sub
 
-
-
-
-
-
-
-Private Sub imgSkills_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgSkills_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Habilidades y Destrezas de tu Personaje"
+
 End Sub
-Private Sub imgQuests_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgQuests_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Misiones y Objetivos a completar"
+
 End Sub
-Private Sub imgRetos_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgRetos_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Juega Luchas con los demás."
+
 End Sub
-Private Sub imgEventos_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgEventos_MouseMove(Button As Integer, _
+                                 Shift As Integer, _
+                                 X As Single, _
+                                 Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Eventos y Torneos Oficiales del Game"
+
 End Sub
-Private Sub imgRanking_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgRanking_MouseMove(Button As Integer, _
+                                 Shift As Integer, _
+                                 X As Single, _
+                                 Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Premios Mensuales"
+
 End Sub
-Private Sub imgGuild_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgGuild_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "<Alianzas> entre personajes"
+
 End Sub
-Private Sub imgStats_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgStats_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Estadisticas de tu Personaje"
+
 End Sub
-Private Sub imgOption_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgOption_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Configuración del Game"
+
 End Sub
-Private Sub imgManual_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgManual_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Manual del Juego para aprender a Jugar"
+
 End Sub
-Private Sub imgMercado_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgMercado_MouseMove(Button As Integer, _
+                                 Shift As Integer, _
+                                 X As Single, _
+                                 Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "¡Compra-Venta de Personajes!"
+
 End Sub
-Private Sub imgShop_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
+Private Sub imgShop_MouseMove(Button As Integer, _
+                              Shift As Integer, _
+                              X As Single, _
+                              Y As Single)
     lblMenuDesc.visible = True
     lblMenuDesc.Caption = "Compra de Items/Personajes/Avatares Y Mas.. Shop Oficial."
+
 End Sub
+
 Private Sub imgQuests_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call ParseUserCommand("/MISIONES")
+
 End Sub
 
 Private Sub imgSkills_Click()
@@ -365,17 +432,23 @@ Private Sub imgSkills_Click()
     
     If Not MainTimer.Check(TimersIndex.Packet500) Then Exit Sub
     Call WriteRequestSkills
+
 End Sub
+
 Private Sub imgRetos_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call ParseUserCommand("/RETOS")
+
 End Sub
+
 Private Sub imgEventos_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call ParseUserCommand("/TORNEOS")
+
 End Sub
+
 Private Sub imgRanking_Click()
     Call Audio.PlayInterface(SND_CLICK)
 
@@ -386,14 +459,17 @@ Private Sub imgRanking_Click()
     #End If
 
 End Sub
+
 Private Sub imgGuild_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call WriteGuilds_Required(0)
+
 End Sub
 
 Private Sub imgStats_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ParseUserCommand("/EST")
+
 End Sub
 
 Private Sub imgOption_Click()
@@ -410,15 +486,18 @@ End Sub
 Private Sub imgShop_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ParseUserCommand("/SHOP")
+
 End Sub
+
 Private Sub imgGrupo_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ShowConsoleMsg("Ayuda» Es hora de enviar solicitudes para que usuarios formen un grupo contigo.. Haz clic sobre aquel que desees invitar y luego teclea F3.", 150, 200, 148, True)
     Call WritePartyClient(1)
+
 End Sub
+
 Private Sub imgManual_Click()
     Call Audio.PlayInterface(SND_CLICK)
-    
     
 End Sub
 

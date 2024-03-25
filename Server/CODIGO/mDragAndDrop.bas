@@ -71,17 +71,14 @@ Sub DragToUser(ByVal UserIndex As Integer, _
 
     End If
     
-    
-    
     If Not MeterItemEnInventario(tIndex, tobj) Then
         WriteConsoleMsg UserIndex, "El usuario no tiene espacio en su inventario.", FontTypeNames.FONTTYPE_INFO
 
         Exit Sub
 
     End If
-
     
-     ' Comprobamos si esta en una misión
+    ' Comprobamos si esta en una misión
     Call Quests_Check_Objs(UserIndex, tobj.ObjIndex, tobj.Amount)
                           
     'Quito el objeto.
@@ -98,6 +95,7 @@ Sub DragToUser(ByVal UserIndex As Integer, _
         tString = tString & " " & tobj.Amount & " - " & ObjData(tobj.ObjIndex).Name
     Else
         tString = tString & " tu " & ObjData(tobj.ObjIndex).Name
+
     End If
           
     tString = tString & " a " & UserList(tIndex).Name
@@ -112,6 +110,7 @@ Sub DragToUser(ByVal UserIndex As Integer, _
         tString = tString & " " & tobj.Amount & " - " & ObjData(tobj.ObjIndex).Name
     Else
         tString = tString & " su " & ObjData(tobj.ObjIndex).Name
+
     End If
           
     'Envio el mensaje al otro usuario
@@ -119,6 +118,7 @@ Sub DragToUser(ByVal UserIndex As Integer, _
 
     If ObjData(tobj.ObjIndex).Log = 1 Then
         Call Logs_User(UserList(UserIndex).Name, eLog.eUser, eDropObj, "El personaje " & UserList(UserIndex).Name & " le ha arrojado a " & UserList(tIndex).Name & " el objeto: " & tobj.Amount & " - " & ObjData(tobj.ObjIndex).Name)
+
     End If
     
     On Error GoTo 0
@@ -127,7 +127,7 @@ Sub DragToUser(ByVal UserIndex As Integer, _
 
 DragToUser_Error:
 
-    LogError "Error " & Err.Number & " (" & Err.description & ") in procedure DragToUser of Módulo MOD_DrAGDrOp in line " & Erl
+    LogError "Error " & Err.number & " (" & Err.description & ") in procedure DragToUser of Módulo MOD_DrAGDrOp in line " & Erl
 
 End Sub
  
@@ -181,6 +181,7 @@ Public Sub DragToNPC(ByVal UserIndex As Integer, _
         If teniaObj <> UserList(UserIndex).Invent.Object(Slot).Amount Then
             WriteConsoleMsg UserIndex, "Has depositado " & Amount & " - " & ObjData(tmpIndex).Name, FontTypeNames.FONTTYPE_INFO
             UpdateUserInv False, UserIndex, Slot
+
         End If
 
         'Es un npc comerciante?
@@ -193,11 +194,14 @@ Public Sub DragToNPC(ByVal UserIndex As Integer, _
 
             If TeniaOro <> UserList(UserIndex).Stats.Gld Then
                 WriteConsoleMsg UserIndex, "Le has vendido al " & Npclist(tNpc).Name & " " & Amount & " - " & ObjData(tmpIndex).Name, FontTypeNames.FONTTYPE_INFO
+
             End If
 
         Else
             WriteConsoleMsg UserIndex, "El npc no está interesado en comprar este tipo de objetos.", FontTypeNames.FONTTYPE_INFO
+
         End If
+
     End If
        
     Exit Sub
@@ -210,7 +214,7 @@ ErrHandler:
 
 DragToNPC_Error:
 
-    LogError "Error " & Err.Number & " (" & Err.description & ") in procedure DragToNPC of Módulo MOD_DrAGDrOp in line " & Erl
+    LogError "Error " & Err.number & " (" & Err.description & ") in procedure DragToNPC of Módulo MOD_DrAGDrOp in line " & Erl
  
 End Sub
  
@@ -288,6 +292,7 @@ Public Sub DragToPos(ByVal UserIndex As Integer, _
 
     If ObjData(tobj.ObjIndex).Log = 1 Then
         Call Logs_User(UserList(UserIndex).Name, eLog.eUser, eDropObj, "El personaje " & UserList(UserIndex).Name & " draggeo el objeto: " & tobj.Amount & " - " & ObjData(tobj.ObjIndex).Name)
+
     End If
     
     On Error GoTo 0
@@ -296,7 +301,7 @@ Public Sub DragToPos(ByVal UserIndex As Integer, _
 
 DragToPos_Error:
 
-    LogError "Error " & Err.Number & " (" & Err.description & ") in procedure DragToPos of Módulo MOD_DrAGDrOp in line " & Erl
+    LogError "Error " & Err.number & " (" & Err.description & ") in procedure DragToPos of Módulo MOD_DrAGDrOp in line " & Erl
        
 End Sub
  
@@ -354,11 +359,13 @@ Private Function CanDragToPos(ByVal Map As Integer, _
 
 CanDragToPos_Error:
 
-    LogError "Error " & Err.Number & " (" & Err.description & ") in procedure CanDragToPos of Módulo MOD_DrAGDrOp in line " & Erl
+    LogError "Error " & Err.number & " (" & Err.description & ") in procedure CanDragToPos of Módulo MOD_DrAGDrOp in line " & Erl
        
 End Function
  
-Private Function CanDragObj(ByVal UserIndex As Integer, ByVal ObjIndex As Integer, ByRef error As String) As Boolean
+Private Function CanDragObj(ByVal UserIndex As Integer, _
+                            ByVal ObjIndex As Integer, _
+                            ByRef error As String) As Boolean
        
     ' @ Author : maTih.-
     '            Devuelve si un objeto es drageable.
@@ -411,6 +418,6 @@ Private Function CanDragObj(ByVal UserIndex As Integer, ByVal ObjIndex As Intege
 
 CanDragObj_Error:
 
-    LogError "Error " & Err.Number & " (" & Err.description & ") in procedure CanDragObj of Módulo MOD_DrAGDrOp in line " & Erl
+    LogError "Error " & Err.number & " (" & Err.description & ") in procedure CanDragObj of Módulo MOD_DrAGDrOp in line " & Erl
        
 End Function

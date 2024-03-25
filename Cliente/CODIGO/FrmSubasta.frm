@@ -129,7 +129,9 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private clsFormulario As clsFormMovementManager
-Private Inv As clsGrapchicalInventory
+
+Private Inv           As clsGrapchicalInventory
+
 Private Sub Form_Load()
     ' Handles Form movement (drag and drop).
     Set clsFormulario = New clsFormMovementManager
@@ -139,20 +141,22 @@ Private Sub Form_Load()
     
     Dim A As Long
     
-    
     Set Inv = New clsGrapchicalInventory
     
     Call Inv.Initialize(picInv, MAX_INVENTORY_SLOTS, MAX_INVENTORY_SLOTS, eCaption.cSubastar, , , , , , , , , , True)
     
     For A = 1 To MAX_INVENTORY_SLOTS
+
         With Inventario
             Call Inv.SetItem(A, .ObjIndex(A), .Amount(A), 0, .GrhIndex(A), .ObjType(A), 0, 0, 0, 0, .Valor(A), .ItemName(A), 0, .CanUse(A), 0, 0, 0, 0)
+
         End With
+
     Next A
     
     Inv.DrawInventory
     
-    Me.Picture = LoadPicture(App.path & "\resource\interface\bank\bank_auction.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\bank\bank_auction.jpg")
     
 End Sub
 
@@ -164,11 +168,13 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub imgSubastar_Click()
+
     If Not CheckData Then Exit Sub
     
     If MsgBox("¿Estás seguro que deseas subastar el objeto " & Inventario.ItemName(Inv.SelectedItem) & " (x" & Val(txtAmount.Text) & ")?", vbYesNo) = vbYes Then
         Call WriteAuction_New(Inv.SelectedItem, Val(txtAmount.Text), Val(txtGld.Text), Val(txtEldhir.Text))
         Unload Me
+
     End If
     
 End Sub
@@ -183,27 +189,33 @@ Private Function CheckData() As Boolean
     If Val(txtAmount.Text) > 10000 Then
         Call MsgBox("No puedes subastar más de 10.000 Objetos.")
         Exit Function
+
     End If
     
     If Val(txtGld.Text) > 100000000 Then
         Call MsgBox("El máximo de Oro que puedes pedir es de 100.000.000")
         Exit Function
+
     End If
     
     If Val(txtEldhir.Text) > 1000 Then
         Call MsgBox("El máximo de Eldhires que puedes pedir es de 1.000")
         Exit Function
+
     End If
     
     If UserGLD < 20000 Then
         Call MsgBox("El servidor te cobrá 20.000 Monedas de Oro para realizar la subasta.")
         Exit Function
+
     End If
     
-    
     CheckData = True
+
 End Function
+
 Private Sub imgUnload_Click()
     Unload Me
+
 End Sub
 

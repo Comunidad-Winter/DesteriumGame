@@ -105,34 +105,31 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private clsFormulario          As clsFormMovementManager
+Private clsFormulario As clsFormMovementManager
 
-Private ListMercader As clsGraphicalList
+Private ListMercader  As clsGraphicalList
 
-Dim SelectedOffer As Integer
+Dim SelectedOffer     As Integer
 
 Private Sub ButtonAdd_Click()
-
   
     Call Audio.PlayInterface(SND_CLICK)
-    
-
 
 End Sub
 
 Public Sub UpdateInfo()
     
     Dim A As Long
-
-   
     
     With MercaderList_Copy(MercaderSelected)
         lblTitle.Caption = .Chars(1).Desc & IIf(.Char > 1, " +" & .Char - 1 & " pjs", vbNullString)
+
     End With
     
     Reelistar_Ofertas
     
     MirandoOffer = True
+
 End Sub
 
 Private Sub ButtonAccept_Click()
@@ -142,12 +139,16 @@ Private Sub ButtonAccept_Click()
     If SelectedOffer = 0 Then
         Call MsgBox("Selecciona una oferta.")
         Exit Sub
+
     End If
     
     If MsgBox("¿Estás seguro que deseas aceptar la oferta? ¡Una vez aceptada no hay vuelta atrás!", vbYesNo) = vbYes Then
         Call WriteMercader_Required(5, SelectedOffer, 0)
+
     End If
+
 End Sub
+
 Private Function Mercader_Prepare_List(ByVal A As Long) As String
     
     Mercader_Prepare_List = MercaderListOffer(A).Chars(1).Desc & IIf(MercaderListOffer(A).Char > 1, " +" & MercaderListOffer(A).Char - 1 & " pjs", vbNullString)
@@ -161,19 +162,23 @@ Private Sub Reelistar_Ofertas()
     Dim A As Long
     
     For A = 1 To MERCADER_MAX_LIST
+
         With MercaderListOffer(A)
+
             If .Desc <> vbNullString Then
                 ListMercader.AddItem Mercader_Prepare_List(A) & " [" & .Desc & "]"
+
             End If
+
         End With
 
     Next A
-    
     
     If ListMercader.ListCount > 0 Then
         MercaderSelectedOffer = 1
     Else
         MercaderSelectedOffer = -1
+
     End If
     
 End Sub
@@ -183,13 +188,14 @@ Private Sub ButtonView_Click()
     
     If ListMercader.ListIndex = -1 Then
         Exit Sub
+
     End If
-    
     
     If FrmMercaderInfoOffer.visible Then
         FrmMercaderInfoOffer.UpdateInfo
     Else
         FrmMercaderInfoOffer.Show , FrmMain
+
     End If
     
     Unload Me
@@ -214,38 +220,42 @@ Private Sub Form_Load()
     
     MirandoOffer = True
     ImgSecure.ToolTipText = "Tienes 48hs para reclamar el cambio de DSP a DINERO REAL."
+
 End Sub
-
-
 
 Private Sub Form_Unload(Cancel As Integer)
     MirandoOffer = False
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Form_KeyDown vbKeyEscape, 0
-End Sub
 
+End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
 End Sub
-
-
 
 Private Sub PicChars_Click()
 
     If ListMercader.ListIndex = -1 Then Exit Sub
     MercaderSelectedOffer = ListMercader.ListIndex + 1
+
 End Sub
 
 ' Lista Gr fica de Hechizos
-Private Sub PicChars_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars_MouseDown(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
+
     If Y < 0 Then Y = 0
     
     If Y > Int(PicChars.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then Y = Int(PicChars.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
@@ -256,30 +266,44 @@ Private Sub PicChars_MouseDown(Button As Integer, Shift As Integer, X As Single,
     
     Else
         ListMercader.DownBarrita = Y - ListMercader.Scroll * (PicChars.ScaleHeight - ListMercader.BarraHeight) / (ListMercader.ListCount - ListMercader.VisibleCount)
+
     End If
     
 End Sub
 
-Private Sub PicChars_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
 
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
     
-    If yy < 0 Then yy = 0
+        If yy < 0 Then yy = 0
     
-    If yy > Int(PicChars.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then yy = Int(PicChars.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
+        If yy > Int(PicChars.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then yy = Int(PicChars.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
     
-    If ListMercader.DownBarrita > 0 Then
-        ListMercader.Scroll = (Y - ListMercader.DownBarrita) * (ListMercader.ListCount - ListMercader.VisibleCount) / (PicChars.ScaleHeight - ListMercader.BarraHeight)
-    Else
-        ListMercader.ListIndex = Int(yy / ListMercader.Pixel_Alto) + ListMercader.Scroll
+        If ListMercader.DownBarrita > 0 Then
+            ListMercader.Scroll = (Y - ListMercader.DownBarrita) * (ListMercader.ListCount - ListMercader.VisibleCount) / (PicChars.ScaleHeight - ListMercader.BarraHeight)
+        Else
+            ListMercader.ListIndex = Int(yy / ListMercader.Pixel_Alto) + ListMercader.Scroll
+
+        End If
+
+    ElseIf Button = 0 Then
+        ListMercader.ShowBarrita = X > PicChars.ScaleWidth - ListMercader.BarraWidth * 2
+
     End If
-ElseIf Button = 0 Then
-    ListMercader.ShowBarrita = X > PicChars.ScaleWidth - ListMercader.BarraWidth * 2
-End If
+
 End Sub
 
-Private Sub PicChars_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars_MouseUp(Button As Integer, _
+                             Shift As Integer, _
+                             X As Single, _
+                             Y As Single)
     ListMercader.DownBarrita = 0
+
 End Sub

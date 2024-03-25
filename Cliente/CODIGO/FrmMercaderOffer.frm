@@ -210,14 +210,13 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private clsFormulario          As clsFormMovementManager
+Private clsFormulario As clsFormMovementManager
 
-Private ListChars As clsGraphicalList
-Private ListChars1 As clsGraphicalList
+Private ListChars     As clsGraphicalList
 
+Private ListChars1    As clsGraphicalList
 
 Private Sub ButtonAdd_Click()
-
   
     Call Audio.PlayInterface(SND_CLICK)
     
@@ -229,11 +228,13 @@ Private Sub ButtonAdd_Click()
     
     If ListCharsExist(Char) Then
         Exit Sub
+
     End If
     
     If Account.Chars(ListChars.ListIndex + 1).Elv < MERCADER_MIN_LVL Then
         Call MsgBox("¡Solo puedes ofrecer personajes superiores a Nivel " & MERCADER_MIN_LVL & "!")
         Exit Sub
+
     End If
     
     If MercaderUserOffer.Char > 0 Then
@@ -242,6 +243,7 @@ Private Sub ButtonAdd_Click()
             Exit Sub
     
         End If
+
     End If
     
     ListChars1.List(ListChars.ListIndex) = Char
@@ -249,20 +251,25 @@ Private Sub ButtonAdd_Click()
     MercaderUserOffer.IDCHARS(Account.Chars(ListChars.ListIndex + 1).ID) = 1
     MercaderUserOffer.bChars(Account.Chars(ListChars.ListIndex + 1).ID) = 1
     MercaderUserOffer.Char = MercaderUserOffer.Char + 1
+
 End Sub
 
 Private Function ListCharsExist(ByVal Char As String) As Boolean
+
     Dim A As Long
-    
     
     If ListChars1.ListIndex = -1 Then Exit Function
     
     For A = 0 To ListChars1.ListCount - 1
+
         If Char = UCase$(ListChars1.List(A)) Then
             ListCharsExist = True
             Exit Function
+
         End If
+
     Next A
+
 End Function
 
 Private Sub ButtonNext_Click()
@@ -271,17 +278,19 @@ Private Sub ButtonNext_Click()
     If Len(txtDesc.Text) <= 4 Then
         Call MsgBox("Elige una descripción un poco más larga.")
         Exit Sub
+
     End If
     
     If Len(txtDesc.Text) >= 30 Then
         Call MsgBox("Elige una descripción un poco más corta.")
         Exit Sub
+
     End If
     
     If Val(txtGld.Text) < 0 Then txtGld.Text = "0"
     If Val(txtDsp.Text) < 0 Then txtDsp.Text = "0"
     
-     If MercaderList_Copy(MercaderSelected).Gld > Account.Gld Then
+    If MercaderList_Copy(MercaderSelected).Gld > Account.Gld Then
         Call MsgBox("El usuario requiere como mínimo " & Format(MercaderList_Copy(MercaderSelected).Gld, "##,##") & " Monedas de Oro.")
         Exit Sub
 
@@ -291,14 +300,13 @@ Private Sub ButtonNext_Click()
     MercaderUserOffer.Dsp = Val(txtDsp.Text)
     MercaderUserOffer.Desc = txtDesc.Text
     
-    
     FrmMercaderConfirm.TypeConfirm = eTypeConfirm.Oferta
     
     FrmMercaderConfirm.Show , FrmMain
+
 End Sub
 
 Private Sub ButtonRemove_Click()
-
   
     Call Audio.PlayInterface(SND_CLICK)
     
@@ -313,11 +321,11 @@ Private Sub ButtonRemove_Click()
     MercaderUserOffer.IDCHARS(Account.Chars(ListChars1.ListIndex + 1).ID) = 0
     MercaderUserOffer.bChars(Account.Chars(ListChars1.ListIndex + 1).ID) = 0
     MercaderUserOffer.Char = MercaderUserOffer.Char - 1
-    
 
 End Sub
 
 Private Sub ResetMercaderOffer()
+
     Dim A As Long
     
     For A = 1 To ACCOUNT_MAX_CHARS
@@ -329,7 +337,9 @@ Private Sub ResetMercaderOffer()
     MercaderUserOffer.Desc = ""
     MercaderUserOffer.Char = 0
     MercaderUserOffer.Blocked = 0
+
 End Sub
+
 Public Sub UpdateInfo()
     
     Dim A As Long
@@ -338,9 +348,11 @@ Public Sub UpdateInfo()
     
     With MercaderList_Copy(MercaderSelected)
         lblTitle.Caption = .Chars(1).Desc & IIf(.Char > 1, " +" & .Char - 1 & " pjs", vbNullString)
+
     End With
     
 End Sub
+
 Private Sub Form_Load()
 
     Dim filePath As String
@@ -360,10 +372,12 @@ Private Sub Form_Load()
     Dim A As Long
     
     For A = 1 To ACCOUNT_MAX_CHARS
+
         If Account.Chars(A).Class > 0 Then
             ListChars.AddItem UCase$(Account.Chars(A).Name)
         Else
             ListChars.AddItem "<Vacio>"
+
         End If
         
         ListChars1.AddItem "<Vacio>"
@@ -373,28 +387,30 @@ Private Sub Form_Load()
     
     ImgInfo.ToolTipText = "Pon algo como 'Te ofrezco mi mago y 250.000 Monedas de Oro'. Cualquier palabra considerada ofensiva será castigada."
     ImgSecure.ToolTipText = "Si ofreces DSP el MERCADO se encargará de transferirle el dinero correspondiente al personaje. Además podrá optar por quedarse los DSP y usarlos en la compra de otros personajes del MERCADO."
+
 End Sub
-
-
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Form_KeyDown vbKeyEscape, 0
-End Sub
 
+End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
 End Sub
 
-
-
 ' Lista Gráfica de Hechizos
-Private Sub PicChars_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars_MouseDown(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
+
     If Y < 0 Then Y = 0
     
     If Y > Int(PicChars.ScaleHeight / ListChars.Pixel_Alto) * ListChars.Pixel_Alto - 1 Then Y = Int(PicChars.ScaleHeight / ListChars.Pixel_Alto) * ListChars.Pixel_Alto - 1
@@ -405,38 +421,55 @@ Private Sub PicChars_MouseDown(Button As Integer, Shift As Integer, X As Single,
     
     Else
         ListChars.DownBarrita = Y - ListChars.Scroll * (PicChars.ScaleHeight - ListChars.BarraHeight) / (ListChars.ListCount - ListChars.VisibleCount)
+
     End If
     
 End Sub
 
-Private Sub PicChars_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
 
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
     
-    If yy < 0 Then yy = 0
+        If yy < 0 Then yy = 0
     
-    If yy > Int(PicChars.ScaleHeight / ListChars.Pixel_Alto) * ListChars.Pixel_Alto - 1 Then yy = Int(PicChars.ScaleHeight / ListChars.Pixel_Alto) * ListChars.Pixel_Alto - 1
+        If yy > Int(PicChars.ScaleHeight / ListChars.Pixel_Alto) * ListChars.Pixel_Alto - 1 Then yy = Int(PicChars.ScaleHeight / ListChars.Pixel_Alto) * ListChars.Pixel_Alto - 1
     
-    If ListChars.DownBarrita > 0 Then
-        ListChars.Scroll = (Y - ListChars.DownBarrita) * (ListChars.ListCount - ListChars.VisibleCount) / (PicChars.ScaleHeight - ListChars.BarraHeight)
-    Else
-        ListChars.ListIndex = Int(yy / ListChars.Pixel_Alto) + ListChars.Scroll
+        If ListChars.DownBarrita > 0 Then
+            ListChars.Scroll = (Y - ListChars.DownBarrita) * (ListChars.ListCount - ListChars.VisibleCount) / (PicChars.ScaleHeight - ListChars.BarraHeight)
+        Else
+            ListChars.ListIndex = Int(yy / ListChars.Pixel_Alto) + ListChars.Scroll
+
+        End If
+
+    ElseIf Button = 0 Then
+        ListChars.ShowBarrita = X > PicChars.ScaleWidth - ListChars.BarraWidth * 2
+
     End If
-ElseIf Button = 0 Then
-    ListChars.ShowBarrita = X > PicChars.ScaleWidth - ListChars.BarraWidth * 2
-End If
+
 End Sub
 
-Private Sub PicChars_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars_MouseUp(Button As Integer, _
+                             Shift As Integer, _
+                             X As Single, _
+                             Y As Single)
     ListChars.DownBarrita = 0
-End Sub
 
+End Sub
 
 ' # Chars 2
 ' Lista Gráfica de Hechizos
-Private Sub PicChars1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars1_MouseDown(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
+
     If Y < 0 Then Y = 0
     
     If Y > Int(PicChars1.ScaleHeight / ListChars1.Pixel_Alto) * ListChars1.Pixel_Alto - 1 Then Y = Int(PicChars1.ScaleHeight / ListChars1.Pixel_Alto) * ListChars1.Pixel_Alto - 1
@@ -447,62 +480,84 @@ Private Sub PicChars1_MouseDown(Button As Integer, Shift As Integer, X As Single
     
     Else
         ListChars1.DownBarrita = Y - ListChars1.Scroll * (PicChars1.ScaleHeight - ListChars1.BarraHeight) / (ListChars1.ListCount - ListChars1.VisibleCount)
+
     End If
     
 End Sub
 
-Private Sub PicChars1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars1_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
 
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
     
-    If yy < 0 Then yy = 0
+        If yy < 0 Then yy = 0
     
-    If yy > Int(PicChars1.ScaleHeight / ListChars1.Pixel_Alto) * ListChars1.Pixel_Alto - 1 Then yy = Int(PicChars1.ScaleHeight / ListChars1.Pixel_Alto) * ListChars1.Pixel_Alto - 1
+        If yy > Int(PicChars1.ScaleHeight / ListChars1.Pixel_Alto) * ListChars1.Pixel_Alto - 1 Then yy = Int(PicChars1.ScaleHeight / ListChars1.Pixel_Alto) * ListChars1.Pixel_Alto - 1
     
-    If ListChars1.DownBarrita > 0 Then
-        ListChars1.Scroll = (Y - ListChars1.DownBarrita) * (ListChars1.ListCount - ListChars1.VisibleCount) / (PicChars1.ScaleHeight - ListChars1.BarraHeight)
-    Else
-        ListChars1.ListIndex = Int(yy / ListChars1.Pixel_Alto) + ListChars1.Scroll
+        If ListChars1.DownBarrita > 0 Then
+            ListChars1.Scroll = (Y - ListChars1.DownBarrita) * (ListChars1.ListCount - ListChars1.VisibleCount) / (PicChars1.ScaleHeight - ListChars1.BarraHeight)
+        Else
+            ListChars1.ListIndex = Int(yy / ListChars1.Pixel_Alto) + ListChars1.Scroll
+
+        End If
+
+    ElseIf Button = 0 Then
+        ListChars1.ShowBarrita = X > PicChars1.ScaleWidth - ListChars1.BarraWidth * 2
+
     End If
-ElseIf Button = 0 Then
-    ListChars1.ShowBarrita = X > PicChars1.ScaleWidth - ListChars1.BarraWidth * 2
-End If
+
 End Sub
 
-Private Sub PicChars1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicChars1_MouseUp(Button As Integer, _
+                              Shift As Integer, _
+                              X As Single, _
+                              Y As Single)
     ListChars1.DownBarrita = 0
-End Sub
 
+End Sub
 
 Private Sub txtGld_Change()
     
     If Not IsNumeric(txtGld.Text) Then
         txtGld.Text = "0"
+
     End If
     
     If Val(txtGld.Text) < 0 Then
         txtGld.Text = "0"
+
     End If
     
     If Val(txtGld.Text) > MERCADER_MAX_GLD Then
         txtGld.Text = MERCADER_MAX_GLD
         txtGld.SelStart = Len(txtGld.Text)
+
     End If
+
 End Sub
+
 Private Sub txtDsp_Change()
     
     If Not IsNumeric(txtDsp.Text) Then
         txtDsp.Text = "0"
+
     End If
     
     If Val(txtDsp.Text) < 0 Then
         txtDsp.Text = "0"
+
     End If
     
     If Val(txtDsp.Text) > MERCADER_MAX_DSP Then
         txtDsp.Text = MERCADER_MAX_DSP
         txtDsp.SelStart = Len(txtDsp.Text)
+
     End If
+
 End Sub

@@ -26,11 +26,13 @@ Option Explicit
 
 #If ClienteGM = 1 Then
 
-Public Enum eSearchData
-    eMac = 1
-    eDisk = 2
-    eIpAddress = 3
-End Enum
+    Public Enum eSearchData
+
+        eMac = 1
+        eDisk = 2
+        eIpAddress = 3
+
+    End Enum
 
 #End If
 
@@ -54,6 +56,7 @@ Public Sub AuxWriteWhisper(ByVal UserName As String, ByVal Mensaje As String)
     
     If (InStrB(UserName, "+") <> 0) Then
         UserName = Replace$(UserName, "+", " ")
+
     End If
     
     UserName = UCase$(UserName)
@@ -154,7 +157,8 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
             Case "/ALQUILAR"
                 Call WriteAlquilar(1)
                 Call ShowConsoleMsg("¡¡RECUERDA!! Con el comando /BALANCEALQUILER podrás saber en todo momento cuanto llevas recaudado. Luego de que se termine el contrato tus items iran a tu boveda ¡¡¡¡¡¡¡Recuerda tener LUGAR DISPONIBLE!!!!!!!")
-                 Call ShowConsoleMsg("¡¡RECUERDA!! Con el comando /RECLAMARGANANCIA podrás ir retirando las ganancias a diario. Sino el último día se te dará")
+                Call ShowConsoleMsg("¡¡RECUERDA!! Con el comando /RECLAMARGANANCIA podrás ir retirando las ganancias a diario. Sino el último día se te dará")
+
             Case "/BALANCEALQUILER"
                 Call WriteAlquilar(2)
                 
@@ -1019,7 +1023,7 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
 
                 End If
                 
-            'Case "/HOGAR"
+                'Case "/HOGAR"
                 'Call WriteHome
                 
             Case "/CI"
@@ -1345,10 +1349,11 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                     
                 Else
                     'Avisar que falta el parametro
-                     Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTDELAYSUMMON DELAY")
+                    Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTDELAYSUMMON DELAY")
+
                 End If
         
-           Case "/BOTDELAYINDEX"
+            Case "/BOTDELAYINDEX"
 
                 If notNullArguments And CantidadArgumentos >= 1 Then
                     If ValidNumber(ArgumentosAll(0), eNumber_Types.ent_Long) Then
@@ -1361,9 +1366,9 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                     
                 Else
                     'Avisar que falta el parametro
-                     Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTDELAYINDEX DELAY")
+                    Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTDELAYINDEX DELAY")
+
                 End If
-     
      
             Case "/BOTMODE"
 
@@ -1374,11 +1379,13 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                         'No es numerico
                         Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTMODE MODE")
                         Call ShowConsoleMsg("1=ZONA SEGURA, 2=EVENTOS AUTOMATICOS, 3=RETOS,4=RETOS RAPIDOS, 5=AGITES EN INSEGURA, 6=MIXED, 7=LISTA DE SEGUIDOS", 150, 150, 150, , True)
+
                     End If
                     
                 Else
                     'Avisar que falta el parametro
                     Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTMODE MODE")
+
                 End If
                 
             Case "/BOTINITIAL"
@@ -1391,6 +1398,7 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                         Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTINITIAL DELAY MODE DELAYINDEX")
 
                     End If
+
                 Else
                     'Avisar que falta el parametro
                     Call ShowConsoleMsg("Valor incorrecto. Utilice /BOTINITIAL DELAY MODE DELAYINDEX")
@@ -1471,7 +1479,6 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                     End If
                     
                 End If
-                
 
             Case "/SHOP"
                 Call FrmShop.Show(, FrmMain)
@@ -1495,7 +1502,7 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
             Case "/MISIONES"
                 Call WriteQuestRequired(0)
                 
-            'Case "/RULETA"
+                'Case "/RULETA"
                 'Call FrmRuleta.Show(, FrmMain)
                 
             Case "/CASTILLO"
@@ -1506,8 +1513,10 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                 
             Case "/SUR"
                 Call WriteCastle(3)
+
             Case "/ESTE"
                 Call WriteCastle(2)
+
             Case "/OESTE"
                 Call WriteCastle(4)
                 
@@ -1575,7 +1584,6 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                     End With
 
                 End If
-                
             
             Case "/INFO"
 
@@ -1645,7 +1653,6 @@ Public Sub ParseUserCommand(ByVal RawCommand As String)
                 
             Case "/TORNEOS"
                 Call WriteInfoEvento
-            
 
             Case "/RETOS"
                 #If ModoBig = 1 Then
@@ -1881,6 +1888,7 @@ Public Sub ShowConsoleMsg(ByVal Message As String, _
     '
     '***************************************************
     Call AddtoRichTextBox(FrmMain.RecTxt, Message, red, green, blue, bold, italic)
+
 End Sub
 
 ''
@@ -1920,9 +1928,11 @@ Public Function ValidNumber(ByVal Numero As String, _
         Case eNumber_Types.ent_Trigger
             minimo = 0
             maximo = 10
+
     End Select
     
     If Val(Numero) >= minimo And Val(Numero) <= maximo Then ValidNumber = True
+
 End Function
 
 ''
@@ -1946,6 +1956,7 @@ Private Function validipv4str(ByVal IP As String) As Boolean
     If Not ValidNumber(tmpArr(0), eNumber_Types.ent_Byte) Or Not ValidNumber(tmpArr(1), eNumber_Types.ent_Byte) Or Not ValidNumber(tmpArr(2), eNumber_Types.ent_Byte) Or Not ValidNumber(tmpArr(3), eNumber_Types.ent_Byte) Then Exit Function
     
     validipv4str = True
+
 End Function
 
 ''
@@ -1975,6 +1986,7 @@ Private Function str2ipv4l(ByVal IP As String) As Byte()
     bArr(3) = CByte(tmpArr(3))
 
     str2ipv4l = bArr
+
 End Function
 
 ''
@@ -2005,7 +2017,9 @@ Private Function AEMAILSplit(ByRef Text As String) As String()
         tmpArr(1) = mid$(Text, Pos + 1)
     Else
         tmpArr(0) = vbNullString
+
     End If
     
     AEMAILSplit = tmpArr
+
 End Function

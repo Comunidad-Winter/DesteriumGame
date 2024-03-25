@@ -1,0 +1,19 @@
+[History]
+1=#P0#=mb	#P1#=Draw_Texture	#P2#=ARGENTUMTDS/Mod_TileEngine/Draw_Texture	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325210306	#P7#=0	#P8#=51	.
+2=#P0#=mb	#P1#=Draw_Texture_Graphic	#P2#=ARGENTUMTDS/Mod_TileEngine/Draw_Texture_Graphic	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325205139	#P7#=0	#P8#=38	.
+3=#P0#=mb	#P1#=Draw_Texture_Default	#P2#=ARGENTUMTDS/Mod_TileEngine/Draw_Texture_Default	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325205026	#P7#=0	#P8#=35	.
+4=#P0#=mb	#P1#=Draw_Texture_Graphic_Gui	#P2#=ARGENTUMTDS/Mod_TileEngine/Draw_Texture_Graphic_Gui	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325204906	#P7#=0	#P8#=39	.
+5=#P0#=mb	#P1#=Get_Image	#P2#=ARGENTUMTDS/modCompression/Get_Image	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325203434	#P7#=0	#P8#=0	.
+6=#P0#=mb	#P1#=HandleConnectedMessage	#P2#=ARGENTUMTDS/Protocol/HandleConnectedMessage	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325202913	#P7#=0	#P8#=4	.
+7=#P0#=mb	#P1#=WriteLoginAccount	#P2#=ARGENTUMTDS/Protocol/WriteLoginAccount	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325201705	#P7#=0	#P8#=13	.
+8=#P0#=mb	#P1#=tReconnect_Timer	#P2#=ARGENTUMTDS/FrmConectando/tReconnect_Timer	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325201631	#P7#=0	#P8#=3	.
+9=#P0#=mb	#P1#=Reconnect_Socket	#P2#=ARGENTUMTDS/FrmConectando/Reconnect_Socket	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325201603	#P7#=0	#P8#=1	.
+10=#P0#=mb	#P1#=cmdCerrar_Click	#P2#=ARGENTUMTDS/frmConnectAcc/cmdCerrar_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325190603	#P7#=0	#P8#=1	.
+11=#P0#=mb	#P1#=cmdConectar_Click	#P2#=ARGENTUMTDS/frmConnectAcc/cmdConectar_Click	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325185615	#P7#=0	#P8#=0	.
+12=#P0#=mb	#P1#=Main	#P2#=ARGENTUMTDS/Mod_General/Main	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325185115	#P7#=0	#P8#=71	.
+13=#P0#=mb	#P1#=LoadInitialConfig	#P2#=ARGENTUMTDS/Mod_General/LoadInitialConfig	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325184652	#P7#=0	#P8#=81	.
+14=#P0#=mb	#P1#=ILoadClientSetup	#P2#=ARGENTUMTDS/mClientSetup/ILoadClientSetup	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325184406	#P7#=0	#P8#=39	.
+15=#P0#=mb	#P1#=LoadUserConfig	#P2#=ARGENTUMTDS/frmOpciones/LoadUserConfig	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325183915	#P7#=0	#P8#=31	.
+16=#P0#=mb	#P1#=PATH_CLIENTSETUP	#P2#=ARGENTUMTDS/mClientSetup/PATH_CLIENTSETUP	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325183600	#P7#=0	#P8#=1	.
+17=#P0#=mb	#P1#=Form_Load	#P2#=ARGENTUMTDS/frmCargando/Form_Load	#P3#=	#P4#=	#P5#=MembEventProcPrivate	#P6#=20240325183034	#P7#=0	#P8#=1	.
+18=#P0#=mb	#P1#=SelectedSpamMessage	#P2#=ARGENTUMTDS/Mod_General/SelectedSpamMessage	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20240325182001	#P7#=0	#P8#=7	.

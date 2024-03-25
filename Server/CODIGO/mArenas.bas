@@ -4,6 +4,7 @@ Option Explicit
 ' Cargamos las arenas para disputar los diferentes eventos del juego. Cada una tiene su identificador valido
 
 Public Type tArenas
+
     Used As Boolean
     
     Map As Integer
@@ -22,21 +23,29 @@ Public Type tArenas
     
 End Type
 
-Public ArenaLast As Integer
+Public ArenaLast       As Integer
+
 Public ArenaLastConfig As Integer
-Public Arenas() As tArenas
+
+Public Arenas()        As tArenas
 
 Public Sub Arenas_Load()
+
     On Error GoTo ErrHandler
     
-    Dim Manager As clsIniManager
+    Dim Manager  As clsIniManager
+
     Dim FilePath As String
-    Dim A As Long, B As Long, C As Long, D As Long
-    Dim Temp As String
-    Dim sMap() As String, sX() As String, sY() As String, AddX As Integer, AddY As Integer, MaxUsers As Byte, MinUsers As Byte
-    Dim MapLast As Long
+
+    Dim A        As Long, B As Long, C As Long, D As Long
+
+    Dim Temp     As String
+
+    Dim sMap()   As String, sX() As String, sY() As String, AddX As Integer, AddY As Integer, MaxUsers As Byte, MinUsers As Byte
+
+    Dim MapLast  As Long
     
-    Dim Terreno As Byte, Tipo As Byte, Plante As Byte
+    Dim Terreno  As Byte, Tipo As Byte, Plante As Byte
     
     FilePath = DatPath & "Arenas.ini"
     
@@ -84,12 +93,13 @@ Public Sub Arenas_Load()
                         .Terreno = Terreno
                         .Tipo = Tipo
                         .Plante = Plante
+
                     End With
+
                 Next D
             Next C
         Next B
     Next A
-
 
     Set Manager = Nothing
     
@@ -98,61 +108,56 @@ Public Sub Arenas_Load()
 ErrHandler:
     ' Manejo de errores
     Set Manager = Nothing
+
 End Sub
-
-
-
 
 ' # Busca una arena libre para disputar en el evento.
 ' # Tipos
 ' 0 = Retos rapidos
 ' 1 = Retos
 '
-Public Function Arenas_Free(ByVal Users As Byte, ByVal Tipo As Byte, Optional ByVal Terreno As Byte = 0) As Integer
-
+Public Function Arenas_Free(ByVal Users As Byte, _
+                            ByVal Tipo As Byte, _
+                            Optional ByVal Terreno As Byte = 0) As Integer
 
     On Error GoTo ErrHandler
     
     Dim FreeArenas() As Integer
-    Dim FreeCount As Integer
-    Dim A As Integer
-    Dim RandIndex As Integer
+
+    Dim FreeCount    As Integer
+
+    Dim A            As Integer
+
+    Dim RandIndex    As Integer
     
     ' Inicializar con 0
     Arenas_Free = 0
     
-    
-    
     ' Contar la cantidad de arenas libres y almacenar sus índices
     FreeCount = 0
+
     For A = LBound(Arenas) To UBound(Arenas)
-                                   '   2             6                          2           6
-        If Not Arenas(A).Used And _
-            (Arenas(A).MaxUsers >= Users And Arenas(A).MinUsers <= Users) And _
-            ((Arenas(A).Terreno > 0 And Arenas(A).Terreno = Terreno) Or Arenas(A).Terreno = 0) And _
-            (Arenas(A).Tipo = Tipo) Then
+
+        '   2             6                          2           6
+        If Not Arenas(A).Used And (Arenas(A).MaxUsers >= Users And Arenas(A).MinUsers <= Users) And ((Arenas(A).Terreno > 0 And Arenas(A).Terreno = Terreno) Or Arenas(A).Terreno = 0) And (Arenas(A).Tipo = Tipo) Then
             
             FreeCount = FreeCount + 1
             ReDim Preserve FreeArenas(1 To FreeCount)
             FreeArenas(FreeCount) = A
             
         End If
+
     Next A
-    
-    
     
     ' Si hay al menos una arena libre, generar un número aleatorio para seleccionar una arena libre
     If FreeCount > 0 Then
         RandIndex = RandomNumber(1, FreeCount)
         Arenas_Free = FreeArenas(RandIndex)
+
     End If
     
     Exit Function
 ErrHandler:
     
 End Function
-
-
-
-
 

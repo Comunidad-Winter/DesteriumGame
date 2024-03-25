@@ -43,7 +43,7 @@ Type CWPSTRUCT
 
     lParam As Long
     wParam As Long
-    message As Long
+    Message As Long
     hWnd As Long
 
 End Type
@@ -76,40 +76,40 @@ Public hHook As Long
 Public Function AppHook(ByVal idHook As Long, _
                         ByVal wParam As Long, _
                         ByVal lParam As Long) As Long
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo AppHook_Err
-        '</EhHeader>
 
-        Dim CWP As CWPSTRUCT
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo AppHook_Err
 
-100     CopyMemory CWP, ByVal lParam, Len(CWP)
+    '</EhHeader>
 
-102     Select Case CWP.message
+    Dim CWP As CWPSTRUCT
 
-            Case WM_CREATE
-104             SetForegroundWindow CWP.hWnd
-106             AppHook = CallNextHookEx(hHook, idHook, wParam, ByVal lParam)
-108             UnhookWindowsHookEx hHook
-110             hHook = 0
+    CopyMemory CWP, ByVal lParam, Len(CWP)
 
-                Exit Function
+    Select Case CWP.Message
 
-        End Select
+        Case WM_CREATE
+            SetForegroundWindow CWP.hWnd
+            AppHook = CallNextHookEx(hHook, idHook, wParam, ByVal lParam)
+            UnhookWindowsHookEx hHook
+            hHook = 0
 
-112     AppHook = CallNextHookEx(hHook, idHook, wParam, ByVal lParam)
-        '<EhFooter>
-        Exit Function
+            Exit Function
+
+    End Select
+
+    AppHook = CallNextHookEx(hHook, idHook, wParam, ByVal lParam)
+    '<EhFooter>
+    Exit Function
 
 AppHook_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.SysTray.AppHook " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.SysTray.AppHook " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 

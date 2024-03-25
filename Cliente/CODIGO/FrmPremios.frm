@@ -62,11 +62,11 @@ Option Explicit
 
 Private clsFormulario As clsFormMovementManager
 
-Const MAX_PAGINATION As Byte = 1
+Const MAX_PAGINATION  As Byte = 1
+
 Public LastPagination As Integer
 
 Private Sub Form_Load()
-
 
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
@@ -74,10 +74,10 @@ Private Sub Form_Load()
         clsFormulario.Initialize Me
     #End If
     
-    Dim FilePath As String
+    Dim filePath As String
     
-    FilePath = DirInterface & "menucompacto\"
-    Me.Picture = LoadPicture(FilePath & "Premios1.jpg")
+    filePath = DirInterface & "menucompacto\"
+    Me.Picture = LoadPicture(filePath & "Premios1.jpg")
     
     LastPagination = 1
     
@@ -86,29 +86,37 @@ End Sub
 Private Sub imgPagination_Click(Index As Integer)
     Call Audio.PlayInterface(SND_CLICK)
     
-    
     Select Case Index
+
         Case 0
+
             If Not LastPagination > 1 Then Exit Sub
             LastPagination = LastPagination - 1
+
         Case 1
+
             If Not LastPagination < MAX_PAGINATION Then Exit Sub
             LastPagination = LastPagination + 1
+
     End Select
     
+    Dim filePath As String
     
-    Dim FilePath As String
-    
-    FilePath = DirInterface & "menucompacto\"
-    Me.Picture = LoadPicture(FilePath & "Premios" & LastPagination & ".jpg")
+    filePath = DirInterface & "menucompacto\"
+    Me.Picture = LoadPicture(filePath & "Premios" & LastPagination & ".jpg")
+
 End Sub
+
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
+
 End Sub
 
 Private Sub imgUnload_Click()
     Form_KeyDown vbKeyEscape, 0
+
 End Sub

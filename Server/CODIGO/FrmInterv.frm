@@ -1374,9 +1374,11 @@ Private Sub Command2_Click()
 
 Err:
     MsgBox "Error al intentar grabar los intervalos"
+
 End Sub
 
 Private Sub ok_Click()
     Me.Visible = False
+
 End Sub
 

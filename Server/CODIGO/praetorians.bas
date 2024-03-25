@@ -50,7 +50,7 @@ Attribute VB_Name = "PraetoriansCoopNPC"
 ''''''''''''''''''''''''''''''''''''''''''''''
 ''Estos numeros son necesarios por cuestiones de
 ''sonido. Son los numeros de los wavs del cliente.
-Public Const SONIDO_DRAGON_VIVO As Integer = 30
+Public Const SONIDO_DRAGON_VIVO  As Integer = 30
 
 '''ALCOBAS REALES
 '''OJO LOS BICHOS TAN HARDCODEADOS, NO CAMBIAR EL MAPA DONDE
@@ -62,21 +62,20 @@ Public Const SONIDO_DRAGON_VIVO As Integer = 30
 'Public Const ALCOBA2_X As Integer = 67
 'Public Const ALCOBA2_Y As Integer = 25
 
-
-
 ' Contains all the pretorian's combinations, and its the offsets
 Public PretorianAIOffset(1 To 7) As Integer
 
-
 Public Type tCombinaciones
-        NpcIndex() As Integer
-        MaxNpc As Integer
-        Map As Integer
-        X As Integer
-        Y As Integer
+
+    NpcIndex() As Integer
+    MaxNpc As Integer
+    Map As Integer
+    X As Integer
+    Y As Integer
         
-        RespawnTime As Long
-        Time As Long
+    RespawnTime As Long
+    Time As Long
+
 End Type
 
 Public PretorianDatNumbers() As tCombinaciones
@@ -88,106 +87,113 @@ Public PretorianDatNumbers() As tCombinaciones
 '
 
 Public Sub Pretorians_Loop()
-        '<EhHeader>
-        On Error GoTo Pretorians_Loop_Err
-        '</EhHeader>
-        Dim A As Long
+
+    '<EhHeader>
+    On Error GoTo Pretorians_Loop_Err
+
+    '</EhHeader>
+    Dim A As Long
     
-100     For A = LBound(PretorianDatNumbers) To UBound(PretorianDatNumbers)
-102         If PretorianDatNumbers(A).Time > 0 Then
-104             PretorianDatNumbers(A).Time = PretorianDatNumbers(A).Time - 1
+    For A = LBound(PretorianDatNumbers) To UBound(PretorianDatNumbers)
+
+        If PretorianDatNumbers(A).Time > 0 Then
+            PretorianDatNumbers(A).Time = PretorianDatNumbers(A).Time - 1
             
-106             If PretorianDatNumbers(A).Time <= 0 Then
-108                 If Not ClanPretoriano(A).SpawnClan(PretorianDatNumbers(A).Map, PretorianDatNumbers(A).X, PretorianDatNumbers(A).Y, A) Then
-110                     Call LogError("Error Al cargar boss nro" & A)
-                    End If
-                End If
-            End If
-    
-112     Next A
-        '<EhFooter>
-        Exit Sub
-
-Pretorians_Loop_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.PraetoriansCoopNPC.Pretorians_Loop " & _
-               "at line " & Erl
-        
-        '</EhFooter>
-End Sub
-Public Sub LoadPretorianData()
-
-        '<EhHeader>
-        On Error GoTo LoadPretorianData_Err
-
-        '</EhHeader>
-
-        Dim PretorianDat As String
-        
-        Dim Manager      As clsIniManager
-        
-        Set Manager = New clsIniManager
-        
-100     PretorianDat = DatPath & "Pretorianos.dat"
-        
-        Manager.Initialize PretorianDat
-
-        Dim NroCombinaciones As Integer
-
-102     NroCombinaciones = val(Manager.GetValue("INIT", "LAST"))
-
-104     ReDim PretorianDatNumbers(0 To NroCombinaciones) As tCombinaciones
-
-        Dim TempInt        As Integer
-
-        Dim Counter        As Long
-
-        Dim PretorianIndex As Integer
-
-        Dim A              As Long, B As Long
-        
-        ReDim ClanPretoriano(0 To NroCombinaciones) As clsClanPretoriano
-        
-        Dim Text() As String
-        
-        Dim Temp As String
-        
-        For A = 1 To NroCombinaciones
-            Set ClanPretoriano(A) = New clsClanPretoriano
-            PretorianDatNumbers(A).MaxNpc = val(Manager.GetValue(CStr(A), "MaxNPC"))
-            
-            Text = Split(Manager.GetValue(CStr(A), "NpcIndex"), "-")
-            
-            ReDim PretorianDatNumbers(A).NpcIndex(1 To UBound(Text) + 1) As Integer
-            
-            For B = LBound(Text) To UBound(Text)
-                PretorianDatNumbers(A).NpcIndex(B + 1) = val(Text(B))
-            Next B
-            
-            Temp = Manager.GetValue(CStr(A), "Map")
-            PretorianDatNumbers(A).Map = val(ReadField(1, Temp, 45))
-            PretorianDatNumbers(A).X = val(ReadField(2, Temp, 45))
-            PretorianDatNumbers(A).Y = val(ReadField(3, Temp, 45))
-            PretorianDatNumbers(A).RespawnTime = val(Manager.GetValue(CStr(A), "RESPAWN"))
-        Next A
-        
-        For A = 1 To NroCombinaciones
-            If PretorianDatNumbers(A).Map > 0 Then
+            If PretorianDatNumbers(A).Time <= 0 Then
                 If Not ClanPretoriano(A).SpawnClan(PretorianDatNumbers(A).Map, PretorianDatNumbers(A).X, PretorianDatNumbers(A).Y, A) Then
                     Call LogError("Error Al cargar boss nro" & A)
-    
+
                 End If
+
             End If
-        Next A
+
+        End If
+    
+    Next A
+
+    '<EhFooter>
+    Exit Sub
+
+Pretorians_Loop_Err:
+    LogError Err.description & vbCrLf & "in ServidorArgentum.PraetoriansCoopNPC.Pretorians_Loop " & "at line " & Erl
         
-        '<EhFooter>
-        Exit Sub
+    '</EhFooter>
+End Sub
+
+Public Sub LoadPretorianData()
+
+    '<EhHeader>
+    On Error GoTo LoadPretorianData_Err
+
+    '</EhHeader>
+
+    Dim PretorianDat As String
+        
+    Dim Manager      As clsIniManager
+        
+    Set Manager = New clsIniManager
+        
+    PretorianDat = DatPath & "Pretorianos.dat"
+        
+    Manager.Initialize PretorianDat
+
+    Dim NroCombinaciones As Integer
+
+    NroCombinaciones = val(Manager.GetValue("INIT", "LAST"))
+
+    ReDim PretorianDatNumbers(0 To NroCombinaciones) As tCombinaciones
+
+    Dim TempInt        As Integer
+
+    Dim Counter        As Long
+
+    Dim PretorianIndex As Integer
+
+    Dim A              As Long, B As Long
+        
+    ReDim ClanPretoriano(0 To NroCombinaciones) As clsClanPretoriano
+        
+    Dim Text() As String
+        
+    Dim Temp   As String
+        
+    For A = 1 To NroCombinaciones
+        Set ClanPretoriano(A) = New clsClanPretoriano
+        PretorianDatNumbers(A).MaxNpc = val(Manager.GetValue(CStr(A), "MaxNPC"))
+            
+        Text = Split(Manager.GetValue(CStr(A), "NpcIndex"), "-")
+            
+        ReDim PretorianDatNumbers(A).NpcIndex(1 To UBound(Text) + 1) As Integer
+            
+        For B = LBound(Text) To UBound(Text)
+            PretorianDatNumbers(A).NpcIndex(B + 1) = val(Text(B))
+        Next B
+            
+        Temp = Manager.GetValue(CStr(A), "Map")
+        PretorianDatNumbers(A).Map = val(ReadField(1, Temp, 45))
+        PretorianDatNumbers(A).X = val(ReadField(2, Temp, 45))
+        PretorianDatNumbers(A).Y = val(ReadField(3, Temp, 45))
+        PretorianDatNumbers(A).RespawnTime = val(Manager.GetValue(CStr(A), "RESPAWN"))
+    Next A
+        
+    For A = 1 To NroCombinaciones
+
+        If PretorianDatNumbers(A).Map > 0 Then
+            If Not ClanPretoriano(A).SpawnClan(PretorianDatNumbers(A).Map, PretorianDatNumbers(A).X, PretorianDatNumbers(A).Y, A) Then
+                Call LogError("Error Al cargar boss nro" & A)
+    
+            End If
+
+        End If
+
+    Next A
+        
+    '<EhFooter>
+    Exit Sub
 
 LoadPretorianData_Err:
-        LogError Err.description & vbCrLf & "in ServidorArgentum.PraetoriansCoopNPC.LoadPretorianData " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.PraetoriansCoopNPC.LoadPretorianData " & "at line " & Erl
 
-        
-
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 

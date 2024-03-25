@@ -2,7 +2,8 @@ Attribute VB_Name = "mDataPasswd"
 Option Explicit
 
 Public Const NUMPASSWD      As Byte = 50
-Public Const NUMCHARS      As Byte = 30
+
+Public Const NUMCHARS       As Byte = 30
 
 Public Const ARCHIVE_PASSWD As String = "data.ini"
 
@@ -17,45 +18,58 @@ End Type
 
 Public ListPasswd(1 To NUMPASSWD) As tPasswd
 
-Public LastAccount As String
+Public LastAccount                As String
 
 Public Type tAccount
+
     Name As String
     Passwd As String
     Pjs(NUMCHARS) As String
+
 End Type
 
 Public DataPasswd As tAccount
+
 Function GetParentFolderPath(ByVal path As String) As String
+
     ' Verificar si la ruta contiene una barra invertida al final
     If Right(path, 1) = "\" Then
         ' Quitar la barra invertida final
         path = Left(path, Len(path) - 1)
+
     End If
     
     ' Obtener la carpeta padre
     GetParentFolderPath = Left(path, InStrRev(path, "\"))
+
 End Function
 
 Public Function IDecryptText(ByVal strText As String, ByVal strPwd As String) As String
-    Dim i As Integer
-    Dim C As Integer
+
+    Dim i       As Integer
+
+    Dim C       As Integer
+
     Dim strBuff As String
 
     strPwd = UCase$(strPwd)
 
     ' Decrypt string
     If Len(strPwd) > 0 Then
+
         For i = 1 To Len(strText)
             C = Asc(mid$(strText, i, 1))
             C = C - Asc(mid$(strPwd, (i Mod Len(strPwd)) + 1, 1))
             strBuff = strBuff & Chr$(C And &HFF)
         Next i
+
     Else
         strBuff = strText
+
     End If
     
     IDecryptText = strBuff
+
 End Function
 
 Public Sub LoadListPasswd()
@@ -73,27 +87,32 @@ Public Sub LoadListPasswd()
     Set Manager = New clsIniManager
     
     Dim Parent As String
+
     Parent = GetParentFolderPath(App.path)
     
     filePath = Parent & ARCHIVE_PASSWD
     
     If FileExist(filePath, vbArchive) Then
         Manager.Initialize filePath
+
     End If
     
     For A = 1 To NUMPASSWD
+
         With ListPasswd(A)
             .Account = Manager.GetValue("PASSWD", "EM" & A)
             .Passwd = IDecryptText(Manager.GetValue("PASSWD", "PM" & A), "1")
+
         End With
+
     Next A
 
     Set Manager = Nothing
     Exit Sub
     
 ErrHandler:
-End Sub
 
+End Sub
 
 Public Sub SaveNewAccount(ByVal Account As String, _
                           ByVal Passwd As String, _
@@ -174,10 +193,13 @@ Private Function FreeSlot() As Integer
         If ListPasswd(A).Account = vbNullString Then
             FreeSlot = A
             Exit Function
+
         End If
+
     Next A
     
     FreeSlot = INVALID_SLOT
+
 End Function
 
 ' Nombre existente
@@ -189,7 +211,6 @@ Private Function SearchSlot(ByVal Account As String) As Integer
     Next SearchSlot
     
     SearchSlot = INVALID_SLOT
+
 End Function
-
-
 

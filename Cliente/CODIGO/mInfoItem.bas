@@ -74,8 +74,8 @@ Public Sub ShowInfoItem(ByVal ObjIndex As Integer)
             L = frmBancoObj.Left + (frmBancoObj.PicBancoInv * Screen.TwipsPerPixelX) + (frmBancoObj.MouseX * Screen.TwipsPerPixelX)
             T = frmBancoObj.Top + (frmBancoObj.PicBancoInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (frmBancoObj.MouseY * Screen.TwipsPerPixelY)
         ElseIf frmBancoObj.SolapaView = 2 Then
-            L = frmBancoObj.Left + (frmBancoObj.PicInv.Left * Screen.TwipsPerPixelX) + (frmBancoObj.MouseX * Screen.TwipsPerPixelX)
-            T = frmBancoObj.Top + (frmBancoObj.PicInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (frmBancoObj.MouseY * Screen.TwipsPerPixelY)
+            L = frmBancoObj.Left + (frmBancoObj.picInv.Left * Screen.TwipsPerPixelX) + (frmBancoObj.MouseX * Screen.TwipsPerPixelX)
+            T = frmBancoObj.Top + (frmBancoObj.picInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (frmBancoObj.MouseY * Screen.TwipsPerPixelY)
 
         End If
         
@@ -90,14 +90,14 @@ Public Sub ShowInfoItem(ByVal ObjIndex As Integer)
         'L = FrmMapa.Left + (FrmMapa.picCofreItem.Left * Screen.TwipsPerPixelX) + (FrmMapa.MouseX * Screen.TwipsPerPixelX)
         'T = FrmMapa.Top + (FrmMapa.picCofreItem.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (FrmMapa.MouseY * Screen.TwipsPerPixelY)
     ElseIf MirandoSkins Then
-        L = FrmSkin.Left + (FrmSkin.PicInv.Left * Screen.TwipsPerPixelX) + (FrmSkin.MouseX * Screen.TwipsPerPixelX)
-        T = FrmSkin.Top + (FrmSkin.PicInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (FrmSkin.MouseY * Screen.TwipsPerPixelY)
+        L = FrmSkin.Left + (FrmSkin.picInv.Left * Screen.TwipsPerPixelX) + (FrmSkin.MouseX * Screen.TwipsPerPixelX)
+        T = FrmSkin.Top + (FrmSkin.picInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (FrmSkin.MouseY * Screen.TwipsPerPixelY)
         
         L = FrmSkin.Left + FrmSkin.Width + 20
         T = FrmSkin.Top
     Else ' Ventana principal
-        L = FrmMain.Left + (FrmMain.PicInv.Left * Screen.TwipsPerPixelX) + (FrmMain.MouseX * Screen.TwipsPerPixelX)
-        T = FrmMain.Top + (FrmMain.PicInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (FrmMain.MouseY * Screen.TwipsPerPixelY)
+        L = FrmMain.Left + (FrmMain.picInv.Left * Screen.TwipsPerPixelX) + (FrmMain.MouseX * Screen.TwipsPerPixelX)
+        T = FrmMain.Top + (FrmMain.picInv.Top * Screen.TwipsPerPixelX) + (32 * Screen.TwipsPerPixelY) + (FrmMain.MouseY * Screen.TwipsPerPixelY)
 
     End If
 
@@ -119,5 +119,4 @@ Public Sub ShowInfoItem(ByVal ObjIndex As Integer)
     FrmObject_Info.Move L, T
 
 End Sub
-
 

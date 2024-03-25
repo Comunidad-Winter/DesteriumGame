@@ -116,6 +116,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub Form_Load()
     
     Me.Picture = LoadPicture(DirInterface & "menucompacto\guilds_found.jpg")
@@ -124,33 +125,35 @@ Private Sub Form_Load()
     cmbAlineation.AddItem "Armada"
     cmbAlineation.AddItem "Legion"
     
-    
-    
     cmbAlineation.ListIndex = 0
-    
     
     lblName.Caption = UserName
     lblGuild.Caption = "<" & txtName.Text & ">"
+
 End Sub
 
 Private Sub imgFound_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
-     If txtName.Text = vbNullString Then
+    If txtName.Text = vbNullString Then
         Call MsgBox("Debes escoger el nombre que tendrá tu nueva Alianza.")
         Exit Sub
+
     End If
         
     If UserLvl < 35 Then
         Call MsgBox("Debes ser nivel 35 para fundar un clan")
         Exit Sub
+
     End If
     
     TempAlineation = cmbAlineation.ListIndex
     
     If MsgBox("¿Estás seguro de fundar el clan '" & txtName.Text & "'", vbYesNo) = vbYes Then
         Call WriteGuilds_Found(txtName.Text, TempAlineation)
+
     End If
+
 End Sub
 
 Private Sub imgReturn_Click()
@@ -158,12 +161,15 @@ Private Sub imgReturn_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call WriteGuilds_Required(0)
     Unload Me
+
 End Sub
 
 Private Sub imgUnload_Click()
     imgReturn_Click
+
 End Sub
 
 Private Sub txtName_Change()
     lblGuild.Caption = "<" & txtName.Text & ">"
+
 End Sub

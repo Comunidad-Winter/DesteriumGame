@@ -62,18 +62,22 @@ Private m_ImageType As eImageType
 
 Public Property Get Width() As Long
     Width = m_Width
+
 End Property
 
 Public Property Get Height() As Long
     Height = m_Height
+
 End Property
 
 Public Property Get Depth() As Byte
     Depth = m_Depth
+
 End Property
 
 Public Property Get ImageType() As eImageType
     ImageType = m_ImageType
+
 End Property
 
 Public Sub ReadImageInfo(sFileName As String)
@@ -143,6 +147,7 @@ Public Sub ReadImageInfo(sFileName As String)
             
             ' get the height
             m_Height = Mult(bBuf(23), bBuf(22))
+
         End If
         
     End If
@@ -160,6 +165,7 @@ Public Sub ReadImageInfo(sFileName As String)
         
         ' get bit depth
         m_Depth = (bBuf(10) And 7) + 1
+
     End If
     
     If bBuf(0) = 66 And bBuf(1) = 77 Then
@@ -175,6 +181,7 @@ Public Sub ReadImageInfo(sFileName As String)
         
         ' get bit depth
         m_Depth = bBuf(28)
+
     End If
 
     If m_ImageType = itUNKNOWN Then
@@ -254,5 +261,6 @@ End Sub
 
 Private Function Mult(lsb As Byte, msb As Byte) As Long
     Mult = lsb + (msb * CLng(256))
+
 End Function
 

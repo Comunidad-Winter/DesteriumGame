@@ -10,6 +10,7 @@ Public Enum eLog
     eGm = 2
     eSecurity = 3
     eAccount = 4
+
 End Enum
 
 Public Enum eLogDescUser
@@ -53,6 +54,7 @@ Public Enum eLogSecurity
     eShop = 8
     eComerciantes = 9
     eLottery = 10
+
 End Enum
 
 Private Function Logs_FilePath(ByVal Log As eLog) As String
@@ -73,7 +75,6 @@ Private Function Logs_FilePath(ByVal Log As eLog) As String
             
         Case eLog.eAccount
             Logs_FilePath = "ACCOUNT\"
-            
             
     End Select
     
@@ -121,12 +122,14 @@ Public Function Logs_DescUser(ByVal LogDesc As eLogDescUser) As String
             
         Case Else
             Logs_DescUser = " "
+
     End Select
     
 End Function
 
 Private Function Logs_Security_Path(ByVal LogDesc As eLogSecurity) As String
-        Select Case LogDesc
+
+    Select Case LogDesc
 
         Case eLogSecurity.eGeneral
             Logs_Security_Path = "GENERAL.log"
@@ -160,10 +163,10 @@ Private Function Logs_Security_Path(ByVal LogDesc As eLogSecurity) As String
             
         Case eLogSecurity.eLottery
             Logs_Security_Path = "LOTTERY.log"
+
     End Select
     
 End Function
-
 
 Public Sub Logs_User(ByVal UserName As String, _
                      ByVal Log As eLog, _
@@ -173,7 +176,7 @@ Public Sub Logs_User(ByVal UserName As String, _
     On Error GoTo ErrHandler
     
     'If Log <> eGm Then
-        'Call Logs_Desarrollo(UserName, eLog.eGeneral, Desc, UserName & " " & Text)
+    'Call Logs_Desarrollo(UserName, eLog.eGeneral, Desc, UserName & " " & Text)
     'End If
     
     Dim nfile    As Integer
@@ -183,7 +186,6 @@ Public Sub Logs_User(ByVal UserName As String, _
     nfile = FreeFile
 
     FilePath = LogPath & Logs_FilePath(Log) & UCase$(UserName) & ".chr"
-    
     
     Open FilePath For Append Shared As #nfile
     Print #nfile, Date & " " & Time & Logs_DescUser(Desc) & " " & Text
@@ -222,8 +224,6 @@ ErrHandler:
 
 End Sub
 
-
-
 Public Sub Logs_Security(ByVal Log As eLog, _
                          ByVal LogDesc As eLogSecurity, _
                          ByVal Text As String)
@@ -250,7 +250,6 @@ Public Sub Logs_Security(ByVal Log As eLog, _
 ErrHandler:
 
 End Sub
-
 
 Public Sub Logs_Account_SettingData(ByVal UserIndex As Integer, _
                                     ByVal Tittle As String, _
@@ -286,10 +285,6 @@ Public Sub Logs_Account_SettingData(ByVal UserIndex As Integer, _
 ErrHandler:
 
 End Sub
-
-
-
-
 
 Public Sub LogCriticEvent(Desc As String)
     '***************************************************
@@ -444,6 +439,7 @@ Public Sub LogError(Desc As String)
 ErrHandler:
 
 End Sub
+
 Public Sub Log_Reward(Desc As String)
     '***************************************************
     'Author: Unknown
@@ -465,6 +461,7 @@ Public Sub Log_Reward(Desc As String)
 ErrHandler:
 
 End Sub
+
 Public Sub Log_ChangePjs(Desc As String)
     '***************************************************
     'Author: Unknown

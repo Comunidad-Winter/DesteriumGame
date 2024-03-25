@@ -1,10 +1,9 @@
 Type=Exe
-Reference=*\G{88D89F7C-BB59-4F13-9850-93CBD874039D}#1.5#0#F:\0_libs\Aurora.Network.dll#Aurora.Network - Aurora Engine - Network
-Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#C:\Windows\SysWOW64\scrrun.dll#Microsoft Scripting Runtime
-Reference=*\G{2D240C7D-F21E-4BF0-AF9B-3ED14E903AD6}#1.0#0#F:\0_libs\Aurora.Multimedia.dll#Aurora.Multimedia - Aurora Engine - Multimedia
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{88D89F7C-BB59-4F13-9850-93CBD874039D}#1.5#0#..\Server\Aurora.Network.dll#Aurora.Network - Aurora Engine - Network
+Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#..\..\..\..\..\Windows\SysWOW64\scrrun.dll#Microsoft Scripting Runtime
+Reference=*\G{2D240C7D-F21E-4BF0-AF9B-3ED14E903AD6}#1.0#0#Aurora.Multimedia.dll#Aurora.Multimedia - Aurora Engine - Multimedia
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
 Object={3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0; RICHTX32.OCX
-Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0; MSCOMCTL.OCX
 Object={F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0; COMDLG32.OCX
 Form=CODIGO\frmCantidad.frm
 Form=CODIGO\frmComerciar.frm
@@ -116,6 +115,9 @@ Form=CODIGO\FrmMercaderOffers.frm
 Form=CODIGO\FrmMercaderInfoOffer.frm
 Form=CODIGO\frmMapa.frm
 Form=CODIGO\FrmMapaNpc.frm
+Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0; MSCOMCTL.OCX
+Form=CODIGO\frmConnectAcc.frm
+Form=CODIGO\frmCargando.frm
 Startup="Sub Main"
 HelpFile=""
 Title="DesteriumAO"
@@ -131,8 +133,9 @@ AutoIncrementVer=0
 ServerSupportFiles=0
 VersionComments="Argentum Game DS"
 VersionCompanyName="@Argentum Game"
+VersionFileDescription="Desterium reparado por Lorwik"
 VersionProductName="Argentum Online"
-CondComp="Classic = 1 : ModoBig = 1 : SonidoPC = 0 : Testeo = 0 : ClienteGM = 0 : ModoScreen = 0 : FullScreen = 0"
+CondComp="Classic = 0 : ModoBig = 1 : SonidoPC = 0 : Testeo = 1 : ClienteGM = 0 : ModoScreen = 0 : FullScreen = 0"
 CompilationType=0
 OptimizationType=0
 FavorPentiumPro(tm)=0

@@ -31,42 +31,60 @@ Option Explicit
 
 Implements wGL_Audio_Callback ' Implements to allow reacting when music is over
 
-Private Const CHANNEL_COUNT     As Long = 3
-Private Const CHANNEL_MUSIC     As Long = 0
-Private Const CHANNEL_EFFECT    As Long = 1
-Private Const CHANNEL_UI        As Long = 2
+Private Const CHANNEL_COUNT    As Long = 3
+
+Private Const CHANNEL_MUSIC    As Long = 0
+
+Private Const CHANNEL_EFFECT   As Long = 1
+
+Private Const CHANNEL_UI       As Long = 2
 
 Private Const EFFECT_FADE_TIME As Long = 1750 ' It Takes 1.75sec to fade in/out between music
 
+Private mMasterMuted           As Boolean
 
-Private mMasterMuted   As Boolean
-Private mMasterVolume  As Long
+Private mMasterVolume          As Long
 
-Private mMasterEnabled As Boolean
-Private mMusicEnabled  As Boolean
-Private mMusicPath     As String
-Private mMusicBuffer   As Long
-Private mMusicID       As Long
-Private mMusicFilename As String
-Private mMusicList()   As Long
+Private mMasterEnabled         As Boolean
 
-Private mFadeBuffer    As Long
-Private mFadeID        As Long
-Private mFadeFilename  As String
-Private mFadeTick      As Long
+Private mMusicEnabled          As Boolean
 
-Private mEffectEnabled As Boolean
-Private mEffectPath    As String
-Private mEffectVolume  As Long
-Private mEffectBank    As Collection
-Private mEffect3D      As Boolean
+Private mMusicPath             As String
 
-Private mInterfaceEnabled As Boolean
-Private mInterfaceVolume  As Long
+Private mMusicBuffer           As Long
 
-Public Function Initialize(ByVal MusicPath As String, ByVal EffectPath As String) As Boolean
+Private mMusicID               As Long
 
-On Error GoTo clsAudio_Initialize_Error
+Private mMusicFilename         As String
+
+Private mMusicList()           As Long
+
+Private mFadeBuffer            As Long
+
+Private mFadeID                As Long
+
+Private mFadeFilename          As String
+
+Private mFadeTick              As Long
+
+Private mEffectEnabled         As Boolean
+
+Private mEffectPath            As String
+
+Private mEffectVolume          As Long
+
+Private mEffectBank            As Collection
+
+Private mEffect3D              As Boolean
+
+Private mInterfaceEnabled      As Boolean
+
+Private mInterfaceVolume       As Long
+
+Public Function Initialize(ByVal MusicPath As String, _
+                           ByVal EffectPath As String) As Boolean
+
+    On Error GoTo clsAudio_Initialize_Error
 
     Call wGL_Audio.Initialise(CHANNEL_COUNT, Me)
     
@@ -95,18 +113,23 @@ End Function
 
 Public Sub Update(ByVal Tick As Long)
         
-#If SonidoPC = 0 Then
-    ' Handle Mute/Unmute on background
-    If (IsAppActive()) Then
-        If (mMasterMuted) Then Call Unmute
-    Else
-        If (Not mMasterMuted) Then Call Mute
-    End If
-#End If
+    #If SonidoPC = 0 Then
+
+        ' Handle Mute/Unmute on background
+        If (IsAppActive()) Then
+            If (mMasterMuted) Then Call Unmute
+        Else
+
+            If (Not mMasterMuted) Then Call Mute
+
+        End If
+
+    #End If
     
     ' Handle Fade In/Out of the music channel
     If (mFadeID <> 0) Then
         Call OnFadeEffect(Tick - mFadeTick)
+
     End If
 
     Call wGL_Audio.Update
@@ -115,7 +138,7 @@ End Sub
 
 'Public Sub SetReverb(ByVal Reverb As wGL_Audio_Reverb)
     
-    'Call wGL_Audio.SetReverb(IIf(Reverb = REVERB_Off, REVERB_Default, Reverb))  ' There is a glitch with Off
+'Call wGL_Audio.SetReverb(IIf(Reverb = REVERB_Off, REVERB_Default, Reverb))  ' There is a glitch with Off
     
 'End Sub
 
@@ -153,6 +176,7 @@ Public Function CreateSource(ByVal X As Single, ByVal Y As Single) As Long
     
     If (CreateSource <> 0) Then
         Call UpdateSource(CreateSource, X, Y)
+
     End If
     
 End Function
@@ -161,6 +185,7 @@ Public Sub UpdateSource(ByVal ID As Long, ByVal X As Single, ByVal Y As Single)
 
     If (ID <> 0) Then
         Call wGL_Audio.UpdateSource(ID, CreateDefaultEmitter(X, Y))
+
     End If
 
 End Sub
@@ -170,6 +195,7 @@ Public Sub DeleteSource(ByRef ID As Long, ByVal StopImmediately As Boolean)
     If (ID <> 0) Then
         Call wGL_Audio.StopBySource(ID, StopImmediately)
         Call wGL_Audio.DeleteSource(ID)
+
     End If
 
     ID = 0
@@ -188,7 +214,9 @@ Public Sub Halt()
     
 End Sub
 
-Public Sub PlayMusic(ByVal FileName As String, Optional ByVal Repeat As Boolean = False, Optional ByVal Fade As Boolean = False)
+Public Sub PlayMusic(ByVal FileName As String, _
+                     Optional ByVal Repeat As Boolean = False, _
+                     Optional ByVal Fade As Boolean = False)
    
     ' Check if music is enabled, or if parameters are valid
     If (Not mMusicEnabled Or FileName = vbNullString Or Not FileExist(mMusicPath & FileName, vbNormal)) Then Exit Sub
@@ -206,10 +234,12 @@ Public Sub PlayMusic(ByVal FileName As String, Optional ByVal Repeat As Boolean 
         
             If (mMusicID <> 0) Then
                 Call wGL_Audio.Stop(mMusicID)
+
             End If
             
             If (mMusicBuffer <> 0) Then
                 Call wGL_Audio.DeleteSound(mMusicBuffer)
+
             End If
             
             mMusicID = mFadeID
@@ -227,6 +257,7 @@ Public Sub PlayMusic(ByVal FileName As String, Optional ByVal Repeat As Boolean 
         
         If (mMusicBuffer <> 0) Then
             Call wGL_Audio.DeleteSound(mMusicBuffer)
+
         End If
             
         mMusicFilename = FileName
@@ -234,6 +265,7 @@ Public Sub PlayMusic(ByVal FileName As String, Optional ByVal Repeat As Boolean 
         mMusicID = wGL_Audio.Play(CHANNEL_MUSIC, mMusicBuffer, 0, 1#, Repeat, False)
         
         Call wGL_Audio.Track(mMusicID)
+
     End If
 
 End Sub
@@ -242,6 +274,7 @@ Public Sub PlayMusicRandomly(ByVal Fade As Boolean)
     
     If (UBound(mMusicList) > 0) Then
         Call PlayMusic(mMusicList(RandomNumber(1, UBound(mMusicList))) & ".mp3", False, Fade)
+
     End If
     
 End Sub
@@ -252,12 +285,14 @@ Public Sub StopMusic()
         Call wGL_Audio.Stop(mFadeID)
         
         mFadeID = 0
+
     End If
     
     If (mFadeBuffer <> 0) Then
         Call wGL_Audio.DeleteSound(mFadeBuffer)
         
         mFadeBuffer = 0
+
     End If
     
     mFadeFilename = vbNullString
@@ -266,17 +301,21 @@ Public Sub StopMusic()
         Call wGL_Audio.Stop(mMusicID)
         
         mMusicID = 0
+
     End If
 
 End Sub
 
-Public Function PlayEffect(ByVal FileName As String, Optional ByVal Source As Long = 0, Optional ByVal Repeat As Boolean = False) As Long
+Public Function PlayEffect(ByVal FileName As String, _
+                           Optional ByVal Source As Long = 0, _
+                           Optional ByVal Repeat As Boolean = False) As Long
 
     If Not mEffectEnabled Then Exit Function
 
     PlayEffect = Play(CHANNEL_EFFECT, FileName, Source, Repeat, True)
     
 End Function
+
 Public Sub PlayInterface(ByVal FileName As String)
 
     If Not mInterfaceEnabled Then Exit Sub
@@ -290,6 +329,7 @@ Public Sub PlayEffectAt(ByVal FileName As String, ByVal X As Single, ByVal Y As 
     If Not mEffectEnabled Then Exit Sub
 
     Dim Effect As Long
+
     Effect = FindEffectFileInBank(FileName)
     
     If (Effect = 0) Then
@@ -298,13 +338,15 @@ Public Sub PlayEffectAt(ByVal FileName As String, ByVal X As Single, ByVal Y As 
         If (Effect = 0) Then Exit Sub
         
         Call mEffectBank.Add(Item:=Effect, Key:=FileName)
+
     End If
     
     Call wGL_Audio.PlayAt(CHANNEL_EFFECT, Effect, CreateDefaultEmitter(X, Y), True)
 
 End Sub
 
-Public Function PlayAmbient(ByVal FileName As String, Optional ByVal Repeat As Boolean = False, _
+Public Function PlayAmbient(ByVal FileName As String, _
+                            Optional ByVal Repeat As Boolean = False, _
                             Optional ByVal Channel As Long = CHANNEL_EFFECT) As Long
 
     If Not mEffectEnabled Then Exit Function
@@ -312,15 +354,18 @@ Public Function PlayAmbient(ByVal FileName As String, Optional ByVal Repeat As B
     PlayAmbient = Play(Channel, FileName, 0, Repeat, True)
     
 End Function
+
 Public Sub StopAmbient(ByRef ID As Long)
     
     If (ID <> 0) Then
         Call wGL_Audio.Stop(ID)
+
     End If
     
     ID = 0
 
 End Sub
+
 Public Property Get Effect3D() As Boolean
 
     Effect3D = mEffect3D
@@ -336,6 +381,7 @@ Public Property Let Effect3D(ByVal nValue As Boolean)
     Call wGL_Audio.Set3D(nValue)
     
 End Property
+
 Public Property Get MasterActivated() As Boolean
 
     MasterActivated = mMasterEnabled
@@ -352,9 +398,11 @@ Public Property Let MasterActivated(ByVal nValue As Boolean)
         Call wGL_Audio.SetMasterVolume(mMasterVolume * 0.01)
     Else
         Call wGL_Audio.SetMasterVolume(0)
+
     End If
     
 End Property
+
 Public Property Let MasterVolume(ByVal Volume As Long)
 
     If Volume < 0 Or Volume > 100 Then Exit Property
@@ -387,6 +435,7 @@ Public Property Let MusicActivated(ByVal nValue As Boolean)
         Call PlayMusicRandomly(True)
     Else
         Call StopMusic
+
     End If
     
 End Property
@@ -421,6 +470,7 @@ Public Property Let EffectActivated(ByVal nValue As Boolean)
         Call wGL_Audio.SetSubmixVolume(CHANNEL_EFFECT, mEffectVolume * 0.01)
     Else
         Call wGL_Audio.SetSubmixVolume(CHANNEL_EFFECT, 0)
+
     End If
     
 End Property
@@ -457,6 +507,7 @@ Public Property Let InterfaceActivated(ByVal nValue As Boolean)
         Call wGL_Audio.SetSubmixVolume(CHANNEL_UI, mInterfaceVolume * 0.01)
     Else
         Call wGL_Audio.SetSubmixVolume(CHANNEL_UI, 0)
+
     End If
     
 End Property
@@ -477,11 +528,16 @@ Public Property Get InterfaceVolume() As Long
     
 End Property
 
-Private Function Play(ByVal Channel As Long, ByVal FileName As String, ByVal Source As Long, ByVal Repeat As Boolean, ByVal Reverb As Boolean) As Long
+Private Function Play(ByVal Channel As Long, _
+                      ByVal FileName As String, _
+                      ByVal Source As Long, _
+                      ByVal Repeat As Boolean, _
+                      ByVal Reverb As Boolean) As Long
 
     If Not mEffectEnabled Then Exit Function
 
     Dim Effect As Long
+
     Effect = FindEffectFileInBank(FileName)
     
     If (Effect = 0) Then
@@ -490,6 +546,7 @@ Private Function Play(ByVal Channel As Long, ByVal FileName As String, ByVal Sou
         If (Effect = 0) Then Exit Function
         
         Call mEffectBank.Add(Item:=Effect, Key:=FileName)
+
     End If
     
     Play = wGL_Audio.Play(Channel, Effect, Source, 1#, Repeat, Reverb)
@@ -498,8 +555,7 @@ End Function
 
 Private Function FindEffectFileInBank(ByVal Key As String) As Long
 
-On Error GoTo clsAudio_FindEffectFileInBank_Error
-    
+    On Error GoTo clsAudio_FindEffectFileInBank_Error
 
     FindEffectFileInBank = mEffectBank.Item(Key)
 
@@ -517,11 +573,13 @@ Private Static Sub wGL_Audio_Callback_OnStreamFinished(ByVal Instance As Long)
         mMusicID = 0
     
         Call PlayMusicRandomly(False)
+
     End If
     
 End Sub
 
-Private Function CreateDefaultEmitter(ByVal X As Single, ByVal Y As Single) As wGL_Audio_Emitter
+Private Function CreateDefaultEmitter(ByVal X As Single, _
+                                      ByVal Y As Single) As wGL_Audio_Emitter
 
     CreateDefaultEmitter.PositionX = X
     CreateDefaultEmitter.PositionY = Y
@@ -536,13 +594,16 @@ Private Function CreateDefaultEmitter(ByVal X As Single, ByVal Y As Single) As w
     CreateDefaultEmitter.InnerRadiusAngle = 3.14 / 4#
     
 End Function
+
 Private Sub OnFadeEffect(ByVal delta As Long)
     
     Dim Time As Single
+
     Time = (delta / EFFECT_FADE_TIME)
     
     ' Calculate the fade in/out gain between 0.0 and 1.0 using easeInOutCubic sigmoid function
     Dim Factor As Single
+
     Factor = IIf(Time < 0.5, 4 * Time * Time * Time, 1 - ((-2# * Time + 2#) ^ 3#) / 2#)
     
     ' Normalize in-case the user alt-tab and tick went to heaven (you will thank me later!)
@@ -553,16 +614,19 @@ Private Sub OnFadeEffect(ByVal delta As Long)
     
     If (mMusicID <> 0) Then
         Call wGL_Audio.Adjust(mMusicID, 1# - Factor)
+
     End If
     
     ' Release the other sound if the fade has finished
     If (delta >= EFFECT_FADE_TIME) Then
         If (mMusicID <> 0) Then
             Call wGL_Audio.Stop(mMusicID)
+
         End If
         
         If (mMusicBuffer <> 0) Then
             Call wGL_Audio.DeleteSound(mMusicBuffer)
+
         End If
         
         mMusicID = mFadeID
@@ -572,6 +636,7 @@ Private Sub OnFadeEffect(ByVal delta As Long)
         mFadeID = 0
         mFadeBuffer = 0
         mFadeFilename = vbNullString
+
     End If
         
 End Sub

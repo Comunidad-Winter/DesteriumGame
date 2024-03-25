@@ -188,16 +188,16 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Public CharSelected As Byte
+Public CharSelected   As Byte
 
-Private clsFormulario          As clsFormMovementManager
+Private clsFormulario As clsFormMovementManager
 
-Private ListMercader As clsGraphicalList
-
+Private ListMercader  As clsGraphicalList
 
 Private Sub ButtonOffer_Click()
     FrmMercaderOffer.Show , FrmMain
     Unload Me
+
 End Sub
 
 Private Sub ButtonRemove_Click()
@@ -205,11 +205,13 @@ Private Sub ButtonRemove_Click()
     
     MercaderOff = 0
     Prepare_And_Connect E_MODO.e_LoginMercaderOff
+
 End Sub
 
 Private Sub ButtonUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub Form_Load()
@@ -230,20 +232,21 @@ Private Sub Form_Load()
     
     MirandoMercader = True
     
-    
     If MercaderSelected = MercaderUserSlot Then
         Set ButtonRemove.Picture = Nothing
         ButtonRemove.Enabled = True
         
     Else
-         ButtonRemove.Picture = LoadPicture(filePath & "NoButton1.jpg")
+        ButtonRemove.Picture = LoadPicture(filePath & "NoButton1.jpg")
         ButtonRemove.Enabled = False
-    End If
-End Sub
 
+    End If
+
+End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     MirandoMercader = False
+
 End Sub
 
 Private Sub ImgInfo_Click()
@@ -253,9 +256,11 @@ Private Sub ImgInfo_Click()
     If ListMercader.ListIndex = -1 Then Exit Sub
     
     Dim Name As String
+
     Name = ReadField(1, ListMercader.List(ListMercader.ListIndex), Asc("»"))
     
     Call WriteRequiredStatsUser(197, Name)
+
 End Sub
 
 Private Sub imgOffer_Click()
@@ -263,6 +268,7 @@ Private Sub imgOffer_Click()
     
     MercaderOff = 3
     Call WriteMercader_Required(MercaderOff, MercaderSelected, 0)
+
 End Sub
 
 Private Sub imgUnload_Click()
@@ -271,15 +277,14 @@ Private Sub imgUnload_Click()
     
 End Sub
 
-
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
 End Sub
-
 
 Public Sub UpdateInfo()
 
@@ -298,18 +303,24 @@ Public Sub UpdateInfo()
         lblChars.Caption = .Char
         
         For A = 1 To ACCOUNT_MAX_CHARS
+
             If .Chars(A).Class > 0 Then
                 ListMercader.AddItem .Chars(A).Name & .Chars(A).Desc
+
             End If
+
         Next A
         
     End With
     
 End Sub
 
-
 ' Lista Gráfica de Hechizos
-Private Sub PicMercader_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMercader_MouseDown(Button As Integer, _
+                                  Shift As Integer, _
+                                  X As Single, _
+                                  Y As Single)
+
     If Y < 0 Then Y = 0
     
     If Y > Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then Y = Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
@@ -320,31 +331,45 @@ Private Sub PicMercader_MouseDown(Button As Integer, Shift As Integer, X As Sing
     
     Else
         ListMercader.DownBarrita = Y - ListMercader.Scroll * (PicMercader.ScaleHeight - ListMercader.BarraHeight) / (ListMercader.ListCount - ListMercader.VisibleCount)
+
     End If
     
 End Sub
 
-Private Sub PicMercader_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMercader_MouseMove(Button As Integer, _
+                                  Shift As Integer, _
+                                  X As Single, _
+                                  Y As Single)
 
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
     
-    If yy < 0 Then yy = 0
+        If yy < 0 Then yy = 0
     
-    If yy > Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then yy = Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
+        If yy > Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1 Then yy = Int(PicMercader.ScaleHeight / ListMercader.Pixel_Alto) * ListMercader.Pixel_Alto - 1
     
-    If ListMercader.DownBarrita > 0 Then
-        ListMercader.Scroll = (Y - ListMercader.DownBarrita) * (ListMercader.ListCount - ListMercader.VisibleCount) / (PicMercader.ScaleHeight - ListMercader.BarraHeight)
-    Else
-        ListMercader.ListIndex = Int(yy / ListMercader.Pixel_Alto) + ListMercader.Scroll
+        If ListMercader.DownBarrita > 0 Then
+            ListMercader.Scroll = (Y - ListMercader.DownBarrita) * (ListMercader.ListCount - ListMercader.VisibleCount) / (PicMercader.ScaleHeight - ListMercader.BarraHeight)
+        Else
+            ListMercader.ListIndex = Int(yy / ListMercader.Pixel_Alto) + ListMercader.Scroll
+
+        End If
+
+    ElseIf Button = 0 Then
+        ListMercader.ShowBarrita = X > PicMercader.ScaleWidth - ListMercader.BarraWidth * 2
+
     End If
-ElseIf Button = 0 Then
-    ListMercader.ShowBarrita = X > PicMercader.ScaleWidth - ListMercader.BarraWidth * 2
-End If
+
 End Sub
 
-Private Sub PicMercader_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicMercader_MouseUp(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     ListMercader.DownBarrita = 0
+
 End Sub
 

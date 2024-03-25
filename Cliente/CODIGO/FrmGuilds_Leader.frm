@@ -95,23 +95,31 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub Form_Load()
     Me.Picture = LoadPicture(DirInterface & "menucompacto\guilds_leader.jpg")
     
     Call ListarMiembros
+
 End Sub
 
-
 Private Sub ListarMiembros()
+
     Dim A As Long
 
     With GuildsInfo(Selected_GuildIndex)
+
         For A = 1 To MAX_GUILD_MEMBER
+
             If .Members(A).Elv > 0 Then
                 lstMembers.AddItem .Members(A).Name
+
             End If
+
         Next A
+
     End With
+
 End Sub
 
 Private Sub imgKick_Click()
@@ -119,44 +127,58 @@ Private Sub imgKick_Click()
     If lstMembers.ListIndex = -1 Then Exit Sub
     
     Dim Name As String
+
     Name = lstMembers.List(lstMembers.ListIndex)
     
     If MsgBox("¿Estás seguro que deseas quitar de tu clan a " & Name & "?") = vbYes Then
         'Call ParseUserCommand("/KICK " & Name)
         Call WriteGuilds_Kick(Name)
+
     End If
+
 End Sub
 
 Private Sub imgReturn_Click()
     imgUnload_Click
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call WriteGuilds_Required(0)
     Unload Me
+
 End Sub
 
 Private Sub lstMembers_Click()
     
-    
     Dim Slot As Integer
+
     Slot = SearchMember(UCase$(Name))
     
     If Slot > 0 Then
         lblElv.Caption = GuildsInfo(Selected_GuildIndex).Members(Slot).Elv
+
     End If
+
 End Sub
 
 Private Function SearchMember(ByVal Name As String)
+
     Dim A As Long
 
     With GuildsInfo(Selected_GuildIndex)
+
         For A = 1 To MAX_GUILD_MEMBER
+
             If StrComp(UCase$(.Members(A).Name), Name) = 0 Then
                 SearchMember = A
                 Exit Function
+
             End If
+
         Next A
+
     End With
+
 End Function

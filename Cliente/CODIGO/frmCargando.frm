@@ -53,6 +53,46 @@ Begin VB.Form frmCargando
       Top             =   1515
       Width           =   4815
    End
+   Begin VB.Label lblReparadoPor 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Reparado por Lorwik"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   240
+      Left            =   3510
+      TabIndex        =   3
+      Top             =   270
+      Width           =   2295
+   End
+   Begin VB.Label lblLoad 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Cargando, espera..."
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   12
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   285
+      Left            =   1860
+      TabIndex        =   2
+      Top             =   1770
+      Width           =   2370
+   End
 End
 Attribute VB_Name = "frmCargando"
 Attribute VB_GlobalNameSpace = False
@@ -62,8 +102,8 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub Form_Load()
-    Me.Picture = LoadPicture(App.path & "\resource\interface\main\load.jpg")
-    imgLoading.Picture = LoadPicture(App.path & "\resource\interface\main\loading.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\main\load.jpg")
+    imgLoading.Picture = LoadPicture(App.path & "\AO\resource\interface\main\loading.jpg")
     
     imgLoading.Width = 0
     
@@ -80,6 +120,7 @@ Private Sub Timer1_Timer()
     If imgLoading.Width >= 307 Then
         imgLoading.Width = 307
         Timer1.Enabled = False
+
     End If
     
 End Sub

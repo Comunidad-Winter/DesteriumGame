@@ -73,37 +73,40 @@ Option Explicit
 
 Private Dragged As Boolean
 
-Private X      As Single
+Private X       As Single
 
-Private Y      As Single
+Private Y       As Single
 
-Private tX     As Byte
+Private tX      As Byte
 
-Private tY     As Byte
+Private tY      As Byte
 
-Private MouseX As Long
+Private MouseX  As Long
 
-Private MouseY As Long
+Private MouseY  As Long
 
 Private Sub Form_Unload(Cancel As Integer)
     MirandoCantidad = False
+
 End Sub
 
 Private Sub Form_Load()
     MirandoCantidad = True
     
-    
-    Me.Picture = LoadPicture(App.path & "\resource\interface\bank\soltarobjeto.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\bank\soltarobjeto.jpg")
+
 End Sub
 
 Public Sub SetDropGround()
     Dragged = False
+
 End Sub
 
 Public Sub SetDropDragged(ByVal NewX As Single, ByVal NewY As Single)
     Dragged = True
     X = NewX
     Y = NewY
+
 End Sub
 
 Private Sub Image1_Click()
@@ -113,7 +116,9 @@ Private Sub Image1_Click()
         
         If Not IsNumeric(FrmCantidad.Text1) Then
             Unload Me
+
             Exit Sub  'Should never happen
+
         End If
         
         If Dragged Then
@@ -133,10 +138,13 @@ Private Sub Image1_Click()
         Else
             Call WriteDrop(Inventario.SelectedItem, FrmCantidad.Text1.Text)
             FrmCantidad.Text1.Text = vbNullString
+
         End If
+
     End If
 
     Unload Me
+
 End Sub
 
 Private Sub Image2_Click()
@@ -166,13 +174,17 @@ Private Sub Image2_Click()
             Else
                 Call WriteDrop(Inventario.SelectedItem, UserGLD)
                 Unload Me
+
             End If
+
         End If
+
     End If
 
     FrmCantidad.Text1.Text = ""
           
     Unload Me
+
 End Sub
 
 Private Sub Text1_Change()
@@ -181,11 +193,12 @@ Private Sub Text1_Change()
 
     If Val(FrmCantidad.Text1) < 0 Then
         FrmCantidad.Text1 = "1"
+
     End If
-          
           
     If Val(FrmCantidad.Text1) > 10000 Then
         FrmCantidad.Text1 = "10000"
+
     End If
           
     Exit Sub
@@ -193,46 +206,57 @@ Private Sub Text1_Change()
 ErrHandler:
     'If we got here the user may have pasted (Shift + Insert) a REALLY large number, causing an overflow, so we set amount back to 1
     FrmCantidad.Text1 = "1"
+
 End Sub
 
-
 Private Function CheckAdding(ByVal Value As Long) As Long
+
     If Value <= 100 Then
-         CheckAdding = Value + 1
+        CheckAdding = Value + 1
     ElseIf Value <= 1000 Then
         CheckAdding = Value + 100
     ElseIf Value <= 10000 Then
         CheckAdding = Value + 1000
     Else
         CheckAdding = MAX_INVENTORY_OBJS
+
     End If
+
 End Function
+
 Private Sub imgMas_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Text1.Text = CheckAdding(Text1.Text)
     
     If Val(Text1.Text) > MAX_INVENTORY_OBJS Then
         Text1.Text = MAX_INVENTORY_OBJS
+
     End If
     
 End Sub
+
 Private Function CheckAdding_Menos(ByVal Value As Long) As Long
+
     If Value <= 100 Then
-         CheckAdding_Menos = Value - 1
+        CheckAdding_Menos = Value - 1
     ElseIf Value <= 1000 Then
         CheckAdding_Menos = Value - 100
     ElseIf Value <= 10000 Then
         CheckAdding_Menos = Value - 1000
     Else
         CheckAdding_Menos = 1
+
     End If
+
 End Function
+
 Private Sub imgMenos_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Text1.Text = CheckAdding_Menos(Text1.Text)
     
     If Val(Text1.Text) < 1 Then
         Text1.Text = 1
+
     End If
     
 End Sub

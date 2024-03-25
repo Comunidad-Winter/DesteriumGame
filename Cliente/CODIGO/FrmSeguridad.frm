@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "Richtx32.ocx"
+Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
 Begin VB.Form FrmSeguridad 
    BackColor       =   &H80000008&
    BorderStyle     =   4  'Fixed ToolWindow
@@ -305,6 +305,7 @@ Begin VB.Form FrmSeguridad
          _Version        =   393217
          BackColor       =   0
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   2
          DisableNoScroll =   -1  'True
@@ -462,10 +463,10 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub cmbClear_Click(Index As Integer)
-        lstU.Clear
-        lstClick.Clear
-        lstSpell.Clear
-        lstAttack.Clear
+    lstU.Clear
+    lstClick.Clear
+    lstSpell.Clear
+    lstAttack.Clear
 
 End Sub
 
@@ -475,30 +476,36 @@ Private Sub cmbSeguir_Click()
         If MsgBox("¿Estás seguro que deseas dejar de seguir al usuario " & lblName.Caption & "?", vbYesNo) = vbYes Then
             cmbSeguir.Caption = "Seguir"
             Call WritePro_Seguimiento(lblName.Caption, False)
+
         End If
 
     Else
         cmbSeguir.Caption = "Dejar de seguir"
         Call WritePro_Seguimiento(lblName.Caption, True)
+
     End If
     
 End Sub
 
 Private Sub cmbClearConsole_Click()
     RecTxt.Text = vbNullString
+
 End Sub
 
 Private Sub cmbUpdateCaptions_Click()
     Me.lstCaptions.Clear
     Call WriteSolicitaSeguridad(lblName.Caption, 2)
+
 End Sub
 
 Private Sub cmbUpdateProcess_Click()
     Me.lstProcess.Clear
     Call WriteSolicitaSeguridad(lblName.Caption, 1)
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     Call WritePro_Seguimiento(lblName.Caption, False)
+
 End Sub
 

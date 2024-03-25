@@ -14,21 +14,29 @@ Option Explicit
 ' #USO NRO°3
 ' Opción de auto completar con bots inteligentes. Permite así completar grandes eventos, o bien cuando un usuario deslogea en evento, un BOT lo sustituye.
 
-Public Const SPELL_PARALISIS As Byte = 9
-Public Const SPELL_REMOVERPARALISIS As Byte = 10
-Public Const SPELL_INMOVILIZAR As Byte = 24
-Public Const SPELL_DESCARGAELECTRICA As Byte = 23
-Public Const SPELL_APOCALIPSIS As Byte = 25
+Public Const SPELL_PARALISIS            As Byte = 9
+
+Public Const SPELL_REMOVERPARALISIS     As Byte = 10
+
+Public Const SPELL_INMOVILIZAR          As Byte = 24
+
+Public Const SPELL_DESCARGAELECTRICA    As Byte = 23
+
+Public Const SPELL_APOCALIPSIS          As Byte = 25
 
 ' @ Estos valores podrían ser alterados por NIVEL/CONFIGURACION de las criaturas
 Public Const BOT_POCION_ROJA_REGENERATE As Byte = 30
+
 Public Const BOT_POCION_AZUL_REGENERATE As Long = 30                ' * lvl
 
 ' @ Lo normal es poner 100. Cada vez que se pone 100+ es un rango con 0.00001
-Public Const BOT_MANCO_USEITEM As Long = 200
-Public Const BOT_MANCO_ATTACK As Long = 200
-Public Const BOT_MANCO_DEFENSE As Long = 200
-Public Const BOT_MANCO_CAMINAR As Long = 100
+Public Const BOT_MANCO_USEITEM          As Long = 200
+
+Public Const BOT_MANCO_ATTACK           As Long = 200
+
+Public Const BOT_MANCO_DEFENSE          As Long = 200
+
+Public Const BOT_MANCO_CAMINAR          As Long = 100
 
 ' Cada mejora de npc son 10%+
 ' Total de Niveles del BOT=10
@@ -36,19 +44,23 @@ Public Const BOT_MANCO_CAMINAR As Long = 100
 
 Public Function BotIntelligence_Balance_Prob(ByVal Elv As Byte) As Boolean
     
-    Dim Temp As Long
+    Dim Temp       As Long
+
     Const PORC_ADD As Byte = 10
     
     Temp = (Elv * (PORC_ADD))
 
     BotIntelligence_Balance_Prob = (RandomNumber(1, 100) <= Temp)
+
 End Function
 
 ' Partiendo del Intervalo de 1.000MS, va descontando según el NIVEL del USUARIO.
 Public Function BotIntelligence_Balance_UseItem(ByVal Elv As Byte) As Boolean
     
-    Dim Temp As Long
-    Const PORC_ADD As Integer = 20
+    Dim Temp         As Long
+
+    Const PORC_ADD   As Integer = 20
+
     Const ONE_SECOND As Integer = 1000
     
     BotIntelligence_Balance_UseItem = ONE_SECOND - (Elv * (PORC_ADD + 10))
@@ -56,20 +68,26 @@ Public Function BotIntelligence_Balance_UseItem(ByVal Elv As Byte) As Boolean
 End Function
 
 ' Posibilidad de manquear según el NIVEL
-Public Function BotIntelligence_Balance_Prob_Manco(ByVal Elv As Byte, ByVal max As Long) As Boolean
-    Dim Temp As Long
+Public Function BotIntelligence_Balance_Prob_Manco(ByVal Elv As Byte, _
+                                                   ByVal max As Long) As Boolean
+
+    Dim Temp       As Long
     
     Const PORC_ADD As Byte = 10
     
     Temp = (Elv * (PORC_ADD))
 
     BotIntelligence_Balance_Prob_Manco = (RandomNumber(1, max) <= Temp)
+
 End Function
+
 ' Cada Nivel parte de una base multiplicado por el nivel mismo.
 Private Function BotIntelligence_ELU(ByVal Elv As Byte) As Long
 
     Const BASE_ADD As Long = 1000000
+
     BotIntelligence_ELU = Elv * BASE_ADD
+
 End Function
 
 ' @ Cargamos la configuración inicial del BOT
@@ -261,6 +279,7 @@ Public Function BotIntelligence_Spawn(ByRef BotCopy As tBotIntelligence, _
                         Case eOBJType.otescudo
                             cChar.ShieldAnim = ObjData(.Inventory(A).ObjIndex).ShieldAnim
                             .ShieldIndex = .Inventory(A).ObjIndex
+
                     End Select
                 
                 End If
@@ -306,7 +325,6 @@ Public Sub BotIntelligence_AI(ByVal NpcIndex As Integer)
 
     Dim RandomMove As Byte
     
-    
     With BotIntelligence(Npclist(NpcIndex).BotIndex)
         
         ' @@ El chamigo ya empezo manqueando, se cae a pedazos.
@@ -314,41 +332,44 @@ Public Sub BotIntelligence_AI(ByVal NpcIndex As Integer)
         
         ' @@ Ataques del BOT
         If Intervalo_CriatureAttack(NpcIndex, False) Then
+
             ' @@ El chamigo manquea el ataque.
             If BotIntelligence_Balance_Prob_Manco(.Stats.Elv, BOT_MANCO_ATTACK) Then
         
-            Select Case .MovementAttack
+                Select Case .MovementAttack
             
-                Case eMovementBotAttack.BOT_MODE_ATTACK
+                    Case eMovementBotAttack.BOT_MODE_ATTACK
                 
-                Case eMovementBotAttack.BOT_MODE_DEFENSE
-                    Call BotIntelligence_CheckEffects(NpcIndex)                 ' Comprueba los Efectos de él (Parálisis,).
+                    Case eMovementBotAttack.BOT_MODE_DEFENSE
+                        Call BotIntelligence_CheckEffects(NpcIndex)                 ' Comprueba los Efectos de él (Parálisis,).
                     
-                Case eMovementBotAttack.BOT_MODE_MIXED
+                    Case eMovementBotAttack.BOT_MODE_MIXED
                     
-                    ' 50% de prob de que priorice defensa y luego intente atacar en caso de no haber defendido.
-                    If RandomNumber(1, 100) <= 25 Then
-                        If Not BotIntelligence_CheckEffects(NpcIndex) Then
-                            Call BotIntelligence_AttackAI(NpcIndex)
+                        ' 50% de prob de que priorice defensa y luego intente atacar en caso de no haber defendido.
+                        If RandomNumber(1, 100) <= 25 Then
+                            If Not BotIntelligence_CheckEffects(NpcIndex) Then
+                                Call BotIntelligence_AttackAI(NpcIndex)
+                            Else
+                                Call BotIntelligence_AttackAI(NpcIndex)
+
+                            End If
+    
                         Else
                             Call BotIntelligence_AttackAI(NpcIndex)
-                        End If
-    
-                    Else
-                        Call BotIntelligence_AttackAI(NpcIndex)
-                    End If
 
-            End Select
+                        End If
+
+                End Select
             
             End If
+
         End If
-        
         
         ' @ Movimientos del BOT
         If Npclist(NpcIndex).flags.Paralizado + Npclist(NpcIndex).flags.Inmovilizado = 0 Then
             If Intervalo_CriatureVelocity(NpcIndex) Then
                 ' @@ El chamigo manquea las teclas a lo loco
-             '   If Not BotIntelligence_Balance_Prob_Manco(.Stats.Elv, 50) Then Exit Sub
+                '   If Not BotIntelligence_Balance_Prob_Manco(.Stats.Elv, 50) Then Exit Sub
                 
                 Select Case .Movement
         
@@ -363,14 +384,17 @@ Public Sub BotIntelligence_AI(ByVal NpcIndex As Integer)
                     Case eMovementBot.BOT_GOTONPC_RANDOM
                         
                 End Select
+
             End If
+
         End If
-        
         
         ' @ Uso de Objetos (HP,MAN)
         If BotIntelligence_Balance_Prob_Manco(.Stats.Elv, 1000) Then
-        Call BotIntelligence_RegenerateStats(NpcIndex)
+            Call BotIntelligence_RegenerateStats(NpcIndex)
+
         End If
+
     End With
   
 End Sub
@@ -388,7 +412,9 @@ Public Function BotIntelligence_CheckEffects(ByVal NpcIndex As Integer) As Boole
         If .flags.Paralizado + .flags.Inmovilizado > 0 Then
             If BotIntelligence_Balance_Prob(.Stats.Elv) Then
                 CanRemoveParalisis = True
+
             End If
+
         End If
 
         If CanRemoveParalisis Then
@@ -402,8 +428,8 @@ Public Function BotIntelligence_CheckEffects(ByVal NpcIndex As Integer) As Boole
             
             BotIntelligence_CheckEffects = True
             Exit Function
+
         End If
-        
         
     End With
 
@@ -419,7 +445,7 @@ Private Sub BotIntelligence_RegenerateStats(ByVal NpcIndex As Integer)
     With Npclist(NpcIndex)
         
         ' @@ El chamigo manquea el ataque.
-       ' If Not BotIntelligence_Balance_Prob_Manco(.Stats.Elv, BOT_MANCO_USEITEM) Then Exit Sub
+        ' If Not BotIntelligence_Balance_Prob_Manco(.Stats.Elv, BOT_MANCO_USEITEM) Then Exit Sub
             
         ' @ No tienes nada que hacer aquí hombre
         If .Stats.MinHp = .Stats.MaxHp And .Stats.MinMan = .Stats.MaxMan Then Exit Sub
@@ -434,6 +460,7 @@ Private Sub BotIntelligence_RegenerateStats(ByVal NpcIndex As Integer)
         If RandomNumber(1, 100) <= 14 Then
             Call BotIntelligence_EffectPocion(NpcIndex, True)
             Exit Sub
+
         End If
     
         ' ¿Tiene más del 70% de la vida? ¡PROB DE PASAR A AZULES!
@@ -446,6 +473,7 @@ Private Sub BotIntelligence_RegenerateStats(ByVal NpcIndex As Integer)
         If .Stats.MinHp <> .Stats.MaxHp Then
             Call BotIntelligence_EffectPocion(NpcIndex, True)
             Exit Sub
+
         End If
 
     End With
@@ -540,6 +568,7 @@ Private Sub BotIntelligence_AttackAI(ByVal NpcIndex As Integer)
                             Else
                                 Call BotIntelligence_AttackNPC(NpcIndex, NI)
                                 Exit Sub
+
                             End If
 
                             Exit Sub
@@ -565,22 +594,24 @@ Private Sub BotIntelligence_AttackAI(ByVal NpcIndex As Integer)
                             
                             ' ¿ Ya tiene TARGET? 70% PROB DE DARLE A ESE CHANGO !
                             If .TargetNPC > 0 Then
-                                 If RandomNumber(1, 100) <= 90 Then
+                                If RandomNumber(1, 100) <= 90 Then
                                     
                                     If Distance(Npclist(.TargetNPC).Pos.X, Npclist(.TargetNPC).Pos.Y, .Pos.X, .Pos.Y) <= RANGO_VISION_x Then
                                         Call BotIntelligence_AttackNPC(NpcIndex, .TargetNPC)
                                         Exit Sub
+
                                     End If
-                                 Else
+
+                                Else
                                     Call BotIntelligence_AttackNPC(NpcIndex, NI)
                                     Exit Sub
+
                                 End If
-                            
-                            
                             
                             End If
                             
-                             .TargetNPC = NI
+                            .TargetNPC = NI
+
                         End If
                         
                     End If
@@ -595,7 +626,8 @@ Private Sub BotIntelligence_AttackAI(ByVal NpcIndex As Integer)
 End Sub
 
 ' @ Las criaturas van a realizar ataques respecto al 'ARMA' que tengan equipada (Daga,Espada,Vara,Arco o Arrojadizos)
-Private Sub BotIntelligence_AttackNPC(ByVal NpcIndex As Integer, ByVal tNpcIndex As Integer)
+Private Sub BotIntelligence_AttackNPC(ByVal NpcIndex As Integer, _
+                                      ByVal tNpcIndex As Integer)
     
     Dim WeaponIndex As Integer
     
@@ -603,8 +635,8 @@ Private Sub BotIntelligence_AttackNPC(ByVal NpcIndex As Integer, ByVal tNpcIndex
     
     If WeaponIndex > 0 Then
         If ObjData(WeaponIndex).proyectil = 1 Then
-             Call BotIntelligence_ProyectilNPC(NpcIndex, tNpcIndex)
-             Exit Sub
+            Call BotIntelligence_ProyectilNPC(NpcIndex, tNpcIndex)
+            Exit Sub
              
         ElseIf ObjData(WeaponIndex).StaffDamageBonus <> 0 Then
             Call BotIntelligence_SpellNPC(NpcIndex, tNpcIndex)
@@ -613,19 +645,24 @@ Private Sub BotIntelligence_AttackNPC(ByVal NpcIndex As Integer, ByVal tNpcIndex
         
         Else
             Call BotIntelligence_CuerpoNPC(NpcIndex, tNpcIndex)
+
         End If
     
     End If
     
     With Npclist(tNpcIndex)
+
         If .Stats.MinHp <= 0 Then
             Call MuereNpc(tNpcIndex, 0)
+
         End If
         
     End With
+
 End Sub
 
-Private Function BotIntelligence_ProyectilNPC(ByVal NpcIndex As Integer, tNpcIndex As Integer) As Boolean
+Private Function BotIntelligence_ProyectilNPC(ByVal NpcIndex As Integer, _
+                                              tNpcIndex As Integer) As Boolean
     
 End Function
 
@@ -671,13 +708,14 @@ Public Sub BotIntelligence_SpellNPC(ByVal NpcIndex As Integer, ByVal tNpcIndex A
                 Exit Sub
     
             End If
+
         End If
-        
         
         ' 40% de probabilidad de pasar a azules para tirar apocasosssssssssssssssss
         If RandomNumber(1, 100) <= 40 Then
             Call BotIntelligence_EffectPocion(NpcIndex, False)
             Exit Sub
+
         End If
         
         ' Se fija si puede tirar DESCARGA ELECTRICA
@@ -688,7 +726,9 @@ Public Sub BotIntelligence_SpellNPC(ByVal NpcIndex As Integer, ByVal tNpcIndex A
                 Exit Sub
     
             End If
+
         End If
+
     End With
     
 End Sub
@@ -700,51 +740,43 @@ Private Sub BotIntelligence_CuerpoNPC(ByVal NpcIndex As Integer, _
 
         If Distancia(.Pos, Npclist(tNpcIndex).Pos) <= 1 Then
             Call SistemaCombate.NpcAtacaNpc(NpcIndex, tNpcIndex)
+
         End If
     
     End With
 
 End Sub
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ' # No me interesa verlo
-
-
-
-
 
 ' @ Slot LIBRE para invocar una nueva criatura BOT
 Private Function BotIntelligence_FreeSlot() As Long
+
     Dim A As Long
     
     For A = 1 To BOT_MAX_SPAWN
+
         With BotIntelligence(A)
+
             If .Active = False Then
                 BotIntelligence_FreeSlot = A
                 Exit Function
+
             End If
+
         End With
     
     Next A
+
 End Function
 
 ' @ Reset información del BOT
 Public Sub BotIntelligence_Reset(ByVal Slot As Long)
+
     Dim NullBot As tBotIntelligence
     
     BotIntelligence(Slot) = NullBot
+
 End Sub
 
 ' Buscamos un Slot libre para que le usuario ponga una nueva mascota

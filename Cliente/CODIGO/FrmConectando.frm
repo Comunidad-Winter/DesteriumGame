@@ -38,25 +38,41 @@ Option Explicit
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
-
     If KeyCode = vbKeyEscape Then
         prgRun = False
         Exit Sub
+
     End If
     
 End Sub
 
 Public Sub Reconnect_Socket()
-        Account.Email = LastDataAccount
-        Account.Passwd = LastDataPasswd
-        Prepare_And_Connect E_MODO.e_LoginAccount
+    Account.Email = LastDataAccount
+    Account.Passwd = LastDataPasswd
+    Prepare_And_Connect E_MODO.e_LoginAccount
+    
+    Debug.Print "Reconectando..."
+
 End Sub
+
 Private Sub tReconnect_Timer()
 
+    Dim respuesta As Integer
+
     If Not IsConnected Then
-        Reconnect_Socket
+        respuesta = MsgBox("No se ha logrado conectar con el servidor ¿Quieres intentar reconectar?", vbYesNo, "Confirmar")
+
+        If respuesta = vbYes Then
+            Reconnect_Socket
+        Else
+            frmConnectAcc.Show
+            Unload Me
+            Exit Sub
+        End If
+ 
     Else
         tReconnect.Enabled = False
+
     End If
     
 End Sub

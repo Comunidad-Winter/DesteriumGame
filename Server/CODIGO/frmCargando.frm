@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.4#0"; "comctl32.ocx"
 Begin VB.Form frmCargando 
    BackColor       =   &H00C0C0C0&
    BorderStyle     =   0  'None
@@ -38,6 +38,26 @@ Begin VB.Form frmCargando
       TabIndex        =   0
       Top             =   -120
       Width           =   6735
+      Begin VB.Label lblReparadoPor 
+         AutoSize        =   -1  'True
+         BackStyle       =   0  'Transparent
+         Caption         =   "Reparado por Lorwik"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H000000FF&
+         Height          =   300
+         Left            =   2220
+         TabIndex        =   4
+         Top             =   2220
+         Width           =   2505
+      End
       Begin VB.Label Label1 
          Alignment       =   2  'Center
          AutoSize        =   -1  'True
@@ -122,5 +142,6 @@ Option Explicit
 Private Sub Form_Load()
     'Label1(1).Caption = Label1(1).Caption & " V." & App.Major & "." & App.Minor & "." & App.Revision
     Picture1.Picture = LoadPicture(App.Path & "\logo.jpg")
+
 End Sub
 

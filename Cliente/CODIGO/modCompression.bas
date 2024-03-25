@@ -5,7 +5,6 @@ Public Const PNG_SOURCE_FILE_EXT As String = ".png"
 
 Public Const BMP_SOURCE_FILE_EXT As String = ".bmp"
 
-
 #If ModoBig = 1 Then
 
     Public Const GRH_RESOURCE_FILE As String = "graphics2.ao"
@@ -18,18 +17,21 @@ Public Const BMP_SOURCE_FILE_EXT As String = ".bmp"
 
 Public Const GRH_RESOURCE_FILE_DEFAULT As String = "graphics.ao"
 
-
-Public Declare Function OleCreatePictureIndirect Lib "oleaut32.dll" ( _
-    ByVal lpPictDesc As picDesc, _
-    ByRef riid As Any, _
-    ByVal fOwn As Long, _
-    ByRef ppvObj As IPicture) As Long
+Public Declare Function OleCreatePictureIndirect _
+               Lib "oleaut32.dll" (ByVal lpPictDesc As picDesc, _
+                                   ByRef riid As Any, _
+                                   ByVal fOwn As Long, _
+                                   ByRef ppvObj As IPicture) As Long
 
 Public Type picDesc
+
     Size As Long
+
     Type As Long
+
     hPic As Long
     hPal As Long
+
 End Type
 
 Public Const AVATARS_RESOURCE_FILE As String = "avatars.ao"
@@ -839,7 +841,7 @@ Public Function Get_Image(ByRef ResourcePath As String, _
         If Extract_File(ResourcePath, InfoHead, data, 0) Then Get_Image = True
     Else
         'Call LogError("Get_Image::No se encontro el recurso " & FileName)
-        Call MsgBox("Get_Image::No se encontro el recurso " & FileName)
+        Call MsgBox("Get_Image::No se encontro el recurso " & FileName & " en la ruta " & ResourcePath)
 
     End If
 
@@ -1531,7 +1533,6 @@ ErrHandler:
     TestZLib = False
 
 End Function
-
 
 Public Function ArrayToPicture(inArray() As Byte, _
                                offset As Long, _

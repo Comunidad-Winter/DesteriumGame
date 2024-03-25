@@ -30,145 +30,171 @@ Attribute VB_Name = "Extra"
 Option Explicit
 
 Public Function EsNewbie(ByVal UserIndex As Integer) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo EsNewbie_Err
-        '</EhHeader>
 
-100     EsNewbie = UserList(UserIndex).Stats.Elv <= LimiteNewbie
-        '<EhFooter>
-        Exit Function
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo EsNewbie_Err
+
+    '</EhHeader>
+
+    EsNewbie = UserList(UserIndex).Stats.Elv <= LimiteNewbie
+    '<EhFooter>
+    Exit Function
 
 EsNewbie_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.EsNewbie " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.EsNewbie " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function esArmada(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo esArmada_Err
-        '</EhHeader>
-100     esArmada = (UserList(UserIndex).Faction.Status = r_Armada)
-        '<EhFooter>
-        Exit Function
+
+    '<EhHeader>
+    On Error GoTo esArmada_Err
+
+    '</EhHeader>
+    esArmada = (UserList(UserIndex).Faction.Status = r_Armada)
+    '<EhFooter>
+    Exit Function
 
 esArmada_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.esArmada " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.esArmada " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function esCaos(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo esCaos_Err
-        '</EhHeader>
-100     esCaos = (UserList(UserIndex).Faction.Status = r_Caos)
-        '<EhFooter>
-        Exit Function
+
+    '<EhHeader>
+    On Error GoTo esCaos_Err
+
+    '</EhHeader>
+    esCaos = (UserList(UserIndex).Faction.Status = r_Caos)
+    '<EhFooter>
+    Exit Function
 
 esCaos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.esCaos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.esCaos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function EsGm(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo EsGm_Err
-        '</EhHeader>
 
-100     EsGm = (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios))
-        '<EhFooter>
-        Exit Function
+    '<EhHeader>
+    On Error GoTo EsGm_Err
+
+    '</EhHeader>
+
+    EsGm = (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin Or PlayerType.Dios Or PlayerType.SemiDios))
+    '<EhFooter>
+    Exit Function
 
 EsGm_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.EsGm " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.EsGm " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Public Function EsGmDios(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo EsGmDios_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo EsGmDios_Err
+
+    '</EhHeader>
     
-100     EsGmDios = (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin Or PlayerType.Dios))
-        '<EhFooter>
-        Exit Function
+    EsGmDios = (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin Or PlayerType.Dios))
+    '<EhFooter>
+    Exit Function
 
 EsGmDios_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.EsGmDios " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.EsGmDios " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Public Function EsGmPriv(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo EsGmPriv_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo EsGmPriv_Err
+
+    '</EhHeader>
     
-        EsGmPriv = CharIs_Admin(UCase$(UserList(UserIndex).Name))
-100     'EsGmPriv = (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin))
-        '<EhFooter>
-        Exit Function
+    EsGmPriv = CharIs_Admin(UCase$(UserList(UserIndex).Name))
+    'EsGmPriv = (UserList(UserIndex).flags.Privilegios And (PlayerType.Admin))
+    '<EhFooter>
+    Exit Function
 
 EsGmPriv_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.EsGmPriv " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.EsGmPriv " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Function GetDayString(AccessDay As Byte) As String
+
     Select Case AccessDay
+
         Case 1: GetDayString = "Lunes"
+
         Case 2: GetDayString = "Martes"
+
         Case 3: GetDayString = "Miércoles"
+
         Case 4: GetDayString = "Jueves"
+
         Case 5: GetDayString = "Viernes"
+
         Case 6: GetDayString = "Sábado"
+
         Case 7: GetDayString = "Domingo"
+
         Case Else: GetDayString = "día inválido"
+
     End Select
+
 End Function
 
 ' # Chequea los online del servidor para determinar si esta disponible
-Public Function CheckMap_Onlines(ByVal UserIndex As Integer, ByRef DestPos As WorldPos) As Boolean
+Public Function CheckMap_Onlines(ByVal UserIndex As Integer, _
+                                 ByRef DestPos As WorldPos) As Boolean
+
     If MapInfo(DestPos.Map).MinOns > 0 Then
         If NumUsers + UsersBot < MapInfo(DestPos.Map).MinOns Then
             Exit Function
+
         End If
+
     End If
     
     CheckMap_Onlines = True
+
 End Function
+
 ' # Chequea el horario del mapa para poder ingresar. Puede habilitarse varios días en diferentes horarios.
-Public Function CheckMap_HourDay(ByVal UserIndex As Integer, ByRef DestPos As WorldPos) As Boolean
+Public Function CheckMap_HourDay(ByVal UserIndex As Integer, _
+                                 ByRef DestPos As WorldPos) As Boolean
 
-On Error GoTo ErrHandler
+    On Error GoTo ErrHandler
 
-    Dim currDay As Integer
-    Dim currTime As Integer
-    Dim i As Integer
+    Dim currDay             As Integer
+
+    Dim currTime            As Integer
+
+    Dim i                   As Integer
+
     Dim availabilityMessage As String
-    Dim accessInfo As String
+
+    Dim accessInfo          As String
     
     If MapInfo(DestPos.Map).AccessDays(0) = 0 Then
         CheckMap_HourDay = True
         Exit Function
+
     End If
     
     currDay = Weekday(Date) ' 1=domingo, 2=lunes, 3 martes, 4 miercoles , 5 jueves, 6 viernes..., 7=sábado
@@ -177,28 +203,30 @@ On Error GoTo ErrHandler
     
     For i = LBound(MapInfo(DestPos.Map).AccessDays) To UBound(MapInfo(DestPos.Map).AccessDays)
     
-            accessInfo = GetDayString(MapInfo(DestPos.Map).AccessDays(i)) & _
-                         " desde las " & Format(MapInfo(DestPos.Map).AccessTimeStarts(i), "00:00") & _
-                         " hasta las " & Format(MapInfo(DestPos.Map).accessTimeEnds(i), "00:00") & ". "
-            availabilityMessage = availabilityMessage & accessInfo & vbCrLf
+        accessInfo = GetDayString(MapInfo(DestPos.Map).AccessDays(i)) & " desde las " & Format(MapInfo(DestPos.Map).AccessTimeStarts(i), "00:00") & " hasta las " & Format(MapInfo(DestPos.Map).accessTimeEnds(i), "00:00") & ". "
+        availabilityMessage = availabilityMessage & accessInfo & vbCrLf
         
         If MapInfo(DestPos.Map).AccessDays(i) = currDay Then
             If currTime >= MapInfo(DestPos.Map).AccessTimeStarts(i) And currTime <= MapInfo(DestPos.Map).accessTimeEnds(i) Then
                 CheckMap_HourDay = True
                 Exit Function
+
             End If
+
         End If
+
     Next i
 
-
-        ' Si llegamos aquí, el acceso está denegado
-        Call WriteConsoleMsg(UserIndex, availabilityMessage, FontTypeNames.FONTTYPE_INFO)
+    ' Si llegamos aquí, el acceso está denegado
+    Call WriteConsoleMsg(UserIndex, availabilityMessage, FontTypeNames.FONTTYPE_INFO)
     CheckMap_HourDay = False
     
     Exit Function
 ErrHandler:
     CheckMap_HourDay = False
+
 End Function
+
 Public Sub DoTileEvents(ByVal UserIndex As Integer, _
                         ByVal Map As Integer, _
                         ByVal X As Integer, _
@@ -458,13 +486,14 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, _
                 If Not CheckMap_HourDay(UserIndex, DestPos) Then
                     Call ClosestStablePos(UserList(UserIndex).Pos, nPos)
                         
-                        If nPos.X <> 0 And nPos.Y <> 0 Then
-                            Call WarpUserChar(UserIndex, nPos.Map, nPos.X, nPos.Y, FxFlag)
+                    If nPos.X <> 0 And nPos.Y <> 0 Then
+                        Call WarpUserChar(UserIndex, nPos.Map, nPos.X, nPos.Y, FxFlag)
 
-                        End If
+                    End If
+
                     Exit Sub
+
                 End If
-                
                 
                 '¿Requiere onlines especificos?
                 If Not CheckMap_Onlines(UserIndex, DestPos) Then
@@ -476,8 +505,8 @@ Public Sub DoTileEvents(ByVal UserIndex As Integer, _
                     End If
                     
                     Exit Sub
+
                 End If
-                
                 
                 '¿Es mapa que permite solo PREMIUMS?
                 If MapInfo(DestPos.Map).Premium > 0 Then
@@ -716,134 +745,138 @@ End Sub
 Function InRangoVision(ByVal UserIndex As Integer, _
                        ByVal X As Integer, _
                        ByVal Y As Integer) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo InRangoVision_Err
-        '</EhHeader>
 
-100     If X > UserList(UserIndex).Pos.X - MinXBorder And X < UserList(UserIndex).Pos.X + MinXBorder Then
-102         If Y > UserList(UserIndex).Pos.Y - MinYBorder And Y < UserList(UserIndex).Pos.Y + MinYBorder Then
-104             InRangoVision = True
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo InRangoVision_Err
 
-                Exit Function
+    '</EhHeader>
 
-            End If
+    If X > UserList(UserIndex).Pos.X - MinXBorder And X < UserList(UserIndex).Pos.X + MinXBorder Then
+        If Y > UserList(UserIndex).Pos.Y - MinYBorder And Y < UserList(UserIndex).Pos.Y + MinYBorder Then
+            InRangoVision = True
+
+            Exit Function
+
         End If
 
-106     InRangoVision = False
+    End If
 
-        '<EhFooter>
-        Exit Function
+    InRangoVision = False
+
+    '<EhFooter>
+    Exit Function
 
 InRangoVision_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.InRangoVision " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.InRangoVision " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function InVisionRangeAndMap(ByVal UserIndex As Integer, _
                                     ByRef OtherUserPos As WorldPos) As Boolean
-        '***************************************************
-        'Author: ZaMa
-        'Last Modification: 20/11/2010
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo InVisionRangeAndMap_Err
-        '</EhHeader>
-    
-100     With UserList(UserIndex)
-        
-            ' Same map?
-102         If .Pos.Map <> OtherUserPos.Map Then Exit Function
-    
-            ' In x range?
-104         If OtherUserPos.X < .Pos.X - MinXBorder Or OtherUserPos.X > .Pos.X + MinXBorder Then Exit Function
-        
-            ' In y range?
-106         If OtherUserPos.Y < .Pos.Y - MinYBorder And OtherUserPos.Y > .Pos.Y + MinYBorder Then Exit Function
-        End With
 
-108     InVisionRangeAndMap = True
+    '***************************************************
+    'Author: ZaMa
+    'Last Modification: 20/11/2010
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo InVisionRangeAndMap_Err
+
+    '</EhHeader>
     
-        '<EhFooter>
-        Exit Function
+    With UserList(UserIndex)
+        
+        ' Same map?
+        If .Pos.Map <> OtherUserPos.Map Then Exit Function
+    
+        ' In x range?
+        If OtherUserPos.X < .Pos.X - MinXBorder Or OtherUserPos.X > .Pos.X + MinXBorder Then Exit Function
+        
+        ' In y range?
+        If OtherUserPos.Y < .Pos.Y - MinYBorder And OtherUserPos.Y > .Pos.Y + MinYBorder Then Exit Function
+
+    End With
+
+    InVisionRangeAndMap = True
+    
+    '<EhFooter>
+    Exit Function
 
 InVisionRangeAndMap_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.InVisionRangeAndMap " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.InVisionRangeAndMap " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Function InRangoVisionNPC(ByVal NpcIndex As Integer, _
                           X As Integer, _
                           Y As Integer) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo InRangoVisionNPC_Err
-        '</EhHeader>
 
-100     If X > Npclist(NpcIndex).Pos.X - MinXBorder And X < Npclist(NpcIndex).Pos.X + MinXBorder Then
-102         If Y > Npclist(NpcIndex).Pos.Y - MinYBorder And Y < Npclist(NpcIndex).Pos.Y + MinYBorder Then
-104             InRangoVisionNPC = True
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo InRangoVisionNPC_Err
 
-                Exit Function
+    '</EhHeader>
 
-            End If
+    If X > Npclist(NpcIndex).Pos.X - MinXBorder And X < Npclist(NpcIndex).Pos.X + MinXBorder Then
+        If Y > Npclist(NpcIndex).Pos.Y - MinYBorder And Y < Npclist(NpcIndex).Pos.Y + MinYBorder Then
+            InRangoVisionNPC = True
+
+            Exit Function
+
         End If
 
-106     InRangoVisionNPC = False
+    End If
 
-        '<EhFooter>
-        Exit Function
+    InRangoVisionNPC = False
+
+    '<EhFooter>
+    Exit Function
 
 InRangoVisionNPC_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.InRangoVisionNPC " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.InRangoVisionNPC " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Function InMapBounds(ByVal Map As Integer, _
                      ByVal X As Integer, _
                      ByVal Y As Integer) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo InMapBounds_Err
-        '</EhHeader>
 
-100     If (Map <= 0 Or Map > NumMaps) Or X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder Then
-102         InMapBounds = False
-        Else
-104         InMapBounds = True
-        End If
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo InMapBounds_Err
+
+    '</EhHeader>
+
+    If (Map <= 0 Or Map > NumMaps) Or X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder Then
+        InMapBounds = False
+    Else
+        InMapBounds = True
+
+    End If
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 InMapBounds_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.InMapBounds " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.InMapBounds " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Private Function RhombLegalPos(ByRef Pos As WorldPos, _
@@ -854,93 +887,93 @@ Private Function RhombLegalPos(ByRef Pos As WorldPos, _
                                Optional PuedeTierra As Boolean = True, _
                                Optional ByVal CheckExitTile As Boolean = False, _
                                Optional ByVal DifPos As Boolean = False) As Boolean
-        '***************************************************
-        'Author: Marco Vanotti (Marco)
-        'Last Modification: -
-        ' walks all the perimeter of a rhomb of side  "distance + 1",
-        ' which starts at Pos.x - Distance and Pos.y
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo RhombLegalPos_Err
-        '</EhHeader>
 
-        Dim i As Long
+    '***************************************************
+    'Author: Marco Vanotti (Marco)
+    'Last Modification: -
+    ' walks all the perimeter of a rhomb of side  "distance + 1",
+    ' which starts at Pos.x - Distance and Pos.y
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo RhombLegalPos_Err
+
+    '</EhHeader>
+
+    Dim i As Long
     
-100     vX = Pos.X - Distance
-102     vY = Pos.Y
+    vX = Pos.X - Distance
+    vY = Pos.Y
     
-104     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
 
-106         If (LegalPos(Pos.Map, vX + i, vY - i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
-108             vX = vX + i
-110             vY = vY - i
-112             RhombLegalPos = True
+        If (LegalPos(Pos.Map, vX + i, vY - i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
+            vX = vX + i
+            vY = vY - i
+            RhombLegalPos = True
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
 
-        Next
+    Next
     
-114     vX = Pos.X
-116     vY = Pos.Y - Distance
+    vX = Pos.X
+    vY = Pos.Y - Distance
     
-118     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
 
-120         If (LegalPos(Pos.Map, vX + i, vY + i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
-122             vX = vX + i
-124             vY = vY + i
-126             RhombLegalPos = True
+        If (LegalPos(Pos.Map, vX + i, vY + i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
+            vX = vX + i
+            vY = vY + i
+            RhombLegalPos = True
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
 
-        Next
+    Next
     
-128     vX = Pos.X + Distance
-130     vY = Pos.Y
+    vX = Pos.X + Distance
+    vY = Pos.Y
     
-132     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
 
-134         If (LegalPos(Pos.Map, vX - i, vY + i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
-136             vX = vX - i
-138             vY = vY + i
-140             RhombLegalPos = True
+        If (LegalPos(Pos.Map, vX - i, vY + i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
+            vX = vX - i
+            vY = vY + i
+            RhombLegalPos = True
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
 
-        Next
+    Next
     
-142     vX = Pos.X
-144     vY = Pos.Y + Distance
+    vX = Pos.X
+    vY = Pos.Y + Distance
     
-146     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
 
-148         If (LegalPos(Pos.Map, vX - i, vY - i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
-150             vX = vX - i
-152             vY = vY - i
-154             RhombLegalPos = True
+        If (LegalPos(Pos.Map, vX - i, vY - i, PuedeAgua, PuedeTierra, CheckExitTile, DifPos)) Then
+            vX = vX - i
+            vY = vY - i
+            RhombLegalPos = True
 
-                Exit Function
+            Exit Function
 
-            End If
+        End If
 
-        Next
+    Next
     
-156     RhombLegalPos = False
+    RhombLegalPos = False
     
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 RhombLegalPos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.RhombLegalPos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.RhombLegalPos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function RhombLegalTilePos(ByRef Pos As WorldPos, _
@@ -951,136 +984,139 @@ Public Function RhombLegalTilePos(ByRef Pos As WorldPos, _
                                   ByVal ObjAmount As Long, _
                                   ByVal PuedeAgua As Boolean, _
                                   ByVal PuedeTierra As Boolean) As Boolean
-        '<EhHeader>
-        On Error GoTo RhombLegalTilePos_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: ZaMa
-        'Last Modification: -
-        ' walks all the perimeter of a rhomb of side  "distance + 1",
-        ' which starts at Pos.x - Distance and Pos.y
-        ' and searchs for a valid position to drop items
-        '***************************************************
+    '<EhHeader>
+    On Error GoTo RhombLegalTilePos_Err
 
-        Dim i           As Long
+    '</EhHeader>
 
-        Dim HayObj      As Boolean
+    '***************************************************
+    'Author: ZaMa
+    'Last Modification: -
+    ' walks all the perimeter of a rhomb of side  "distance + 1",
+    ' which starts at Pos.x - Distance and Pos.y
+    ' and searchs for a valid position to drop items
+    '***************************************************
+
+    Dim i           As Long
+
+    Dim HayObj      As Boolean
     
-        Dim X           As Integer
+    Dim X           As Integer
 
-        Dim Y           As Integer
+    Dim Y           As Integer
 
-        Dim MapObjIndex As Integer
+    Dim MapObjIndex As Integer
     
-100     vX = Pos.X - Distance
-102     vY = Pos.Y
+    vX = Pos.X - Distance
+    vY = Pos.Y
     
-104     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
         
-106         X = vX + i
-108         Y = vY - i
+        X = vX + i
+        Y = vY - i
         
-110         If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
+        If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
             
-                ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
-112             If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
-114                 vX = X
-116                 vY = Y
+            ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
+            If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
+                vX = X
+                vY = Y
                 
-118                 RhombLegalTilePos = True
+                RhombLegalTilePos = True
 
-                    Exit Function
+                Exit Function
 
-                End If
+            End If
             
-            End If
+        End If
 
-        Next
+    Next
     
-120     vX = Pos.X
-122     vY = Pos.Y - Distance
+    vX = Pos.X
+    vY = Pos.Y - Distance
     
-124     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
         
-126         X = vX + i
-128         Y = vY + i
+        X = vX + i
+        Y = vY + i
         
-130         If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
+        If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
             
-                ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
-132             If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
-134                 vX = X
-136                 vY = Y
+            ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
+            If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
+                vX = X
+                vY = Y
                 
-138                 RhombLegalTilePos = True
+                RhombLegalTilePos = True
 
-                    Exit Function
+                Exit Function
 
-                End If
             End If
 
-        Next
+        End If
+
+    Next
     
-140     vX = Pos.X + Distance
-142     vY = Pos.Y
+    vX = Pos.X + Distance
+    vY = Pos.Y
     
-144     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
         
-146         X = vX - i
-148         Y = vY + i
+        X = vX - i
+        Y = vY + i
     
-150         If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
+        If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
         
-                ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
-152             If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
-154                 vX = X
-156                 vY = Y
+            ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
+            If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
+                vX = X
+                vY = Y
                 
-158                 RhombLegalTilePos = True
+                RhombLegalTilePos = True
 
-                    Exit Function
+                Exit Function
 
-                End If
             End If
 
-        Next
+        End If
+
+    Next
     
-160     vX = Pos.X
-162     vY = Pos.Y + Distance
+    vX = Pos.X
+    vY = Pos.Y + Distance
     
-164     For i = 0 To Distance - 1
+    For i = 0 To Distance - 1
         
-166         X = vX - i
-168         Y = vY - i
+        X = vX - i
+        Y = vY - i
     
-170         If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
+        If (LegalPos(Pos.Map, X, Y, PuedeAgua, PuedeTierra, True)) Then
 
-                ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
-172             If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
-174                 vX = X
-176                 vY = Y
+            ' No hay obj tirado o la suma de lo que hay + lo nuevo <= 10k
+            If Not HayObjeto(Pos.Map, X, Y, ObjIndex, ObjAmount) Then
+                vX = X
+                vY = Y
                 
-178                 RhombLegalTilePos = True
+                RhombLegalTilePos = True
 
-                    Exit Function
+                Exit Function
 
-                End If
             End If
 
-        Next
-    
-180     RhombLegalTilePos = False
+        End If
 
-        '<EhFooter>
-        Exit Function
+    Next
+    
+    RhombLegalTilePos = False
+
+    '<EhFooter>
+    Exit Function
 
 RhombLegalTilePos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.RhombLegalTilePos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.RhombLegalTilePos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function HayObjeto(ByVal mapa As Integer, _
@@ -1088,43 +1124,45 @@ Public Function HayObjeto(ByVal mapa As Integer, _
                           ByVal Y As Long, _
                           ByVal ObjIndex As Integer, _
                           ByVal ObjAmount As Long) As Boolean
-        '<EhHeader>
-        On Error GoTo HayObjeto_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: ZaMa
-        'Last Modification: -
-        'Checks if there's space in a tile to add an itemAmount
-        '***************************************************
-        Dim MapObjIndex As Integer
+    '<EhHeader>
+    On Error GoTo HayObjeto_Err
 
-100     MapObjIndex = MapData(mapa, X, Y).ObjInfo.ObjIndex
+    '</EhHeader>
+
+    '***************************************************
+    'Author: ZaMa
+    'Last Modification: -
+    'Checks if there's space in a tile to add an itemAmount
+    '***************************************************
+    Dim MapObjIndex As Integer
+
+    MapObjIndex = MapData(mapa, X, Y).ObjInfo.ObjIndex
             
-        ' Hay un objeto tirado?
-102     If MapObjIndex <> 0 Then
+    ' Hay un objeto tirado?
+    If MapObjIndex <> 0 Then
 
-            ' Es el mismo objeto?
-104         If MapObjIndex = ObjIndex Then
-                ' La suma es menor a 10k?
-106             HayObjeto = (MapData(mapa, X, Y).ObjInfo.Amount + ObjAmount > MAX_INVENTORY_OBJS)
-            Else
-108             HayObjeto = True
-            End If
-
+        ' Es el mismo objeto?
+        If MapObjIndex = ObjIndex Then
+            ' La suma es menor a 10k?
+            HayObjeto = (MapData(mapa, X, Y).ObjInfo.Amount + ObjAmount > MAX_INVENTORY_OBJS)
         Else
-110         HayObjeto = False
+            HayObjeto = True
+
         End If
 
-        '<EhFooter>
-        Exit Function
+    Else
+        HayObjeto = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 HayObjeto_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.HayObjeto " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.HayObjeto " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Sub ClosestLegalPos(Pos As WorldPos, _
@@ -1133,250 +1171,257 @@ Sub ClosestLegalPos(Pos As WorldPos, _
                     Optional PuedeTierra As Boolean = True, _
                     Optional ByVal CheckExitTile As Boolean = False, _
                     Optional ByVal DifPos As Boolean = False)
-        '*****************************************************************
-        'Author: Unknown (original version)
-        'Last Modification: 09/14/2010 (Marco)
-        'History:
-        ' - 01/24/2007 (ToxicWaste)
-        'Encuentra la posicion legal mas cercana y la guarda en nPos
-        '*****************************************************************
-        '<EhHeader>
-        On Error GoTo ClosestLegalPos_Err
-        '</EhHeader>
 
-        Dim Found As Boolean
+    '*****************************************************************
+    'Author: Unknown (original version)
+    'Last Modification: 09/14/2010 (Marco)
+    'History:
+    ' - 01/24/2007 (ToxicWaste)
+    'Encuentra la posicion legal mas cercana y la guarda en nPos
+    '*****************************************************************
+    '<EhHeader>
+    On Error GoTo ClosestLegalPos_Err
 
-        Dim LoopC As Integer
+    '</EhHeader>
 
-        Dim tX    As Long
+    Dim Found As Boolean
 
-        Dim tY    As Long
+    Dim LoopC As Integer
+
+    Dim tX    As Long
+
+    Dim tY    As Long
     
-100     nPos = Pos
-102     tX = Pos.X
-104     tY = Pos.Y
+    nPos = Pos
+    tX = Pos.X
+    tY = Pos.Y
     
-106     LoopC = 1
+    LoopC = 1
     
-        ' La primera posicion es valida?
-108     If LegalPos(Pos.Map, nPos.X, nPos.Y, PuedeAgua, PuedeTierra, CheckExitTile) Then
-110         Found = True
+    ' La primera posicion es valida?
+    If LegalPos(Pos.Map, nPos.X, nPos.Y, PuedeAgua, PuedeTierra, CheckExitTile) Then
+        Found = True
     
-            ' Busca en las demas posiciones, en forma de "rombo"
-        Else
+        ' Busca en las demas posiciones, en forma de "rombo"
+    Else
 
-112         While (Not Found) And LoopC <= 12
+        While (Not Found) And LoopC <= 12
 
-114             If RhombLegalPos(Pos, tX, tY, LoopC, PuedeAgua, PuedeTierra, CheckExitTile, DifPos) Then
-116                 nPos.X = tX
-118                 nPos.Y = tY
-120                 Found = True
-                End If
+            If RhombLegalPos(Pos, tX, tY, LoopC, PuedeAgua, PuedeTierra, CheckExitTile, DifPos) Then
+                nPos.X = tX
+                nPos.Y = tY
+                Found = True
+
+            End If
         
-122             LoopC = LoopC + 1
+            LoopC = LoopC + 1
 
-            Wend
+        Wend
         
-        End If
+    End If
     
-124     If Not Found Then
-126         nPos.X = 0
-128         nPos.Y = 0
-        End If
+    If Not Found Then
+        nPos.X = 0
+        nPos.Y = 0
 
-        '<EhFooter>
-        Exit Sub
+    End If
+
+    '<EhFooter>
+    Exit Sub
 
 ClosestLegalPos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.ClosestLegalPos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.ClosestLegalPos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub ClosestStablePos(Pos As WorldPos, ByRef nPos As WorldPos)
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: 09/14/2010
-        'Encuentra la posicion legal mas cercana que no sea un portal y la guarda en nPos
-        '*****************************************************************
-        '<EhHeader>
-        On Error GoTo ClosestStablePos_Err
-        '</EhHeader>
-100     Call ClosestLegalPos(Pos, nPos, , , True)
+
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: 09/14/2010
+    'Encuentra la posicion legal mas cercana que no sea un portal y la guarda en nPos
+    '*****************************************************************
+    '<EhHeader>
+    On Error GoTo ClosestStablePos_Err
+
+    '</EhHeader>
+    Call ClosestLegalPos(Pos, nPos, , , True)
           
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 ClosestStablePos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.ClosestStablePos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.ClosestStablePos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Function NameIndex(ByVal Name As String) As Integer
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo NameIndex_Err
-        '</EhHeader>
 
-        Dim UserIndex As Long
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo NameIndex_Err
+
+    '</EhHeader>
+
+    Dim UserIndex As Long
     
-        '¿Nombre valido?
-100     If LenB(Name) = 0 Then
-102         NameIndex = 0
+    '¿Nombre valido?
+    If LenB(Name) = 0 Then
+        NameIndex = 0
+
+        Exit Function
+
+    End If
+    
+    If InStrB(Name, "+") <> 0 Then
+        Name = UCase$(Replace(Name, "+", " "))
+
+    End If
+    
+    UserIndex = 1
+
+    Do Until UCase$(UserList(UserIndex).Name) = UCase$(Name)
+        
+        UserIndex = UserIndex + 1
+        
+        If UserIndex > MaxUsers Then
+            NameIndex = 0
 
             Exit Function
 
         End If
-    
-104     If InStrB(Name, "+") <> 0 Then
-106         Name = UCase$(Replace(Name, "+", " "))
-        End If
-    
-108     UserIndex = 1
 
-110     Do Until UCase$(UserList(UserIndex).Name) = UCase$(Name)
+    Loop
+     
+    NameIndex = UserIndex
+    '<EhFooter>
+    Exit Function
+
+NameIndex_Err:
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.NameIndex " & "at line " & Erl
         
-112         UserIndex = UserIndex + 1
+    '</EhFooter>
+End Function
+
+Function CheckForSameIP(ByVal UserIndex As Integer, ByVal UserIP As String) As Integer
+
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo CheckForSameIP_Err
+
+    '</EhHeader>
+
+    Dim LoopC  As Long
+
+    Dim Amount As Integer
+    
+    For LoopC = 1 To LastUser
+
+        If UserList(LoopC).flags.UserLogged = True Then
+            If UserList(LoopC).IpAddress = UserIP And UserIndex <> LoopC Then
+                Amount = Amount + 1
+
+            End If
+
+        End If
+
+    Next LoopC
+    
+    CheckForSameIP = Amount
+
+    '<EhFooter>
+    Exit Function
+
+CheckForSameIP_Err:
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.CheckForSameIP " & "at line " & Erl
         
-114         If UserIndex > MaxUsers Then
-116             NameIndex = 0
+    '</EhFooter>
+End Function
+
+Function CheckForSameName(ByVal Name As String) As Boolean
+
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo CheckForSameName_Err
+
+    '</EhHeader>
+
+    'Controlo que no existan usuarios con el mismo nombre
+    Dim LoopC As Long
+    
+    For LoopC = 1 To LastUser
+
+        If UserList(LoopC).flags.UserLogged Then
+            If UCase$(UserList(LoopC).Name) = UCase$(Name) Then
+                CheckForSameName = True
 
                 Exit Function
 
             End If
 
-        Loop
-     
-118     NameIndex = UserIndex
-        '<EhFooter>
-        Exit Function
+        End If
 
-NameIndex_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.NameIndex " & _
-               "at line " & Erl
-        
-        '</EhFooter>
-End Function
-
-Function CheckForSameIP(ByVal UserIndex As Integer, ByVal UserIP As String) As Integer
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo CheckForSameIP_Err
-        '</EhHeader>
-
-        Dim LoopC As Long
-
-        Dim Amount  As Integer
+    Next LoopC
     
-100     For LoopC = 1 To LastUser
-
-102         If UserList(LoopC).flags.UserLogged = True Then
-104             If UserList(LoopC).IpAddress = UserIP And UserIndex <> LoopC Then
-106                 Amount = Amount + 1
-                End If
-            End If
-
-108     Next LoopC
-    
-110     CheckForSameIP = Amount
-
-        '<EhFooter>
-        Exit Function
-
-CheckForSameIP_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.CheckForSameIP " & _
-               "at line " & Erl
-        
-        '</EhFooter>
-End Function
-
-Function CheckForSameName(ByVal Name As String) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo CheckForSameName_Err
-        '</EhHeader>
-
-        'Controlo que no existan usuarios con el mismo nombre
-        Dim LoopC As Long
-    
-100     For LoopC = 1 To LastUser
-
-102         If UserList(LoopC).flags.UserLogged Then
-104             If UCase$(UserList(LoopC).Name) = UCase$(Name) Then
-106                 CheckForSameName = True
-
-                    Exit Function
-
-                End If
-            End If
-
-108     Next LoopC
-    
-110     CheckForSameName = False
-        '<EhFooter>
-        Exit Function
+    CheckForSameName = False
+    '<EhFooter>
+    Exit Function
 
 CheckForSameName_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.CheckForSameName " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.CheckForSameName " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Sub HeadtoPos(ByVal Head As eHeading, ByRef Pos As WorldPos)
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        'Toma una posicion y se mueve hacia donde esta perfilado
-        '*****************************************************************
-        '<EhHeader>
-        On Error GoTo HeadtoPos_Err
-        '</EhHeader>
 
-100     Select Case Head
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    'Toma una posicion y se mueve hacia donde esta perfilado
+    '*****************************************************************
+    '<EhHeader>
+    On Error GoTo HeadtoPos_Err
 
-            Case eHeading.NORTH
-102             Pos.Y = Pos.Y - 1
-        
-104         Case eHeading.SOUTH
-106             Pos.Y = Pos.Y + 1
-        
-108         Case eHeading.EAST
-110             Pos.X = Pos.X + 1
-        
-112         Case eHeading.WEST
-114             Pos.X = Pos.X - 1
-        End Select
+    '</EhHeader>
 
-        '<EhFooter>
-        Exit Sub
+    Select Case Head
+
+        Case eHeading.NORTH
+            Pos.Y = Pos.Y - 1
+        
+        Case eHeading.SOUTH
+            Pos.Y = Pos.Y + 1
+        
+        Case eHeading.EAST
+            Pos.X = Pos.X + 1
+        
+        Case eHeading.WEST
+            Pos.X = Pos.X - 1
+
+    End Select
+
+    '<EhFooter>
+    Exit Sub
 
 HeadtoPos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.HeadtoPos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.HeadtoPos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Function LegalPos(ByVal Map As Integer, _
@@ -1386,50 +1431,51 @@ Function LegalPos(ByVal Map As Integer, _
                   Optional ByVal PuedeTierra As Boolean = True, _
                   Optional ByVal CheckExitTile As Boolean = False, _
                   Optional ByVal DifPos As Boolean = False) As Boolean
-        '***************************************************
-        'Autor: Pablo (ToxicWaste) & Unknown (orginal version)
-        'Last Modification: 23/01/2007
-        'Checks if the position is Legal.
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo LegalPos_Err
-        '</EhHeader>
 
-        '¿Es un mapa valido?
-100     If (Map <= 0 Or Map > NumMaps) Or (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) Then
-102         LegalPos = False
-        Else
+    '***************************************************
+    'Autor: Pablo (ToxicWaste) & Unknown (orginal version)
+    'Last Modification: 23/01/2007
+    'Checks if the position is Legal.
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo LegalPos_Err
 
-104         With MapData(Map, X, Y)
+    '</EhHeader>
 
-106             If PuedeAgua And PuedeTierra Then
-108                 LegalPos = (.Blocked <> 1) And (.UserIndex = 0) And (.NpcIndex = 0)
-110             ElseIf PuedeTierra And Not PuedeAgua Then
-112                 LegalPos = (.Blocked <> 1) And (.UserIndex = 0) And (.NpcIndex = 0) And (Not HayAgua(Map, X, Y))
-114             ElseIf PuedeAgua And Not PuedeTierra Then
-116                 LegalPos = (.Blocked <> 1) And (.UserIndex = 0) And (.NpcIndex = 0) And (HayAgua(Map, X, Y))
-                Else
-118                 LegalPos = False
-                End If
+    '¿Es un mapa valido?
+    If (Map <= 0 Or Map > NumMaps) Or (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) Then
+        LegalPos = False
+    Else
 
-            End With
-        
-120         If CheckExitTile Then
-122             LegalPos = LegalPos And (MapData(Map, X, Y).TileExit.Map = 0)
+        With MapData(Map, X, Y)
+
+            If PuedeAgua And PuedeTierra Then
+                LegalPos = (.Blocked <> 1) And (.UserIndex = 0) And (.NpcIndex = 0)
+            ElseIf PuedeTierra And Not PuedeAgua Then
+                LegalPos = (.Blocked <> 1) And (.UserIndex = 0) And (.NpcIndex = 0) And (Not HayAgua(Map, X, Y))
+            ElseIf PuedeAgua And Not PuedeTierra Then
+                LegalPos = (.Blocked <> 1) And (.UserIndex = 0) And (.NpcIndex = 0) And (HayAgua(Map, X, Y))
+            Else
+                LegalPos = False
+
             End If
-        
-        
-        End If
 
-        '<EhFooter>
-        Exit Function
+        End With
+        
+        If CheckExitTile Then
+            LegalPos = LegalPos And (MapData(Map, X, Y).TileExit.Map = 0)
+
+        End If
+        
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 LegalPos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.LegalPos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.LegalPos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Function MoveToLegalPos(ByVal Map As Integer, _
@@ -1437,164 +1483,172 @@ Function MoveToLegalPos(ByVal Map As Integer, _
                         ByVal Y As Integer, _
                         Optional ByVal PuedeAgua As Boolean = False, _
                         Optional ByVal PuedeTierra As Boolean = True) As Boolean
-        '***************************************************
-        'Autor: ZaMa
-        'Last Modification: 13/07/2009
-        'Checks if the position is Legal, but considers that if there's a casper, it's a legal movement.
-        '13/07/2009: ZaMa - Now it's also legal move where an invisible admin is.
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo MoveToLegalPos_Err
-        '</EhHeader>
 
-        Dim UserIndex        As Integer
-        Dim IsDeadChar       As Boolean
-        Dim IsAdminInvisible As Boolean
+    '***************************************************
+    'Autor: ZaMa
+    'Last Modification: 13/07/2009
+    'Checks if the position is Legal, but considers that if there's a casper, it's a legal movement.
+    '13/07/2009: ZaMa - Now it's also legal move where an invisible admin is.
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo MoveToLegalPos_Err
 
-        '¿Es un mapa valido?
-100     If (Map <= 0 Or Map > NumMaps) Or (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) Then
-102         MoveToLegalPos = False
-        Else
+    '</EhHeader>
 
-104         With MapData(Map, X, Y)
-106             UserIndex = .UserIndex
+    Dim UserIndex        As Integer
+
+    Dim IsDeadChar       As Boolean
+
+    Dim IsAdminInvisible As Boolean
+
+    '¿Es un mapa valido?
+    If (Map <= 0 Or Map > NumMaps) Or (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) Then
+        MoveToLegalPos = False
+    Else
+
+        With MapData(Map, X, Y)
+            UserIndex = .UserIndex
         
-108             If UserIndex > 0 Then
-#If Classic = 0 Then
-110                     IsDeadChar = True
-#Else
-110                     IsDeadChar = (UserList(UserIndex).flags.Muerto = 1)
-#End If
+            If UserIndex > 0 Then
+                #If Classic = 0 Then
+                    IsDeadChar = True
+                #Else
+                    IsDeadChar = (UserList(UserIndex).flags.Muerto = 1)
+                #End If
 
-112                 IsAdminInvisible = (UserList(UserIndex).flags.AdminInvisible = 1)
-                Else
-114                 IsDeadChar = False
-116                 IsAdminInvisible = False
-                End If
+                IsAdminInvisible = (UserList(UserIndex).flags.AdminInvisible = 1)
+            Else
+                IsDeadChar = False
+                IsAdminInvisible = False
+
+            End If
         
-118             If PuedeAgua And PuedeTierra Then
-120                 MoveToLegalPos = (.Blocked <> 1) And (UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0)
-122             ElseIf PuedeTierra And Not PuedeAgua Then
-124                 MoveToLegalPos = (.Blocked <> 1) And (UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (Not HayAgua(Map, X, Y))
-126             ElseIf PuedeAgua And Not PuedeTierra Then
-128                 MoveToLegalPos = (.Blocked <> 1) And (UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (HayAgua(Map, X, Y))
-                Else
-130                 MoveToLegalPos = False
-                End If
+            If PuedeAgua And PuedeTierra Then
+                MoveToLegalPos = (.Blocked <> 1) And (UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0)
+            ElseIf PuedeTierra And Not PuedeAgua Then
+                MoveToLegalPos = (.Blocked <> 1) And (UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (Not HayAgua(Map, X, Y))
+            ElseIf PuedeAgua And Not PuedeTierra Then
+                MoveToLegalPos = (.Blocked <> 1) And (UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (HayAgua(Map, X, Y))
+            Else
+                MoveToLegalPos = False
 
-            End With
+            End If
 
-        End If
+        End With
 
-        '<EhFooter>
-        Exit Function
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 MoveToLegalPos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.MoveToLegalPos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.MoveToLegalPos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub FindLegalPos(ByVal UserIndex As Integer, _
                         ByVal Map As Integer, _
                         ByRef X As Integer, _
                         ByRef Y As Integer)
-        '<EhHeader>
-        On Error GoTo FindLegalPos_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Autor: ZaMa
-        'Last Modification: 26/03/2009
-        'Search for a Legal pos for the user who is being teleported.
-        '***************************************************
+    '<EhHeader>
+    On Error GoTo FindLegalPos_Err
 
+    '</EhHeader>
 
-100     If MapData(Map, X, Y).UserIndex <> 0 Or MapData(Map, X, Y).NpcIndex <> 0 Then
+    '***************************************************
+    'Autor: ZaMa
+    'Last Modification: 26/03/2009
+    'Search for a Legal pos for the user who is being teleported.
+    '***************************************************
+
+    If MapData(Map, X, Y).UserIndex <> 0 Or MapData(Map, X, Y).NpcIndex <> 0 Then
                     
-            ' Se teletransporta a la misma pos a la que estaba
-102         If MapData(Map, X, Y).UserIndex = UserIndex Then Exit Sub
+        ' Se teletransporta a la misma pos a la que estaba
+        If MapData(Map, X, Y).UserIndex = UserIndex Then Exit Sub
                             
-            Dim FoundPlace     As Boolean
+        Dim FoundPlace     As Boolean
 
-            Dim tX             As Long
+        Dim tX             As Long
 
-            Dim tY             As Long
+        Dim tY             As Long
 
-            Dim Rango          As Long
+        Dim Rango          As Long
 
-            Dim OtherUserIndex As Integer
+        Dim OtherUserIndex As Integer
     
-104         For Rango = 1 To 5
-106             For tY = Y - Rango To Y + Rango
-108                 For tX = X - Rango To X + Rango
+        For Rango = 1 To 5
+            For tY = Y - Rango To Y + Rango
+                For tX = X - Rango To X + Rango
 
-                        'Reviso que no haya User ni NPC
-110                     If MapData(Map, tX, tY).UserIndex = 0 And MapData(Map, tX, tY).NpcIndex = 0 Then
+                    'Reviso que no haya User ni NPC
+                    If MapData(Map, tX, tY).UserIndex = 0 And MapData(Map, tX, tY).NpcIndex = 0 Then
                         
-112                         If InMapBounds(Map, tX, tY) Then FoundPlace = True
+                        If InMapBounds(Map, tX, tY) Then FoundPlace = True
                         
-                            Exit For
+                        Exit For
 
-                        End If
-
-114                 Next tX
-        
-116                 If FoundPlace Then Exit For
-118             Next tY
-            
-120             If FoundPlace Then Exit For
-122         Next Rango
-    
-124         If FoundPlace Then 'Si encontramos un lugar, listo, nos quedamos ahi
-126             X = tX
-128             Y = tY
-            Else
-                'Muy poco probable, pero..
-                'Si no encontramos un lugar, sacamos al usuario que tenemos abajo, y si es un NPC, lo pisamos.
-130             OtherUserIndex = MapData(Map, X, Y).UserIndex
-
-132             If OtherUserIndex <> 0 Then
-
-                    'Si no encontramos lugar, y abajo teniamos a un usuario, lo pisamos y cerramos su comercio seguro
-134                 If UserList(OtherUserIndex).ComUsu.DestUsu > 0 Then
-
-                        'Le avisamos al que estaba comerciando que se tuvo que ir.
-136                     If UserList(UserList(OtherUserIndex).ComUsu.DestUsu).flags.UserLogged Then
-138                         Call FinComerciarUsu(UserList(OtherUserIndex).ComUsu.DestUsu)
-140                         Call WriteConsoleMsg(UserList(OtherUserIndex).ComUsu.DestUsu, "Comercio cancelado. El otro usuario se ha desconectado.", FontTypeNames.FONTTYPE_TALK)
-142                         Call FlushBuffer(UserList(OtherUserIndex).ComUsu.DestUsu)
-                        End If
-
-                        'Lo sacamos.
-144                     If UserList(OtherUserIndex).flags.UserLogged Then
-146                         Call FinComerciarUsu(OtherUserIndex)
-148                         Call WriteErrorMsg(OtherUserIndex, "Alguien se ha conectado donde te encontrabas, por favor reconéctate...")
-150                         Call FlushBuffer(OtherUserIndex)
-                        End If
                     End If
+
+                Next tX
+        
+                If FoundPlace Then Exit For
+            Next tY
             
-                    'Call CloseSocket(OtherUserIndex)
-152                 Call WriteDisconnect(OtherUserIndex)
-154                 Call FlushBuffer(OtherUserIndex)
-                                                            
-156                 Call CloseSocket(OtherUserIndex)
+            If FoundPlace Then Exit For
+        Next Rango
+    
+        If FoundPlace Then 'Si encontramos un lugar, listo, nos quedamos ahi
+            X = tX
+            Y = tY
+        Else
+            'Muy poco probable, pero..
+            'Si no encontramos un lugar, sacamos al usuario que tenemos abajo, y si es un NPC, lo pisamos.
+            OtherUserIndex = MapData(Map, X, Y).UserIndex
+
+            If OtherUserIndex <> 0 Then
+
+                'Si no encontramos lugar, y abajo teniamos a un usuario, lo pisamos y cerramos su comercio seguro
+                If UserList(OtherUserIndex).ComUsu.DestUsu > 0 Then
+
+                    'Le avisamos al que estaba comerciando que se tuvo que ir.
+                    If UserList(UserList(OtherUserIndex).ComUsu.DestUsu).flags.UserLogged Then
+                        Call FinComerciarUsu(UserList(OtherUserIndex).ComUsu.DestUsu)
+                        Call WriteConsoleMsg(UserList(OtherUserIndex).ComUsu.DestUsu, "Comercio cancelado. El otro usuario se ha desconectado.", FontTypeNames.FONTTYPE_TALK)
+                        Call FlushBuffer(UserList(OtherUserIndex).ComUsu.DestUsu)
+
+                    End If
+
+                    'Lo sacamos.
+                    If UserList(OtherUserIndex).flags.UserLogged Then
+                        Call FinComerciarUsu(OtherUserIndex)
+                        Call WriteErrorMsg(OtherUserIndex, "Alguien se ha conectado donde te encontrabas, por favor reconéctate...")
+                        Call FlushBuffer(OtherUserIndex)
+
+                    End If
+
                 End If
+            
+                'Call CloseSocket(OtherUserIndex)
+                Call WriteDisconnect(OtherUserIndex)
+                Call FlushBuffer(OtherUserIndex)
+                                                            
+                Call CloseSocket(OtherUserIndex)
+
             End If
+
         End If
 
+    End If
 
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 FindLegalPos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.FindLegalPos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.FindLegalPos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Function LegalPosNPC(ByVal Map As Integer, _
@@ -1603,615 +1657,622 @@ Function LegalPosNPC(ByVal Map As Integer, _
                      ByVal AguaValida As Byte, _
                      Optional ByVal IsPet As Boolean = False, _
                      Optional ByVal TierraInvalida As Boolean = False) As Boolean
-        '***************************************************
-        'Autor: Unkwnown
-        'Last Modification: 09/23/2009
-        'Checks if it's a Legal pos for the npc to move to.
-        '09/23/2009: Pato - If UserIndex is a AdminInvisible, then is a legal pos.
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo LegalPosNPC_Err
-        '</EhHeader>
 
-        Dim IsDeadChar       As Boolean
-        Dim UserIndex        As Integer
-        Dim IsAdminInvisible As Boolean
- 
-100     If (Map <= 0 Or Map > NumMaps) Or (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) Then
-102         LegalPosNPC = False
-            Exit Function
-        End If
- 
-104     With MapData(Map, X, Y)
-106         UserIndex = .UserIndex
-108         If UserIndex > 0 Then
-110             IsDeadChar = UserList(UserIndex).flags.Muerto = 1
-112             IsAdminInvisible = (UserList(UserIndex).flags.AdminInvisible = 1)
-            Else
-114             IsDeadChar = False
-116             IsAdminInvisible = False
-            End If
- 
-            ' if it's a pet, check if is going to walk on a tp
-118         If IsPet And .ObjInfo.ObjIndex <> 0 Then
-120             If ObjData(.ObjInfo.ObjIndex).OBJType = eOBJType.otTeleport Then
-122                 LegalPosNPC = False
-                    Exit Function
-                End If
-            End If
- 
-124         If AguaValida = 0 Then
-126             LegalPosNPC = (.Blocked <> 1) And (.UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (.trigger <> eTrigger.POSINVALIDA Or IsPet) And Not HayAgua(Map, X, Y)
-128         ElseIf TierraInvalida = False Then
-130             LegalPosNPC = (.Blocked <> 1) And (.UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (.trigger <> eTrigger.POSINVALIDA Or IsPet)
-            Else
-132             LegalPosNPC = (.Blocked <> 1) And (.UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (.trigger <> eTrigger.POSINVALIDA And HayAgua(Map, X, Y) Or IsPet)
-            End If
-        End With
- 
+    '***************************************************
+    'Autor: Unkwnown
+    'Last Modification: 09/23/2009
+    'Checks if it's a Legal pos for the npc to move to.
+    '09/23/2009: Pato - If UserIndex is a AdminInvisible, then is a legal pos.
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo LegalPosNPC_Err
 
-        '<EhFooter>
+    '</EhHeader>
+
+    Dim IsDeadChar       As Boolean
+
+    Dim UserIndex        As Integer
+
+    Dim IsAdminInvisible As Boolean
+ 
+    If (Map <= 0 Or Map > NumMaps) Or (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) Then
+        LegalPosNPC = False
         Exit Function
 
+    End If
+ 
+    With MapData(Map, X, Y)
+        UserIndex = .UserIndex
+
+        If UserIndex > 0 Then
+            IsDeadChar = UserList(UserIndex).flags.Muerto = 1
+            IsAdminInvisible = (UserList(UserIndex).flags.AdminInvisible = 1)
+        Else
+            IsDeadChar = False
+            IsAdminInvisible = False
+
+        End If
+ 
+        ' if it's a pet, check if is going to walk on a tp
+        If IsPet And .ObjInfo.ObjIndex <> 0 Then
+            If ObjData(.ObjInfo.ObjIndex).OBJType = eOBJType.otTeleport Then
+                LegalPosNPC = False
+                Exit Function
+
+            End If
+
+        End If
+ 
+        If AguaValida = 0 Then
+            LegalPosNPC = (.Blocked <> 1) And (.UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (.trigger <> eTrigger.POSINVALIDA Or IsPet) And Not HayAgua(Map, X, Y)
+        ElseIf TierraInvalida = False Then
+            LegalPosNPC = (.Blocked <> 1) And (.UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (.trigger <> eTrigger.POSINVALIDA Or IsPet)
+        Else
+            LegalPosNPC = (.Blocked <> 1) And (.UserIndex = 0 Or IsDeadChar Or IsAdminInvisible) And (.NpcIndex = 0) And (.trigger <> eTrigger.POSINVALIDA And HayAgua(Map, X, Y) Or IsPet)
+
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Function
+
 LegalPosNPC_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.LegalPosNPC " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.LegalPosNPC " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
-
 Public Sub LoadHelp()
-        '<EhHeader>
-        On Error GoTo LoadHelp_Err
-        '</EhHeader>
-        Dim Manager As clsIniManager
-    
-100     Set Manager = New clsIniManager
-    
-102     Manager.Initialize DatPath & "Help.dat"
 
-        Dim A As Long
+    '<EhHeader>
+    On Error GoTo LoadHelp_Err
+
+    '</EhHeader>
+    Dim Manager As clsIniManager
     
-104     HelpLast = val(Manager.GetValue("INIT", "NUMLINES"))
+    Set Manager = New clsIniManager
     
-106     ReDim HelpLines(1 To HelpLast) As String
+    Manager.Initialize DatPath & "Help.dat"
+
+    Dim A As Long
     
-108     For A = 1 To HelpLast
-110         HelpLines(A) = Manager.GetValue("HELP", "LINE" & A)
-112     Next A
+    HelpLast = val(Manager.GetValue("INIT", "NUMLINES"))
     
-114     Set Manager = Nothing
-        '<EhFooter>
-        Exit Sub
+    ReDim HelpLines(1 To HelpLast) As String
+    
+    For A = 1 To HelpLast
+        HelpLines(A) = Manager.GetValue("HELP", "LINE" & A)
+    Next A
+    
+    Set Manager = Nothing
+    '<EhFooter>
+    Exit Sub
 
 LoadHelp_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.LoadHelp " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.LoadHelp " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
-Sub SendHelp(ByVal Index As Integer)
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo SendHelp_Err
-        '</EhHeader>
-        
-        Dim LoopC As Long
-        
-102     For LoopC = 1 To HelpLast
-104         Call WriteConsoleMsg(Index, HelpLines(LoopC), FontTypeNames.FONTTYPE_INFO)
-106     Next LoopC
 
-        '<EhFooter>
-        Exit Sub
+Sub SendHelp(ByVal Index As Integer)
+
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo SendHelp_Err
+
+    '</EhHeader>
+        
+    Dim LoopC As Long
+        
+    For LoopC = 1 To HelpLast
+        Call WriteConsoleMsg(Index, HelpLines(LoopC), FontTypeNames.FONTTYPE_INFO)
+    Next LoopC
+
+    '<EhFooter>
+    Exit Sub
 
 SendHelp_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.SendHelp " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.SendHelp " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub Expresar(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo Expresar_Err
-        '</EhHeader>
 
-100     If Npclist(NpcIndex).NroExpresiones > 0 Then
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo Expresar_Err
 
-            Dim randomi
+    '</EhHeader>
 
-102         randomi = RandomNumber(1, Npclist(NpcIndex).NroExpresiones)
-104         Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageChatOverHead(Npclist(NpcIndex).Expresiones(randomi), Npclist(NpcIndex).Char.charindex, vbWhite))
-        End If
+    If Npclist(NpcIndex).NroExpresiones > 0 Then
 
-        '<EhFooter>
-        Exit Sub
+        Dim randomi
+
+        randomi = RandomNumber(1, Npclist(NpcIndex).NroExpresiones)
+        Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageChatOverHead(Npclist(NpcIndex).Expresiones(randomi), Npclist(NpcIndex).Char.charindex, vbWhite))
+
+    End If
+
+    '<EhFooter>
+    Exit Sub
 
 Expresar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.Expresar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.Expresar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Sub LookatTile(ByVal UserIndex As Integer, _
                ByVal Map As Integer, _
                ByVal X As Integer, _
                ByVal Y As Integer)
-        '***************************************************
-        'Autor: Unknown (orginal version)
-        'Last Modification: 26/03/2009
-        '13/02/2009: ZaMa - El nombre del gm que aparece por consola al clickearlo, tiene el color correspondiente a su rango
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo LookatTile_Err
-        '</EhHeader>
 
-        'Responde al click del usuario sobre el mapa
-        Dim FoundChar      As Byte
+    '***************************************************
+    'Autor: Unknown (orginal version)
+    'Last Modification: 26/03/2009
+    '13/02/2009: ZaMa - El nombre del gm que aparece por consola al clickearlo, tiene el color correspondiente a su rango
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo LookatTile_Err
 
-        Dim FoundSomething As Byte
+    '</EhHeader>
 
-        Dim TempCharIndex  As Integer
+    'Responde al click del usuario sobre el mapa
+    Dim FoundChar      As Byte
 
-        Dim Stat           As String
+    Dim FoundSomething As Byte
 
-        Dim Ft             As FontTypeNames
+    Dim TempCharIndex  As Integer
 
-100     With UserList(UserIndex)
-            'If .flags.GmSeguidor > 0 Then
-            'Call WriteUpdateListSecurity(.flags.GmSeguidor, .Name, "Click a  Pos X: " & X & ", Y:" & Y & ". UserIndex: " & MapData(Map, X, Y).UserIndex, 1)
-            'Call LogError("GM SEGUIDOR: " & UserList(.flags.GmSeguidor).Name)
-            'End If
+    Dim Stat           As String
+
+    Dim Ft             As FontTypeNames
+
+    With UserList(UserIndex)
+        'If .flags.GmSeguidor > 0 Then
+        'Call WriteUpdateListSecurity(.flags.GmSeguidor, .Name, "Click a  Pos X: " & X & ", Y:" & Y & ". UserIndex: " & MapData(Map, X, Y).UserIndex, 1)
+        'Call LogError("GM SEGUIDOR: " & UserList(.flags.GmSeguidor).Name)
+        'End If
         
-            '¿Rango Visión? (ToxicWaste)
-102         If (Abs(.Pos.Y - Y) > RANGO_VISION_y) Or (Abs(.Pos.X - X) > RANGO_VISION_x) Then
+        '¿Rango Visión? (ToxicWaste)
+        If (Abs(.Pos.Y - Y) > RANGO_VISION_y) Or (Abs(.Pos.X - X) > RANGO_VISION_x) Then
 
-                Exit Sub
+            Exit Sub
 
-            End If
+        End If
     
-            '¿Posicion valida?
-104         If InMapBounds(Map, X, Y) Then
+        '¿Posicion valida?
+        If InMapBounds(Map, X, Y) Then
 
-106             With .flags
-108                 .TargetMap = Map
-110                 .TargetX = X
-112                 .TargetY = Y
+            With .flags
+                .TargetMap = Map
+                .TargetX = X
+                .TargetY = Y
 
-                    '¿Es un obj?
-114                 If MapData(Map, X, Y).ObjInfo.ObjIndex > 0 Then
+                '¿Es un obj?
+                If MapData(Map, X, Y).ObjInfo.ObjIndex > 0 Then
+                    'Informa el nombre
+                    .TargetObjMap = Map
+                    .TargetObjX = X
+                    .TargetObjY = Y
+                    FoundSomething = 1
+                ElseIf MapData(Map, X + 1, Y).ObjInfo.ObjIndex > 0 Then
+
+                    'Informa el nombre
+                    If ObjData(MapData(Map, X + 1, Y).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
+                        .TargetObjMap = Map
+                        .TargetObjX = X + 1
+                        .TargetObjY = Y
+                        FoundSomething = 1
+
+                    End If
+
+                ElseIf MapData(Map, X + 1, Y + 1).ObjInfo.ObjIndex > 0 Then
+
+                    If ObjData(MapData(Map, X + 1, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
                         'Informa el nombre
-116                     .TargetObjMap = Map
-118                     .TargetObjX = X
-120                     .TargetObjY = Y
-122                     FoundSomething = 1
-124                 ElseIf MapData(Map, X + 1, Y).ObjInfo.ObjIndex > 0 Then
+                        .TargetObjMap = Map
+                        .TargetObjX = X + 1
+                        .TargetObjY = Y + 1
+                        FoundSomething = 1
 
+                    End If
+
+                ElseIf MapData(Map, X, Y + 1).ObjInfo.ObjIndex > 0 Then
+
+                    If ObjData(MapData(Map, X, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
                         'Informa el nombre
-126                     If ObjData(MapData(Map, X + 1, Y).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
-128                         .TargetObjMap = Map
-130                         .TargetObjX = X + 1
-132                         .TargetObjY = Y
-134                         FoundSomething = 1
-
-                        End If
-
-136                 ElseIf MapData(Map, X + 1, Y + 1).ObjInfo.ObjIndex > 0 Then
-
-138                     If ObjData(MapData(Map, X + 1, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
-                            'Informa el nombre
-140                         .TargetObjMap = Map
-142                         .TargetObjX = X + 1
-144                         .TargetObjY = Y + 1
-146                         FoundSomething = 1
-
-                        End If
-
-148                 ElseIf MapData(Map, X, Y + 1).ObjInfo.ObjIndex > 0 Then
-
-150                     If ObjData(MapData(Map, X, Y + 1).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas Then
-                            'Informa el nombre
-152                         .TargetObjMap = Map
-154                         .TargetObjX = X
-156                         .TargetObjY = Y + 1
-158                         FoundSomething = 1
-
-                        End If
-
-                    End If
-            
-160                 If FoundSomething = 1 Then
-162                     .TargetObj = MapData(Map, .TargetObjX, .TargetObjY).ObjInfo.ObjIndex
-                    
-164                     If ObjData(.TargetObj).OBJType = otTeleport Then
-166                         If MapData(Map, X, Y).TileExit.Map <> 0 Then
-168                             If EsGm(UserIndex) Then
-170                                 Call WriteConsoleMsg(UserIndex, "Teleport a '" & MapInfo(MapData(Map, X, Y).TileExit.Map).Name & "' (" & MapData(Map, X, Y).TileExit.Map & ", " & MapData(Map, X, Y).TileExit.X & ", " & MapData(Map, X, Y).TileExit.Y & ")", FontTypeNames.FONTTYPE_INFO)
-                                Else
-                            
-172                                 Call WriteConsoleMsg(UserIndex, "Teleport a '" & MapInfo(MapData(Map, X, Y).TileExit.Map).Name & "'", FontTypeNames.FONTTYPE_INFO)
-
-                                End If
-
-                            End If
-
-                        Else
-
-174                         If MostrarCantidad(.TargetObj) Then
-176                             Call WriteConsoleMsg(UserIndex, ObjData(.TargetObj).Name & " - " & MapData(.TargetObjMap, .TargetObjX, .TargetObjY).ObjInfo.Amount & "", FontTypeNames.FONTTYPE_INFO)
-                            Else
-178                             Call WriteConsoleMsg(UserIndex, ObjData(.TargetObj).Name, FontTypeNames.FONTTYPE_INFO)
-
-                            End If
-
-                        End If
-
-                    End If
-            
-                    '¿Es un personaje?
-180                 If Y + 1 <= YMaxMapSize Then
-182                     If MapData(Map, X, Y + 1).UserIndex > 0 Then
-184                         TempCharIndex = MapData(Map, X, Y + 1).UserIndex
-186                         FoundChar = 1
-
-                        End If
-
-188                     If MapData(Map, X, Y + 1).NpcIndex > 0 Then
-190                         TempCharIndex = MapData(Map, X, Y + 1).NpcIndex
-192                         FoundChar = 2
-
-                        End If
-
-                    End If
-
-                    '¿Es un personaje?
-194                 If FoundChar = 0 Then
-196                     If MapData(Map, X, Y).UserIndex > 0 Then
-198                         TempCharIndex = MapData(Map, X, Y).UserIndex
-200                         FoundChar = 1
-
-                        End If
-
-202                     If MapData(Map, X, Y).NpcIndex > 0 Then
-204                         TempCharIndex = MapData(Map, X, Y).NpcIndex
-206                         FoundChar = 2
-
-                        End If
-
-                    End If
-
-                End With
-    
-                'Reaccion al personaje
-208             If FoundChar = 1 Then '  ¿Encontro un Usuario?
-210                 If UserList(TempCharIndex).flags.AdminInvisible = 0 Then
-
-212                     With UserList(TempCharIndex)
-
-214                         If LenB(.DescRM) = 0 And .ShowName Then 'No tiene descRM y quiere que se vea su nombre.
-                    
-                                Dim Name         As String
-
-                                Dim Desc         As String
-                        
-                                Dim FactionRange As String
-
-                                Dim GuildName    As String
-
-                                Dim RangeGm      As String
-
-                                Dim Concilio     As Byte
-
-                                Dim Consejo      As Byte
-
-                                Dim sPlayerType  As PlayerType
-                        
-216                             If .GuildIndex > 0 Then
-218                                 GuildName = GuildsInfo(.GuildIndex).Name
-
-                                End If
-                        
-220                             If .Faction.Status <> r_None Then
-222                                 FactionRange = InfoFaction(.Faction.Status).Range(.Faction.Range).Text
-
-                                End If
-                        
-224                             If EsGm(TempCharIndex) Then
-226                                 RangeGm = GetCharRange(UCase$(.Name))
-
-                                End If
-                        
-228                             If Escriminal(TempCharIndex) Then
-230                                 Ft = FontTypeNames.FONTTYPE_FIGHT
-                                Else
-232                                 Ft = FontTypeNames.FONTTYPE_CITIZEN
-
-                                End If
-                        
-234                             If .flags.Privilegios And PlayerType.RoyalCouncil Then
-236                                 sPlayerType = PlayerType.RoyalCouncil
-238                                 Ft = FontTypeNames.FONTTYPE_CONSEJOVesA
-240                             ElseIf .flags.Privilegios And PlayerType.ChaosCouncil Then
-242                                 sPlayerType = PlayerType.ChaosCouncil
-244                                 Ft = FontTypeNames.FONTTYPE_EJECUCION
-                                Else
-
-246                                 If Not .flags.Privilegios And PlayerType.User Then
-248                                     If .flags.Privilegios = PlayerType.Admin Then
-250                                         sPlayerType = PlayerType.Admin
-252                                         Ft = FontTypeNames.FONTTYPE_ADMIN
-254                                     ElseIf .flags.Privilegios = PlayerType.Dios Then
-256                                         sPlayerType = PlayerType.Dios
-258                                         Ft = FontTypeNames.FONTTYPE_DIOS
-                                            ' Gm
-260                                     ElseIf .flags.Privilegios = PlayerType.SemiDios Then
-262                                         sPlayerType = PlayerType.SemiDios
-264                                         Ft = FontTypeNames.FONTTYPE_GM
-
-                                        End If
-
-                                    End If
-
-                                End If
-
-                            Else  'Si tiene descRM la muestro siempre.
-266                             Stat = .DescRM
-
-                            End If
-                    
-268                         If .ShowName = True Then
-270                             If UserList(TempCharIndex).flags.SlotEvent = 0 Then
-272                                 Call WriteVesA(UserIndex, .secName, .Desc, .Clase, .Raza, .Faction.Status, FactionRange, GuildName, .GuildRange, RangeGm, _
-                                            .flags.Privilegios, .flags.Oro, .flags.Bronce, .flags.Plata, .flags.Premium, .flags.ModoStream, .flags.Transform, _
-                                            .flags.Muerto, Ft, .flags.StreamUrl, .flags.RachasTemp, .flags.Rachas)
-                                Else
-274                                 Call WriteConsoleMsg(UserIndex, "Participante", FontTypeNames.FONTTYPE_INFOBOLD)
-
-                                End If
-
-                            End If
-
-                        End With
-                
-276                     FoundSomething = 1
-278                     .flags.TargetUser = TempCharIndex
-280                     .flags.TargetNPC = 0
-282                     .flags.TargetNpcTipo = eNPCType.Comun
+                        .TargetObjMap = Map
+                        .TargetObjX = X
+                        .TargetObjY = Y + 1
+                        FoundSomething = 1
 
                     End If
 
                 End If
-    
-284             With .flags
-
-286                 If FoundChar = 2 Then '¿Encontro un NPC?
-
-                        Dim estatus As String
-
-                        Dim MinHp   As Long
-
-                        Dim MaxHp   As Long
-
-                        Dim Elv     As Byte
-
-                        Dim sDesc   As String
-                        
-288                     Elv = UserList(UserIndex).Stats.Elv
-290                     MinHp = Npclist(TempCharIndex).Stats.MinHp
-292                     MaxHp = Npclist(TempCharIndex).Stats.MaxHp
-                
-294                     If .Privilegios And (PlayerType.SemiDios Or PlayerType.Dios Or PlayerType.Admin) Then
-296                         estatus = "(" & MinHp & "/" & MaxHp & ") "
-                        Else
-
-298                         If .Muerto = 0 And MinHp > 0 Then
+            
+                If FoundSomething = 1 Then
+                    .TargetObj = MapData(Map, .TargetObjX, .TargetObjY).ObjInfo.ObjIndex
                     
-300                             If Elv <= 5 Then
-302                                 estatus = "(Dudoso) "
-                            
-304                             ElseIf Elv <= 13 Then
-
-306                                 If MinHp < (MaxHp / 2) Then
-308                                     estatus = "(Herido) "
-                                    Else
-310                                     estatus = "(Sano) "
-
-                                    End If
-                            
-312                             ElseIf Elv <= 21 Then
-
-314                                 If MinHp < (MaxHp * 0.5) Then
-316                                     estatus = "(Malherido) "
-318                                 ElseIf MinHp < (MaxHp * 0.75) Then
-320                                     estatus = "(Herido) "
-                                    Else
-322                                     estatus = "(Sano) "
-
-                                    End If
-                            
-324                             ElseIf Elv <= 25 Then
-
-326                                 If MinHp < (MaxHp * 0.25) Then
-328                                     estatus = "(Muy malherido) "
-330                                 ElseIf MinHp < (MaxHp * 0.5) Then
-332                                     estatus = "(Herido) "
-334                                 ElseIf MinHp < (MaxHp * 0.75) Then
-336                                     estatus = "(Levemente herido) "
-                                    Else
-338                                     estatus = "(Sano) "
-
-                                    End If
-                            
-340                             ElseIf Elv < 36 Then
-
-342                                 If MinHp < (MaxHp * 0.05) Then
-344                                     estatus = "(Agonizando) "
-346                                 ElseIf MinHp < (MaxHp * 0.1) Then
-348                                     estatus = "(Casi muerto) "
-350                                 ElseIf MinHp < (MaxHp * 0.25) Then
-352                                     estatus = "(Muy Malherido) "
-354                                 ElseIf MinHp < (MaxHp * 0.5) Then
-356                                     estatus = "(Herido) "
-358                                 ElseIf MinHp < (MaxHp * 0.75) Then
-360                                     estatus = "(Levemente herido) "
-362                                 ElseIf MinHp < (MaxHp) Then
-364                                     estatus = "(Sano) "
-                                    Else
-366                                     estatus = "(Intacto) "
-
-                                    End If
-                                
-368                             ElseIf Elv < 40 Then
-370                                 estatus = "(" & Round(CDbl(MinHp) * CDbl(100) / CDbl(MaxHp), 2) & "%)"
-
-                                Else
-
-372                                 estatus = "(" & MinHp & "/" & MaxHp & ") "
-
-                                End If
-                            
-374                             If Npclist(TempCharIndex).flags.Invasion = 1 Or Npclist(TempCharIndex).Stats.Elv > UserList(UserIndex).Stats.Elv Then
-376                                 estatus = "(Dudoso) "
-
-                                End If
-                            
-378                             If Npclist(TempCharIndex).Stats.Elv > 0 Then
-380                                 estatus = estatus & "(Lvl " & Npclist(TempCharIndex).Stats.Elv & ")"
-
-                                End If
-
-                            End If
-
-                        End If
-                
-382                     If Len(Npclist(TempCharIndex).Desc) > 1 Then
-384                         Stat = Npclist(TempCharIndex).Desc
-                    
-                            ' Informacion de ciertos NPCS:: APARTAR EN ALGUN MODULO :: LAUTARO
-386                         If Npclist(TempCharIndex).numero = 742 Then
-388                             If ConfigServer.ModoRetosFast = 0 Then
-390                                 Stat = Stat & " (DESACTIVADO)"
-                                Else
-392                                 Stat = Stat & " (ACTIVADO)"
-
-                                End If
-
-                            End If
-                        
-394                         If EsGm(UserIndex) Then
-396                             Call WriteConsoleMsg(UserIndex, "Npc n°" & Npclist(TempCharIndex).numero & " CharIndex: " & Npclist(TempCharIndex).Char.charindex, FontTypeNames.FONTTYPE_INFO)
-
-                            End If
-                    
-                            'Enviamos el mensaje propiamente dicho:
-398                         Call WriteChatOverHead(UserIndex, Stat, Npclist(TempCharIndex).Char.charindex, vbWhite)
-                            'Call WriteConsoleMsg(UserIndex, Npclist(TempCharIndex).Name & IIf(Npclist(TempCharIndex).Level > 0, " <Nivel: " & Npclist(TempCharIndex).Level & ">", vbNullString), FontTypeNames.FONTTYPE_INFO)
-400                         Call WriteConsoleMsg(UserIndex, Npclist(TempCharIndex).Name & " " & estatus, FontTypeNames.FONTTYPE_INFO)
-                        Else
-
-402                         If Npclist(TempCharIndex).MaestroUser > 0 Then
-404                             Call WriteConsoleMsg(UserIndex, estatus & Npclist(TempCharIndex).Name & " es mascota de " & UserList(Npclist(TempCharIndex).MaestroUser).Name & ".", FontTypeNames.FONTTYPE_INFO)
+                    If ObjData(.TargetObj).OBJType = otTeleport Then
+                        If MapData(Map, X, Y).TileExit.Map <> 0 Then
+                            If EsGm(UserIndex) Then
+                                Call WriteConsoleMsg(UserIndex, "Teleport a '" & MapInfo(MapData(Map, X, Y).TileExit.Map).Name & "' (" & MapData(Map, X, Y).TileExit.Map & ", " & MapData(Map, X, Y).TileExit.X & ", " & MapData(Map, X, Y).TileExit.Y & ")", FontTypeNames.FONTTYPE_INFO)
                             Else
-406                             sDesc = Npclist(TempCharIndex).Name & " " & estatus
-
-408                             If Npclist(TempCharIndex).Owner > 0 Then
-410                                 sDesc = sDesc & " le pertenece a " & UserList(Npclist(TempCharIndex).Owner).Name & "."
-
-                                End If
-                                
-412                             If EsGm(UserIndex) Then
-414                                 Call WriteConsoleMsg(UserIndex, sDesc & "Npc n°" & Npclist(TempCharIndex).numero, FontTypeNames.FONTTYPE_INFO)
-                                Else
-416                                 Call WriteConsoleMsg(UserIndex, sDesc, FontTypeNames.FONTTYPE_INFO)
-
-                                End If
                             
-418                             If .Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then
-420                                 Call WriteConsoleMsg(UserIndex, "Le pegó primero: " & Npclist(TempCharIndex).flags.AttackedFirstBy & ".", FontTypeNames.FONTTYPE_INFO)
+                                Call WriteConsoleMsg(UserIndex, "Teleport a '" & MapInfo(MapData(Map, X, Y).TileExit.Map).Name & "'", FontTypeNames.FONTTYPE_INFO)
 
-                                End If
-                          
                             End If
 
                         End If
-                
-422                     FoundSomething = 1
-424                     .TargetNpcTipo = Npclist(TempCharIndex).NPCtype
-426                     .TargetNPC = TempCharIndex
-428                     .TargetUser = 0
-430                     .TargetObj = 0
+
+                    Else
+
+                        If MostrarCantidad(.TargetObj) Then
+                            Call WriteConsoleMsg(UserIndex, ObjData(.TargetObj).Name & " - " & MapData(.TargetObjMap, .TargetObjX, .TargetObjY).ObjInfo.Amount & "", FontTypeNames.FONTTYPE_INFO)
+                        Else
+                            Call WriteConsoleMsg(UserIndex, ObjData(.TargetObj).Name, FontTypeNames.FONTTYPE_INFO)
+
+                        End If
 
                     End If
+
+                End If
             
-432                 If FoundChar = 0 Then
-434                     .TargetNPC = 0
-436                     .TargetNpcTipo = eNPCType.Comun
-438                     .TargetUser = 0
+                '¿Es un personaje?
+                If Y + 1 <= YMaxMapSize Then
+                    If MapData(Map, X, Y + 1).UserIndex > 0 Then
+                        TempCharIndex = MapData(Map, X, Y + 1).UserIndex
+                        FoundChar = 1
 
                     End If
-            
-                    '*** NO ENCOTRO NADA ***
-440                 If FoundSomething = 0 Then
-442                     .TargetNPC = 0
-444                     .TargetNpcTipo = eNPCType.Comun
-446                     .TargetUser = 0
-448                     .TargetObj = 0
-450                     .TargetObjMap = 0
-452                     .TargetObjX = 0
-454                     .TargetObjY = 0
 
-                        'Call WriteMultiMessage(UserIndex, eMessages.DontSeeAnything)
+                    If MapData(Map, X, Y + 1).NpcIndex > 0 Then
+                        TempCharIndex = MapData(Map, X, Y + 1).NpcIndex
+                        FoundChar = 2
+
                     End If
 
-                End With
+                End If
 
-            Else
+                '¿Es un personaje?
+                If FoundChar = 0 Then
+                    If MapData(Map, X, Y).UserIndex > 0 Then
+                        TempCharIndex = MapData(Map, X, Y).UserIndex
+                        FoundChar = 1
 
-456             If FoundSomething = 0 Then
+                    End If
 
-458                 With .flags
-460                     .TargetNPC = 0
-462                     .TargetNpcTipo = eNPCType.Comun
-464                     .TargetUser = 0
-466                     .TargetObj = 0
-468                     .TargetObjMap = 0
-470                     .TargetObjX = 0
-472                     .TargetObjY = 0
+                    If MapData(Map, X, Y).NpcIndex > 0 Then
+                        TempCharIndex = MapData(Map, X, Y).NpcIndex
+                        FoundChar = 2
+
+                    End If
+
+                End If
+
+            End With
+    
+            'Reaccion al personaje
+            If FoundChar = 1 Then '  ¿Encontro un Usuario?
+                If UserList(TempCharIndex).flags.AdminInvisible = 0 Then
+
+                    With UserList(TempCharIndex)
+
+                        If LenB(.DescRM) = 0 And .ShowName Then 'No tiene descRM y quiere que se vea su nombre.
+                    
+                            Dim Name         As String
+
+                            Dim Desc         As String
+                        
+                            Dim FactionRange As String
+
+                            Dim GuildName    As String
+
+                            Dim RangeGm      As String
+
+                            Dim Concilio     As Byte
+
+                            Dim Consejo      As Byte
+
+                            Dim sPlayerType  As PlayerType
+                        
+                            If .GuildIndex > 0 Then
+                                GuildName = GuildsInfo(.GuildIndex).Name
+
+                            End If
+                        
+                            If .Faction.Status <> r_None Then
+                                FactionRange = InfoFaction(.Faction.Status).Range(.Faction.Range).Text
+
+                            End If
+                        
+                            If EsGm(TempCharIndex) Then
+                                RangeGm = GetCharRange(UCase$(.Name))
+
+                            End If
+                        
+                            If Escriminal(TempCharIndex) Then
+                                Ft = FontTypeNames.FONTTYPE_FIGHT
+                            Else
+                                Ft = FontTypeNames.FONTTYPE_CITIZEN
+
+                            End If
+                        
+                            If .flags.Privilegios And PlayerType.RoyalCouncil Then
+                                sPlayerType = PlayerType.RoyalCouncil
+                                Ft = FontTypeNames.FONTTYPE_CONSEJOVesA
+                            ElseIf .flags.Privilegios And PlayerType.ChaosCouncil Then
+                                sPlayerType = PlayerType.ChaosCouncil
+                                Ft = FontTypeNames.FONTTYPE_EJECUCION
+                            Else
+
+                                If Not .flags.Privilegios And PlayerType.User Then
+                                    If .flags.Privilegios = PlayerType.Admin Then
+                                        sPlayerType = PlayerType.Admin
+                                        Ft = FontTypeNames.FONTTYPE_ADMIN
+                                    ElseIf .flags.Privilegios = PlayerType.Dios Then
+                                        sPlayerType = PlayerType.Dios
+                                        Ft = FontTypeNames.FONTTYPE_DIOS
+                                        ' Gm
+                                    ElseIf .flags.Privilegios = PlayerType.SemiDios Then
+                                        sPlayerType = PlayerType.SemiDios
+                                        Ft = FontTypeNames.FONTTYPE_GM
+
+                                    End If
+
+                                End If
+
+                            End If
+
+                        Else  'Si tiene descRM la muestro siempre.
+                            Stat = .DescRM
+
+                        End If
+                    
+                        If .ShowName = True Then
+                            If UserList(TempCharIndex).flags.SlotEvent = 0 Then
+                                Call WriteVesA(UserIndex, .secName, .Desc, .Clase, .Raza, .Faction.Status, FactionRange, GuildName, .GuildRange, RangeGm, .flags.Privilegios, .flags.Oro, .flags.Bronce, .flags.Plata, .flags.Premium, .flags.ModoStream, .flags.Transform, .flags.Muerto, Ft, .flags.StreamUrl, .flags.RachasTemp, .flags.Rachas)
+                            Else
+                                Call WriteConsoleMsg(UserIndex, "Participante", FontTypeNames.FONTTYPE_INFOBOLD)
+
+                            End If
+
+                        End If
 
                     End With
+                
+                    FoundSomething = 1
+                    .flags.TargetUser = TempCharIndex
+                    .flags.TargetNPC = 0
+                    .flags.TargetNpcTipo = eNPCType.Comun
+
+                End If
+
+            End If
+    
+            With .flags
+
+                If FoundChar = 2 Then '¿Encontro un NPC?
+
+                    Dim estatus As String
+
+                    Dim MinHp   As Long
+
+                    Dim MaxHp   As Long
+
+                    Dim Elv     As Byte
+
+                    Dim sDesc   As String
+                        
+                    Elv = UserList(UserIndex).Stats.Elv
+                    MinHp = Npclist(TempCharIndex).Stats.MinHp
+                    MaxHp = Npclist(TempCharIndex).Stats.MaxHp
+                
+                    If .Privilegios And (PlayerType.SemiDios Or PlayerType.Dios Or PlayerType.Admin) Then
+                        estatus = "(" & MinHp & "/" & MaxHp & ") "
+                    Else
+
+                        If .Muerto = 0 And MinHp > 0 Then
+                    
+                            If Elv <= 5 Then
+                                estatus = "(Dudoso) "
+                            
+                            ElseIf Elv <= 13 Then
+
+                                If MinHp < (MaxHp / 2) Then
+                                    estatus = "(Herido) "
+                                Else
+                                    estatus = "(Sano) "
+
+                                End If
+                            
+                            ElseIf Elv <= 21 Then
+
+                                If MinHp < (MaxHp * 0.5) Then
+                                    estatus = "(Malherido) "
+                                ElseIf MinHp < (MaxHp * 0.75) Then
+                                    estatus = "(Herido) "
+                                Else
+                                    estatus = "(Sano) "
+
+                                End If
+                            
+                            ElseIf Elv <= 25 Then
+
+                                If MinHp < (MaxHp * 0.25) Then
+                                    estatus = "(Muy malherido) "
+                                ElseIf MinHp < (MaxHp * 0.5) Then
+                                    estatus = "(Herido) "
+                                ElseIf MinHp < (MaxHp * 0.75) Then
+                                    estatus = "(Levemente herido) "
+                                Else
+                                    estatus = "(Sano) "
+
+                                End If
+                            
+                            ElseIf Elv < 36 Then
+
+                                If MinHp < (MaxHp * 0.05) Then
+                                    estatus = "(Agonizando) "
+                                ElseIf MinHp < (MaxHp * 0.1) Then
+                                    estatus = "(Casi muerto) "
+                                ElseIf MinHp < (MaxHp * 0.25) Then
+                                    estatus = "(Muy Malherido) "
+                                ElseIf MinHp < (MaxHp * 0.5) Then
+                                    estatus = "(Herido) "
+                                ElseIf MinHp < (MaxHp * 0.75) Then
+                                    estatus = "(Levemente herido) "
+                                ElseIf MinHp < (MaxHp) Then
+                                    estatus = "(Sano) "
+                                Else
+                                    estatus = "(Intacto) "
+
+                                End If
+                                
+                            ElseIf Elv < 40 Then
+                                estatus = "(" & Round(CDbl(MinHp) * CDbl(100) / CDbl(MaxHp), 2) & "%)"
+
+                            Else
+
+                                estatus = "(" & MinHp & "/" & MaxHp & ") "
+
+                            End If
+                            
+                            If Npclist(TempCharIndex).flags.Invasion = 1 Or Npclist(TempCharIndex).Stats.Elv > UserList(UserIndex).Stats.Elv Then
+                                estatus = "(Dudoso) "
+
+                            End If
+                            
+                            If Npclist(TempCharIndex).Stats.Elv > 0 Then
+                                estatus = estatus & "(Lvl " & Npclist(TempCharIndex).Stats.Elv & ")"
+
+                            End If
+
+                        End If
+
+                    End If
+                
+                    If Len(Npclist(TempCharIndex).Desc) > 1 Then
+                        Stat = Npclist(TempCharIndex).Desc
+                    
+                        ' Informacion de ciertos NPCS:: APARTAR EN ALGUN MODULO :: LAUTARO
+                        If Npclist(TempCharIndex).numero = 742 Then
+                            If ConfigServer.ModoRetosFast = 0 Then
+                                Stat = Stat & " (DESACTIVADO)"
+                            Else
+                                Stat = Stat & " (ACTIVADO)"
+
+                            End If
+
+                        End If
+                        
+                        If EsGm(UserIndex) Then
+                            Call WriteConsoleMsg(UserIndex, "Npc n°" & Npclist(TempCharIndex).numero & " CharIndex: " & Npclist(TempCharIndex).Char.charindex, FontTypeNames.FONTTYPE_INFO)
+
+                        End If
+                    
+                        'Enviamos el mensaje propiamente dicho:
+                        Call WriteChatOverHead(UserIndex, Stat, Npclist(TempCharIndex).Char.charindex, vbWhite)
+                        'Call WriteConsoleMsg(UserIndex, Npclist(TempCharIndex).Name & IIf(Npclist(TempCharIndex).Level > 0, " <Nivel: " & Npclist(TempCharIndex).Level & ">", vbNullString), FontTypeNames.FONTTYPE_INFO)
+                        Call WriteConsoleMsg(UserIndex, Npclist(TempCharIndex).Name & " " & estatus, FontTypeNames.FONTTYPE_INFO)
+                    Else
+
+                        If Npclist(TempCharIndex).MaestroUser > 0 Then
+                            Call WriteConsoleMsg(UserIndex, estatus & Npclist(TempCharIndex).Name & " es mascota de " & UserList(Npclist(TempCharIndex).MaestroUser).Name & ".", FontTypeNames.FONTTYPE_INFO)
+                        Else
+                            sDesc = Npclist(TempCharIndex).Name & " " & estatus
+
+                            If Npclist(TempCharIndex).Owner > 0 Then
+                                sDesc = sDesc & " le pertenece a " & UserList(Npclist(TempCharIndex).Owner).Name & "."
+
+                            End If
+                                
+                            If EsGm(UserIndex) Then
+                                Call WriteConsoleMsg(UserIndex, sDesc & "Npc n°" & Npclist(TempCharIndex).numero, FontTypeNames.FONTTYPE_INFO)
+                            Else
+                                Call WriteConsoleMsg(UserIndex, sDesc, FontTypeNames.FONTTYPE_INFO)
+
+                            End If
+                            
+                            If .Privilegios And (PlayerType.Dios Or PlayerType.Admin) Then
+                                Call WriteConsoleMsg(UserIndex, "Le pegó primero: " & Npclist(TempCharIndex).flags.AttackedFirstBy & ".", FontTypeNames.FONTTYPE_INFO)
+
+                            End If
+                          
+                        End If
+
+                    End If
+                
+                    FoundSomething = 1
+                    .TargetNpcTipo = Npclist(TempCharIndex).NPCtype
+                    .TargetNPC = TempCharIndex
+                    .TargetUser = 0
+                    .TargetObj = 0
+
+                End If
             
+                If FoundChar = 0 Then
+                    .TargetNPC = 0
+                    .TargetNpcTipo = eNPCType.Comun
+                    .TargetUser = 0
+
+                End If
+            
+                '*** NO ENCOTRO NADA ***
+                If FoundSomething = 0 Then
+                    .TargetNPC = 0
+                    .TargetNpcTipo = eNPCType.Comun
+                    .TargetUser = 0
+                    .TargetObj = 0
+                    .TargetObjMap = 0
+                    .TargetObjX = 0
+                    .TargetObjY = 0
+
                     'Call WriteMultiMessage(UserIndex, eMessages.DontSeeAnything)
                 End If
 
+            End With
+
+        Else
+
+            If FoundSomething = 0 Then
+
+                With .flags
+                    .TargetNPC = 0
+                    .TargetNpcTipo = eNPCType.Comun
+                    .TargetUser = 0
+                    .TargetObj = 0
+                    .TargetObjMap = 0
+                    .TargetObjX = 0
+                    .TargetObjY = 0
+
+                End With
+            
+                'Call WriteMultiMessage(UserIndex, eMessages.DontSeeAnything)
             End If
 
-        End With
+        End If
 
-        '<EhFooter>
-        Exit Sub
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 LookatTile_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.LookatTile " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.LookatTile " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub ShowMenu(ByVal UserIndex As Integer, _
@@ -2273,14 +2334,18 @@ Public Sub ShowMenu(ByVal UserIndex As Integer, _
                     If (UserList(tmpIndex).flags.AdminInvisible Or UserList(tmpIndex).flags.Invisible Or UserList(tmpIndex).flags.Oculto) = 0 Or tmpIndex = UserIndex Then
                         
                         FoundChar = 1
+
                     End If
+
                 End If
                 
                 ' Npc?
                 If MapData(Map, X, Y + 1).NpcIndex > 0 Then
                     tmpIndex = MapData(Map, X, Y + 1).NpcIndex
                     FoundChar = 2
+
                 End If
+
             End If
              
             ' Npc or user? (upper position)
@@ -2295,30 +2360,31 @@ Public Sub ShowMenu(ByVal UserIndex As Integer, _
                     If (UserList(tmpIndex).flags.AdminInvisible Or UserList(tmpIndex).flags.Invisible Or UserList(tmpIndex).flags.Oculto) = 0 Or tmpIndex = UserIndex Then
                         
                         FoundChar = 1
+
                     End If
+
                 End If
                 
                 ' Npc?
                 If MapData(Map, X, Y).NpcIndex > 0 Then
                     tmpIndex = MapData(Map, X, Y).NpcIndex
                     FoundChar = 2
+
                 End If
+
             End If
             
             ' User
             If FoundChar = 1 Then
-               ' If Interval_Packet250(UserIndex) Then
-                  '  Call WriteStatsUser(UserIndex, UserList(UserIndex))
-               ' End If
+                ' If Interval_Packet250(UserIndex) Then
+                '  Call WriteStatsUser(UserIndex, UserList(UserIndex))
+                ' End If
                     
                 ' Self clicked => pick item
                 If tmpIndex = UserIndex Then
                 
                     If EsGm(UserIndex) Then Exit Sub
                     If EsNewbie(UserIndex) Then Exit Sub
-                    
-                    
-                    
                     
                     ' Pick item
                     Call GetObj(UserIndex)
@@ -2329,6 +2395,7 @@ Public Sub ShowMenu(ByVal UserIndex As Integer, _
                         MenuIndex = eMenues.ieOtroUserCompartiendoNpc
                     Else
                         MenuIndex = eMenues.ieOtroUser
+
                     End If
                     
                     .TargetUser = tmpIndex
@@ -2341,17 +2408,17 @@ Public Sub ShowMenu(ByVal UserIndex As Integer, _
                 ' Has menu attached?
                 If Npclist(tmpIndex).MenuIndex <> 0 Then
                     MenuIndex = Npclist(tmpIndex).MenuIndex
+
                 End If
                 
                 .TargetNpcTipo = Npclist(tmpIndex).NPCtype
                 .TargetNPC = tmpIndex
                 
                 'If Npclist(tmpIndex).Stats.MinHp > 0 Then
-                    'Call WriteSendInfoNpc(UserIndex, Npclist(tmpIndex).Numero)
-              '  Else
-                   Call Accion(UserIndex, Map, X, Y, 0)
-               ' End If
-                
+                'Call WriteSendInfoNpc(UserIndex, Npclist(tmpIndex).Numero)
+                '  Else
+                Call Accion(UserIndex, Map, X, Y, 0)
+                ' End If
                 
             End If
             
@@ -2367,15 +2434,19 @@ Public Sub ShowMenu(ByVal UserIndex As Integer, _
                     
                     If MenuIndex = eMenues.ieFogata Then
                         If .Descansar = 1 Then MenuIndex = eMenues.ieFogataDescansando
+
                     End If
                     
                     .TargetObjMap = Map
                     .TargetObjX = X
                     .TargetObjY = Y
+
                 End If
+
             End If
 
         End With
+
     End With
     
     ' Show it
@@ -2385,631 +2456,670 @@ Public Sub ShowMenu(ByVal UserIndex As Integer, _
 
 ErrHandler:
     Call LogError("Error en ShowMenu. Error " & Err.number & " : " & Err.description)
+
 End Sub
 
 Function FindDirection(Pos As WorldPos, Target As WorldPos) As eHeading
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        'Devuelve la direccion en la cual el target se encuentra
-        'desde pos, 0 si la direc es igual
-        '*****************************************************************
-        '<EhHeader>
-        On Error GoTo FindDirection_Err
-        '</EhHeader>
 
-        Dim X As Integer
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    'Devuelve la direccion en la cual el target se encuentra
+    'desde pos, 0 si la direc es igual
+    '*****************************************************************
+    '<EhHeader>
+    On Error GoTo FindDirection_Err
 
-        Dim Y As Integer
+    '</EhHeader>
+
+    Dim X As Integer
+
+    Dim Y As Integer
     
-100     X = Pos.X - Target.X
-102     Y = Pos.Y - Target.Y
+    X = Pos.X - Target.X
+    Y = Pos.Y - Target.Y
     
-        'NE
-104     If Sgn(X) = -1 And Sgn(Y) = 1 Then
-106         FindDirection = IIf(RandomNumber(0, 1), eHeading.NORTH, eHeading.EAST)
+    'NE
+    If Sgn(X) = -1 And Sgn(Y) = 1 Then
+        FindDirection = IIf(RandomNumber(0, 1), eHeading.NORTH, eHeading.EAST)
 
-            Exit Function
-
-        End If
-    
-        'NW
-108     If Sgn(X) = 1 And Sgn(Y) = 1 Then
-110         FindDirection = IIf(RandomNumber(0, 1), eHeading.WEST, eHeading.NORTH)
-
-            Exit Function
-
-        End If
-    
-        'SW
-112     If Sgn(X) = 1 And Sgn(Y) = -1 Then
-114         FindDirection = IIf(RandomNumber(0, 1), eHeading.WEST, eHeading.SOUTH)
-
-            Exit Function
-
-        End If
-    
-        'SE
-116     If Sgn(X) = -1 And Sgn(Y) = -1 Then
-118         FindDirection = IIf(RandomNumber(0, 1), eHeading.SOUTH, eHeading.EAST)
-
-            Exit Function
-
-        End If
-    
-        'Sur
-120     If Sgn(X) = 0 And Sgn(Y) = -1 Then
-122         FindDirection = eHeading.SOUTH
-
-            Exit Function
-
-        End If
-    
-        'norte
-124     If Sgn(X) = 0 And Sgn(Y) = 1 Then
-126         FindDirection = eHeading.NORTH
-
-            Exit Function
-
-        End If
-    
-        'oeste
-128     If Sgn(X) = 1 And Sgn(Y) = 0 Then
-130         FindDirection = eHeading.WEST
-
-            Exit Function
-
-        End If
-    
-        'este
-132     If Sgn(X) = -1 And Sgn(Y) = 0 Then
-134         FindDirection = eHeading.EAST
-
-            Exit Function
-
-        End If
-    
-        'misma
-136     If Sgn(X) = 0 And Sgn(Y) = 0 Then
-138         FindDirection = 0
-
-            Exit Function
-
-        End If
-
-        '<EhFooter>
         Exit Function
 
+    End If
+    
+    'NW
+    If Sgn(X) = 1 And Sgn(Y) = 1 Then
+        FindDirection = IIf(RandomNumber(0, 1), eHeading.WEST, eHeading.NORTH)
+
+        Exit Function
+
+    End If
+    
+    'SW
+    If Sgn(X) = 1 And Sgn(Y) = -1 Then
+        FindDirection = IIf(RandomNumber(0, 1), eHeading.WEST, eHeading.SOUTH)
+
+        Exit Function
+
+    End If
+    
+    'SE
+    If Sgn(X) = -1 And Sgn(Y) = -1 Then
+        FindDirection = IIf(RandomNumber(0, 1), eHeading.SOUTH, eHeading.EAST)
+
+        Exit Function
+
+    End If
+    
+    'Sur
+    If Sgn(X) = 0 And Sgn(Y) = -1 Then
+        FindDirection = eHeading.SOUTH
+
+        Exit Function
+
+    End If
+    
+    'norte
+    If Sgn(X) = 0 And Sgn(Y) = 1 Then
+        FindDirection = eHeading.NORTH
+
+        Exit Function
+
+    End If
+    
+    'oeste
+    If Sgn(X) = 1 And Sgn(Y) = 0 Then
+        FindDirection = eHeading.WEST
+
+        Exit Function
+
+    End If
+    
+    'este
+    If Sgn(X) = -1 And Sgn(Y) = 0 Then
+        FindDirection = eHeading.EAST
+
+        Exit Function
+
+    End If
+    
+    'misma
+    If Sgn(X) = 0 And Sgn(Y) = 0 Then
+        FindDirection = 0
+
+        Exit Function
+
+    End If
+
+    '<EhFooter>
+    Exit Function
+
 FindDirection_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.FindDirection " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.FindDirection " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function ItemNoEsDeMapa(ByVal Map As Integer, _
                                ByVal X As Byte, _
                                ByVal Y As Byte, _
                                ByVal bIsExit As Boolean) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo ItemNoEsDeMapa_Err
-        '</EhHeader>
 
-        Dim ObjIndex As Integer
-    
-100     ObjIndex = MapData(Map, X, Y).ObjInfo.ObjIndex
-    
-102     With ObjData(ObjIndex)
-104         ItemNoEsDeMapa = .OBJType <> eOBJType.otPuertas And .OBJType <> eOBJType.otForos And .OBJType <> eOBJType.otCarteles And .OBJType <> eOBJType.otArboles And .OBJType <> eOBJType.otYacimiento And Not (.OBJType = eOBJType.otTeleport And bIsExit) And (MapData(Map, X, Y).Blocked = 0) 'And (MapData(Map, X, Y).trigger = 0)
-    
-        End With
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo ItemNoEsDeMapa_Err
 
-        '<EhFooter>
-        Exit Function
+    '</EhHeader>
+
+    Dim ObjIndex As Integer
+    
+    ObjIndex = MapData(Map, X, Y).ObjInfo.ObjIndex
+    
+    With ObjData(ObjIndex)
+        ItemNoEsDeMapa = .OBJType <> eOBJType.otPuertas And .OBJType <> eOBJType.otForos And .OBJType <> eOBJType.otCarteles And .OBJType <> eOBJType.otArboles And .OBJType <> eOBJType.otYacimiento And Not (.OBJType = eOBJType.otTeleport And bIsExit) And (MapData(Map, X, Y).Blocked = 0) 'And (MapData(Map, X, Y).trigger = 0)
+    
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 ItemNoEsDeMapa_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.ItemNoEsDeMapa " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.ItemNoEsDeMapa " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function MostrarCantidad(ByVal Index As Integer) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo MostrarCantidad_Err
-        '</EhHeader>
 
-100     With ObjData(Index)
-102         MostrarCantidad = .OBJType <> eOBJType.otPuertas And .OBJType <> eOBJType.otForos And .OBJType <> eOBJType.otCarteles And .OBJType <> eOBJType.otArboles And .OBJType <> eOBJType.otYacimiento And .OBJType <> eOBJType.otTeleport
-        End With
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo MostrarCantidad_Err
 
-        '<EhFooter>
-        Exit Function
+    '</EhHeader>
+
+    With ObjData(Index)
+        MostrarCantidad = .OBJType <> eOBJType.otPuertas And .OBJType <> eOBJType.otForos And .OBJType <> eOBJType.otCarteles And .OBJType <> eOBJType.otArboles And .OBJType <> eOBJType.otYacimiento And .OBJType <> eOBJType.otTeleport
+
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 MostrarCantidad_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.MostrarCantidad " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.MostrarCantidad " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function EsObjetoFijo(ByVal OBJType As eOBJType) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo EsObjetoFijo_Err
-        '</EhHeader>
 
-100     EsObjetoFijo = OBJType = eOBJType.otForos Or _
-                       OBJType = eOBJType.otCarteles Or _
-                       OBJType = eOBJType.otArboles Or _
-                       OBJType = eOBJType.otYacimiento
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo EsObjetoFijo_Err
+
+    '</EhHeader>
+
+    EsObjetoFijo = OBJType = eOBJType.otForos Or OBJType = eOBJType.otCarteles Or OBJType = eOBJType.otArboles Or OBJType = eOBJType.otYacimiento
                    
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 EsObjetoFijo_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.EsObjetoFijo " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.EsObjetoFijo " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function RestrictStringToByte(ByRef restrict As String) As Byte
-        '***************************************************
-        'Author: Torres Patricio (Pato)
-        'Last Modification: 04/18/2011
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo RestrictStringToByte_Err
-        '</EhHeader>
-100     restrict = UCase$(restrict)
 
-102     Select Case restrict
+    '***************************************************
+    'Author: Torres Patricio (Pato)
+    'Last Modification: 04/18/2011
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo RestrictStringToByte_Err
 
-            Case "NEWBIE"
-104             RestrictStringToByte = 1
-        
-106         Case "ARMADA"
-108             RestrictStringToByte = 2
-        
-110         Case "CAOS"
-112             RestrictStringToByte = 3
-        
-114         Case "FACCION"
-116             RestrictStringToByte = 4
-        
-118         Case Else
-120             RestrictStringToByte = 0
-        End Select
+    '</EhHeader>
+    restrict = UCase$(restrict)
 
-        '<EhFooter>
-        Exit Function
+    Select Case restrict
+
+        Case "NEWBIE"
+            RestrictStringToByte = 1
+        
+        Case "ARMADA"
+            RestrictStringToByte = 2
+        
+        Case "CAOS"
+            RestrictStringToByte = 3
+        
+        Case "FACCION"
+            RestrictStringToByte = 4
+        
+        Case Else
+            RestrictStringToByte = 0
+
+    End Select
+
+    '<EhFooter>
+    Exit Function
 
 RestrictStringToByte_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.RestrictStringToByte " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.RestrictStringToByte " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function RestrictByteToString(ByVal restrict As Byte) As String
-        '<EhHeader>
-        On Error GoTo RestrictByteToString_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Torres Patricio (Pato)
-        'Last Modification: 04/18/2011
-        '
-        '***************************************************
-100     Select Case restrict
+    '<EhHeader>
+    On Error GoTo RestrictByteToString_Err
 
-            Case 1
-102             RestrictByteToString = "NEWBIE"
-        
-104         Case 2
-106             RestrictByteToString = "ARMADA"
-        
-108         Case 3
-110             RestrictByteToString = "CAOS"
-        
-112         Case 4
-114             RestrictByteToString = "FACCION"
-        
-116         Case 0
-118             RestrictByteToString = "NO"
-        End Select
+    '</EhHeader>
 
-        '<EhFooter>
-        Exit Function
+    '***************************************************
+    'Author: Torres Patricio (Pato)
+    'Last Modification: 04/18/2011
+    '
+    '***************************************************
+    Select Case restrict
+
+        Case 1
+            RestrictByteToString = "NEWBIE"
+        
+        Case 2
+            RestrictByteToString = "ARMADA"
+        
+        Case 3
+            RestrictByteToString = "CAOS"
+        
+        Case 4
+            RestrictByteToString = "FACCION"
+        
+        Case 0
+            RestrictByteToString = "NO"
+
+    End Select
+
+    '<EhFooter>
+    Exit Function
 
 RestrictByteToString_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.RestrictByteToString " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.RestrictByteToString " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function TerrainStringToByte(ByRef restrict As String) As Byte
-        '***************************************************
-        'Author: Torres Patricio (Pato)
-        'Last Modification: 04/18/2011
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo TerrainStringToByte_Err
-        '</EhHeader>
-100     restrict = UCase$(restrict)
 
-102     Select Case restrict
+    '***************************************************
+    'Author: Torres Patricio (Pato)
+    'Last Modification: 04/18/2011
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo TerrainStringToByte_Err
 
-            Case "NIEVE"
-104             TerrainStringToByte = 1
-        
-106         Case "DESIERTO"
-108             TerrainStringToByte = 2
-        
-110         Case "CIUDAD"
-112             TerrainStringToByte = 3
-        
-114         Case "CAMPO"
-116             TerrainStringToByte = 4
-        
-118         Case "DUNGEON"
-120             TerrainStringToByte = 5
-        
-122         Case Else
-124             TerrainStringToByte = 0
-        End Select
+    '</EhHeader>
+    restrict = UCase$(restrict)
 
-        '<EhFooter>
-        Exit Function
+    Select Case restrict
+
+        Case "NIEVE"
+            TerrainStringToByte = 1
+        
+        Case "DESIERTO"
+            TerrainStringToByte = 2
+        
+        Case "CIUDAD"
+            TerrainStringToByte = 3
+        
+        Case "CAMPO"
+            TerrainStringToByte = 4
+        
+        Case "DUNGEON"
+            TerrainStringToByte = 5
+        
+        Case Else
+            TerrainStringToByte = 0
+
+    End Select
+
+    '<EhFooter>
+    Exit Function
 
 TerrainStringToByte_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.TerrainStringToByte " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.TerrainStringToByte " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function TerrainByteToString(ByVal restrict As Byte) As String
-        '<EhHeader>
-        On Error GoTo TerrainByteToString_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Torres Patricio (Pato)
-        'Last Modification: 04/18/2011
-        '
-        '***************************************************
-100     Select Case restrict
+    '<EhHeader>
+    On Error GoTo TerrainByteToString_Err
 
-            Case 1
-102             TerrainByteToString = "NIEVE"
-        
-104         Case 2
-106             TerrainByteToString = "DESIERTO"
-        
-108         Case 3
-110             TerrainByteToString = "CIUDAD"
-        
-112         Case 4
-114             TerrainByteToString = "CAMPO"
-        
-116         Case 5
-118             TerrainByteToString = "DUNGEON"
-        
-120         Case 0
-122             TerrainByteToString = "BOSQUE"
-        End Select
+    '</EhHeader>
 
-        '<EhFooter>
-        Exit Function
+    '***************************************************
+    'Author: Torres Patricio (Pato)
+    'Last Modification: 04/18/2011
+    '
+    '***************************************************
+    Select Case restrict
+
+        Case 1
+            TerrainByteToString = "NIEVE"
+        
+        Case 2
+            TerrainByteToString = "DESIERTO"
+        
+        Case 3
+            TerrainByteToString = "CIUDAD"
+        
+        Case 4
+            TerrainByteToString = "CAMPO"
+        
+        Case 5
+            TerrainByteToString = "DUNGEON"
+        
+        Case 0
+            TerrainByteToString = "BOSQUE"
+
+    End Select
+
+    '<EhFooter>
+    Exit Function
 
 TerrainByteToString_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.TerrainByteToString " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.TerrainByteToString " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub SetAreaResuTheNpc(ByVal iNpc As Integer)
-        '<EhHeader>
-        On Error GoTo SetAreaResuTheNpc_Err
-        '</EhHeader>
 
-        ' @@ Miqueas
-        ' @@ 17-10-2015
-        ' @@ Set Trigger in this NPC area
-        Const Range = 5 ' @@ + 5 Tildes a la redonda del npc
+    '<EhHeader>
+    On Error GoTo SetAreaResuTheNpc_Err
 
-        Dim X      As Long
+    '</EhHeader>
 
-        Dim Y      As Long
+    ' @@ Miqueas
+    ' @@ 17-10-2015
+    ' @@ Set Trigger in this NPC area
+    Const Range = 5 ' @@ + 5 Tildes a la redonda del npc
+
+    Dim X      As Long
+
+    Dim Y      As Long
      
-        Dim NpcPos As WorldPos
+    Dim NpcPos As WorldPos
      
-100     NpcPos.Map = Npclist(iNpc).Pos.Map
-102     NpcPos.X = Npclist(iNpc).Pos.X
-104     NpcPos.Y = Npclist(iNpc).Pos.Y
+    NpcPos.Map = Npclist(iNpc).Pos.Map
+    NpcPos.X = Npclist(iNpc).Pos.X
+    NpcPos.Y = Npclist(iNpc).Pos.Y
         
-106     For X = NpcPos.X - Range To NpcPos.X + Range
-108         For Y = NpcPos.Y - Range To NpcPos.Y + Range
+    For X = NpcPos.X - Range To NpcPos.X + Range
+        For Y = NpcPos.Y - Range To NpcPos.Y + Range
 
-110             If InMapBounds(NpcPos.Map, X, Y) Then
-112                 If (MapData(NpcPos.Map, X, Y).trigger = NADA) Then
-114                     MapData(NpcPos.Map, X, Y).trigger = eTrigger.AutoResu
-                    End If
+            If InMapBounds(NpcPos.Map, X, Y) Then
+                If (MapData(NpcPos.Map, X, Y).trigger = NADA) Then
+                    MapData(NpcPos.Map, X, Y).trigger = eTrigger.AutoResu
+
                 End If
 
-116         Next Y
-118     Next X
+            End If
 
-        '<EhFooter>
-        Exit Sub
+        Next Y
+    Next X
+
+    '<EhFooter>
+    Exit Sub
 
 SetAreaResuTheNpc_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.SetAreaResuTheNpc " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.SetAreaResuTheNpc " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub DeleteAreaResuTheNpc(ByVal iNpc As Integer)
-        '<EhHeader>
-        On Error GoTo DeleteAreaResuTheNpc_Err
-        '</EhHeader>
 
-        ' @@ Miqueas
-        ' @@ 17-10-2015
-        ' @@ Not Set Trigger in this NPC area
-        Const Range = 5 ' @@ + 4 Tildes a la redonda del npc
+    '<EhHeader>
+    On Error GoTo DeleteAreaResuTheNpc_Err
 
-        Dim X      As Long
+    '</EhHeader>
 
-        Dim Y      As Long
+    ' @@ Miqueas
+    ' @@ 17-10-2015
+    ' @@ Not Set Trigger in this NPC area
+    Const Range = 5 ' @@ + 4 Tildes a la redonda del npc
+
+    Dim X      As Long
+
+    Dim Y      As Long
      
-        Dim NpcPos As WorldPos
+    Dim NpcPos As WorldPos
      
-100     NpcPos.Map = Npclist(iNpc).Pos.Map
-102     NpcPos.X = Npclist(iNpc).Pos.X
-104     NpcPos.Y = Npclist(iNpc).Pos.Y
+    NpcPos.Map = Npclist(iNpc).Pos.Map
+    NpcPos.X = Npclist(iNpc).Pos.X
+    NpcPos.Y = Npclist(iNpc).Pos.Y
 
-106     For X = NpcPos.X - Range To NpcPos.X + Range
-108         For Y = NpcPos.Y - Range To NpcPos.Y + Range
+    For X = NpcPos.X - Range To NpcPos.X + Range
+        For Y = NpcPos.Y - Range To NpcPos.Y + Range
 
-110             If InMapBounds(NpcPos.Map, X, Y) Then
-112                 If (MapData(NpcPos.Map, X, Y).trigger = eTrigger.AutoResu) Then
-114                     MapData(NpcPos.Map, X, Y).trigger = 0
-                    End If
+            If InMapBounds(NpcPos.Map, X, Y) Then
+                If (MapData(NpcPos.Map, X, Y).trigger = eTrigger.AutoResu) Then
+                    MapData(NpcPos.Map, X, Y).trigger = 0
+
                 End If
 
-116         Next Y
-118     Next X
+            End If
 
-        '<EhFooter>
-        Exit Sub
+        Next Y
+    Next X
+
+    '<EhFooter>
+    Exit Sub
 
 DeleteAreaResuTheNpc_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.DeleteAreaResuTheNpc " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.DeleteAreaResuTheNpc " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Function IsAreaResu(ByVal UserIndex As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo IsAreaResu_Err
-        '</EhHeader>
 
-        ' @@ Miqueas
-        ' @@ 17/10/2015
-        ' @@ Validate Trigger Area
-100     With UserList(UserIndex)
+    '<EhHeader>
+    On Error GoTo IsAreaResu_Err
 
-102         If MapData(.Pos.Map, .Pos.X, .Pos.Y).trigger = eTrigger.AutoResu Then
-104             IsAreaResu = True
+    '</EhHeader>
 
-                Exit Function
+    ' @@ Miqueas
+    ' @@ 17/10/2015
+    ' @@ Validate Trigger Area
+    With UserList(UserIndex)
 
-            End If
+        If MapData(.Pos.Map, .Pos.X, .Pos.Y).trigger = eTrigger.AutoResu Then
+            IsAreaResu = True
 
-        End With
+            Exit Function
 
-106     IsAreaResu = False
-        '<EhFooter>
-        Exit Function
+        End If
+
+    End With
+
+    IsAreaResu = False
+    '<EhFooter>
+    Exit Function
 
 IsAreaResu_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.IsAreaResu " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.IsAreaResu " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Sub AutoCurar(ByVal UserIndex As Integer)
-        '<EhHeader>
-        On Error GoTo AutoCurar_Err
-        '</EhHeader>
 
-        ' @@ Miqueas
-        ' @@ 17-10-15
-        ' @@ Zona de auto curacion
+    '<EhHeader>
+    On Error GoTo AutoCurar_Err
+
+    '</EhHeader>
+
+    ' @@ Miqueas
+    ' @@ 17-10-15
+    ' @@ Zona de auto curacion
      
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
 
-102         If .flags.Muerto = 1 Then
-104             Call RevivirUsuario(UserIndex)
-                'Call WriteConsoleMsg(UserIndex, "El sacerdote te ha resucitado", FontTypeNames.FONTTYPE_INFO)
-106             GoTo Temp
-            End If
+        If .flags.Muerto = 1 Then
+            Call RevivirUsuario(UserIndex)
+            'Call WriteConsoleMsg(UserIndex, "El sacerdote te ha resucitado", FontTypeNames.FONTTYPE_INFO)
+            GoTo Temp
 
-108         If .Stats.MinHp < .Stats.MaxHp Then
-110             .Stats.MinHp = .Stats.MaxHp
-112             Call WriteUpdateHP(UserIndex)
-                'Call WriteConsoleMsg(UserIndex, "El sacerdote te ha curado.", FontTypeNames.FONTTYPE_INFO)
-            End If
+        End If
+
+        If .Stats.MinHp < .Stats.MaxHp Then
+            .Stats.MinHp = .Stats.MaxHp
+            Call WriteUpdateHP(UserIndex)
+
+            'Call WriteConsoleMsg(UserIndex, "El sacerdote te ha curado.", FontTypeNames.FONTTYPE_INFO)
+        End If
 
 Temp:
 
-114         If .flags.Ceguera = 1 Then
-116             .flags.Ceguera = 0
-            End If
+        If .flags.Ceguera = 1 Then
+            .flags.Ceguera = 0
 
-118         If .flags.Envenenado = 1 Then
-120             .flags.Envenenado = 0
-            End If
+        End If
 
-        End With
+        If .flags.Envenenado = 1 Then
+            .flags.Envenenado = 0
 
-        '<EhFooter>
-        Exit Sub
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 AutoCurar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.AutoCurar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.AutoCurar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Function isNPCResucitador(ByVal iNpc As Integer) As Boolean
-        '<EhHeader>
-        On Error GoTo isNPCResucitador_Err
-        '</EhHeader>
 
-        ' @@ Miqueas
-        ' @@ 17/10/2015
-        ' @@ Validate NPC
-100     With Npclist(iNpc)
+    '<EhHeader>
+    On Error GoTo isNPCResucitador_Err
 
-102         If (.NPCtype = eNPCType.Revividor) Or (.NPCtype = eNPCType.ResucitadorNewbie) Then
-104             isNPCResucitador = True
+    '</EhHeader>
 
-                Exit Function
+    ' @@ Miqueas
+    ' @@ 17/10/2015
+    ' @@ Validate NPC
+    With Npclist(iNpc)
 
-            End If
+        If (.NPCtype = eNPCType.Revividor) Or (.NPCtype = eNPCType.ResucitadorNewbie) Then
+            isNPCResucitador = True
 
-        End With
+            Exit Function
 
-106     isNPCResucitador = False
-        '<EhFooter>
-        Exit Function
+        End If
+
+    End With
+
+    isNPCResucitador = False
+    '<EhFooter>
+    Exit Function
 
 isNPCResucitador_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Extra.isNPCResucitador " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Extra.isNPCResucitador " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Sub LoadPacketRatePolicy()
-        On Error GoTo LoadPacketRatePolicy_Err
 
-        Dim Lector   As clsIniManager
-        Dim i As Long
-100     If frmMain.Visible Then frmMain.txStatus.Caption = "Cargando PacketRatePolicy."
+    On Error GoTo LoadPacketRatePolicy_Err
+
+    Dim Lector As clsIniManager
+
+    Dim i      As Long
+
+    If frmMain.Visible Then frmMain.txStatus.Caption = "Cargando PacketRatePolicy."
     
-102     Set Lector = New clsIniManager
-104     Call Lector.Initialize(IniPath & "PacketRatePolicy.ini")
-            For i = 1 To MAX_PACKET_COUNTERS
-                Dim PacketName As String
-                PacketName = PacketIdToString(i)
-                MacroIterations(i) = val(Lector.GetValue(PacketName, "Iterations"))
-                PacketTimerThreshold(i) = val(Lector.GetValue(PacketName, "Limit"))
-            Next i
+    Set Lector = New clsIniManager
+    Call Lector.Initialize(IniPath & "PacketRatePolicy.ini")
 
-168     Set Lector = Nothing
+    For i = 1 To MAX_PACKET_COUNTERS
 
-        Exit Sub
+        Dim PacketName As String
+
+        PacketName = PacketIdToString(i)
+        MacroIterations(i) = val(Lector.GetValue(PacketName, "Iterations"))
+        PacketTimerThreshold(i) = val(Lector.GetValue(PacketName, "Limit"))
+    Next i
+
+    Set Lector = Nothing
+
+    Exit Sub
 
 LoadPacketRatePolicy_Err:
-170     Set Lector = Nothing
-
+    Set Lector = Nothing
         
 End Sub
+
 Public Function PacketIdToString(ByVal PacketID As Long) As String
 
     Select Case PacketID
+
         Case 1
             PacketIdToString = "CastSpell"
             Exit Function
+
         Case 2
             PacketIdToString = "WorkLeftClick"
             Exit Function
+
         Case 3
             PacketIdToString = "LeftClick"
             Exit Function
+
         Case 4
             PacketIdToString = "UseItem"
             Exit Function
+
         Case 5
             PacketIdToString = "UseItemU"
             Exit Function
+
         Case 6
             PacketIdToString = "Walk"
             Exit Function
+
         Case 7
             PacketIdToString = "Sailing"
             Exit Function
+
         Case 8
             PacketIdToString = "Talk"
             Exit Function
+
         Case 9
             PacketIdToString = "Attack"
             Exit Function
+
         Case 10
             PacketIdToString = "Drop"
             Exit Function
+
         Case 11
             PacketIdToString = "Work"
             Exit Function
+
         Case 12
             PacketIdToString = "EquipItem"
             Exit Function
+
         Case 13
             PacketIdToString = "GuildMessage"
             Exit Function
+
         Case 14
             PacketIdToString = "QuestionGM"
             Exit Function
+
         Case 15
             PacketIdToString = "ChangeHeading"
             Exit Function
+
     End Select
     
 End Function
-Public Function HayPuerta(ByVal Map As Integer, ByVal X As Integer, ByVal Y As Integer) As Boolean
-100     If MapData(Map, X, Y).ObjInfo.ObjIndex > 0 Then
-102         HayPuerta = (ObjData(MapData(Map, X, Y).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas) And ObjData(MapData(Map, X, Y).ObjInfo.ObjIndex).Cerrada = 1 And (ObjData(MapData(Map, X, Y).ObjInfo.ObjIndex).Llave = 0)
-        End If
+
+Public Function HayPuerta(ByVal Map As Integer, _
+                          ByVal X As Integer, _
+                          ByVal Y As Integer) As Boolean
+
+    If MapData(Map, X, Y).ObjInfo.ObjIndex > 0 Then
+        HayPuerta = (ObjData(MapData(Map, X, Y).ObjInfo.ObjIndex).OBJType = eOBJType.otPuertas) And ObjData(MapData(Map, X, Y).ObjInfo.ObjIndex).Cerrada = 1 And (ObjData(MapData(Map, X, Y).ObjInfo.ObjIndex).Llave = 0)
+
+    End If
+
 End Function
 
 ' Autor: WyroX - 20/01/2021
@@ -3017,18 +3127,17 @@ End Function
 ' Si R es 1, rota en sentido horario. Si R es -1, en sentido antihorario.
 Function Rotate_Heading(ByVal Heading As eHeading, ByVal r As Integer) As eHeading
     
-100     Rotate_Heading = (Heading + r + 3) Mod 4 + 1
+    Rotate_Heading = (Heading + r + 3) Mod 4 + 1
     
 End Function
+
 Function Status(ByVal UserIndex As Integer) As eTipoFaction
         
-        On Error GoTo Status_Err
-        
+    On Error GoTo Status_Err
 
-100     Status = UserList(UserIndex).Faction.Status
-
+    Status = UserList(UserIndex).Faction.Status
         
-        Exit Function
+    Exit Function
 
 Status_Err:
         

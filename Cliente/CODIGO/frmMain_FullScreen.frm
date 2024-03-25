@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0"; "RICHTX32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMain_FullScreen 
    BackColor       =   &H00FFFF80&
    BorderStyle     =   0  'None
@@ -1610,17 +1610,20 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private ZoomIn As Boolean
+Private ZoomIn        As Boolean
 
-Public ModoTab As Boolean
+Public ModoTab        As Boolean
+
 Private SpellSelected As Byte
-Public CoordBloqued As Boolean
-Public PorcBloqued As Boolean
+
+Public CoordBloqued   As Boolean
+
+Public PorcBloqued    As Boolean
+
 Public CursorSelected As Byte
 
 ' Detectar posicion del cursor.
 Private Declare Function GetCursorPos Lib "user32.dll" (Pt As Point) As Long
-
 
 Private totalclicks As Integer
 
@@ -1641,7 +1644,7 @@ Private Enum eVentanas
 
 End Enum
 
-Public Panel                   As Byte
+Public Panel                    As Byte
 
 Private LastPanel               As Byte
 
@@ -1676,8 +1679,6 @@ Public tY                       As Byte
 
 Public MouseX                   As Long
 
-
-
 Public MouseY                   As Long
 
 Public MouseBoton               As Long
@@ -1710,63 +1711,80 @@ Private Declare Function QueryPerformanceCounter _
 Private Declare Function QueryPerformanceFrequency _
                 Lib "kernel32" (lpFrequency As Currency) As Long
 
-Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+Private Declare Function SetWindowLong _
+                Lib "user32" _
+                Alias "SetWindowLongA" (ByVal hWnd As Long, _
+                                        ByVal nIndex As Long, _
+                                        ByVal dwNewLong As Long) As Long
+
 Private Const GWL_EXSTYLE = -20
+
 Private Const WS_EX_LAYERED = &H80000
+
 Private Const WS_EX_TRANSPARENT As Long = &H20&
 
-
 ' Botones Gráficos
-Private cBotonOpciones     As clsGraphicalButton
-Private cBotonParty        As clsGraphicalButton
-Private cBotonRetos        As clsGraphicalButton
-Private cBotonEventos      As clsGraphicalButton
-Private cBotonClanes       As clsGraphicalButton
-Private cBotonObjetive     As clsGraphicalButton
-Private cBotonRanking       As clsGraphicalButton
-Private cBotonStats    As clsGraphicalButton
+Private cBotonOpciones          As clsGraphicalButton
 
-Public LastButtonPressed   As clsGraphicalButton
+Private cBotonParty             As clsGraphicalButton
+
+Private cBotonRetos             As clsGraphicalButton
+
+Private cBotonEventos           As clsGraphicalButton
+
+Private cBotonClanes            As clsGraphicalButton
+
+Private cBotonObjetive          As clsGraphicalButton
+
+Private cBotonRanking           As clsGraphicalButton
+
+Private cBotonStats             As clsGraphicalButton
+
+Public LastButtonPressed        As clsGraphicalButton
 
 Private Sub CMSG_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
     SetHand
+
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     #If ModoBig = 1 Then
+
         If KeyCode = vbKeyEscape Then
             dockForm FrmMenu.hWnd, FrmMain.PicMenu, True
             
             UnloadAllForms_ButPrincipal
+
         End If
+
     #End If
+
 End Sub
-
-
 
 Private Sub Form_Unload(Cancel As Integer)
     DisableURLDetect
     
-   ' hSwapCursor = SetClassLong(frmMain.hWnd, GLC_HCURSOR, hSwapCursor)
+    ' hSwapCursor = SetClassLong(frmMain.hWnd, GLC_HCURSOR, hSwapCursor)
 End Sub
 
 'Private Sub hlst_Click()
-   ' If (MouseShift And 1) = 1 Then
-      '  If hlst.ListIndex <> -1 Then
-      '      Call WriteSpellInfo(hlst.ListIndex + 1)
-      '  End If
-   ' End If
+' If (MouseShift And 1) = 1 Then
+'  If hlst.ListIndex <> -1 Then
+'      Call WriteSpellInfo(hlst.ListIndex + 1)
+'  End If
+' End If
 'End Sub
 
 'Private Sub hlst_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-   ' MouseShift = Shift
+' MouseShift = Shift
 'End Sub
 
 Private Sub Hpshp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     LastButtonPressed.ToggleToNormal
     SetHand
+
 End Sub
 
 Private Sub imgButton_Click(Index As Integer)
@@ -1792,12 +1810,16 @@ Private Sub imgButton_Click(Index As Integer)
         Case 5 ' Party
             Call ShowConsoleMsg("Ayuda» Es hora de enviar solicitudes para que usuarios formen un grupo contigo.. Haz clic sobre aquel que desees invitar y luego teclea F3.", 150, 200, 148, True)
             Call WritePartyClient(1)
+
         Case 6
             Call WriteSafeToggle
+
         Case 7
             Call WriteDragToggle
+
         Case 8
             Call WriteResuscitationToggle
+
     End Select
 
 End Sub
@@ -1808,39 +1830,57 @@ Private Sub imgCerrar_Click()
     If MsgBox("¿Estás seguro que deseas salir del personaje?", vbYesNo + vbQuestion, "Desterium AO") = vbYes Then
         'prgRun = False
         Call ParseUserCommand("/SALIR")
+
     End If
+
 End Sub
 
-Private Sub imgClanes_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgClanes_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
     SetHand
+
 End Sub
 
 Private Sub imgDrag_Click()
     Call WriteDragToggle
+
 End Sub
 
-Private Sub imgEvents_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-SetHand
+Private Sub imgEvents_MouseMove(Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
+    SetHand
+
 End Sub
 
-Private Sub imgMapa_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-SetHand
+Private Sub imgMapa_MouseMove(Button As Integer, _
+                              Shift As Integer, _
+                              X As Single, _
+                              Y As Single)
+    SetHand
+
 End Sub
 
 Private Sub imgFight_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ShowConsoleMsg("Ayuda» Los comandos /RETOSON y /RETOSOFF activan un Panel que te ayudará a ver la invitación en una nueva Ventana.", 150, 200, 148, True)
     Call ParseUserCommand("/RETOS")
+
 End Sub
 
 Private Sub imgGoMenu_Click()
-     Call Audio.PlayInterface(SND_CLICK)
-     PicStats.visible = True
+    Call Audio.PlayInterface(SND_CLICK)
+    PicStats.visible = True
+
 End Sub
 
 Private Sub imgGoStats_Click()
-     Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
     PicStats.visible = False
+
 End Sub
 
 Private Sub ImgInfo_Click()
@@ -1855,6 +1895,7 @@ End Sub
 Private Sub imgMinimize_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Me.WindowState = 1
+
 End Sub
 
 Private Sub imgMoveSpell_Click(Index As Integer)
@@ -1886,11 +1927,9 @@ Private Sub imgMoveSpell_Click(Index As Integer)
         Case 0 'subir
             Call WriteMoveSpell(hlst.ListIndex, hlst.ListIndex + 1)
             sTemp = hlst.List(hlst.ListIndex - 1)
-
              
             'UserHechizos(hlst.ListIndex) = UserHechizos(hlst.ListIndex + 1)
             UserHechizos(hlst.ListIndex) = Temp
-                
             
             hlst.List(hlst.ListIndex - 1) = hlst.List(hlst.ListIndex)
             hlst.List(hlst.ListIndex) = sTemp
@@ -1900,7 +1939,6 @@ Private Sub imgMoveSpell_Click(Index As Integer)
         Case 1 'bajar
             Call WriteMoveSpell(hlst.ListIndex + 1, hlst.ListIndex + 2)
             sTemp = hlst.List(hlst.ListIndex + 1)
-           
             
             'UserHechizos(hlst.ListIndex) = UserHechizos(hlst.ListIndex + 1)
             UserHechizos(hlst.ListIndex + 2) = Temp
@@ -1916,25 +1954,32 @@ Private Sub imgMoveSpell_Click(Index As Integer)
 
 End Sub
 
-Private Sub imgMoveSpell_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub imgMoveSpell_MouseMove(Index As Integer, _
+                                   Button As Integer, _
+                                   Shift As Integer, _
+                                   X As Single, _
+                                   Y As Single)
     LastButtonPressed.ToggleToNormal
+
 End Sub
 
 Private Sub imgObjetive_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call WriteQuestRequired(0)
-End Sub
 
+End Sub
 
 Private Sub imgRank_Click()
     Call Audio.PlayInterface(SND_CLICK)
-     Call ShellExecute(hWnd, "open", "https://www.argentumgame.com/level/", vbNullString, vbNullString, 1)
+    Call ShellExecute(hWnd, "open", "https://www.argentumgame.com/level/", vbNullString, vbNullString, 1)
+
 End Sub
 
 Private Sub imgWeb_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call ShellExecute(hWnd, "open", "https://www.argentumgame.com/", vbNullString, vbNullString, 1)
+
 End Sub
 
 Private Sub imgParty_Click()
@@ -1948,12 +1993,13 @@ Private Sub imgQuests_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call WriteQuestRequired(0)
-End Sub
 
+End Sub
 
 Private Sub imgResu_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call WriteResuscitationToggle
+
 End Sub
 
 Private Sub imgRetos_Click()
@@ -1966,6 +2012,7 @@ End Sub
 Private Sub imgSeg_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call WriteSafeToggle
+
 End Sub
 
 Private Sub imgSocial_Click(Index As Integer)
@@ -1977,33 +2024,40 @@ Private Sub imgSocial_Click(Index As Integer)
     
         Case 0 ' Instagram
             Url = "https://www.instagram.com/ArgentumGame"
+
         Case 1 ' Youtube
-             Url = "https://www.instagram.com/ArgentumGame"
+            Url = "https://www.instagram.com/ArgentumGame"
+
         Case 2 ' Facebook
-             Url = "https://www.facebook.com/ArgentumGame"
+            Url = "https://www.facebook.com/ArgentumGame"
+
         Case 3 ' Discord
-             Url = "https://www.discord.argentumgame.com/"
+            Url = "https://www.discord.argentumgame.com/"
+
     End Select
     
     Call ShellExecute(hWnd, "open", Url, vbNullString, vbNullString, 1)
+
 End Sub
 
 Private Sub imgStats_Click()
 
-  If Not MainTimer.Check(TimersIndex.Packet500) Then Exit Sub
+    If Not MainTimer.Check(TimersIndex.Packet500) Then Exit Sub
     
     Call Audio.PlayInterface(SND_CLICK)
     
     Call WriteRequestSkills
+
 End Sub
 
-
-
 Private Sub SetHand()
+
     If Not CursorSelected = 3 Then
-    Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorHand, IDC_ARROW)
-    CursorSelected = 3
+        Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorHand, IDC_ARROW)
+        CursorSelected = 3
+
     End If
+
 End Sub
 
 Private Sub Label1_Click()
@@ -2013,6 +2067,7 @@ End Sub
 
 Private Sub lblMana_Click(Index As Integer)
     MANShp_Click
+
 End Sub
 
 Private Sub lblMap_Click(Index As Integer)
@@ -2022,7 +2077,9 @@ Private Sub lblMap_Click(Index As Integer)
         CoordBloqued = False
     Else
         CoordBloqued = True
+
     End If
+
 End Sub
 
 Private Sub lblMap_MouseMove(Index As Integer, _
@@ -2030,15 +2087,17 @@ Private Sub lblMap_MouseMove(Index As Integer, _
                              Shift As Integer, _
                              X As Single, _
                              Y As Single)
+
     If Not CoordBloqued Then
         Map_UpdateLabel (True)
+
     End If
+
 End Sub
 
 Private Sub lblporclvl_Click(Index As Integer)
 
-
-        PorcBloqued = Not PorcBloqued
+    PorcBloqued = Not PorcBloqued
     
     If UserPasarNivel > 0 Then
         Call ShowConsoleMsg(Format$(UserExp, "#,###") & "/" & Format$(UserPasarNivel, "#,###") & " " & Round(CDbl(UserExp) * CDbl(100) / CDbl(UserPasarNivel), 2) & "%")
@@ -2046,6 +2105,7 @@ Private Sub lblporclvl_Click(Index As Integer)
     End If
     
     Call Render_Exp(False)
+
 End Sub
 
 Private Sub lblporclvl_MouseMove(Index As Integer, _
@@ -2053,10 +2113,11 @@ Private Sub lblporclvl_MouseMove(Index As Integer, _
                                  Shift As Integer, _
                                  X As Single, _
                                  Y As Single)
+
     Dim A As Long
     
-    
     #If ModoBig > 0 Then
+
         If Index <> 2 Then Exit Sub
         
     #End If
@@ -2077,43 +2138,59 @@ Private Sub lblRedes_Click(Index As Integer)
     
         Case 0 ' Instagram
             Url = "https://www.instagram.com/argentumgame/"
+
         Case 1 ' Twitch
             Url = "https://www.twitch.tv/argentumgameplay"
+
         Case 2 ' Facebook
             Url = "https://www.facebook.com/DesteriumGame/"
+
         Case 3 ' Discord
             Url = "https://www.discord.argentumgame.com/"
+
         Case 4 ' Página Web
             Url = "https://www.argentumgame.com/"
-    End Select
 
+    End Select
   
     Call ShellExecute(hWnd, "open", Url, vbNullString, vbNullString, 1)
+
 End Sub
 
-Private Sub lblVida_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-SetHand
+Private Sub lblVida_MouseMove(Index As Integer, _
+                              Button As Integer, _
+                              Shift As Integer, _
+                              X As Single, _
+                              Y As Single)
+    SetHand
+
 End Sub
 
 Private Sub MANShp_Click()
+
     If Not MainTimer.Check(TimersIndex.Packet250) Then Exit Sub
     Call ParseUserCommand("/MEDITAR")
     
 End Sub
 
 Private Sub lblVida_Click(Index As Integer)
-   Hpshp_Click
+    Hpshp_Click
+
 End Sub
 
 Private Sub Hpshp_Click()
+
     If Not MainTimer.Check(TimersIndex.Packet500) Then Exit Sub
     Call ParseUserCommand("/EST")
+
 End Sub
 
+Private Sub MANShp_MouseMove(Button As Integer, _
+                             Shift As Integer, _
+                             X As Single, _
+                             Y As Single)
+    SetHand
 
-
-Private Sub MANShp_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-SetHand
 End Sub
 
 Private Sub MiniMapa_Click()
@@ -2123,14 +2200,15 @@ Private Sub MiniMapa_Click()
     #Else
         Call Audio.PlayInterface(SND_CLICK)
 
-            Call FrmMapa.Show(vbModeless, FrmMain)
+        Call FrmMapa.Show(vbModeless, FrmMain)
         
     #End If
+
 End Sub
 
-
 Private Sub picHechiz_DblClick(Index As Integer)
-  Dim Temp As String
+
+    Dim Temp As String
     
     If (MouseShift And 1) = 1 Then
         If SpellSelected = 0 Then
@@ -2151,10 +2229,15 @@ Private Sub picHechiz_DblClick(Index As Integer)
         End If
     
     End If
+
 End Sub
 
-Private Sub PicStats_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicStats_MouseMove(Button As Integer, _
+                               Shift As Integer, _
+                               X As Single, _
+                               Y As Single)
     LastButtonPressed.ToggleToNormal
+
 End Sub
 
 Private Sub RecTxt_MouseMove(Button As Integer, _
@@ -2162,6 +2245,7 @@ Private Sub RecTxt_MouseMove(Button As Integer, _
                              X As Single, _
                              Y As Single)
     StartCheckingLinks
+
 End Sub
 
 Private Sub Form_Load()
@@ -2181,7 +2265,6 @@ Private Sub Form_Load()
     imgExp.Picture = LoadPicture(DirInterface & "main\exp.jpg")
     picHechiz(0).Picture = LoadPicture(DirInterface & "main\spellfound_new.jpg")
     Me.Picture = LoadPicture(DirInterface & "main\main_stream.jpg")
-    
     
     Set LastButtonPressed = New clsGraphicalButton
     
@@ -2207,8 +2290,8 @@ Private Sub Form_Load()
     
     lblPMSG.ForeColor = RGB(224, 224, 224)
     lblCMSG.ForeColor = RGB(224, 224, 224)
-End Sub
 
+End Sub
 
 Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
     '***************************************************
@@ -2231,17 +2314,18 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
         If LenB(CustomKeys.ReadableName(KeyCode)) > 0 Then
             
             Select Case KeyCode
-            Case CustomKeys.BindedKey(eKeyType.mKeyPanelParty)
-                        Call ShowConsoleMsg("Ayuda» Es hora de enviar solicitudes para que usuarios formen un grupo contigo.. Haz clic sobre aquel que desees invitar y luego teclea F3.", 150, 200, 148, True)
-                        Call WritePartyClient(1)
+
+                Case CustomKeys.BindedKey(eKeyType.mKeyPanelParty)
+                    Call ShowConsoleMsg("Ayuda» Es hora de enviar solicitudes para que usuarios formen un grupo contigo.. Haz clic sobre aquel que desees invitar y luego teclea F3.", 150, 200, 148, True)
+                    Call WritePartyClient(1)
                 
                 Case CustomKeys.BindedKey(eKeyType.mKeyTabPanel)
                     'FrmMain.ModoTab = True
-                   ' If FrmMain.Panel = 1 Then
-                        'FrmMain.Label4_Click
-                   ' Else
-                        'FrmMain.Label7_Click
-                 '   End If
+                    ' If FrmMain.Panel = 1 Then
+                    'FrmMain.Label4_Click
+                    ' Else
+                    'FrmMain.Label7_Click
+                    '   End If
                     
                 Case CustomKeys.BindedKey(eKeyType.mKeyPanelFight)
                     Call ShowConsoleMsg("Recuerda que podrás utilizar el comando /RETOSON y /RETOSOFF para mostrar la invitación recibida de una forma más segura.", 150, 200, 148, True)
@@ -2454,15 +2538,13 @@ Private Sub Form_KeyUp(KeyCode As Integer, Shift As Integer)
 
         Case CustomKeys.BindedKey(eKeyType.mKeyTalk)
             
-            
-            
-           ' If (Not Comerciando) And (Not MirandoForo) And (Not MirandoEstadisticas) And (Not MirandoCantidad) And (Not MirandoRank) And (Not MirandoGuildPanel) And (Not MirandoTravel) And (Not MirandoComerciarUsu) And (Not MirandoBanco) And (Not MirandoComerciar) And (Not MirandoConcentracion) And (Not MirandoCuenta) Then
+            ' If (Not Comerciando) And (Not MirandoForo) And (Not MirandoEstadisticas) And (Not MirandoCantidad) And (Not MirandoRank) And (Not MirandoGuildPanel) And (Not MirandoTravel) And (Not MirandoComerciarUsu) And (Not MirandoBanco) And (Not MirandoComerciar) And (Not MirandoConcentracion) And (Not MirandoCuenta) Then
                 
-                SendTxt.visible = True
+            SendTxt.visible = True
                 
-                SendTxt.SetFocus
+            SendTxt.SetFocus
 
-        '    End If
+            '    End If
                   
     End Select
 
@@ -2471,11 +2553,13 @@ End Sub
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     MouseBoton = Button
     MouseShift = Shift
+
 End Sub
 
 Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
     clicX = X
     clicY = Y
+
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -2489,6 +2573,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         MouseX = 0
     ElseIf MouseX > MainViewShp.Width Then
         MouseX = MainViewPic.Width
+
     End If
        
     'Trim to fit screen
@@ -2496,6 +2581,7 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         MouseY = 0
     ElseIf MouseY > MainViewShp.Height Then
         MouseY = MainViewShp.Height
+
     End If
           
     Dim A As Long
@@ -2507,10 +2593,12 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
         MouseY = 0
     ElseIf MouseY > MainViewShp.Height Then
         MouseY = MainViewShp.Height
+
     End If
     
     If Not CoordBloqued Then
         Map_UpdateLabel
+
     End If
     
     Inventario.uMoveItem = False
@@ -2518,21 +2606,21 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
           
     If SendTxt.visible Then
         SendTxt.SetFocus
+
     End If
     
     ' Disable links checking (not over consola)
     StopCheckingLinks
     
-    
     If Not CursorSelected = 1 Then
-        Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
+        Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
         CursorSelected = 1
+
     End If
     
-    
-   ' If MirandoObjetos Then
+    ' If MirandoObjetos Then
     '    FrmObject_Info.Close_Form
-  '  End If
+    '  End If
 End Sub
 
 Private Sub lblCMSG_Click()
@@ -2542,12 +2630,12 @@ Private Sub lblCMSG_Click()
         Call AddtoRichTextBox(FrmMain.RecTxt, "¡No perteneces a ningún clan!", 0, 200, 200, False, False, True)
 
     Else
+
         If PMSGimg Then Call lblPMSG_Click
         
         bCMSG = Not bCMSG
 
         If bCMSG Then
-            
             
             lblCMSG.ForeColor = RGB(245, 212, 24)
             Call AddtoRichTextBox(FrmMain.RecTxt, "Todo lo que digas sera escuchado por tu clan.", 0, 200, 200, False, False)
@@ -2559,16 +2647,18 @@ Private Sub lblCMSG_Click()
             CMSG.Picture = Nothing
             imgButton(2).Picture = Nothing
             HablaTemp = vbNullString
+
         End If
+
     End If
 
 End Sub
-
 
 Private Sub imageparty_click()
     
     If MsgBox("¿Estás seguro que deseas crear un grupo?", vbYesNo) = vbYes Then
         WritePartyClient 1
+
     End If
 
 End Sub
@@ -2597,7 +2687,6 @@ Public Function LeerJPG(ByRef file_path As String) As Byte()
 
 End Function
 
-
 Private Sub lblPMSG_Click()
     Call Audio.PlayInterface(SND_CLICK)
 
@@ -2616,14 +2705,17 @@ Private Sub lblPMSG_Click()
         imgButton(3).Picture = Nothing
         Call AddtoRichTextBox(FrmMain.RecTxt, "Dejas de ser escuchado por tu party. ", 255, 200, 200, False, False)
         HablaTemp = vbNullString
+
     End If
 
 End Sub
+
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 
     If prgRun = True Then
         prgRun = False
         Cancel = 1
+
     End If
 
 End Sub
@@ -2632,6 +2724,7 @@ Private Sub imgGuild_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call WriteGuilds_Required(0)
+
 End Sub
 
 Private Sub imgGrupo_Click()
@@ -2639,11 +2732,13 @@ Private Sub imgGrupo_Click()
 
     Call ShowConsoleMsg("Ayuda» Es hora de enviar solicitudes para que usuarios formen un grupo contigo.. Haz clic sobre aquel que desees invitar y luego teclea F3.", 150, 200, 148, True)
     Call WritePartyClient(1)
+
 End Sub
 
 Private Sub imgOption_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call frmOpciones.Show(vbModeless, FrmMain)
+
 End Sub
 
 Private Sub InvEqu_MouseMove(Button As Integer, _
@@ -2655,21 +2750,21 @@ Private Sub InvEqu_MouseMove(Button As Integer, _
     Inventario.sMoveItem = False
     
     'If Not CursorSelected = 1 Then
-        'Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
-        'CursorSelected = 1
+    'Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorGeneral, IDC_ARROW)
+    'CursorSelected = 1
     'End If
     
     LastButtonPressed.ToggleToNormal
-
     
-   ' If MirandoObjetos Then
+    ' If MirandoObjetos Then
     '    FrmObject_Info.Close_Form
-   ' End If
+    ' End If
     
 End Sub
 
 Private Sub lblScroll_Click(Index As Integer)
     Inventario.ScrollInventory (Index = 0)
+
 End Sub
 
 Private Sub lblHabla_Click(Index As Integer)
@@ -2681,6 +2776,7 @@ Private Sub lblHabla_Click(Index As Integer)
             picHabla.visible = False
         Else
             picHabla.visible = True
+
         End If
         
         Exit Sub
@@ -2709,38 +2805,45 @@ Private Sub lblHabla_Click(Index As Integer)
             
         Case 4 ' Emojis visibles
             Call MsgBox("Algunas computadoras presentan problemas con el componente que utilizamos para los emojis. Cuando se encuentre reparado en su totalidad, volveremos a activarlo")
+
             'Call ShellExecute(hWnd, "open", "https://es.piliapp.com/facebook-symbols/", vbNullString, vbNullString, 1)
     End Select
     
     If Index > 0 Then picHabla.visible = False
-End Sub
 
+End Sub
 
 Private Sub lblMinimizar_Click()
     Me.WindowState = 1
+
 End Sub
 
 Private Sub mnuEquipar_Click()
     Call EquiparItem
+
 End Sub
 
 Private Sub mnuNPCComerciar_Click()
     Call WriteLeftClick(tX, tY)
     Call WriteCommerceStart
+
 End Sub
 
 Private Sub mnuNpcDesc_Click()
     Call WriteLeftClick(tX, tY)
+
 End Sub
 
 Private Sub Capturar_Guardar()
       
     Dim filePath As String
+
     filePath = App.path & "\SCREENSHOTS\Prueba.jpg"
     'FilePath = "c:\pantalla.bmp"
     
     If FileExist(filePath, vbArchive) Then
         Kill filePath
+
     End If
     
     Clipboard.Clear
@@ -2754,8 +2857,8 @@ Private Sub Capturar_Guardar()
     If Clipboard.GetFormat(vbCFBitmap) Then
         'Guardamos la imagen en disco
         SavePicture Clipboard.GetData(vbCFBitmap), filePath
+
     End If
-    
    
 End Sub
 
@@ -2861,7 +2964,6 @@ Private Sub MainViewPic_Click()
 
                     End If
 
-
                     FrmMain.MousePointer = vbDefault
                     Call RestoreLastCursor(IDC_CROSS)
                     Call WriteWorkLeftClick(tX, tY, UsingSkill, Pt.X, Pt.Y)
@@ -2908,12 +3010,12 @@ Private Sub MainViewPic_Click()
 
 End Sub
 
-
 Private Sub MainViewPic_DblClick()
     Form_DblClick
 
     If SendTxt.visible Then
         SendTxt.SetFocus
+
     End If
 
 End Sub
@@ -2945,15 +3047,17 @@ Private Sub MainViewPic_MouseMove(Button As Integer, _
     Else
 
         If Inventario.sMoveItem And vbKeyShift Then
-            
                 
             FrmCantidad.Show , FrmMain
             Call FrmCantidad.SetDropDragged(X, Y)
+
         End If
+
     End If
 
     If SendTxt.visible Then
         SendTxt.SetFocus
+
     End If
 
 End Sub
@@ -2972,16 +3076,18 @@ Private Sub mnuTirar_Click()
     Call TirarItem
     Inventario.uMoveItem = False
     Inventario.sMoveItem = False
+
 End Sub
 
 Private Sub mnuUsar_Click()
     Call UsarItem(0)
+
 End Sub
 
 Private Sub PicMH_Click()
     Call AddtoRichTextBox(FrmMain.RecTxt, "Auto lanzar hechizos. Utiliza esta habilidad para entrenar únicamente. Para activarlo/desactivarlo utiliza F7.", 255, 255, 255, False, False, True)
-End Sub
 
+End Sub
 
 Private Sub coord_click()
     Call Audio.PlayInterface(SND_CLICK)
@@ -2990,32 +3096,31 @@ Private Sub coord_click()
         CoordBloqued = False
     Else
         CoordBloqued = True
+
     End If
     
 End Sub
 
-
 Private Sub picHabla_Click()
     
     picHabla.visible = False
+
 End Sub
-
-
 
 Private Sub Second_Timer()
 
     If Not DialogosClanes Is Nothing Then DialogosClanes.PassTimer
-          
-    
     
     With GlobalCounters
+
         If .StrenghtAndDextery > 0 Then
         
             .StrenghtAndDextery = .StrenghtAndDextery - 1
         
-        
         End If
+
     End With
+
 End Sub
 
 '[END]'
@@ -3030,6 +3135,7 @@ Private Sub TirarItem()
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
             Call ShowConsoleMsg("¡¡Estás muerto!!", .red, .green, .blue, .bold, .italic)
+
         End With
 
     Else
@@ -3045,12 +3151,15 @@ Private Sub TirarItem()
 
                 If Inventario.Amount(Inventario.SelectedItem) > 1 Then
                     
-                    
                     If Not Comerciando Then FrmCantidad.Show , FrmMain
                     Call FrmCantidad.SetDropGround
+
                 End If
+
             End If
+
         End If
+
     End If
 
 End Sub
@@ -3061,16 +3170,17 @@ Private Sub AgarrarItem()
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
             Call ShowConsoleMsg("¡¡Estás muerto!!", .red, .green, .blue, .bold, .italic)
+
         End With
 
     Else
         Call WritePickUp
+
     End If
 
 End Sub
 
 Private Sub UsarItem(ByVal SecondaryClick As Byte)
-    
     
     'If Not MainTimer.Check(TimersIndex.Arrows, False) Then Exit Sub
     'If Not CheckInterval(SecondaryClick) Then Exit Sub
@@ -3097,14 +3207,17 @@ Private Sub UsarItem(ByVal SecondaryClick As Byte)
                 
                 Call WriteDenounce("[SEGURIDAD]: Posible uso de Mouse-Gamer. Velocidades: " & strTemp)
                 CheckingDouble = 0
+
             End If
+
         Else
             CheckingDouble = 0
 
         End If
     
     Else
-         If Not MainTimer.Check(TimersIndex.UseItemWithU) Then
+
+        If Not MainTimer.Check(TimersIndex.UseItemWithU) Then
             CheckingDouble_U = CheckingDouble_U + 1
             CheckingDoubleValue_U(CheckingDouble_U) = Value
             
@@ -3118,13 +3231,12 @@ Private Sub UsarItem(ByVal SecondaryClick As Byte)
                 CheckingDouble_U = 0
             Else
                 CheckingDouble_U = 0
+
             End If
 
         End If
-        
        
     End If
-
     
     Dim ItemIndex As Integer
               
@@ -3147,6 +3259,7 @@ Private Sub UsarItem(ByVal SecondaryClick As Byte)
 
         If Not IsActionParaCliente(Inventario.ObjIndex(ItemIndex)) Then
             Call WriteUseItem(ItemIndex, SecondaryClick, Value)
+
         End If
         
         Call AssignedInterval(SecondaryClick)
@@ -3154,6 +3267,7 @@ Private Sub UsarItem(ByVal SecondaryClick As Byte)
     End If
 
     Call Inventario.DrawInventory
+
 End Sub
 
 Private Sub EquiparItem()
@@ -3162,6 +3276,7 @@ Private Sub EquiparItem()
 
         With FontTypes(FontTypeNames.FONTTYPE_INFO)
             Call ShowConsoleMsg("¡¡Estás muerto!!", .red, .green, .blue, .bold, .italic)
+
         End With
 
     Else
@@ -3169,15 +3284,14 @@ Private Sub EquiparItem()
         If Comerciando Then Exit Sub
    
         If (Inventario.SelectedItem > 0) And (Inventario.SelectedItem < MAX_INVENTORY_SLOTS + 1) Then Call WriteEquipItem(Inventario.SelectedItem)
+
     End If
 
 End Sub
 
-
-
-
 Private Sub tAnuncios_Timer()
     Anuncio_Update_Next_Text
+
 End Sub
 
 Private Sub Timer1_Timer()
@@ -3186,36 +3300,35 @@ Private Sub Timer1_Timer()
     
     Static A As Long
 
-   ' A = A + 1
+    ' A = A + 1
     
-   ' If A = 40 Then
-       ' A = 0
+    ' If A = 40 Then
+    ' A = 0
     'End If
 End Sub
 
 Private Sub TimerPing_Timer()
 
-    Static I As Integer
+    Static i As Integer
 
     '//
-    I = I + 1
+    i = i + 1
 
-
-    If I >= 3 Then
-        I = 0
+    If i >= 3 Then
+        i = 0
 
     End If
 
 End Sub
 
-
-
 Private Sub tMapName_Timer()
     Map_TimeRender = 255
     tMapName.Enabled = False
+
 End Sub
 
 Private Sub tMessage_Timer()
+
     Static Minutes As Integer
     
     Minutes = Minutes + 1
@@ -3228,23 +3341,25 @@ Private Sub tMessage_Timer()
     
 End Sub
 
-
-
 Private Sub tmrBlink_Timer()
 
     Dim A As Long
     
     For A = Me.lblFuerza.LBound To Me.lblFuerza.UBound
+
         If bLastBrightBlink Then
             FrmMain.lblFuerza(A).ForeColor = getStrenghtColor(UserFuerza)
             FrmMain.lblAgilidad(A).ForeColor = getDexterityColor(UserAgilidad)
         Else
             FrmMain.lblFuerza(A).ForeColor = vbWhite
             FrmMain.lblAgilidad(A).ForeColor = vbWhite
+
         End If
     
     Next A
+
     bLastBrightBlink = Not bLastBrightBlink
+
 End Sub
 
 ''''''''''''''''''''''''''''''''''''''
@@ -3273,13 +3388,17 @@ Private Sub TrainingMacro_Timer()
     If hlst.List(hlst.ListIndex) <> "(Vacio)" And MainTimer.Check(TimersIndex.CastSpell, False) Then
         Call WriteCastSpell(hlst.ListIndex + 1)
         Call WriteWork(eSkill.Magia)
+
     End If
           
     Call ConvertCPtoTP(MouseX, MouseY, tX, tY)
-          Dim Pt As Point
+
+    Dim Pt As Point
+
     GetCursorPos Pt
     Call WriteWorkLeftClick(tX, tY, UsingSkill, Pt.X, Pt.Y)
     UsingSkill = 0
+
 End Sub
 
 Private Sub cmdLanzar_Click()
@@ -3290,19 +3409,22 @@ Private Sub cmdLanzar_Click()
 
             With FontTypes(FontTypeNames.FONTTYPE_INFO)
                 Call ShowConsoleMsg("¡¡Estás muerto!!", .red, .green, .blue, .bold, .italic)
+
             End With
 
         Else
+
             If ClientSetup.bConfig(eSetupMods.SETUP_BOTONLANZAR) = 1 Then
                 If Not MainTimer.Check(TimersIndex.CastSpell, False) Then Exit Sub
+
             End If
             
             Call WriteCastSpell(hlst.ListIndex + 1)
             Call WriteWork(eSkill.Magia)
+
         End If
+
     End If
-    
-    
     
     'Call TestingSound
 End Sub
@@ -3316,7 +3438,7 @@ Private Sub TestingSound()
     'If Effect >= 40 Then Effect = 1
     
     'Call Audio.SetReverb(Effect)
-       ' Call Audio.SetReverb(REVERB_Off)  ' EFECTO DESACTIVADO
+    ' Call Audio.SetReverb(REVERB_Off)  ' EFECTO DESACTIVADO
         
     'End If
 
@@ -3328,10 +3450,12 @@ Private Sub CmdLanzar_MouseMove(Button As Integer, _
                                 Y As Single)
     
     SetHand
+
 End Sub
 
 Private Sub DespInv_Click(Index As Integer)
     Inventario.ScrollInventory (Index = 0)
+
 End Sub
 
 Private Sub PicInv_MouseMove(Button As Integer, _
@@ -3343,13 +3467,16 @@ Private Sub PicInv_MouseMove(Button As Integer, _
     MouseY = Y
     
     If Not Inventario.uMoveItem Then
-        PicInv.MousePointer = vbDefault
+        picInv.MousePointer = vbDefault
+
     End If
     
     If Not CursorSelected = 2 Then
-        Call StartAnimatedCursor(App.path & "\resource\cursor\" & ClientSetup.CursorInv, IDC_ARROW)
+        Call StartAnimatedCursor(App.path & "\AO\resource\cursor\" & ClientSetup.CursorInv, IDC_ARROW)
         CursorSelected = 2
+
     End If
+
 End Sub
 
 Private Sub Form_DblClick()
@@ -3409,6 +3536,7 @@ Public Sub Label4_Click()
         Pt.X = 0
         Pt.Y = 0
         ModoTab = False
+
     End If
     
     Call WriteSetPanelClient(Panel, 255, Pt.X, Pt.Y)
@@ -3416,7 +3544,7 @@ Public Sub Label4_Click()
     'End If
 
     ' Activo controles de inventario
-    PicInv.visible = True
+    picInv.visible = True
     
     #If ModoBig > 0 Then
         FrmMain.GldLbl(0).visible = True
@@ -3426,7 +3554,7 @@ Public Sub Label4_Click()
     picHechiz(0).visible = False
 
     CmdLanzar.visible = False
-    ImgInfo.visible = False
+    imgInfo.visible = False
     
     imgButton(6).visible = True
     imgButton(7).visible = True
@@ -3444,14 +3572,15 @@ Private Sub label4_MouseMove(Button As Integer, _
     Inventario.sMoveItem = False
     
     SetHand
+
 End Sub
 
 Public Sub Label7_Click()
     
     Call Audio.PlayInterface(SND_CLICK)
     
-    
     #If ModoBig = 0 Then
+
         If ClientSetup.bConfig(eSetupMods.SETUP_INTERFAZTDS) Then
             InvEqu.Picture = LoadPicture(DirInterface & "main\SpellClassic.jpg")
         Else
@@ -3487,6 +3616,7 @@ Public Sub Label7_Click()
         Pt.X = 0
         Pt.Y = 0
         ModoTab = False
+
     End If
     
     Call WriteSetPanelClient(Panel, TempInv, Pt.X, Pt.Y)
@@ -3498,7 +3628,7 @@ Public Sub Label7_Click()
     picHechiz(0).visible = True
     
     CmdLanzar.visible = True
-    ImgInfo.visible = True
+    imgInfo.visible = True
     
     #If ModoBig > 0 Then
 
@@ -3509,19 +3639,17 @@ Public Sub Label7_Click()
     #End If
     
     ' Desactivo controles de inventario
-    PicInv.visible = False
+    picInv.visible = False
     
     imgButton(6).visible = False
     imgButton(7).visible = False
     imgButton(8).visible = False
     'imgInvScrollUp.Visible = False
     'imgInvScrollDown.Visible = False
-
     
-    
-   ' If MirandoObjetos Then
-   '     FrmObject_Info.Close_Form
-   ' End If
+    ' If MirandoObjetos Then
+    '     FrmObject_Info.Close_Form
+    ' End If
 
 End Sub
 
@@ -3534,6 +3662,7 @@ Private Sub Label7_MouseMove(Button As Integer, _
     Inventario.sMoveItem = False
     
     SetHand
+
 End Sub
 
 Private Sub PicInv_DblClick()
@@ -3546,6 +3675,7 @@ Private Sub PicInv_DblClick()
     Dim Value As Long, strTemp As String, A As Long
 
     mouse_UP = False
+
     ' x button
     If MacroTrabajo.Enabled Then Call DesactivarMacroTrabajo
      
@@ -3558,27 +3688,24 @@ Private Sub PicInv_DblClick()
     ObjIndex = Inventario.ObjIndex(Inventario.SelectedItem)
     
     If ObjIndex > 0 Then
-        If (ObjData(ObjIndex).ObjType = otarmadura Or _
-            ObjData(ObjIndex).ObjType = otWeapon Or _
-            ObjData(ObjIndex).ObjType = otcasco Or _
-            ObjData(ObjIndex).ObjType = otescudo Or _
-            ObjData(ObjIndex).ObjType = otAnillo Or _
-            ObjData(ObjIndex).ObjType = otMagic Or _
-            ObjData(ObjIndex).ObjType = otFlechas Or _
-            ObjData(ObjIndex).ObjType = otPendienteParty) Then
+        If (ObjData(ObjIndex).ObjType = otarmadura Or ObjData(ObjIndex).ObjType = otWeapon Or ObjData(ObjIndex).ObjType = otcasco Or ObjData(ObjIndex).ObjType = otescudo Or ObjData(ObjIndex).ObjType = otAnillo Or ObjData(ObjIndex).ObjType = otMagic Or ObjData(ObjIndex).ObjType = otFlechas Or ObjData(ObjIndex).ObjType = otPendienteParty) Then
             
             If Not Inventario.Equipped(Inventario.SelectedItem) Then
                 Call EquiparItem
             Else
                 Call UsarItem(1)
+
             End If
+
         Else
             Call UsarItem(1)
+
         End If
     
     End If
     
     Inventario.DrawInventory
+
 End Sub
 
 Private Sub PicInv_Click()
@@ -3620,12 +3747,14 @@ Private Sub PicInv_MouseUp(Button As Integer, Shift As Integer, X As Single, Y A
            
     Inventario.uMoveItem = False
     MouseInvBoton = Button
-   ' Inventario.DrawInventory
+    ' Inventario.DrawInventory
    
-       If Button = 1 Then
+    If Button = 1 Then
         dobleclick.Interval = 1000
         totalclicks = totalclicks + 1
+
     End If
+
 End Sub
 
 Private Sub RecTxt_Change()
@@ -3636,26 +3765,24 @@ Private Sub RecTxt_Change()
           
     If SendTxt.visible Then
         SendTxt.SetFocus
-    ElseIf (Not Comerciando) And (Not MirandoForo) And (Not MirandoEstadisticas) And (Not MirandoCantidad) And _
-           (Not MirandoRank) And (Not MirandoGuildPanel) And (Not MirandoTravel) And _
-        (Not MirandoComerciarUsu) And (Not MirandoBanco) And (Not MirandoComerciar) And (Not MirandoConcentracion) And (Not MirandoCuenta) Then
+    ElseIf (Not Comerciando) And (Not MirandoForo) And (Not MirandoEstadisticas) And (Not MirandoCantidad) And (Not MirandoRank) And (Not MirandoGuildPanel) And (Not MirandoTravel) And (Not MirandoComerciarUsu) And (Not MirandoBanco) And (Not MirandoComerciar) And (Not MirandoConcentracion) And (Not MirandoCuenta) Then
                
-       ' If picInv.Visible Then
-           ' picInv.SetFocus
-       ' ElseIf hlst.Visible Then
+        ' If picInv.Visible Then
+        ' picInv.SetFocus
+        ' ElseIf hlst.Visible Then
         '    hlst.SetFocus
-      '  End If
+        '  End If
     End If
 
 End Sub
 
 Private Sub RecTxt_KeyDown(KeyCode As Integer, Shift As Integer)
 
-  '  If picInv.Visible Then
-       ' picInv.SetFocus
-   ' Else
+    '  If picInv.Visible Then
+    ' picInv.SetFocus
+    ' Else
     '    hlst.SetFocus
-   ' End If
+    ' End If
 
 End Sub
 
@@ -3671,21 +3798,23 @@ Private Function InGameArea() As Boolean
     If clicY < MainViewPic.Top Or clicY > MainViewPic.Top + MainViewPic.Height Then Exit Function
           
     InGameArea = True
+
 End Function
-
-
 
 Private Sub tUpdate_Timer()
     Render
+
 End Sub
 
 Private Sub tUpdateInactive_Timer()
     Call WriteUpdateInactive
+
 End Sub
 
 Public Sub DesactivarMacroHechizos()
     TrainingMacro.Enabled = False
     Call AddtoRichTextBox(FrmMain.RecTxt, "Auto lanzar hechizos desactivado", 0, 150, 150, False, True, True)
+
 End Sub
 
 Private Sub PicInv_MouseDown(Button As Integer, _
@@ -3694,11 +3823,17 @@ Private Sub PicInv_MouseDown(Button As Integer, _
                              Y As Single)
 
     Dim Position  As Integer
-    Dim I         As Long
+
+    Dim i         As Long
+
     Dim file_path As String
+
     Dim data()    As Byte
+
     Dim bmpInfo   As BITMAPINFO
+
     Dim handle    As Integer
+
     Dim bmpData   As StdPicture
     
     '    / x button
@@ -3718,7 +3853,7 @@ Private Sub PicInv_MouseDown(Button As Integer, _
                 Position = Search_GhID(3057)
                   
                 If Position = 0 Then
-                    I = 3057
+                    i = 3057
                     Call Get_Image(DirGraficos & GRH_RESOURCE_FILE_DEFAULT, CStr(3057), data, False)
                     Set bmpData = ArrayToPicture(data(), 0, UBound(data) + 1)
                     FrmMain.ImageList1.ListImages.Add , "g3057", Picture:=bmpData
@@ -3729,29 +3864,32 @@ Private Sub PicInv_MouseDown(Button As Integer, _
                   
                 Inventario.uMoveItem = True
                   
-                Set PicInv.MouseIcon = FrmMain.ImageList1.ListImages(Position).ExtractIcon
-                FrmMain.PicInv.MousePointer = vbCustom
+                Set picInv.MouseIcon = FrmMain.ImageList1.ListImages(Position).ExtractIcon
+                FrmMain.picInv.MousePointer = vbCustom
 
                 Exit Sub
 
             End If
+
         End If
+
     End If
 
 End Sub
 
 Private Function Search_GhID(ByVal gh As Integer) As Integer
 
-    Dim I As Long
+    Dim i As Long
 
-    For I = 1 To FrmMain.ImageList1.ListImages.Count
+    For i = 1 To FrmMain.ImageList1.ListImages.Count
 
-        If FrmMain.ImageList1.ListImages(I).Key = "g" & CStr(gh) Then
-            Search_GhID = I
+        If FrmMain.ImageList1.ListImages(i).Key = "g" & CStr(gh) Then
+            Search_GhID = i
             Exit For
+
         End If
 
-    Next I
+    Next i
 
 End Function
 
@@ -3759,8 +3897,8 @@ Public Sub dragInventory_dragDone(ByVal originalSlot As Integer, ByVal newSlot A
     Call Protocol.WriteMoveItem(originalSlot, newSlot, eMoveType.Inventory)
     Inventario.uMoveItem = False
     Inventario.sMoveItem = False
-End Sub
 
+End Sub
 
 Private Sub SendCMSTXT_KeyUp(KeyCode As Integer, Shift As Integer)
 
@@ -3770,27 +3908,31 @@ Private Sub SendCMSTXT_KeyUp(KeyCode As Integer, Shift As Integer)
         'Say
         If LenB(stxtbuffercmsg) <> 0 Then
             Call ParseUserCommand("/CMSG " & stxtbuffercmsg)
+
         End If
 
         stxtbuffercmsg = vbNullString
         KeyCode = 0
               
-       'If picInv.Visible Then
-       '     picInv.SetFocus
-      '  Else
-      '      hlst.SetFocus
-      '  End If
+        'If picInv.Visible Then
+        '     picInv.SetFocus
+        '  Else
+        '      hlst.SetFocus
+        '  End If
     End If
 
 End Sub
 
 Private Sub SendCMSTXT_KeyPress(KeyAscii As Integer)
+
     If Not (KeyAscii = vbKeyBack) And Not (KeyAscii >= vbKeySpace And KeyAscii <= 250) Then KeyAscii = 0
+
 End Sub
 
 Private Sub UnicodeRtfTextBox1_Click()
 
 End Sub
+
 Private Sub SendTxt_Change()
     '**************************************************************
     'Author: Unknown
@@ -3803,25 +3945,27 @@ Private Sub SendTxt_Change()
     Else
 
         'Make sure only valid chars are inserted (with Shift + Insert they can paste illegal chars)
-        Dim I         As Long
+        Dim i         As Long
 
         Dim TempStr   As String
 
         Dim CharAscii As Integer
               
-        For I = 1 To Len(SendTxt.Text)
-            CharAscii = Asc(mid$(SendTxt.Text, I, 1))
+        For i = 1 To Len(SendTxt.Text)
+            CharAscii = Asc(mid$(SendTxt.Text, i, 1))
 
             If CharAscii >= vbKeySpace And CharAscii <= 250 Then
                 TempStr = TempStr & Chr$(CharAscii)
+
             End If
 
-        Next I
+        Next i
               
         If TempStr <> SendTxt.Text Then
             'We only set it if it's different, otherwise the event will be raised
             'constantly and the client will crush
             SendTxt.Text = TempStr
+
         End If
         
         stxtbuffer = SendTxt.Text
@@ -3834,18 +3978,23 @@ End Sub
 Private Sub SendTxt_KeyPress(KeyAscii As Integer)
 
     If Not (KeyAscii = vbKeyBack) And Not (KeyAscii >= vbKeySpace And KeyAscii <= 250) Then KeyAscii = 0
+
 End Sub
 
 Private Sub SendTxt_KeyUp(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = CustomKeys.BindedKey(eKeyType.mKeyTalk) Then 'Si se apretó enter entonces:
         
         ' No enviamos mensajes vacios a los clanes pero borramos cartel.
         If stxtbuffer = " " Or stxtbuffer = "  " Then
             Call ParseUserCommand(stxtbuffer)
         Else
+
             If LenB(stxtbuffer) <> 0 Then
                 Call ParseUserCommand(HablaTemp & stxtbuffer)
+
             End If
+
         End If
         
         stxtbuffer = vbNullString ' // Mejor vbnullstring que vbnullstring
@@ -3853,33 +4002,31 @@ Private Sub SendTxt_KeyUp(KeyCode As Integer, Shift As Integer)
         KeyCode = 0
         SendTxt.visible = False
              
-      '  If picInv.Visible Then
+        '  If picInv.Visible Then
         '    picInv.SetFocus
-       ' Else
-     '       hlst.SetFocus
-     '   End If
+        ' Else
+        '       hlst.SetFocus
+        '   End If
     End If
        
 End Sub
 
-
-
-
-
 Private Sub tUpdateMS_Timer()
     Call ParseUserCommand("/PING")
+
 End Sub
 
 Private Sub UpdateMapa_Timer()
     
     If RenderizandoIndex = UserMap Then
         Call wGL_Graphic.Capture(FrmMain.MiniMapa.hWnd, MiniMap_FilePath & RenderizandoIndex & ".png")
+
     End If
     
     UpdateMapa.Enabled = False
     RenderizandoMap = False
-End Sub
 
+End Sub
 
 Private Sub macrotrabajo_Timer()
 
@@ -3890,18 +4037,20 @@ Private Sub macrotrabajo_Timer()
 
     End If
     
-        Dim Pt As Point
+    Dim Pt As Point
+
     GetCursorPos Pt
           
     If (UsingSkill = eSkill.Pesca Or UsingSkill = eSkill.Talar Or UsingSkill = eSkill.Mineria Or UsingSkill = FundirMetal) Then
         Call WriteWorkLeftClick(tX, tY, UsingSkill, Pt.X, Pt.Y)
         UsingSkill = 0
+
     End If
           
     Call UsarItem(0)
     Inventario.DrawInventory
-End Sub
 
+End Sub
 
 Public Sub ActivarMacroTrabajo()
     MacroTrabajo.Interval = IntervaloUserPuedeTrabajar
@@ -3920,76 +4069,96 @@ Public Sub DesactivarMacroTrabajo()
        
 End Sub
 
-
 ' Lista Gráfica de Hechizos
-Private Sub picHechiz_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-If Y < 0 Then Y = 0
-If Y > Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1 Then Y = Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1
-If X < picHechiz(Index).ScaleWidth - 10 Then
-    hlst.ListIndex = Int(Y / hlst.Pixel_Alto) + hlst.Scroll
+Private Sub picHechiz_MouseDown(Index As Integer, _
+                                Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
+
+    If Y < 0 Then Y = 0
+    If Y > Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1 Then Y = Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1
+    If X < picHechiz(Index).ScaleWidth - 10 Then
+        hlst.ListIndex = Int(Y / hlst.Pixel_Alto) + hlst.Scroll
+        hlst.DownBarrita = 0
+
+    Else
+        hlst.DownBarrita = Y - hlst.Scroll * (picHechiz(Index).ScaleHeight - hlst.BarraHeight) / (hlst.ListCount - hlst.VisibleCount)
+
+    End If
+
+End Sub
+
+Private Sub picHechiz_MouseMove(Index As Integer, _
+                                Button As Integer, _
+                                Shift As Integer, _
+                                X As Single, _
+                                Y As Single)
+
+    MouseShift = Shift
+
+    If Button = 1 Then
+
+        Dim yy As Integer
+
+        yy = Y
+
+        If yy < 0 Then yy = 0
+        If yy > Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1 Then yy = Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1
+        If hlst.DownBarrita > 0 Then
+            hlst.Scroll = (Y - hlst.DownBarrita) * (hlst.ListCount - hlst.VisibleCount) / (picHechiz(Index).ScaleHeight - hlst.BarraHeight)
+        Else
+            hlst.ListIndex = Int(yy / hlst.Pixel_Alto) + hlst.Scroll
+
+            ' If ScrollArrastrar = 0 Then
+            ' If (Y < yy) Then hlst.Scroll = hlst.Scroll - 1
+            '   If (Y > yy) Then hlst.Scroll = hlst.Scroll + 1
+            ' End If
+        End If
+
+    ElseIf Button = 0 Then
+        hlst.ShowBarrita = X > picHechiz(Index).ScaleWidth - hlst.BarraWidth * 2
+
+    End If
+
+End Sub
+
+Private Sub picHechiz_MouseUp(Index As Integer, _
+                              Button As Integer, _
+                              Shift As Integer, _
+                              X As Single, _
+                              Y As Single)
     hlst.DownBarrita = 0
 
-Else
-    hlst.DownBarrita = Y - hlst.Scroll * (picHechiz(Index).ScaleHeight - hlst.BarraHeight) / (hlst.ListCount - hlst.VisibleCount)
-End If
 End Sub
-
-Private Sub picHechiz_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
-MouseShift = Shift
-If Button = 1 Then
-    Dim yy As Integer
-    yy = Y
-    If yy < 0 Then yy = 0
-    If yy > Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1 Then yy = Int(picHechiz(Index).ScaleHeight / hlst.Pixel_Alto) * hlst.Pixel_Alto - 1
-    If hlst.DownBarrita > 0 Then
-        hlst.Scroll = (Y - hlst.DownBarrita) * (hlst.ListCount - hlst.VisibleCount) / (picHechiz(Index).ScaleHeight - hlst.BarraHeight)
-    Else
-        hlst.ListIndex = Int(yy / hlst.Pixel_Alto) + hlst.Scroll
-
-       ' If ScrollArrastrar = 0 Then
-          ' If (Y < yy) Then hlst.Scroll = hlst.Scroll - 1
-         '   If (Y > yy) Then hlst.Scroll = hlst.Scroll + 1
-       ' End If
-    End If
-ElseIf Button = 0 Then
-    hlst.ShowBarrita = X > picHechiz(Index).ScaleWidth - hlst.BarraWidth * 2
-End If
-End Sub
-
-Private Sub picHechiz_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-hlst.DownBarrita = 0
-End Sub
-
-
-
 
 ' RENDER
 Private Sub Render()
-        '<EhHeader>
-        On Error GoTo Render_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Render_Err
+
+    '</EhHeader>
         
-100     Call wGL_Graphic.Use_Device(g_Captions(eCaption.e_Perfil))
-102     Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmMain.PicPerfil.ScaleWidth, FrmMain.PicPerfil.ScaleHeight)
-104     Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
+    Call wGL_Graphic.Use_Device(g_Captions(eCaption.e_Perfil))
+    Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmMain.PicPerfil.ScaleWidth, FrmMain.PicPerfil.ScaleHeight)
+    Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
     
-    
-          ' Cuadro/Borde del Avatar
-106     Call Draw_Texture_Graphic_Gui(95, 0, 0, To_Depth(1), 118, 118, 0, 0, 118, 118, -1, 0, eTechnique.t_Alpha)
+    ' Cuadro/Borde del Avatar
+    Call Draw_Texture_Graphic_Gui(95, 0, 0, To_Depth(1), 118, 118, 0, 0, 118, 118, -1, 0, eTechnique.t_Alpha)
         
-          ' Avatar
-         Call Draw_Avatar(0, 8, 8, To_Depth(2), 102, 102, 0, 0, 102, 102, -1, 0, eTechnique.t_Alpha)
+    ' Avatar
+    Call Draw_Avatar(0, 8, 8, To_Depth(2), 102, 102, 0, 0, 102, 102, -1, 0, eTechnique.t_Alpha)
     
-176     Call wGL_Graphic_Renderer.Flush
+    Call wGL_Graphic_Renderer.Flush
   
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Render_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.FrmShop.Render " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ARGENTUM.FrmShop.Render " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub

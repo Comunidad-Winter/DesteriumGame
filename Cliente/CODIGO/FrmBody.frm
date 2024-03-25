@@ -412,6 +412,7 @@ Option Explicit
 Private Sub cmdAPLICARAL_Click()
 
     Dim Body As Integer
+
     Body = Val(txt.Text)
                 
     If TempCharIndex > 0 Then
@@ -429,5 +430,7 @@ Private Sub cmdAPLICARAL_Click()
         CharList(TempCharIndex).Body.BodyOffSet(4).Y = Val(FrmBody.y4.Text)
     Else
         Call MsgBox("Selecciona un char")
+
     End If
+
 End Sub

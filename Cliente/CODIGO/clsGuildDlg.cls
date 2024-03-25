@@ -33,6 +33,7 @@ Public Property Let CantidadDialogos(ByVal v As Byte)
     If v > 0 Then
         ReDim Preserve p_Dialogos(1 To v) As t_GuildDlg
         p_CANTIDADDIALOGOS = v
+
     End If
 
 End Property
@@ -47,11 +48,11 @@ Public Sub RemoveDialogs()
     'Last Modification: 04/02/07
     'Removes all dialogs
     '***************************************************
-    Dim I As Long
+    Dim i As Long
     
-    For I = 1 To p_CANTIDADDIALOGOS
-        p_Dialogos(I).Texto = vbNullString
-    Next I
+    For i = 1 To p_CANTIDADDIALOGOS
+        p_Dialogos(i).Texto = vbNullString
+    Next i
 
 End Sub
 
@@ -67,67 +68,75 @@ Public Property Get CantidadDialogos() As Byte
     'Retrieves the number of dialogs to be displayed on screen
     '***************************************************
     CantidadDialogos = p_CANTIDADDIALOGOS
+
 End Property
 
 Public Property Let Activo(ByVal v As Boolean)
     p_Activo = v
+
 End Property
 
 Public Property Get Activo() As Boolean
     Activo = p_Activo
+
 End Property
 
 Private Sub Class_Initialize()
     p_CANTIDADDIALOGOS = 5
     ReDim p_Dialogos(1 To p_CANTIDADDIALOGOS) As t_GuildDlg
     p_Activo = True
+
 End Sub
 
 Public Sub Draw()
 
-    Dim I As Byte
+    Dim i    As Byte
 
-    Dim Y As Long
+    Dim Y    As Long
+
     Dim AddY As Long
     
     If Not p_Activo Then Exit Sub
 
     #If ModoBig = 0 Then
-    Y = 350
-    AddY = 10
+        Y = 350
+        AddY = 10
     #Else
-    Y = 350 * 2
-    AddY = 20
+        Y = 350 * 2
+        AddY = 20
     #End If
     
     '500 600 700 800 900
-    For I = 1 To p_CANTIDADDIALOGOS
+    For i = 1 To p_CANTIDADDIALOGOS
 
-        If Trim$(p_Dialogos(I).Texto) <> vbNullString Then
-            If Left$(p_Dialogos(I).Texto, 1) = Chr(3) Then
-                Call Draw_Text(f_Chat, 14, 260, Y + (I * AddY), To_Depth(6), -1, ARGB(0, 255, 0, 200), FONT_ALIGNMENT_LEFT, mid(p_Dialogos(I).Texto, 2), True)
+        If Trim$(p_Dialogos(i).Texto) <> vbNullString Then
+            If Left$(p_Dialogos(i).Texto, 1) = Chr(3) Then
+                Call Draw_Text(f_Chat, 14, 260, Y + (i * AddY), To_Depth(6), -1, ARGB(0, 255, 0, 200), FONT_ALIGNMENT_LEFT, mid(p_Dialogos(i).Texto, 2), True)
             Else
-                Call Draw_Text(f_Chat, 14, AddY, Y + (I * AddY), To_Depth(6), -1, ARGB(255, 200, 0, 200), FONT_ALIGNMENT_LEFT, p_Dialogos(I).Texto, True)
+                Call Draw_Text(f_Chat, 14, AddY, Y + (i * AddY), To_Depth(6), -1, ARGB(255, 200, 0, 200), FONT_ALIGNMENT_LEFT, p_Dialogos(i).Texto, True)
+
             End If
+
         End If
 
-    Next I
+    Next i
 
 End Sub
 
 Public Sub PassTimer()
 
-    Dim I As Byte
+    Dim i As Byte
 
-    For I = 1 To p_CANTIDADDIALOGOS
+    For i = 1 To p_CANTIDADDIALOGOS
 
-        If p_Dialogos(I).Segundos > 0 Then
-            p_Dialogos(I).Segundos = p_Dialogos(I).Segundos - 1
+        If p_Dialogos(i).Segundos > 0 Then
+            p_Dialogos(i).Segundos = p_Dialogos(i).Segundos - 1
         Else
-            p_Dialogos(I).Texto = vbNullString
+            p_Dialogos(i).Texto = vbNullString
+
         End If
 
-    Next I
+    Next i
     
 End Sub
 
@@ -162,45 +171,48 @@ Public Sub PushBackText(ByVal s As String)
     
     If LenB(str) <> LenB(s) Then
         Call PushBackText(Right$(s, Len(s) - Len(str) - 1))
+
     End If
 
 End Sub
 
 Private Sub RealPushBackText(ByVal s As String)
 
-    Dim I     As Byte
+    Dim i     As Byte
 
     Dim Vacio As Boolean
 
     If p_CANTIDADDIALOGOS > 0 Then
-        I = p_CANTIDADDIALOGOS
+        i = p_CANTIDADDIALOGOS
         Vacio = True
 
-        While I > 0 And Vacio
+        While i > 0 And Vacio
 
-            Vacio = p_Dialogos(I).Texto = vbNullString
+            Vacio = p_Dialogos(i).Texto = vbNullString
 
-            If Vacio Then I = I - 1
+            If Vacio Then i = i - 1
 
         Wend
 
-        If I = p_CANTIDADDIALOGOS Then
+        If i = p_CANTIDADDIALOGOS Then
             'hay q scrollear, estamos llenos
-            I = 1
+            i = 1
 
-            While I < p_CANTIDADDIALOGOS
+            While i < p_CANTIDADDIALOGOS
 
-                p_Dialogos(I) = p_Dialogos(I + 1)
-                I = I + 1
+                p_Dialogos(i) = p_Dialogos(i + 1)
+                i = i + 1
 
             Wend
 
-            p_Dialogos(I).Texto = s
-            p_Dialogos(I).Segundos = p_SEGUNDOS
+            p_Dialogos(i).Texto = s
+            p_Dialogos(i).Segundos = p_SEGUNDOS
         Else
-            p_Dialogos(I + 1).Texto = s
-            p_Dialogos(I + 1).Segundos = p_SEGUNDOS
+            p_Dialogos(i + 1).Texto = s
+            p_Dialogos(i + 1).Segundos = p_SEGUNDOS
+
         End If
+
     End If
 
 End Sub

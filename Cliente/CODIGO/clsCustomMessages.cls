@@ -36,8 +36,6 @@ Attribute VB_Exposed = False
 Option Explicit
 Option Base 0
 
-
-
 ''
 ' Defines the number of messages that can be created.
 Private Const MESSAGE_COUNT               As Byte = 10
@@ -72,22 +70,23 @@ Private Sub Class_Initialize()
 
     Dim handle As Integer
 
-    Dim I      As Long
+    Dim i      As Long
     
     'Load custom messages
     handle = FreeFile()
     
     Open App.path & MESSAGE_FILE_PATH For Input As handle
     
-    Do While (I < MESSAGE_COUNT) And (Not EOF(handle))
-        Line Input #handle, CustomMessages(I)
+    Do While (i < MESSAGE_COUNT) And (Not EOF(handle))
+        Line Input #handle, CustomMessages(i)
         
         'Purge invalid messages
-        If Not MessageIsValid(CustomMessages(I)) Then
-            CustomMessages(I) = vbNullString
+        If Not MessageIsValid(CustomMessages(i)) Then
+            CustomMessages(i) = vbNullString
+
         End If
         
-        I = I + 1
+        i = i + 1
     Loop
     
     Close handle
@@ -95,6 +94,7 @@ Private Sub Class_Initialize()
     'If the file does not exist (only possible error),
     'then we have nothing to worry. All messages will be empty
 ErrHandler:
+
 End Sub
 
 ''
@@ -109,7 +109,7 @@ Private Sub Class_Terminate()
     '***************************************************
     Dim handle        As Integer
 
-    Dim I             As Long
+    Dim i             As Long
 
     Dim directories() As String
 
@@ -119,25 +119,27 @@ Private Sub Class_Terminate()
     directories = Split(MESSAGE_FILE_PATH, "/")
     path = App.path
     
-    For I = 0 To UBound(directories()) - 1
-        path = path & "/" & directories(I)
+    For i = 0 To UBound(directories()) - 1
+        path = path & "/" & directories(i)
         
         If LenB(Dir(path, vbDirectory)) = 0 Then
             Call MkDir(path)
+
         End If
 
-    Next I
+    Next i
     
     'Serialize custom messages
     handle = FreeFile()
     
     Open App.path & MESSAGE_FILE_PATH For Output As handle
     
-    For I = 0 To MESSAGE_COUNT - 1
-        Print #handle, CustomMessages(I)
-    Next I
+    For i = 0 To MESSAGE_COUNT - 1
+        Print #handle, CustomMessages(i)
+    Next i
     
     Close handle
+
 End Sub
 
 ''
@@ -160,6 +162,7 @@ Public Property Get Message(ByVal Index As Integer) As String
     End If
     
     Message = CustomMessages(Index)
+
 End Property
 
 ''
@@ -189,6 +192,7 @@ Public Property Let Message(ByVal Index As Integer, ByVal nValue As String)
     End If
     
     CustomMessages(Index) = nValue
+
 End Property
 
 ''
@@ -203,6 +207,7 @@ Public Property Get InvalidMessageErrCode() As Long
     'Retrieves the INVALID_MESSAGE error code.
     '***************************************************
     InvalidMessageErrCode = INVALID_MESSAGE
+
 End Property
 
 ''
@@ -222,7 +227,7 @@ Private Function MessageIsValid(ByRef msg As String) As Boolean
     'it was causing problems and detected as many messages
     'as wrong with nothing bad on them
     '***************************************************
-    Dim I     As Long
+    Dim i     As Long
 
     Dim Char  As String * 1
 
@@ -239,8 +244,8 @@ Private Function MessageIsValid(ByRef msg As String) As Boolean
 
     End If
     
-    For I = 1 To Len(msg)
-        Char = mid$(msg, I, 1)
+    For i = 1 To Len(msg)
+        Char = mid$(msg, i, 1)
         ascii = Asc(Char)
         
         'check for invalid chars...
@@ -252,10 +257,11 @@ Private Function MessageIsValid(ByRef msg As String) As Boolean
 
         End If
 
-    Next I
+    Next i
     
     'Discard extremely long messages
     If Len(msg) > MAX_MESSAGE_LENGTH Then Exit Function
     
     MessageIsValid = True
+
 End Function

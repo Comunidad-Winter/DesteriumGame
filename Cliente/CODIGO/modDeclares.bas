@@ -34,7 +34,8 @@ Option Explicit
 
 Public Declare Function IsDebuggerPresent Lib "kernel32" () As Long
 
-Public UsersOnline As Long
+Public UsersOnline         As Long
+
 Public Const MAXUSERQUESTS As Integer = 30
 
 Public Type tDropData
@@ -105,31 +106,30 @@ Public EsModoEvento     As Byte
 Public UsuariosOnline   As Integer
 
 ' // Formularios Escalados
-    #If ModoBig = 1 Then
+#If ModoBig = 1 Then
         
-        #If FullScreen = 1 Then
+    #If FullScreen = 1 Then
 
-            Public FrmMain As New frmMain_FullScreen
-        #Else
-
-            Public FrmMain As New frmMain_Scalled
-        #End If
-
-        Public FrmConnect_Account As New FrmConnect_AccountBig
-    
+        Public FrmMain As New frmMain_FullScreen
     #Else
-        
-        #If FullScreen = 1 Then
-            Public FrmMain            As New frmMain_FullScreen
-        #Else
-            Public FrmMain            As New frmMain_Classic
-        #End If
-        
-        
 
-        Public FrmConnect_Account As New FrmConnect_AccountOrig
+        Public FrmMain As New frmMain_Scalled
     #End If
 
+    Public FrmConnect_Account As New FrmConnect_AccountBig
+    
+#Else
+        
+    #If FullScreen = 1 Then
+
+        Public FrmMain As New frmMain_FullScreen
+    #Else
+
+        Public FrmMain As New frmMain_Classic
+    #End If
+
+    Public FrmConnect_Account As New FrmConnect_AccountOrig
+#End If
 
 Public Enum eSubClass
 
@@ -139,16 +139,15 @@ Public Enum eSubClass
 
 End Enum
 
-Public SubClass        As eSubClass
+Public SubClass As eSubClass
 
 Public Alias As String
-Public CVU As String
+
+Public CVU             As String
 
 Public LastDataAccount As String
 
 Public LastDataPasswd  As String
-
-
     
 Public ARENA_LAST      As Long
     
@@ -164,7 +163,6 @@ Public Type tBattleArena
 End Type
     
 Public Battle_Arenas() As tBattleArena
-
 
 #If ModoBig = 1 Then
 
@@ -250,16 +248,16 @@ Public Type RGBA
 
 End Type
 
-Public MiniMap_TileX        As Long
+Public MiniMap_TileX           As Long
 
-Public MiniMap_TileY        As Long
+Public MiniMap_TileY           As Long
 
-Public MiniMap_TileX_Actual As Long
+Public MiniMap_TileX_Actual    As Long
 
-Public MiniMap_TileY_Actual As Long
+Public MiniMap_TileY_Actual    As Long
 
+Public Const MAX_RETOS_CONFIG  As Byte = 6
 
-Public Const MAX_RETOS_CONFIG As Byte = 6
 Public Const MAX_RETOS_TERRENO As Byte = 8
 
 Public Enum eRetoConfig
@@ -399,7 +397,8 @@ Public Type AuraData
 End Type 'Lista de las animaciones de las auras
 
 Public GrhData()        As GrhData 'Guarda todos los grh
-Public GrhDataDefault()        As GrhData ' Contiene todos los Grh sin alteraciones en calculos de x2
+
+Public GrhDataDefault() As GrhData ' Contiene todos los Grh sin alteraciones en calculos de x2
 
 Public BodyData()       As BodyData
 
@@ -656,7 +655,7 @@ Public Dialogos               As clsDialogs
 
 Public Audio                  As clsAudio
 
-Public InventorySkins As clsGrapchicalInventory
+Public InventorySkins         As clsGrapchicalInventory
 
 Public Inventario             As clsGrapchicalInventory
 
@@ -768,82 +767,85 @@ Public Const CASPER_BODY_IDLE        As Integer = 829
 
 Public Const TIME_CASPER_IDLE        As Long = 300
 
+Public Const iCuerpoMuerto           As Integer = 8
 
-Public Const iCuerpoMuerto  As Integer = 8
-Public Const iCuerpoMuerto_Legion  As Integer = 145
-Public Const iCabezaMuerto  As Integer = 500
-Public Const iCabezaMuerto_Legion  As Integer = 501
+Public Const iCuerpoMuerto_Legion    As Integer = 145
 
-Public Const FRAGATA_FANTASMAL As Integer = 764
-Public Const NUMATRIBUTES As Byte = 5
+Public Const iCabezaMuerto           As Integer = 500
 
-    Public Const HUMANO_H_PRIMER_CABEZA  As Integer = 502
+Public Const iCabezaMuerto_Legion    As Integer = 501
 
-    Public Const HUMANO_H_ULTIMA_CABEZA  As Integer = 546
+Public Const FRAGATA_FANTASMAL       As Integer = 764
 
-    Public Const HUMANO_H_CUERPO_DESNUDO As Integer = 21
+Public Const NUMATRIBUTES            As Byte = 5
 
-    Public Const ELFO_H_PRIMER_CABEZA    As Integer = 577
+Public Const HUMANO_H_PRIMER_CABEZA  As Integer = 502
 
-    Public Const ELFO_H_ULTIMA_CABEZA    As Integer = 608
+Public Const HUMANO_H_ULTIMA_CABEZA  As Integer = 546
 
-    Public Const ELFO_H_CUERPO_DESNUDO   As Integer = 21
+Public Const HUMANO_H_CUERPO_DESNUDO As Integer = 21
 
-    Public Const DROW_H_PRIMER_CABEZA    As Integer = 639
+Public Const ELFO_H_PRIMER_CABEZA    As Integer = 577
 
-    Public Const DROW_H_ULTIMA_CABEZA    As Integer = 669
+Public Const ELFO_H_ULTIMA_CABEZA    As Integer = 608
 
-    Public Const DROW_H_CUERPO_DESNUDO   As Integer = 32
+Public Const ELFO_H_CUERPO_DESNUDO   As Integer = 21
 
-    Public Const ENANO_H_PRIMER_CABEZA   As Integer = 700
+Public Const DROW_H_PRIMER_CABEZA    As Integer = 639
 
-    Public Const ENANO_H_ULTIMA_CABEZA   As Integer = 729
+Public Const DROW_H_ULTIMA_CABEZA    As Integer = 669
 
-    Public Const ENANO_H_CUERPO_DESNUDO  As Integer = 53
+Public Const DROW_H_CUERPO_DESNUDO   As Integer = 32
 
-    Public Const GNOMO_H_PRIMER_CABEZA   As Integer = 760
+Public Const ENANO_H_PRIMER_CABEZA   As Integer = 700
 
-    Public Const GNOMO_H_ULTIMA_CABEZA   As Integer = 789
+Public Const ENANO_H_ULTIMA_CABEZA   As Integer = 729
 
-    Public Const GNOMO_H_CUERPO_DESNUDO  As Integer = 53
+Public Const ENANO_H_CUERPO_DESNUDO  As Integer = 53
 
-    '**************************************************
-    Public Const HUMANO_M_PRIMER_CABEZA  As Integer = 547
+Public Const GNOMO_H_PRIMER_CABEZA   As Integer = 760
 
-    Public Const HUMANO_M_ULTIMA_CABEZA  As Integer = 576
+Public Const GNOMO_H_ULTIMA_CABEZA   As Integer = 789
 
-    Public Const HUMANO_M_CUERPO_DESNUDO As Integer = 39
+Public Const GNOMO_H_CUERPO_DESNUDO  As Integer = 53
 
-    Public Const ELFO_M_PRIMER_CABEZA    As Integer = 609
+'**************************************************
+Public Const HUMANO_M_PRIMER_CABEZA  As Integer = 547
 
-    Public Const ELFO_M_ULTIMA_CABEZA    As Integer = 638
+Public Const HUMANO_M_ULTIMA_CABEZA  As Integer = 576
 
-    Public Const ELFO_M_CUERPO_DESNUDO   As Integer = 39
+Public Const HUMANO_M_CUERPO_DESNUDO As Integer = 39
 
-    Public Const DROW_M_PRIMER_CABEZA    As Integer = 670
+Public Const ELFO_M_PRIMER_CABEZA    As Integer = 609
 
-    Public Const DROW_M_ULTIMA_CABEZA    As Integer = 699
+Public Const ELFO_M_ULTIMA_CABEZA    As Integer = 638
 
-    Public Const DROW_M_CUERPO_DESNUDO   As Integer = 40
+Public Const ELFO_M_CUERPO_DESNUDO   As Integer = 39
 
-    Public Const ENANO_M_PRIMER_CABEZA   As Integer = 730
+Public Const DROW_M_PRIMER_CABEZA    As Integer = 670
 
-    Public Const ENANO_M_ULTIMA_CABEZA   As Integer = 759
+Public Const DROW_M_ULTIMA_CABEZA    As Integer = 699
 
-    Public Const ENANO_M_CUERPO_DESNUDO  As Integer = 60
+Public Const DROW_M_CUERPO_DESNUDO   As Integer = 40
 
-    Public Const GNOMO_M_PRIMER_CABEZA   As Integer = 790
+Public Const ENANO_M_PRIMER_CABEZA   As Integer = 730
 
-    Public Const GNOMO_M_ULTIMA_CABEZA   As Integer = 819
+Public Const ENANO_M_ULTIMA_CABEZA   As Integer = 759
 
-    Public Const GNOMO_M_CUERPO_DESNUDO  As Integer = 60
+Public Const ENANO_M_CUERPO_DESNUDO  As Integer = 60
+
+Public Const GNOMO_M_PRIMER_CABEZA   As Integer = 790
+
+Public Const GNOMO_M_ULTIMA_CABEZA   As Integer = 819
+
+Public Const GNOMO_M_CUERPO_DESNUDO  As Integer = 60
 
 'Musica
-Public Const MP3_Inicio As Byte = 101
+Public Const MP3_Inicio              As Byte = 101
 
-Public ConsoleIndex     As Byte
+Public ConsoleIndex                  As Byte
 
-Public RawServersList   As String
+Public RawServersList                As String
 
 Public Type tColor
 
@@ -983,7 +985,6 @@ Public Enum eClass
     Paladin = 7   'Paladín
     Hunter = 8   'Cazador
     Thief = 9     'Ladrón
-    
     
     ' OFF
     Workerer = 10    'Trabajador
@@ -1265,6 +1266,7 @@ Public Enum eGMCommands
     ChangeModoArgentum
     StreamerBotSetting
     LotteryNew
+
 End Enum
         
 '
@@ -1473,6 +1475,7 @@ Type Inventory
     Premium As Byte
     
     ExistSkin As Integer ' # Identifica si tiene la skin
+
 End Type
 
 Type NpCinV
@@ -1649,11 +1652,11 @@ Public UserMuerto                                 As Boolean
 '<-------------------------NUEVO-------------------------->
 Public Comerciando                                As Boolean
 
-
 Public MirandoRetos                               As Boolean
+
 Public MirandoObjetos                             As Boolean
 
-Public MirandoPartidas As Boolean
+Public MirandoPartidas                            As Boolean
 
 Public MirandoOpcionesNpc                         As Boolean
 
@@ -1687,12 +1690,16 @@ Public MirandoComerciar                           As Boolean
 
 Public MirandoCuenta                              As Boolean
 
-
 Public MirandoObj                                 As Boolean
+
 Public MirandoNpc                                 As Boolean
+
 Public MirandoMercader                            As Boolean
+
 Public MirandoOffer                               As Boolean
+
 Public MirandoStatsUser                           As Boolean
+
 Public EsperandoValidacion                        As Boolean 'MAO
 
 '<-------------------------NUEVO-------------------------->
@@ -1719,45 +1726,43 @@ Public Const NUMSKILLSESPECIAL                    As Byte = 9
 
 Public Const NUMATRIBUTOS                         As Byte = 5
 
+Public Const NUMCLASES                            As Byte = 9
 
-Public Const NUMCLASES As Byte = 9
+Public Const NUMRAZAS                             As Byte = 5
 
+Public UserSkills(1 To NUMSKILLS)                 As Byte
 
-Public Const NUMRAZAS                    As Byte = 5
+Public SkillsNames(1 To NUMSKILLS)                As String
 
-Public UserSkills(1 To NUMSKILLS)        As Byte
+Public UserAtributos(1 To NUMATRIBUTOS)           As Byte
 
-Public SkillsNames(1 To NUMSKILLS)       As String
+Public AtributosNames(1 To NUMATRIBUTOS)          As String
 
-Public UserAtributos(1 To NUMATRIBUTOS)  As Byte
+Public Ciudades(1 To NUMCIUDADES)                 As String
 
-Public AtributosNames(1 To NUMATRIBUTOS) As String
+Public ListaRazas(1 To NUMRAZAS)                  As String
 
-Public Ciudades(1 To NUMCIUDADES)        As String
+Public ListaRazasShort(1 To NUMRAZAS)             As String
 
-Public ListaRazas(1 To NUMRAZAS)         As String
+Public ListaClases(1 To NUMCLASES)                As String
 
-Public ListaRazasShort(1 To NUMRAZAS)    As String
+Public SkillPoints                                As Integer
 
-Public ListaClases(1 To NUMCLASES)       As String
+Public Alocados                                   As Integer
 
-Public SkillPoints                       As Integer
+Public Flags()                                    As Integer
 
-Public Alocados                          As Integer
+Public Oscuridad                                  As Integer
 
-Public Flags()                           As Integer
+Public logged                                     As Boolean
 
-Public Oscuridad                         As Integer
+Public UsingSkill                                 As Integer
 
-Public logged                            As Boolean
+Public MD5HushYo                                  As String * 16
 
-Public UsingSkill                        As Integer
+Public EsPartyLeader                              As Boolean
 
-Public MD5HushYo                         As String * 16
-
-Public EsPartyLeader                     As Boolean
-
-Public ServerSelected                    As Byte
+Public ServerSelected                             As Byte
 
 Public Enum E_MODO
 
@@ -2221,7 +2226,7 @@ Public CharCommerce              As tCharCommerce
 
 ' Clanes
 
-Public Selected_GuildIndex As Integer
+Public Selected_GuildIndex       As Integer
 
 Public Const MAX_GUILDS          As Integer = 300
 
@@ -2306,22 +2311,19 @@ Public Enum rGuildPanel
 
 End Enum
 
+Public Const GUILD_CRISTAL         As Integer = 2206
 
+Public TempAlineation              As eGuildAlineation
 
-Public Const GUILD_CRISTAL    As Integer = 2206
+Public CastleGuild(2)              As Integer    ' Clanes de Castillos
 
+Public GuildPanel                  As rGuildPanel 'Solapa Seleccionada
 
-Public TempAlineation                   As eGuildAlineation
+Public GuildSelected               As Integer ' Clan seleccionado para visualizar la información
 
-Public CastleGuild(2)                   As Integer    ' Clanes de Castillos
+Public LastSelectedGuild           As Integer ' Scroll de los Clanes
 
-Public GuildPanel                       As rGuildPanel 'Solapa Seleccionada
-
-Public GuildSelected                    As Integer ' Clan seleccionado para visualizar la información
-
-Public LastSelectedGuild                As Integer ' Scroll de los Clanes
-
-Public GuildsInfo(1 To MAX_GUILDS)      As tGuild
+Public GuildsInfo(1 To MAX_GUILDS) As tGuild
 
 Public Type tDrops
 
@@ -2420,6 +2422,7 @@ Public Type UserOBJ
     Amount As Long
     Equipped As Byte
     CanUse As Boolean
+
 End Type
 
 Public Type tMercaderChar
@@ -2478,26 +2481,30 @@ Public Type tMercader
 End Type
 
 Public MercaderOff                               As Byte ' Solicita quitar o listar ofertas, estando off pj pero on cuenta, por eso acá.
+
 Public MercaderGld                               As Long      ' Oro Temporal de cuanto te va a salir la publicacion!!!
 
 Public MercaderUser                              As tMercader
-Public MercaderUserOffer                          As tMercader
+
+Public MercaderUserOffer                         As tMercader
 
 Public MercaderChars(1 To ACCOUNT_MAX_CHARS)     As tMercaderChar
 
 Public MercaderList(0 To MERCADER_MAX_LIST)      As tMercader
+
 Public MercaderListOffer(0 To MERCADER_MAX_LIST) As tMercader
 
 Public MercaderList_Copy(0 To MERCADER_MAX_LIST) As tMercader
 
-Public MercaderSelected As Integer  ' Publi seleccionado
-Public MercaderSelected1 As Integer ' Publicación seleccionada una vez que confirma la oferta
-Public MercaderSelectedOffer1 As Integer ' Oferta seleccionada una vez que el vendedor tiene los botones habilitados de  ACEPTAR/RECHAZAR
+Public MercaderSelected                          As Integer  ' Publi seleccionado
 
-Public MercaderSelectedOffer As Integer  ' Oferta seleccionada
+Public MercaderSelected1                         As Integer ' Publicación seleccionada una vez que confirma la oferta
 
+Public MercaderSelectedOffer1                    As Integer ' Oferta seleccionada una vez que el vendedor tiene los botones habilitados de  ACEPTAR/RECHAZAR
 
-Public MercaderUserSlot As Integer ' Slot de MERCADO que tiene el usuario para su cuenta. En caso de tener publicacion vigente.
+Public MercaderSelectedOffer                     As Integer  ' Oferta seleccionada
+
+Public MercaderUserSlot                          As Integer ' Slot de MERCADO que tiene el usuario para su cuenta. En caso de tener publicacion vigente.
 
 Public Enum eMercaderSelected
 
@@ -2769,10 +2776,11 @@ Public Const ACTA_NACIMIENTO       As Integer = 1745
 
 Public Const PENDIENTE_SACRIFICIO  As Integer = 1465
 
-Public Const FRAGMENTO_HIELO  As Integer = 2207
+Public Const FRAGMENTO_HIELO       As Integer = 2207
 
-Public Const MANUSCRITO_1  As Integer = 41
-Public Const MANUSCRITO_2  As Integer = 1473
+Public Const MANUSCRITO_1          As Integer = 41
+
+Public Const MANUSCRITO_2          As Integer = 1473
 
 Public Const PERLA_FORTUNA_1       As Integer = 1442
 
@@ -2784,10 +2792,9 @@ Public Const VaraMataDragonesIndex As Integer = 1037
 
 Public Const EspadaDiablo          As Integer = 1235
 
+Public Const LAUDMAGICO            As Integer = 167
 
-Public Const LAUDMAGICO   As Integer = 167
-Public Const ANILLOMAGICO As Integer = 168
-
+Public Const ANILLOMAGICO          As Integer = 168
 
 ' Personaje dibujado en el INFOOBJ
 Public Type tChar_InfoObj
@@ -2837,6 +2844,7 @@ End Type
 
 ' Lista de Objetos
 Public Type tObjData
+
     ID As Integer
     
     Name As String
@@ -2887,11 +2895,15 @@ Public Type tObjData
     Chest As tChest
     
     VisualSkin As Byte
+
 End Type
 
 Public NumObjDatas As Integer
-Public SkinLast As Integer
-Public CopyObjs() As tObjData
+
+Public SkinLast    As Integer
+
+Public CopyObjs()  As tObjData
+
 Public ObjData()   As tObjData
 
 ' Lista de Npcs
@@ -3075,18 +3087,18 @@ Public Type tGlobalCounters
 
 End Type
 
-Public GlobalCounters As tGlobalCounters
+Public GlobalCounters  As tGlobalCounters
 
 ' Lista Gráfica
-Public hlst           As clsGraphicalList
+Public hlst            As clsGraphicalList
 
-Public RankList       As clsGraphicalList
+Public RankList        As clsGraphicalList
 
-Public hlstMercader   As clsGraphicalList
+Public hlstMercader    As clsGraphicalList
 
 Public ScrollArrastrar As Byte
 
-Public LastScroll     As Byte
+Public LastScroll      As Byte
 
 Public Type tShop
 
@@ -3307,6 +3319,7 @@ Public NumeroHechizos As Integer
 Public Hechizos()     As tHechizo
 
 Type tLottery
+
     Name As String
     Desc As String
     
@@ -3320,11 +3333,10 @@ Type tLottery
     CharLast As Integer
     Chars() As String
     LastSpam As Long                     ' Tiempo que hace que spameo en la consola sobre el sorteo.
+
 End Type
 
 Public Lottery() As tLottery
-
-
 
 Public Type Inventario
 
@@ -3362,9 +3374,9 @@ Public Type Inventario
 
 End Type
 
-
 ' # Carga Bonus1=Tipo|Value|ObjIndex|Amount|DurationUse|DurationDate
 Public Type UserBonus
+
     Tipo As eBonusType
     Value As Long
     Amount As Integer
@@ -3390,6 +3402,7 @@ Public Type tSkins
 End Type
 
 Public Type tInfoUser
+
     UserName As String
     Clase As Byte
     Raza As Byte
@@ -3426,14 +3439,15 @@ Public Type tInfoUser
     
     BonusLast As Byte
     BonusUser() As UserBonus
+
 End Type
 
 ' # Estadísticas del personaje
 Public InfoUser As tInfoUser
 
-
 ' Tipos de Bonus que puedo otorgar
 Public Enum eBonusType
+
     eGLD = 1        ' Altera el % de Oro
     eExp = 2        ' Altera el % de Exp
     ePoints = 3     ' Altera el % de Puntos
@@ -3441,5 +3455,6 @@ Public Enum eBonusType
     eObj = 5        ' Determina si da un objeto y no un efecto.
     eVip = 6        ' Agrega tiempo V.I.P
     eMap = 7        ' Agrega acceso a un mapa específico.
+
 End Enum
 

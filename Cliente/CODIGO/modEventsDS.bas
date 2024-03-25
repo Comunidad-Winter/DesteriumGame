@@ -1,7 +1,8 @@
 Attribute VB_Name = "EventosDS"
 Option Explicit
 
-Public TEMP_SLOTEVENT As Byte ' Info del NPC SELECCIONADO
+Public TEMP_SLOTEVENT       As Byte ' Info del NPC SELECCIONADO
+
 Public Const MAX_REWARD_OBJ As Byte = 10
 
 Public Enum eModalityEvent
@@ -17,11 +18,11 @@ Public Enum eModalityEvent
     JuegosDelHambre = 9
     
     Manual = 10
-
     
 End Enum
 
 Public Enum eConfigEvent
+
     eBronce = 0
     ePlata = 1
     eOro = 2
@@ -46,11 +47,13 @@ Public Enum eConfigEvent
     eTeletransportacion = 21
     eCascoEscudo = 22
     eFuegoAmigo = 23
+
 End Enum
 
 Public Const MAX_EVENTS_CONFIG As Byte = 24
 
 Public Type tEvents
+
     Predeterminado As Boolean ' Determina si es un evento cargado desde un .ini, de manera tal que se tenga que reingresar al sistema y hacerse de forma ilimitada.
     TimeInit_Default As Long
     TimeCancel_Default As Long
@@ -92,7 +95,7 @@ Public Type tEvents
     AllowedFaction() As Byte
     PrizeGld As Long
     PrizeObj As Obj
-     LimitRed As Long
+    LimitRed As Long
     TempAdd As String
     TempDate As String
     TempFormat As String
@@ -126,23 +129,26 @@ Public Type tEvents
 End Type
 
 ' # Configuración General de los Eventos
-Public Const MAX_EVENT_SIMULTANEO As Byte = 20
+Public Const MAX_EVENT_SIMULTANEO        As Byte = 20
+
 Public Events(1 To MAX_EVENT_SIMULTANEO) As tEvents
-Public Events_TimeInit As Long
-Public LastEvent As Byte
+
+Public Events_TimeInit                   As Long
+
+Public LastEvent                         As Byte
 
 Public Function strModality(ByVal Modality As eModalityEvent) As String
 
-10  Select Case Modality
+    Select Case Modality
 
         Case eModalityEvent.CastleMode
-20          strModality = "REYVSREY"
+            strModality = "REYVSREY"
                   
-30      Case eModalityEvent.DagaRusa
-40          strModality = "DAGARUSA"
+        Case eModalityEvent.DagaRusa
+            strModality = "DAGARUSA"
                   
-50      Case eModalityEvent.DeathMatch
-60          strModality = "DEATHMATCH"
+        Case eModalityEvent.DeathMatch
+            strModality = "DEATHMATCH"
                   
         Case eModalityEvent.Enfrentamientos
             strModality = "DUELOS"
@@ -159,25 +165,25 @@ Public Function strModality(ByVal Modality As eModalityEvent) As String
         Case eModalityEvent.JuegosDelHambre
             strModality = "JUEGOSDELHAMBRE"
             
-70          ' Case eModalityEvent.Aracnus
-80          'strModality = "Aracnus"
+            ' Case eModalityEvent.Aracnus
+            'strModality = "Aracnus"
                   
-90          ' Case eModalityEvent.HombreLobo
-100             'strModality = "HombreLobo"
+            ' Case eModalityEvent.HombreLobo
+            'strModality = "HombreLobo"
                   
-110             'Case eModalityEvent.Minotauro
-120             'strModality = "Minotauro"
+            'Case eModalityEvent.Minotauro
+            'strModality = "Minotauro"
                   
-130             Case eModalityEvent.Busqueda
-140             strModality = "BUSQUEDA"
+        Case eModalityEvent.Busqueda
+            strModality = "BUSQUEDA"
                   
-150            Case eModalityEvent.Unstoppable
-160             strModality = "IMPARABLE"
+        Case eModalityEvent.Unstoppable
+            strModality = "IMPARABLE"
               
-170             'Case eModalityEvent.Invasion
-180             'strModality = "Invasion"
+            'Case eModalityEvent.Invasion
+            'strModality = "Invasion"
               
-210     End Select
+    End Select
 
 End Function
 
@@ -194,21 +200,25 @@ Public Function CheckAllowedClasses(ByRef AllowedClasses() As Byte) As String
                 CheckAllowedClasses = ListaClases(LoopC)
             Else
                 CheckAllowedClasses = CheckAllowedClasses & ", " & ListaClases(LoopC)
+
             End If
 
         Else
             Valid = False
+
         End If
 
     Next LoopC
 
     If Valid Then
         CheckAllowedClasses = "TODAS"
+
     End If
 
 End Function
 
 Public Function Events_GetDescription(ByRef Modality As eModalityEvent) As String
+
     Select Case Modality
     
         Case eModalityEvent.Enfrentamientos
@@ -235,87 +245,104 @@ End Function
 
 Public Sub Events_GenerateSpam(ByVal Slot As Byte, ByRef Console As RichTextBox)
 
-    Dim strTemp  As String
-    Dim txtRojas As String
+    Dim strTemp      As String
+
+    Dim txtRojas     As String
     
     ' Define RGB colors for different types of text
     Dim TitleColor() As Variant: TitleColor = Array(50, 205, 50)    ' Green
-    Dim DescColor() As Variant: DescColor = Array(70, 130, 180) ' Steel Blue
+
+    Dim DescColor()  As Variant: DescColor = Array(70, 130, 180) ' Steel Blue
+
     Dim ValueColor() As Variant: ValueColor = Array(255, 165, 0) ' Orange
 
     With Events(Slot)
+
         ' Modality-Rounds
         If (.Modality = Enfrentamientos) Then
             strTemp = " | Rounds: " & .LimitRound & IIf(.LimitRound > 1, "s", vbNullString) & IIf(.LimitRoundFinal <> .LimitRound, ". (Final a " & .LimitRoundFinal & ")", vbNullString)
+
         End If
 
         ' Title
         AddtoRichTextBox Console, "'" & UCase$(.Name) & "'" & IIf(.Config(eConfigEvent.eFuegoAmigo) = 1, " (Fuego Amigo)", vbNullString), TitleColor(0), TitleColor(1), TitleColor(2), False, False, True
         
         If strTemp <> vbNullString Then
-             AddtoRichTextBox Console, strTemp, ValueColor(0), ValueColor(1), ValueColor(2), False, False, True
+            AddtoRichTextBox Console, strTemp, ValueColor(0), ValueColor(1), ValueColor(2), False, False, True
+
         End If
         
         ' Points prize
         If .PrizePoints > 0 Then
             AddtoRichTextBox Console, "Puntos de Partida: Hasta ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox Console, .PrizePoints, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
         End If
 
         ' Points exp
         If .PrizeExp > 0 Then
-             AddtoRichTextBox Console, "Puntos de Experiencia: Hasta ", DescColor(0), DescColor(1), DescColor(2), False, False, True
+            AddtoRichTextBox Console, "Puntos de Experiencia: Hasta ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox Console, PonerPuntos(.PrizeExp), ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
         End If
 
         ' Level requirement
         If Not (.LvlMin = 1 And .LvlMax = 47) And Not (.LvlMin = 1 And .LvlMax = 1) Then
             'If .PrizeExp > 0 Then
-                AddtoRichTextBox Console, "Nivel permitido: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
-                AddtoRichTextBox Console, .LvlMin & " a " & .LvlMax & ". ", ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+            AddtoRichTextBox Console, "Nivel permitido: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
+            AddtoRichTextBox Console, .LvlMin & " a " & .LvlMax & ". ", ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
             'End If
         End If
 
-           ' Class and faction requirement
+        ' Class and faction requirement
         Dim TextClass As String: TextClass = CheckAllowedClasses(.AllowedClasses)
+
         If TextClass <> "TODAS" Then
             AddtoRichTextBox Console, "Clases permitidas: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox Console, TextClass, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
         End If
 
         ' Fees
         If .InscriptionGld > 0 Or .InscriptionGldPremium > 0 Then
             AddtoRichTextBox Console, "Cuotas de inscripción: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox Console, IIf(.InscriptionGld > 0, .InscriptionGld & " de oro", "") & IIf(.InscriptionGldPremium > 0, " | " & .InscriptionGldPremium & " GldPremiums", "") & ".", ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
         End If
 
         ' Prizes
         If .PrizeGld > 0 Or .PrizeGldPremium > 0 Or .PrizeObj.ObjIndex > 0 Then
             AddtoRichTextBox Console, "Premios: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox Console, IIf(.PrizeGld > 0, .PrizeGld & " de oro", "") & IIf(.PrizeGldPremium > 0, " | " & .PrizeGldPremium & " DSP", "") & strTemp, ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
         End If
 
         ' Special rules
         If .Config(eConfigEvent.eCascoEscudo) = 0 Then
             AddtoRichTextBox Console, "Regla especial: ", DescColor(0), DescColor(1), DescColor(2), False, False, True
             AddtoRichTextBox Console, "No se permiten Cascos-Escudos.", ValueColor(0), ValueColor(1), ValueColor(2), False, False, False
+
         End If
 
         ' Special spells
         If .Config(eConfigEvent.eResu) = 1 Or .Config(eConfigEvent.eInvisibilidad) = 1 Or .Config(eConfigEvent.eOcultar) = 1 Or .Config(eConfigEvent.eInvocar) = 1 Then
             strTemp = "Hechizos NO permitidos: "
+
             If .Config(eConfigEvent.eResu) = 1 Then strTemp = strTemp & " 'RESU' "
             If .Config(eConfigEvent.eInvisibilidad) = 1 Then strTemp = strTemp & " 'INVI' "
             If .Config(eConfigEvent.eOcultar) = 1 Then strTemp = strTemp & " 'OCULTAR' "
             If .Config(eConfigEvent.eInvocar) = 1 Then strTemp = strTemp & " 'INVOCAR' "
             
             AddtoRichTextBox Console, strTemp, ValueColor(0), ValueColor(1), ValueColor(2), False, False, True
+
         End If
 
         ' Space
         AddtoRichTextBox Console, " ", 255, 255, 255, False, False, True
         
         Console.SelStart = 0
+
     End With
 
 End Sub

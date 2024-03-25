@@ -29,8 +29,6 @@ Attribute VB_Name = "AI"
 
 Option Explicit
 
-
-
 Public Enum TipoAI
 
     Estatico = 1
@@ -47,202 +45,195 @@ Public Enum TipoAI
     IntelligenceMax = 14            ' @ Inteligencia aplicada para las criaturas inteligentes
     Caminata = 15
     Invasion = 16
+
 End Enum
 
 'Damos a los NPCs el mismo rango de visiï¿½n que un PJ
 
-
 Public Const RANGO_VISION_x As Byte = 8
+
 Public Const RANGO_VISION_y As Byte = 6
 
-
-
 Private Sub RestoreOldMovement(ByVal NpcIndex As Integer)
-        '<EhHeader>
-        On Error GoTo RestoreOldMovement_Err
-        '</EhHeader>
 
-100     With Npclist(NpcIndex)
+    '<EhHeader>
+    On Error GoTo RestoreOldMovement_Err
 
-102         If .MaestroUser = 0 Then
-104             .Movement = .flags.OldMovement
-106             .Hostile = .flags.OldHostil
-108             .flags.AttackedBy = vbNullString
-110             .flags.KeepHeading = 0
+    '</EhHeader>
 
-            End If
+    With Npclist(NpcIndex)
 
-        End With
+        If .MaestroUser = 0 Then
+            .Movement = .flags.OldMovement
+            .Hostile = .flags.OldHostil
+            .flags.AttackedBy = vbNullString
+            .flags.KeepHeading = 0
 
-        '<EhFooter>
-        Exit Sub
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Sub
 
 RestoreOldMovement_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.AI.RestoreOldMovement " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.AI.RestoreOldMovement " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
-
-
 
 Sub NpcLanzaUnSpell(ByVal NpcIndex As Integer, ByVal UserIndex As Integer)
 
-        '<EhHeader>
-        On Error GoTo NpcLanzaUnSpell_Err
+    '<EhHeader>
+    On Error GoTo NpcLanzaUnSpell_Err
 
-        '</EhHeader>
+    '</EhHeader>
 
-        '**************************************************************
-        'Author: Unknown
-        'Last Modify by: -
-        'Last Modify Date: -
-        '**************************************************************
-100     With UserList(UserIndex)
+    '**************************************************************
+    'Author: Unknown
+    'Last Modify by: -
+    'Last Modify Date: -
+    '**************************************************************
+    With UserList(UserIndex)
 
-102         If .flags.Invisible = 1 Or .flags.Oculto = 1 Then Exit Sub
-              If Not Intervalo_CriatureAttack(NpcIndex, False) Then Exit Sub
-        End With
+        If .flags.Invisible = 1 Or .flags.Oculto = 1 Then Exit Sub
+        If Not Intervalo_CriatureAttack(NpcIndex, False) Then Exit Sub
+
+    End With
     
-        Dim K As Integer
+    Dim K As Integer
 
-104     K = RandomNumber(1, Npclist(NpcIndex).flags.LanzaSpells)
-106     Call NpcLanzaSpellSobreUser(NpcIndex, UserIndex, Npclist(NpcIndex).Spells(K))
-        '<EhFooter>
-        Exit Sub
+    K = RandomNumber(1, Npclist(NpcIndex).flags.LanzaSpells)
+    Call NpcLanzaSpellSobreUser(NpcIndex, UserIndex, Npclist(NpcIndex).Spells(K))
+    '<EhFooter>
+    Exit Sub
 
 NpcLanzaUnSpell_Err:
-        LogError Err.description & vbCrLf & "in NpcLanzaUnSpell " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in NpcLanzaUnSpell " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Sub NpcLanzaUnSpellSobreNpc(ByVal NpcIndex As Integer, ByVal TargetNPC As Integer)
 
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo NpcLanzaUnSpellSobreNpc_Err
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo NpcLanzaUnSpellSobreNpc_Err
 
-        '</EhHeader>
+    '</EhHeader>
 
-        Dim K As Integer
+    Dim K As Integer
 
-100     K = RandomNumber(1, Npclist(NpcIndex).flags.LanzaSpells)
-102     Call NpcLanzaSpellSobreNpc(NpcIndex, TargetNPC, Npclist(NpcIndex).Spells(K), True)
-        '<EhFooter>
-        Exit Sub
+    K = RandomNumber(1, Npclist(NpcIndex).flags.LanzaSpells)
+    Call NpcLanzaSpellSobreNpc(NpcIndex, TargetNPC, Npclist(NpcIndex).Spells(K), True)
+    '<EhFooter>
+    Exit Sub
 
 NpcLanzaUnSpellSobreNpc_Err:
-        LogError Err.description & vbCrLf & "in NpcLanzaUnSpellSobreNpc " & Npclist(NpcIndex).Name & ". " & "at line " & Erl
+    LogError Err.description & vbCrLf & "in NpcLanzaUnSpellSobreNpc " & Npclist(NpcIndex).Name & ". " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
-
 Public Sub Events_AI_DagaRusa(ByVal NpcIndex As Integer, _
-                            Optional ByVal Init As Boolean = False)
+                              Optional ByVal Init As Boolean = False)
 
+    On Error GoTo Events_AI_DagaRusa_Err
 
-        On Error GoTo Events_AI_DagaRusa_Err
+    Dim UserIndex  As Integer
 
+    Dim Npc        As Npc
 
-        Dim UserIndex  As Integer
+    Dim LoopC      As Integer
 
-        Dim Npc        As Npc
+    Dim SlotEvent  As Integer
 
-        Dim LoopC      As Integer
+    Dim tHeading   As eHeading
 
-        Dim SlotEvent  As Integer
-
-        Dim tHeading   As eHeading
-
-        Dim Pos        As WorldPos
+    Dim Pos        As WorldPos
           
-        Static Pasaron As Byte
-          
+    Static Pasaron As Byte
 
-100     Npc = Npclist(NpcIndex)
-102     SlotEvent = Npc.flags.SlotEvent
+    Npc = Npclist(NpcIndex)
+    SlotEvent = Npc.flags.SlotEvent
           
-104     If Init Then
-106         Pasaron = 0
+    If Init Then
+        Pasaron = 0
 
+        Exit Sub
+
+    End If
+        
+    With Events(SlotEvent)
+              
+        ' El NPC completa la ronda.
+        If Pasaron >= Npclist(NpcIndex).flags.InscribedPrevio Then
+                
+            DataRusa_SummonUser SlotEvent, False ' @ Vuelve a summonear a los usuarios
+            DagaRusa_ResetRonda SlotEvent
+            UserIndex = DagaRusa_NextUser(SlotEvent)
+                  
+            Pos.Map = Npclist(NpcIndex).Pos.Map
+            Pos.X = UserList(UserIndex).Pos.X
+            Pos.Y = UserList(UserIndex).Pos.Y - 1
+            tHeading = FindDirection(Npclist(NpcIndex).Pos, Pos)
+            Call MoveNPCChar(NpcIndex, tHeading)
+                  
+            If Npclist(NpcIndex).Pos.X = Pos.X Then
+                Pasaron = 0
+                Npclist(NpcIndex).flags.InscribedPrevio = .Inscribed
+
+            End If
+                  
             Exit Sub
 
         End If
-        
-108     With Events(SlotEvent)
-              
-            ' El NPC completa la ronda.
-110         If Pasaron >= Npclist(NpcIndex).flags.InscribedPrevio Then
-                
-                DataRusa_SummonUser SlotEvent, False ' @ Vuelve a summonear a los usuarios
-112             DagaRusa_ResetRonda SlotEvent
-114             UserIndex = DagaRusa_NextUser(SlotEvent)
-                  
-116             Pos.Map = Npclist(NpcIndex).Pos.Map
-118             Pos.X = UserList(UserIndex).Pos.X
-120             Pos.Y = UserList(UserIndex).Pos.Y - 1
-122             tHeading = FindDirection(Npclist(NpcIndex).Pos, Pos)
-124             Call MoveNPCChar(NpcIndex, tHeading)
-                  
-126             If Npclist(NpcIndex).Pos.X = Pos.X Then
-128                 Pasaron = 0
-130                 Npclist(NpcIndex).flags.InscribedPrevio = .Inscribed
-
-                End If
-                  
-                Exit Sub
-
-            End If
                       
-132         UserIndex = DagaRusa_NextUser(SlotEvent)
+        UserIndex = DagaRusa_NextUser(SlotEvent)
               
-134         If UserIndex > 0 Then
+        If UserIndex > 0 Then
               
-136             If Not (Distancia(Npclist(NpcIndex).Pos, UserList(UserIndex).Pos) <= 1) Then
-138                 Pos.Map = UserList(UserIndex).Pos.Map
-140                 Pos.X = UserList(UserIndex).Pos.X
-142                 Pos.Y = UserList(UserIndex).Pos.Y - 1
+            If Not (Distancia(Npclist(NpcIndex).Pos, UserList(UserIndex).Pos) <= 1) Then
+                Pos.Map = UserList(UserIndex).Pos.Map
+                Pos.X = UserList(UserIndex).Pos.X
+                Pos.Y = UserList(UserIndex).Pos.Y - 1
                                   
-144                 tHeading = FindDirection(Npclist(NpcIndex).Pos, Pos)
-146                 Call MoveNPCChar(NpcIndex, tHeading)
-148                 Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, tHeading)
-                Else
-150                 Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, eHeading.SOUTH)
+                tHeading = FindDirection(Npclist(NpcIndex).Pos, Pos)
+                Call MoveNPCChar(NpcIndex, tHeading)
+                Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, tHeading)
+            Else
+                Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, eHeading.SOUTH)
 
-                End If
+            End If
                   
-152             If (Distancia(Npclist(NpcIndex).Pos, UserList(UserIndex).Pos) <= 1) Then
-154                 Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, SOUTH)
-156                 .Users(UserList(UserIndex).flags.SlotUserEvent).Value = 1
+            If (Distancia(Npclist(NpcIndex).Pos, UserList(UserIndex).Pos) <= 1) Then
+                Call ChangeNPCChar(NpcIndex, Npclist(NpcIndex).Char.Body, Npclist(NpcIndex).Char.Head, SOUTH)
+                .Users(UserList(UserIndex).flags.SlotUserEvent).Value = 1
                 
-158                 Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayEffect(SND_IMPACTO, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y, UserList(UserIndex).Char.charindex))
-160                 Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.charindex, FXSANGRE, 0))
+                Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessagePlayEffect(SND_IMPACTO, UserList(UserIndex).Pos.X, UserList(UserIndex).Pos.Y, UserList(UserIndex).Char.charindex))
+                Call SendData(SendTarget.ToPCArea, UserIndex, PrepareMessageCreateFX(UserList(UserIndex).Char.charindex, FXSANGRE, 0))
                 
-162                 If RandomNumber(1, 100) <= .Prob Then
-164                     Call UserDie(UserIndex)
-                    Else
-166                     Call WriteConsoleMsg(UserIndex, "¡Te has salvado! Pero no tendrás tanta suerte la próxima...", FontTypeNames.FONTTYPE_INFOGREEN)
-
-                    End If
-
-168                 Npclist(NpcIndex).Target = UserIndex
-170                 Pasaron = Pasaron + 1
+                If RandomNumber(1, 100) <= .Prob Then
+                    Call UserDie(UserIndex)
+                Else
+                    Call WriteConsoleMsg(UserIndex, "¡Te has salvado! Pero no tendrás tanta suerte la próxima...", FontTypeNames.FONTTYPE_INFOGREEN)
 
                 End If
-              
+
+                Npclist(NpcIndex).Target = UserIndex
+                Pasaron = Pasaron + 1
+
             End If
               
-        End With
+        End If
+              
+    End With
 
-
-        Exit Sub
+    Exit Sub
 
 Events_AI_DagaRusa_Err:
     LogError Err.description & vbCrLf & "in Events_AI_DagaRusa " & "at line " & Erl

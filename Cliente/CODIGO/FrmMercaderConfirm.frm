@@ -77,7 +77,6 @@ Begin VB.Form FrmMercaderConfirm
       _Version        =   393217
       BackColor       =   0
       BorderStyle     =   0
-      Enabled         =   -1  'True
       ReadOnly        =   -1  'True
       ScrollBars      =   2
       DisableNoScroll =   -1  'True
@@ -169,15 +168,19 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private clsFormulario          As clsFormMovementManager
-Private picCheckBox          As Picture
-Private picCheckBoxNulo      As Picture
+Private clsFormulario   As clsFormMovementManager
 
-Private Confirm As Boolean
+Private picCheckBox     As Picture
+
+Private picCheckBoxNulo As Picture
+
+Private Confirm         As Boolean
 
 Public Enum eTypeConfirm
+
     Venta = 1
     Oferta = 2
+
 End Enum
 
 Public TypeConfirm As eTypeConfirm
@@ -188,18 +191,20 @@ Private Sub ButtonNext_Click()
     If Not Confirm Then
         Call MsgBox("Debes aceptar los términos y condiciones.")
         Exit Sub
+
     End If
     
     If Len(txtPasswd.Text) < 5 Then
         Call MsgBox("Contraseña incorrecta.")
         Exit Sub
+
     End If
     
     If Len(txtPin.Text) < 5 Then
         Call MsgBox("Clave Pin incorrecta.")
         Exit Sub
+
     End If
-    
 
     Account.Passwd = txtPasswd.Text
     Account.Key = txtPin.Text
@@ -208,9 +213,11 @@ Private Sub ButtonNext_Click()
         Call WriteMercader_New(0, MercaderUser)
     Else
         Call WriteMercader_New(MercaderSelectedOffer, MercaderUserOffer)
+
     End If
     
     Form_KeyDown vbKeyEscape, 0
+
 End Sub
 
 Private Sub chkConfirm_Click()
@@ -238,9 +245,11 @@ Private Sub chkView1_Click()
     Else
         txtPasswd.PasswordChar = "*"
         Set chkView1.Picture = picCheckBoxNulo
+
     End If
     
 End Sub
+
 Private Sub chkView2_Click()
     Call Audio.PlayInterface(SND_CLICK)
      
@@ -255,6 +264,7 @@ Private Sub chkView2_Click()
     End If
     
 End Sub
+
 Private Sub Form_Load()
 
     Dim filePath As String
@@ -277,14 +287,14 @@ End Sub
 
 Public Sub UpdateInfo()
 
-    Dim A As Long
+    Dim A     As Long
     
     Dim TempA As Long
     
     With MercaderList(MercaderSelected)
+
         If TypeConfirm = eTypeConfirm.Oferta Then
             lblTitle.Caption = "OFERTA a» " + .Chars(1).Desc & IIf(.Char > 1, " +" & .Char - 1 & " pjs", vbNullString)
-            
             
             With MercaderUserOffer
              
@@ -292,10 +302,13 @@ Public Sub UpdateInfo()
                 Call AddtoRichTextBox(Console, "Personajes que vas a ofrecer: ", 255, 255, 255, True, False)
                 
                 For A = 1 To ACCOUNT_MAX_CHARS
+
                     If .bChars(A) > 0 Then
                         TempA = TempA + 1
                         Call AddtoRichTextBox(Console, TempA & "°: " & Account.Chars(A).Name, 172, 246, 180, True, False)
+
                     End If
+
                 Next A
                 
                 Call AddtoRichTextBox(Console, " ", 255, 255, 255, True, False)
@@ -322,26 +335,27 @@ Public Sub UpdateInfo()
                 Call AddtoRichTextBox(Console, "Descripción elegida (Cuentale en pocas palabras que le das): ", 255, 255, 255, True, False)
                 Call AddtoRichTextBox(Console, .Desc, 191, 197, 249, True, False, False)
                 
-                
-                
-                
                 Call AddtoRichTextBox(Console, " ", 255, 255, 255, True, False)
                 Call AddtoRichTextBox(Console, "FIN de la información. Scrollea el texto para leerlo bien.", 255, 255, 255, True, False)
                 Call AddtoRichTextBox(Console, " ", 255, 255, 255, True, False)
+
             End With
             
         Else
             lblTitle.Caption = "Estás realizando una nueva publicación"
             
-             With MercaderUser
+            With MercaderUser
              
                 ' # Personajes que vas a vender
                 Call AddtoRichTextBox(Console, "Personajes que vas a publicar: ", 255, 255, 255, True, False)
                 
                 For A = 1 To ACCOUNT_MAX_CHARS
+
                     If .bChars(A) > 0 Then
                         Call AddtoRichTextBox(Console, A & "°: " & Account.Chars(A).Name, 172, 246, 180, True, False)
+
                     End If
+
                 Next A
                 
                 Call AddtoRichTextBox(Console, " ", 255, 255, 255, True, False)
@@ -366,20 +380,15 @@ Public Sub UpdateInfo()
                 Call AddtoRichTextBox(Console, "Descripción elegida: ", 255, 255, 255, True, False)
                 Call AddtoRichTextBox(Console, .Desc, 191, 197, 249, True, False, False)
                 
-                
-                
-                
                 Call AddtoRichTextBox(Console, " ", 255, 255, 255, True, False)
                 Call AddtoRichTextBox(Console, "FIN de la información. Scrollea el texto para leerlo bien.", 255, 255, 255, True, False)
                 Call AddtoRichTextBox(Console, " ", 255, 255, 255, True, False)
+
             End With
+
         End If
         
     End With
-
-   
-    
-    
     
 End Sub
 
@@ -396,13 +405,14 @@ End Sub
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Form_KeyDown vbKeyEscape, 0
-End Sub
 
+End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
 End Sub

@@ -52,11 +52,13 @@ Private m_size      As Integer
 
 Public Function IsEmpty() As Boolean
     IsEmpty = m_size = 0
+
 End Function
 
 Public Function IsFull() As Boolean
     'IsFull = m_lastelem = m_maxelem
     IsFull = m_size = m_maxelem
+
 End Function
 
 Public Function Push(ByVal aString As String) As Boolean
@@ -74,6 +76,7 @@ Public Function Push(ByVal aString As String) As Boolean
         Push = True
     Else
         Push = False
+
     End If
 
 End Function
@@ -93,6 +96,7 @@ Public Function Pop() As String
             m_lastelem = 0
             m_firstelem = 0
             m_size = 0
+
         End If
 
     Else
@@ -109,10 +113,12 @@ Private Sub Class_Initialize()
     m_maxelem = 300
 
     ReDim m_array(1 To m_maxelem)
+
 End Sub
 
 Public Property Get MaxElems() As Long
     MaxElems = m_maxelem
+
 End Property
 
 Public Property Let MaxElems(ByVal lNewValue As Long)

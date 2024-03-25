@@ -53,16 +53,19 @@ Public Function IntervaloPermiteLanzarSpell(ByVal UserIndex As Integer, _
             UserList(UserIndex).Counters.TimerLanzarSpell = TActual
             ' Actualizo spell-attack
             UserList(UserIndex).Counters.TimerMagiaGolpe = TActual
+
         End If
 
         IntervaloPermiteLanzarSpell = True
     Else
         IntervaloPermiteLanzarSpell = False
+
     End If
 
 End Function
+
 Public Function IntervaloPermiteShiftear(ByVal UserIndex As Integer, _
-                                            Optional ByVal Actualizar As Boolean = True) As Boolean
+                                         Optional ByVal Actualizar As Boolean = True) As Boolean
 
     Dim TActual As Long
 
@@ -73,11 +76,13 @@ Public Function IntervaloPermiteShiftear(ByVal UserIndex As Integer, _
             UserList(UserIndex).Counters.TimerShiftear = TActual
             ' Actualizo spell-attack
             UserList(UserIndex).Counters.TimerShiftear = TActual
+
         End If
 
         IntervaloPermiteShiftear = True
     Else
         IntervaloPermiteShiftear = False
+
     End If
 
 End Function
@@ -92,569 +97,594 @@ Public Function IntervaloPermiteCaspear(ByVal UserIndex As Integer, _
     If TActual - UserList(UserIndex).Counters.CaspeoTime >= 2000 Then
         If Actualizar Then
             UserList(UserIndex).Counters.CaspeoTime = TActual
+
         End If
 
         IntervaloPermiteCaspear = True
     Else
         IntervaloPermiteCaspear = False
+
     End If
 
 End Function
 
 Public Function IntervaloPermiteMoverUsuario(ByVal UserIndex As Integer, _
-                                            Optional ByVal Actualizar As Boolean = True) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteLanzarSpell_Err
-        '</EhHeader>
+                                             Optional ByVal Actualizar As Boolean = True) As Boolean
 
-        Dim TActual As Long
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteLanzarSpell_Err
 
-100     TActual = GetTime
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.TimerLanzarSpell >= IntervaloUserPuedeCastear Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimerLanzarSpell = TActual
-                ' Actualizo spell-attack
-108             UserList(UserIndex).Counters.TimerMagiaGolpe = TActual
-            End If
+    Dim TActual As Long
 
-110         IntervaloPermiteMoverUsuario = True
-        Else
-112         IntervaloPermiteMoverUsuario = False
+    TActual = GetTime
+
+    If TActual - UserList(UserIndex).Counters.TimerLanzarSpell >= IntervaloUserPuedeCastear Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimerLanzarSpell = TActual
+            ' Actualizo spell-attack
+            UserList(UserIndex).Counters.TimerMagiaGolpe = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        IntervaloPermiteMoverUsuario = True
+    Else
+        IntervaloPermiteMoverUsuario = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteLanzarSpell_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteLanzarSpell " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteLanzarSpell " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteAtacar(ByVal UserIndex As Integer, _
                                        Optional ByVal Actualizar As Boolean = True) As Boolean
-     '***************************************************
-     'Author: Unknown
-     'Last Modification: -
-     '
-     '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteAtacar_Err
-        '</EhHeader>
 
-     Dim TActual As Long
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteAtacar_Err
 
-100  TActual = GetTime
+    '</EhHeader>
 
-102  If TActual - UserList(UserIndex).Counters.TimerPuedeAtacar >= IntervaloUserPuedeAtacar Then
-104      If Actualizar Then
-106          UserList(UserIndex).Counters.TimerPuedeAtacar = TActual
-             ' Actualizo attack-spell
-108          UserList(UserIndex).Counters.TimerGolpeMagia = TActual
-             ' Actualizo attack-use
-110          UserList(UserIndex).Counters.TimerGolpeUsar = TActual
-         End If
+    Dim TActual As Long
 
-112      IntervaloPermiteAtacar = True
-     Else
-114      IntervaloPermiteAtacar = False
-     End If
+    TActual = GetTime
 
-        '<EhFooter>
-        Exit Function
+    If TActual - UserList(UserIndex).Counters.TimerPuedeAtacar >= IntervaloUserPuedeAtacar Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimerPuedeAtacar = TActual
+            ' Actualizo attack-spell
+            UserList(UserIndex).Counters.TimerGolpeMagia = TActual
+            ' Actualizo attack-use
+            UserList(UserIndex).Counters.TimerGolpeUsar = TActual
+
+        End If
+
+        IntervaloPermiteAtacar = True
+    Else
+        IntervaloPermiteAtacar = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteAtacar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteAtacar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteAtacar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteGolpeUsar(ByVal UserIndex As Integer, _
                                           Optional ByVal Actualizar As Boolean = True) As Boolean
-        '***************************************************
-        'Author: ZaMa
-        'Checks if the time that passed from the last hit is enough for the user to use a potion.
-        'Last Modification: 06/04/2009
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteGolpeUsar_Err
-        '</EhHeader>
 
-        Dim TActual As Long
+    '***************************************************
+    'Author: ZaMa
+    'Checks if the time that passed from the last hit is enough for the user to use a potion.
+    'Last Modification: 06/04/2009
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteGolpeUsar_Err
 
-100     TActual = GetTime
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.TimerGolpeUsar >= IntervaloGolpeUsar Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimerGolpeUsar = TActual
-            End If
+    Dim TActual As Long
 
-108         IntervaloPermiteGolpeUsar = True
-        Else
-110         IntervaloPermiteGolpeUsar = False
+    TActual = GetTime
+
+    If TActual - UserList(UserIndex).Counters.TimerGolpeUsar >= IntervaloGolpeUsar Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimerGolpeUsar = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        IntervaloPermiteGolpeUsar = True
+    Else
+        IntervaloPermiteGolpeUsar = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteGolpeUsar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteGolpeUsar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteGolpeUsar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteMagiaGolpe(ByVal UserIndex As Integer, _
                                            Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteMagiaGolpe_Err
-        '</EhHeader>
 
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteMagiaGolpe_Err
+
+    '</EhHeader>
+
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    Dim TActual As Long
     
-100     With UserList(UserIndex)
+    With UserList(UserIndex)
         
-102         TActual = GetTime
+        TActual = GetTime
         
-104         If TActual - .Counters.TimerLanzarSpell >= IntervaloMagiaGolpe Then
-106             If Actualizar Then
-108                 .Counters.TimerMagiaGolpe = TActual
-                End If
+        If TActual - .Counters.TimerLanzarSpell >= IntervaloMagiaGolpe Then
+            If Actualizar Then
+                .Counters.TimerMagiaGolpe = TActual
 
-110             IntervaloPermiteMagiaGolpe = True
-            Else
-112             IntervaloPermiteMagiaGolpe = False
             End If
 
-        End With
+            IntervaloPermiteMagiaGolpe = True
+        Else
+            IntervaloPermiteMagiaGolpe = False
 
-        '<EhFooter>
-        Exit Function
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteMagiaGolpe_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteMagiaGolpe " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteMagiaGolpe " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteGolpeMagia(ByVal UserIndex As Integer, _
                                            Optional ByVal Actualizar As Boolean = True) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteGolpeMagia_Err
-        '</EhHeader>
 
-        Dim TActual As Long
-    
-100     TActual = GetTime
-    
-102     If TActual - UserList(UserIndex).Counters.TimerGolpeMagia >= IntervaloGolpeMagia Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimerGolpeMagia = TActual
-            End If
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteGolpeMagia_Err
 
-108         IntervaloPermiteGolpeMagia = True
-        Else
-110         IntervaloPermiteGolpeMagia = False
+    '</EhHeader>
+
+    Dim TActual As Long
+    
+    TActual = GetTime
+    
+    If TActual - UserList(UserIndex).Counters.TimerGolpeMagia >= IntervaloGolpeMagia Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimerGolpeMagia = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        IntervaloPermiteGolpeMagia = True
+    Else
+        IntervaloPermiteGolpeMagia = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteGolpeMagia_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteGolpeMagia " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteGolpeMagia " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' TRABAJO
 Public Function IntervaloPermiteTrabajar(ByVal UserIndex As Integer, _
                                          Optional ByVal Actualizar As Boolean = True) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteTrabajar_Err
-        '</EhHeader>
 
-        Dim TActual As Long
-    
-100     TActual = GetTime
-    
-102     If TActual - UserList(UserIndex).Counters.TimerPuedeTrabajar >= IntervaloUserPuedeTrabajar Then
-104         If Actualizar Then UserList(UserIndex).Counters.TimerPuedeTrabajar = TActual
-106         IntervaloPermiteTrabajar = True
-        Else
-108         IntervaloPermiteTrabajar = False
-        End If
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteTrabajar_Err
 
-        '<EhFooter>
-        Exit Function
+    '</EhHeader>
+
+    Dim TActual As Long
+    
+    TActual = GetTime
+    
+    If TActual - UserList(UserIndex).Counters.TimerPuedeTrabajar >= IntervaloUserPuedeTrabajar Then
+        If Actualizar Then UserList(UserIndex).Counters.TimerPuedeTrabajar = TActual
+        IntervaloPermiteTrabajar = True
+    Else
+        IntervaloPermiteTrabajar = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteTrabajar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteTrabajar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteTrabajar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 ' USAR OBJETOS
 Public Function IntervaloPermiteUsar(ByVal UserIndex As Integer, _
                                      Optional ByVal Actualizar As Boolean = True) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: 25/01/2010 (ZaMa)
-        '25/01/2010: ZaMa - General adjustments.
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteUsar_Err
-        '</EhHeader>
 
-        Dim TActual As Long
-    
-100     TActual = GetTime
-    
-102     If TActual - UserList(UserIndex).Counters.TimerUsar >= IntervaloUserPuedeUsar Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimerUsar = TActual
-108             UserList(UserIndex).Counters.failedUsageAttempts = 0
-            End If
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: 25/01/2010 (ZaMa)
+    '25/01/2010: ZaMa - General adjustments.
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteUsar_Err
 
-110         IntervaloPermiteUsar = True
-        Else
-112         IntervaloPermiteUsar = False
-        
-114         UserList(UserIndex).Counters.failedUsageAttempts = UserList(UserIndex).Counters.failedUsageAttempts + 1
-        
-            'Tolerancia arbitraria - 20 es MUY alta, la está chiteando zarpado
-116         If UserList(UserIndex).Counters.failedUsageAttempts = 10 Then
-                'Call SendData(SendTarget.ToAdmins, 0, PrepareMessageConsoleMsg("[ANTI-CHEAT]: " & UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Ip & " estuvo alterando el intervalo 'IntervaloPermiteUsar'", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
-118             UserList(UserIndex).Counters.failedUsageAttempts = 0
-            End If
+    '</EhHeader>
+
+    Dim TActual As Long
+    
+    TActual = GetTime
+    
+    If TActual - UserList(UserIndex).Counters.TimerUsar >= IntervaloUserPuedeUsar Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimerUsar = TActual
+            UserList(UserIndex).Counters.failedUsageAttempts = 0
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        IntervaloPermiteUsar = True
+    Else
+        IntervaloPermiteUsar = False
+        
+        UserList(UserIndex).Counters.failedUsageAttempts = UserList(UserIndex).Counters.failedUsageAttempts + 1
+        
+        'Tolerancia arbitraria - 20 es MUY alta, la está chiteando zarpado
+        If UserList(UserIndex).Counters.failedUsageAttempts = 10 Then
+            'Call SendData(SendTarget.ToAdmins, 0, PrepareMessageConsoleMsg("[ANTI-CHEAT]: " & UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Ip & " estuvo alterando el intervalo 'IntervaloPermiteUsar'", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
+            UserList(UserIndex).Counters.failedUsageAttempts = 0
+
+        End If
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteUsar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteUsar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteUsar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteUsarArcos(ByVal UserIndex As Integer, _
                                           Optional ByVal Actualizar As Boolean = True) As Boolean
-        '***************************************************
-        'Author: Unknown
-        'Last Modification: -
-        '
-        '***************************************************
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteUsarArcos_Err
-        '</EhHeader>
 
-        Dim TActual As Long
-    
-100     TActual = GetTime
-    
-102     If TActual - UserList(UserIndex).Counters.TimerPuedeUsarArco >= IntervaloFlechasCazadores Then
-104         If Actualizar Then UserList(UserIndex).Counters.TimerPuedeUsarArco = TActual
-106         IntervaloPermiteUsarArcos = True
-        Else
-108         IntervaloPermiteUsarArcos = False
-        End If
+    '***************************************************
+    'Author: Unknown
+    'Last Modification: -
+    '
+    '***************************************************
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteUsarArcos_Err
 
-        '<EhFooter>
-        Exit Function
+    '</EhHeader>
+
+    Dim TActual As Long
+    
+    TActual = GetTime
+    
+    If TActual - UserList(UserIndex).Counters.TimerPuedeUsarArco >= IntervaloFlechasCazadores Then
+        If Actualizar Then UserList(UserIndex).Counters.TimerPuedeUsarArco = TActual
+        IntervaloPermiteUsarArcos = True
+    Else
+        IntervaloPermiteUsarArcos = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteUsarArcos_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteUsarArcos " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteUsarArcos " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteSerAtacado(ByVal UserIndex As Integer, _
                                            Optional ByVal Actualizar As Boolean = False) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteSerAtacado_Err
-        '</EhHeader>
 
-        '**************************************************************
-        'Author: ZaMa
-        'Last Modify by: ZaMa
-        'Last Modify Date: 13/11/2009
-        '13/11/2009: ZaMa - Add the Timer which determines wether the user can be atacked by a NPc or not
-        '**************************************************************
-        Dim TActual As Long
-    
-100     TActual = GetTime
-    
-102     With UserList(UserIndex)
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteSerAtacado_Err
 
-            ' Inicializa el timer
-104         If Actualizar Then
-106             .Counters.TimerPuedeSerAtacado = TActual
-108             .flags.NoPuedeSerAtacado = True
-110             IntervaloPermiteSerAtacado = False
+    '</EhHeader>
+
+    '**************************************************************
+    'Author: ZaMa
+    'Last Modify by: ZaMa
+    'Last Modify Date: 13/11/2009
+    '13/11/2009: ZaMa - Add the Timer which determines wether the user can be atacked by a NPc or not
+    '**************************************************************
+    Dim TActual As Long
+    
+    TActual = GetTime
+    
+    With UserList(UserIndex)
+
+        ' Inicializa el timer
+        If Actualizar Then
+            .Counters.TimerPuedeSerAtacado = TActual
+            .flags.NoPuedeSerAtacado = True
+            IntervaloPermiteSerAtacado = False
+        Else
+
+            If TActual - .Counters.TimerPuedeSerAtacado >= IntervaloPuedeSerAtacado Then
+                .flags.NoPuedeSerAtacado = False
+                IntervaloPermiteSerAtacado = True
             Else
+                IntervaloPermiteSerAtacado = False
 
-112             If TActual - .Counters.TimerPuedeSerAtacado >= IntervaloPuedeSerAtacado Then
-114                 .flags.NoPuedeSerAtacado = False
-116                 IntervaloPermiteSerAtacado = True
-                Else
-118                 IntervaloPermiteSerAtacado = False
-                End If
             End If
 
-        End With
+        End If
 
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteSerAtacado_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteSerAtacado " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteSerAtacado " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPerdioNpc(ByVal UserIndex As Integer, _
                                    Optional ByVal Actualizar As Boolean = False) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloPerdioNpc_Err
-        '</EhHeader>
 
-        '**************************************************************
-        'Author: ZaMa
-        'Last Modify by: ZaMa
-        'Last Modify Date: 13/11/2009
-        '13/11/2009: ZaMa - Add the Timer which determines wether the user still owns a Npc or not
-        '**************************************************************
-        Dim TActual As Long
-    
-100     TActual = GetTime
-    
-102     With UserList(UserIndex)
+    '<EhHeader>
+    On Error GoTo IntervaloPerdioNpc_Err
 
-            ' Inicializa el timer
-104         If Actualizar Then
-106             .Counters.TimerPerteneceNpc = TActual
-108             IntervaloPerdioNpc = False
+    '</EhHeader>
+
+    '**************************************************************
+    'Author: ZaMa
+    'Last Modify by: ZaMa
+    'Last Modify Date: 13/11/2009
+    '13/11/2009: ZaMa - Add the Timer which determines wether the user still owns a Npc or not
+    '**************************************************************
+    Dim TActual As Long
+    
+    TActual = GetTime
+    
+    With UserList(UserIndex)
+
+        ' Inicializa el timer
+        If Actualizar Then
+            .Counters.TimerPerteneceNpc = TActual
+            IntervaloPerdioNpc = False
+        Else
+
+            If TActual - .Counters.TimerPerteneceNpc >= IntervaloOwnedNpc Then
+                IntervaloPerdioNpc = True
             Else
+                IntervaloPerdioNpc = False
 
-110             If TActual - .Counters.TimerPerteneceNpc >= IntervaloOwnedNpc Then
-112                 IntervaloPerdioNpc = True
-                Else
-114                 IntervaloPerdioNpc = False
-                End If
             End If
 
-        End With
+        End If
 
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPerdioNpc_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPerdioNpc " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPerdioNpc " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
-
-
 
 Public Function IntervaloGoHome(ByVal UserIndex As Integer, _
                                 Optional ByVal TimeInterval As Long, _
                                 Optional ByVal Actualizar As Boolean = False) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloGoHome_Err
-        '</EhHeader>
 
-        '**************************************************************
-        'Author: ZaMa
-        'Last Modify by: ZaMa
-        'Last Modify Date: 01/06/2010
-        '01/06/2010: ZaMa - Add the Timer which determines wether the user can be teleported to its home or not
-        '**************************************************************
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo IntervaloGoHome_Err
+
+    '</EhHeader>
+
+    '**************************************************************
+    'Author: ZaMa
+    'Last Modify by: ZaMa
+    'Last Modify Date: 01/06/2010
+    '01/06/2010: ZaMa - Add the Timer which determines wether the user can be teleported to its home or not
+    '**************************************************************
+    Dim TActual As Long
     
-100     TActual = GetTime
+    TActual = GetTime
     
-102     With UserList(UserIndex)
+    With UserList(UserIndex)
 
-            ' Inicializa el timer
-104         If Actualizar Then
-106             .flags.Traveling = 1
-108             .Counters.goHome = TActual + TimeInterval
-            Else
+        ' Inicializa el timer
+        If Actualizar Then
+            .flags.Traveling = 1
+            .Counters.goHome = TActual + TimeInterval
+        Else
 
-110             If TActual >= .Counters.goHome Then
-112                 IntervaloGoHome = True
-114                 Call WriteUpdateGlobalCounter(UserIndex, 4, 0)
-                End If
+            If TActual >= .Counters.goHome Then
+                IntervaloGoHome = True
+                Call WriteUpdateGlobalCounter(UserIndex, 4, 0)
+
             End If
 
-        End With
+        End If
 
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloGoHome_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloGoHome " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloGoHome " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function IntervaloPermiteUsarClick(ByVal UserIndex As Integer, _
                                           Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteUsarClick_Err
-        '</EhHeader>
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteUsarClick_Err
 
-100     With UserList(UserIndex).Counters
-102         TActual = GetTime()
+    '</EhHeader>
 
-104         If (TActual - UserList(UserIndex).Counters.TimerUsarClick) >= IntervaloUserPuedeUsarClick Then
-106             If Actualizar Then
-                    '.TimerUsar = TActual
-108                 .TimerUsarClick = TActual
+    Dim TActual As Long
 
-                End If
+    With UserList(UserIndex).Counters
+        TActual = GetTime()
 
-110             IntervaloPermiteUsarClick = True
-            Else
-112             IntervaloPermiteUsarClick = False
-            
-114             UserList(UserIndex).Counters.failedUsageAttempts_Clic = UserList(UserIndex).Counters.failedUsageAttempts_Clic + 1
-        
-                'Tolerancia arbitraria - 20 es MUY alta, la está chiteando zarpado
-116             If UserList(UserIndex).Counters.failedUsageAttempts_Clic = 10 Then
-                    Call SendData(SendTarget.ToAdmins, 0, PrepareMessageConsoleMsg("[ANTI-CHEAT]: " & UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Account.Sec.IP_Address & " estuvo alterando el intervalo 'IntervaloPermiteUsar'", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
-118                 UserList(UserIndex).Counters.failedUsageAttempts_Clic = 0
-                End If
-            
+        If (TActual - UserList(UserIndex).Counters.TimerUsarClick) >= IntervaloUserPuedeUsarClick Then
+            If Actualizar Then
+                '.TimerUsar = TActual
+                .TimerUsarClick = TActual
+
             End If
 
-        End With
+            IntervaloPermiteUsarClick = True
+        Else
+            IntervaloPermiteUsarClick = False
+            
+            UserList(UserIndex).Counters.failedUsageAttempts_Clic = UserList(UserIndex).Counters.failedUsageAttempts_Clic + 1
+        
+            'Tolerancia arbitraria - 20 es MUY alta, la está chiteando zarpado
+            If UserList(UserIndex).Counters.failedUsageAttempts_Clic = 10 Then
+                Call SendData(SendTarget.ToAdmins, 0, PrepareMessageConsoleMsg("[ANTI-CHEAT]: " & UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Account.Sec.IP_Address & " estuvo alterando el intervalo 'IntervaloPermiteUsar'", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
+                UserList(UserIndex).Counters.failedUsageAttempts_Clic = 0
 
-        '<EhFooter>
-        Exit Function
+            End If
+            
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteUsarClick_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteUsarClick " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteUsarClick " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Interval_Drop(ByVal UserIndex As Integer, _
                               Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Interval_Drop_Err
-        '</EhHeader>
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo Interval_Drop_Err
 
-100     TActual = GetTime()
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.TimeDrop >= IntervalDrop Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimeDrop = TActual
-            End If
+    Dim TActual As Long
 
-108         Interval_Drop = True
-        Else
-110         Interval_Drop = False
+    TActual = GetTime()
+
+    If TActual - UserList(UserIndex).Counters.TimeDrop >= IntervalDrop Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimeDrop = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        Interval_Drop = True
+    Else
+        Interval_Drop = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Interval_Drop_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_Drop " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_Drop " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Interval_InfoChar(ByVal UserIndex As Integer, _
                                   Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Interval_InfoChar_Err
-        '</EhHeader>
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo Interval_InfoChar_Err
 
-100     TActual = GetTime()
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.TimeInfoChar >= 10000 Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimeInfoChar = TActual
-            End If
+    Dim TActual As Long
 
-108         Interval_InfoChar = True
-        Else
-110         Interval_InfoChar = False
+    TActual = GetTime()
+
+    If TActual - UserList(UserIndex).Counters.TimeInfoChar >= 10000 Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimeInfoChar = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        Interval_InfoChar = True
+    Else
+        Interval_InfoChar = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Interval_InfoChar_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_InfoChar " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_InfoChar " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Interval_Commerce(ByVal UserIndex As Integer, _
                                   Optional ByVal Actualizar As Boolean = True) As Boolean
-
-    
         
-          '<EhHeader>
+    '<EhHeader>
     On Error GoTo Interval_Commerce_Err
-        '</EhHeader>
+
+    '</EhHeader>
         
     Dim TActual As Long
 
@@ -663,29 +693,30 @@ Public Function Interval_Commerce(ByVal UserIndex As Integer, _
     If TActual - UserList(UserIndex).Counters.TimeCommerce >= IntervalCommerce Then
         If Actualizar Then
             UserList(UserIndex).Counters.TimeCommerce = TActual
+
         End If
 
         Interval_Commerce = True
     Else
         Interval_Commerce = False
+
     End If
-   '<EhFooter>
-        Exit Function
+
+    '<EhFooter>
+    Exit Function
 
 Interval_Commerce_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_Commerce " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_Commerce " & "at line " & Erl
         
 End Function
 
 Public Function Interval_Message(ByVal UserIndex As Integer, _
                                  Optional ByVal Actualizar As Boolean = True) As Boolean
-
     
-           '<EhHeader>
-        On Error GoTo Interval_Message_Err
-        '</EhHeader>
+    '<EhHeader>
+    On Error GoTo Interval_Message_Err
+
+    '</EhHeader>
         
     Dim TActual As Long
 
@@ -694,410 +725,454 @@ Public Function Interval_Message(ByVal UserIndex As Integer, _
     If TActual - UserList(UserIndex).Counters.TimeMessage >= IntervalMessage Then
         If Actualizar Then
             UserList(UserIndex).Counters.TimeMessage = TActual
+
         End If
 
         Interval_Message = True
     Else
         Interval_Message = False
+
     End If
 
-
-        '<EhFooter>
-        Exit Function
+    '<EhFooter>
+    Exit Function
 
 Interval_Message_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_Message " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_Message " & "at line " & Erl
         
 End Function
 
 Public Function Interval_Packet250(ByVal UserIndex As Integer, _
-                                 Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Interval_Packet250_Err
-        '</EhHeader>
+                                   Optional ByVal Actualizar As Boolean = True) As Boolean
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo Interval_Packet250_Err
 
-100     TActual = GetTime()
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.Packet250 >= 250 Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.Packet250 = TActual
-            End If
+    Dim TActual As Long
 
-108         Interval_Packet250 = True
-        Else
-110         Interval_Packet250 = False
+    TActual = GetTime()
+
+    If TActual - UserList(UserIndex).Counters.Packet250 >= 250 Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.Packet250 = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        Interval_Packet250 = True
+    Else
+        Interval_Packet250 = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Interval_Packet250_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_Packet250 " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_Packet250 " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Interval_Packet500(ByVal UserIndex As Integer, _
-                                 Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Interval_Packet500_Err
-        '</EhHeader>
+                                   Optional ByVal Actualizar As Boolean = True) As Boolean
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo Interval_Packet500_Err
 
-100     TActual = GetTime()
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.Packet500 >= 500 Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.Packet500 = TActual
-            End If
+    Dim TActual As Long
 
-108         Interval_Packet500 = True
-        Else
-110         Interval_Packet500 = False
+    TActual = GetTime()
+
+    If TActual - UserList(UserIndex).Counters.Packet500 >= 500 Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.Packet500 = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        Interval_Packet500 = True
+    Else
+        Interval_Packet500 = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Interval_Packet500_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_Packet500 " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_Packet500 " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Interval_Mao(ByVal UserIndex As Integer, _
                              Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Interval_Mao_Err
-        '</EhHeader>
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo Interval_Mao_Err
 
-100     TActual = GetTime
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.TimeInfoMao >= IntervalInfoMao Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimeInfoMao = TActual
-            End If
+    Dim TActual As Long
 
-108         Interval_Mao = True
-        Else
-110         Interval_Mao = False
+    TActual = GetTime
+
+    If TActual - UserList(UserIndex).Counters.TimeInfoMao >= IntervalInfoMao Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimeInfoMao = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        Interval_Mao = True
+    Else
+        Interval_Mao = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Interval_Mao_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Interval_Mao " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Interval_Mao " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Public Function Interval_Equipped(ByVal UserIndex As Integer, _
-                             Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Interval_Equipped_Err
-        '</EhHeader>
+                                  Optional ByVal Actualizar As Boolean = True) As Boolean
 
-        Dim TActual As Long
+    '<EhHeader>
+    On Error GoTo Interval_Equipped_Err
 
-100     TActual = GetTime
+    '</EhHeader>
 
-102     If TActual - UserList(UserIndex).Counters.TimeEquipped >= IntervaloEquipped Then
-104         If Actualizar Then
-106             UserList(UserIndex).Counters.TimeEquipped = TActual
-            End If
+    Dim TActual As Long
 
-108         Interval_Equipped = True
-        Else
-110         Interval_Equipped = False
+    TActual = GetTime
+
+    If TActual - UserList(UserIndex).Counters.TimeEquipped >= IntervaloEquipped Then
+        If Actualizar Then
+            UserList(UserIndex).Counters.TimeEquipped = TActual
+
         End If
 
-        '<EhFooter>
-        Exit Function
+        Interval_Equipped = True
+    Else
+        Interval_Equipped = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 Interval_Equipped_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.Interval_Equipped.Interval_Mao " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.Interval_Equipped.Interval_Mao " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function checkInterval(ByRef startTime As Long, _
                               ByVal timeNow As Long, _
                               ByVal interval As Long) As Boolean
-        '<EhHeader>
-        On Error GoTo checkInterval_Err
-        '</EhHeader>
 
-        Dim lInterval As Long
+    '<EhHeader>
+    On Error GoTo checkInterval_Err
 
-100     If timeNow < startTime Then
-102         lInterval = &H7FFFFFFF - startTime + timeNow + 1
-        Else
-104         lInterval = timeNow - startTime
-        End If
+    '</EhHeader>
 
-106     If lInterval >= interval Then
-108         startTime = timeNow
-110         checkInterval = True
-        Else
-112         checkInterval = False
-        End If
+    Dim lInterval As Long
 
-        '<EhFooter>
-        Exit Function
+    If timeNow < startTime Then
+        lInterval = &H7FFFFFFF - startTime + timeNow + 1
+    Else
+        lInterval = timeNow - startTime
+
+    End If
+
+    If lInterval >= interval Then
+        startTime = timeNow
+        checkInterval = True
+    Else
+        checkInterval = False
+
+    End If
+
+    '<EhFooter>
+    Exit Function
 
 checkInterval_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.checkInterval " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.checkInterval " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
-Public Function IntervaloPuedeRecibirAtaqueCriature(ByVal UserIndex As Integer, Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloPuedeRecibirAtaqueCriature_Err
-        '</EhHeader>
+Public Function IntervaloPuedeRecibirAtaqueCriature(ByVal UserIndex As Integer, _
+                                                    Optional ByVal Actualizar As Boolean = True) As Boolean
 
-    Dim TActual                     As Long
+    '<EhHeader>
+    On Error GoTo IntervaloPuedeRecibirAtaqueCriature_Err
 
-100     If haciendoBK Then Exit Function
+    '</EhHeader>
 
-102     TActual = GetTime
+    Dim TActual As Long
 
-104     With UserList(UserIndex).Counters
-106         If TActual - .TimerPuedeRecibirAtaqueCriature >= 800 Then
-108             If Actualizar Then
-110                 .TimerPuedeRecibirAtaqueCriature = TActual
-                End If
+    If haciendoBK Then Exit Function
 
-112             IntervaloPuedeRecibirAtaqueCriature = True
-            Else
-114             IntervaloPuedeRecibirAtaqueCriature = False
+    TActual = GetTime
+
+    With UserList(UserIndex).Counters
+
+        If TActual - .TimerPuedeRecibirAtaqueCriature >= 800 Then
+            If Actualizar Then
+                .TimerPuedeRecibirAtaqueCriature = TActual
+
             End If
-        End With
 
-        '<EhFooter>
-        Exit Function
+            IntervaloPuedeRecibirAtaqueCriature = True
+        Else
+            IntervaloPuedeRecibirAtaqueCriature = False
+
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPuedeRecibirAtaqueCriature_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPuedeRecibirAtaqueCriature " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPuedeRecibirAtaqueCriature " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
-Public Function IntervaloPermiteCastear(ByVal UserIndex As Integer, Optional ByVal Actualizar As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo IntervaloPermiteCastear_Err
-        '</EhHeader>
+Public Function IntervaloPermiteCastear(ByVal UserIndex As Integer, _
+                                        Optional ByVal Actualizar As Boolean = True) As Boolean
 
-    Dim TActual                     As Long
+    '<EhHeader>
+    On Error GoTo IntervaloPermiteCastear_Err
 
-100     If haciendoBK Then Exit Function
+    '</EhHeader>
 
-102     TActual = GetTime
+    Dim TActual As Long
 
-104     With UserList(UserIndex).Counters
-106         If TActual - .TimerPuedeCastear >= IntervaloPuedeCastear Then
-108             If Actualizar Then
-110                 .TimerPuedeCastear = TActual
-                End If
+    If haciendoBK Then Exit Function
 
-112             IntervaloPermiteCastear = True
-            Else
-114             IntervaloPermiteCastear = False
-            
-116             .failedUsageCastSpell = .failedUsageCastSpell + 1
-        
-                'Tolerancia arbitraria - 20 es MUY alta, la está chiteando zarpado
-118             If .failedUsageCastSpell = 10 Then
-                    'Call Logs_Security(eSecurity, eLogSecurity.eAntiCheat, UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Ip & " estuvo alterando el intervalo 'IntervaloPuedeCastear'")
-                    'Call SendData(SendTarget.ToAdmins, 0, PrepareMessageConsoleMsg("[ANTI-CHEAT]: " & UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Ip & " estuvo alterando el intervalo 'IntervaloPuedeCastear'", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
-120                 .failedUsageCastSpell = 0
-                End If
+    TActual = GetTime
+
+    With UserList(UserIndex).Counters
+
+        If TActual - .TimerPuedeCastear >= IntervaloPuedeCastear Then
+            If Actualizar Then
+                .TimerPuedeCastear = TActual
+
             End If
-        End With
 
-        '<EhFooter>
-        Exit Function
+            IntervaloPermiteCastear = True
+        Else
+            IntervaloPermiteCastear = False
+            
+            .failedUsageCastSpell = .failedUsageCastSpell + 1
+        
+            'Tolerancia arbitraria - 20 es MUY alta, la está chiteando zarpado
+            If .failedUsageCastSpell = 10 Then
+                'Call Logs_Security(eSecurity, eLogSecurity.eAntiCheat, UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Ip & " estuvo alterando el intervalo 'IntervaloPuedeCastear'")
+                'Call SendData(SendTarget.ToAdmins, 0, PrepareMessageConsoleMsg("[ANTI-CHEAT]: " & UserList(UserIndex).Name & " con IP: " & UserList(UserIndex).Ip & " estuvo alterando el intervalo 'IntervaloPuedeCastear'", FontTypeNames.FONTTYPE_SERVER, eMessageType.Admin))
+                .failedUsageCastSpell = 0
+
+            End If
+
+        End If
+
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 IntervaloPermiteCastear_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.IntervaloPermiteCastear " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.IntervaloPermiteCastear " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Public Function Intervalo_BotUseItem(ByVal NpcIndex As Integer, _
-                                           Optional ByVal Update As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Intervalo_BotUseItem_Err
-        '</EhHeader>
+                                     Optional ByVal Update As Boolean = True) As Boolean
+
+    '<EhHeader>
+    On Error GoTo Intervalo_BotUseItem_Err
+
+    '</EhHeader>
     
-        Dim TActual As Long
-100     TActual = GetTime
+    Dim TActual As Long
+
+    TActual = GetTime
     
-102     With Npclist(NpcIndex)
+    With Npclist(NpcIndex)
     
-104         If TActual - .Contadores.UseItem >= BotIntelligence_Balance_UseItem(.Stats.Elv) Then
-106             If Update Then
-108                 .Contadores.UseItem = TActual
-                End If
-            
-110             Intervalo_BotUseItem = True
-            Else
-112             Intervalo_BotUseItem = False
+        If TActual - .Contadores.UseItem >= BotIntelligence_Balance_UseItem(.Stats.Elv) Then
+            If Update Then
+                .Contadores.UseItem = TActual
+
             End If
+            
+            Intervalo_BotUseItem = True
+        Else
+            Intervalo_BotUseItem = False
+
+        End If
         
-        End With
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 Intervalo_BotUseItem_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Intervalo_BotUseItem " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Intervalo_BotUseItem " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Public Function Intervalo_CriatureVelocity(ByVal NpcIndex As Integer, _
                                            Optional ByVal Update As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Intervalo_CriatureVelocity_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Intervalo_CriatureVelocity_Err
+
+    '</EhHeader>
     
-        Dim TActual As Long
-100     TActual = GetTime
+    Dim TActual As Long
+
+    TActual = GetTime
     
-102     With Npclist(NpcIndex)
+    With Npclist(NpcIndex)
     
-104         If TActual - .Contadores.Velocity >= .Velocity Then
-106             If Update Then
-108                 .Contadores.Velocity = TActual
-                End If
-            
-110             Intervalo_CriatureVelocity = True
-            Else
-112             Intervalo_CriatureVelocity = False
+        If TActual - .Contadores.Velocity >= .Velocity Then
+            If Update Then
+                .Contadores.Velocity = TActual
+
             End If
+            
+            Intervalo_CriatureVelocity = True
+        Else
+            Intervalo_CriatureVelocity = False
+
+        End If
         
-        End With
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 Intervalo_CriatureVelocity_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureVelocity " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureVelocity " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
+
 Public Function Intervalo_CriatureAttack(ByVal NpcIndex As Integer, _
-                                           Optional ByVal Update As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Intervalo_CriatureAttack_Err
-        '</EhHeader>
+                                         Optional ByVal Update As Boolean = True) As Boolean
+
+    '<EhHeader>
+    On Error GoTo Intervalo_CriatureAttack_Err
+
+    '</EhHeader>
     
-        Dim TActual As Long
-100     TActual = GetTime
+    Dim TActual As Long
+
+    TActual = GetTime
     
-102     With Npclist(NpcIndex)
+    With Npclist(NpcIndex)
               
-104         If TActual - .Contadores.Attack >= .IntervalAttack Then
-106             If Update Then
-108                 .Contadores.Attack = TActual
-                End If
-            
-110             Intervalo_CriatureAttack = True
+        If TActual - .Contadores.Attack >= .IntervalAttack Then
+            If Update Then
+                .Contadores.Attack = TActual
+
             End If
+            
+            Intervalo_CriatureAttack = True
+
+        End If
         
-        End With
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 Intervalo_CriatureAttack_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureAttack " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureAttack " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Intervalo_CriatureDescanso(ByVal NpcIndex As Integer, _
                                            Optional ByVal Update As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Intervalo_CriatureDescanso_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Intervalo_CriatureDescanso_Err
+
+    '</EhHeader>
     
-        Dim TActual As Long
-100     TActual = GetTime
+    Dim TActual As Long
+
+    TActual = GetTime
     
-102     With Npclist(NpcIndex)
+    With Npclist(NpcIndex)
     
-104         If TActual - .Contadores.Descanso >= 30000 Then
-106             If Update Then
-108                 .Contadores.Descanso = TActual
-                End If
-            
-110             Intervalo_CriatureDescanso = True
+        If TActual - .Contadores.Descanso >= 30000 Then
+            If Update Then
+                .Contadores.Descanso = TActual
+
             End If
+            
+            Intervalo_CriatureDescanso = True
+
+        End If
         
-        End With
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 Intervalo_CriatureDescanso_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureDescanso " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureDescanso " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 
 Public Function Intervalo_CriatureMovimientoConstante(ByVal NpcIndex As Integer, _
-                                           Optional ByVal Update As Boolean = True) As Boolean
-        '<EhHeader>
-        On Error GoTo Intervalo_CriatureMovimientoConstante_Err
-        '</EhHeader>
+                                                      Optional ByVal Update As Boolean = True) As Boolean
+
+    '<EhHeader>
+    On Error GoTo Intervalo_CriatureMovimientoConstante_Err
+
+    '</EhHeader>
     
-        Dim TActual As Long
-100     TActual = GetTime
+    Dim TActual As Long
+
+    TActual = GetTime
     
-102     With Npclist(NpcIndex)
+    With Npclist(NpcIndex)
     
-104         If TActual - .Contadores.MovimientoConstante >= 10000 Then
-106             If Update Then
-108                 .Contadores.MovimientoConstante = TActual
-                End If
-            
-110             Intervalo_CriatureMovimientoConstante = True
+        If TActual - .Contadores.MovimientoConstante >= 10000 Then
+            If Update Then
+                .Contadores.MovimientoConstante = TActual
+
             End If
+            
+            Intervalo_CriatureMovimientoConstante = True
+
+        End If
         
-        End With
-        '<EhFooter>
-        Exit Function
+    End With
+
+    '<EhFooter>
+    Exit Function
 
 Intervalo_CriatureMovimientoConstante_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureMovimientoConstante " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.modNuevoTimer.Intervalo_CriatureMovimientoConstante " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Function
 

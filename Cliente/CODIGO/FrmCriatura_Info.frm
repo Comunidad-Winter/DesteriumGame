@@ -130,35 +130,35 @@ Option Explicit
 
 Public FormMovement As clsFormMovementManager
 
-
-
 Private Sub Form_Load()
 
     Set FormMovement = New clsFormMovementManager
     
     Call FormMovement.Initialize(Me, 32)
     
-  '  g_Captions(eCaption.cCriaturaInfo) = wGL_Graphic.Create_Device_From_Display(Me.hWnd, Me.ScaleWidth, Me.ScaleHeight)
+    '  g_Captions(eCaption.cCriaturaInfo) = wGL_Graphic.Create_Device_From_Display(Me.hWnd, Me.ScaleWidth, Me.ScaleHeight)
         
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-'    Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.cCriaturaInfo))
+
+    '    Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.cCriaturaInfo))
 End Sub
-
-
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     If frmCriatura_Quest.visible Then
         frmCriatura_Quest.SetFocus
+
     End If
     
     Unload Me
+
 End Sub
 
 Private Sub Item_Click(Index As Integer)
+
     If NpcList(SelectedNpcIndex).Object(Index + 1).ObjIndex = 0 Then Exit Sub
     
     SelectedObjIndex = NpcList(SelectedNpcIndex).Object(Index + 1).ObjIndex
@@ -166,16 +166,20 @@ Private Sub Item_Click(Index As Integer)
     Call SelectedObjIndex_Update
  
 End Sub
+
 Private Sub Drop_Click(Index As Integer)
+
     If NpcList(SelectedNpcIndex).Drop(Index + 1).ObjIndex = 0 Then Exit Sub
     
     SelectedObjIndex = NpcList(SelectedNpcIndex).Drop(Index + 1).ObjIndex
     
     Call SelectedObjIndex_Update
+
 End Sub
 
-
 Private Sub tUpdate_Timer()
+
     If SelectedNpcIndex = 0 Then Exit Sub
     Render_CriaturaInfo
+
 End Sub

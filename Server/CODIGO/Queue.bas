@@ -48,10 +48,12 @@ Private m_size        As Integer
 
 Public Function IsEmpty() As Boolean
     IsEmpty = m_size = 0
+
 End Function
 
 Public Function IsFull() As Boolean
     IsFull = m_lastelem = MAXELEM
+
 End Function
 
 Public Function Push(ByRef Vertice As tVertice) As Boolean
@@ -67,6 +69,7 @@ Public Function Push(ByRef Vertice As tVertice) As Boolean
         Push = True
     Else
         Push = False
+
     End If
 
 End Function
@@ -83,6 +86,7 @@ Public Function Pop() As tVertice
             m_lastelem = 0
             m_firstelem = 0
             m_size = 0
+
         End If
    
     End If
@@ -94,5 +98,6 @@ Public Sub InitQueue()
     m_lastelem = 0
     m_firstelem = 0
     m_size = 0
+
 End Sub
 

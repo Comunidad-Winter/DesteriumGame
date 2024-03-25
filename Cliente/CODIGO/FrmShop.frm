@@ -53,6 +53,7 @@ Begin VB.Form FrmShop
          _Version        =   393217
          BackColor       =   0
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   2
          DisableNoScroll =   -1  'True
@@ -81,7 +82,7 @@ Begin VB.Form FrmShop
          BackStyle       =   0  'Transparent
          Caption         =   "TIER 1"
          BeginProperty Font 
-            Name            =   "Booter - Five Zero"
+            Name            =   "Arial"
             Size            =   24
             Charset         =   0
             Weight          =   700
@@ -103,7 +104,7 @@ Begin VB.Form FrmShop
          Caption         =   "100"
          DataField       =   "+"
          BeginProperty Font 
-            Name            =   "Booter - Five Zero"
+            Name            =   "Arial"
             Size            =   20.25
             Charset         =   0
             Weight          =   700
@@ -149,6 +150,7 @@ Begin VB.Form FrmShop
          _Version        =   393217
          BackColor       =   0
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   2
          DisableNoScroll =   -1  'True
@@ -170,7 +172,7 @@ Begin VB.Form FrmShop
          Caption         =   "200"
          DataField       =   "+"
          BeginProperty Font 
-            Name            =   "Booter - Five Zero"
+            Name            =   "Arial"
             Size            =   20.25
             Charset         =   0
             Weight          =   700
@@ -192,7 +194,7 @@ Begin VB.Form FrmShop
          BackStyle       =   0  'Transparent
          Caption         =   "TIER 1"
          BeginProperty Font 
-            Name            =   "Booter - Five Zero"
+            Name            =   "Arial"
             Size            =   24
             Charset         =   0
             Weight          =   700
@@ -222,7 +224,7 @@ Begin VB.Form FrmShop
       BackColor       =   &H80000001&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
          Weight          =   700
@@ -242,7 +244,7 @@ Begin VB.Form FrmShop
       BackColor       =   &H80000001&
       BorderStyle     =   0  'None
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
          Weight          =   700
@@ -264,7 +266,7 @@ Begin VB.Form FrmShop
    End
    Begin VB.ComboBox cmbPromotion 
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   15.75
          Charset         =   0
          Weight          =   400
@@ -308,6 +310,7 @@ Begin VB.Form FrmShop
          _Version        =   393217
          BackColor       =   0
          BorderStyle     =   0
+         Enabled         =   -1  'True
          ReadOnly        =   -1  'True
          ScrollBars      =   2
          DisableNoScroll =   -1  'True
@@ -329,7 +332,7 @@ Begin VB.Form FrmShop
          Caption         =   "200"
          DataField       =   "+"
          BeginProperty Font 
-            Name            =   "Booter - Five Zero"
+            Name            =   "Arial"
             Size            =   20.25
             Charset         =   0
             Weight          =   700
@@ -351,7 +354,7 @@ Begin VB.Form FrmShop
          BackStyle       =   0  'Transparent
          Caption         =   "TIER 1"
          BeginProperty Font 
-            Name            =   "Booter - Five Zero"
+            Name            =   "Arial"
             Size            =   24
             Charset         =   0
             Weight          =   700
@@ -490,7 +493,7 @@ Begin VB.Form FrmShop
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   12
          Charset         =   0
          Weight          =   700
@@ -510,7 +513,7 @@ Begin VB.Form FrmShop
       BackStyle       =   0  'Transparent
       Caption         =   "0"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   12
          Charset         =   0
          Weight          =   700
@@ -629,7 +632,7 @@ Begin VB.Form FrmShop
       BackStyle       =   0  'Transparent
       Caption         =   "999.999.999"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   21.75
          Charset         =   0
          Weight          =   700
@@ -676,7 +679,7 @@ Begin VB.Form FrmShop
       BackStyle       =   0  'Transparent
       Caption         =   "999.999.999"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   11.25
          Charset         =   0
          Weight          =   700
@@ -757,7 +760,7 @@ Begin VB.Form FrmShop
       BackStyle       =   0  'Transparent
       Caption         =   "999.999.999"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   12
          Charset         =   0
          Weight          =   700
@@ -776,7 +779,7 @@ Begin VB.Form FrmShop
       BackStyle       =   0  'Transparent
       Caption         =   "999.999.999"
       BeginProperty Font 
-         Name            =   "Booter - Five Zero"
+         Name            =   "Arial"
          Size            =   12
          Charset         =   0
          Weight          =   700
@@ -806,24 +809,23 @@ Private Enum ePanel
     eCargar = 3
     eChars = 4
     eAvatars = 5
+
 End Enum
 
-
 Private Enum ePRICE
+
     eGLD = 0
     eDSP = 1
+
 End Enum
 
 Private SelectedPrice As ePRICE
 
+Public Pagination     As Integer
 
+Private Panel         As ePanel
 
-
-Public Pagination As Integer
-
-
-Private Panel As ePanel
-Public TierSelected As Byte
+Public TierSelected   As Byte
 
 ' Consola Transparente
 Private Declare Function SetWindowLong _
@@ -836,9 +838,9 @@ Private Const GWL_EXSTYLE = -20
 
 Private Const WS_EX_LAYERED = &H80000
 
+Public Lastcopy                 As Integer
 
-Public Lastcopy As Integer
-Public MeditationSelected As Integer
+Public MeditationSelected       As Integer
 
 Private Const WS_EX_TRANSPARENT As Long = &H20&
 
@@ -848,29 +850,37 @@ Private Sub cmbPromotion_Click()
     
         Case 0
             lblCantDSP.Caption = "250 DSP"
+
         Case 1
             lblCantDSP.Caption = "500 DSP"
+
         Case 2
             lblCantDSP.Caption = "1.000 DSP"
+
         Case 3
             lblCantDSP.Caption = "2.000 DSP"
+
         Case 4
             lblCantDSP.Caption = "4.000 DSP"
+
         Case 5
             lblCantDSP.Caption = "8.000 DSP"
+
     End Select
+
 End Sub
 
 Private Sub Form_Load()
         
     g_Captions(eCaption.e_Shop) = wGL_Graphic.Create_Device_From_Display(PicDraw.hWnd, PicDraw.ScaleWidth, PicDraw.ScaleHeight)
     lblGld.Caption = PonerPuntos(Account.Gld)
-    lblDSP.Caption = PonerPuntos(Account.Eldhir)
+    lblDsp.Caption = PonerPuntos(Account.Eldhir)
     lblPoints.Caption = PonerPuntos(UserPoints)
     
     ReDim ShopCopy(1 To ShopLast) As tShop
     
     MirandoShop = True
+
     Dim A As Long
     
     For A = 0 To 2
@@ -893,14 +903,13 @@ Private Sub Form_Load()
     cmbPromotion.AddItem "AR$15.000-50OFF DEPOSITÁ AR$7.500!"
     cmbPromotion.ListIndex = 1
 
-
     txtEmail.Text = Account.Email
-    
     
     lblCVU.Caption = CVU
     lblAlias.Caption = Alias
     
     AjustarClic
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -909,6 +918,7 @@ Private Sub Form_Unload(Cancel As Integer)
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.e_Shop))
 
 End Sub
+
 Private Sub imgAdd_Click()
     
     If Panel = ePanel.eTienda Then
@@ -973,56 +983,73 @@ Private Sub ComprarChar()
     End If
 
     Call WriteConfirmChar(SelectedTienda)
+
 End Sub
+
 Public Function ApplyDiscount(ByVal Tier As Integer, ByVal Price As Long)
-        '<EhHeader>
-        On Error GoTo ApplyDiscount_Err
-        '</EhHeader>
-100     Select Case Tier
+
+    '<EhHeader>
+    On Error GoTo ApplyDiscount_Err
+
+    '</EhHeader>
+    Select Case Tier
     
-            Case 0
-102             ApplyDiscount = Price
-104         Case 1
-106             ApplyDiscount = Price - (Price * 0.05)
-108         Case 2
-110             ApplyDiscount = Price - (Price * 0.07)
-112         Case 3
-114             ApplyDiscount = Price - (Price * 0.1)
-        End Select
-        '<EhFooter>
-        Exit Function
+        Case 0
+            ApplyDiscount = Price
+
+        Case 1
+            ApplyDiscount = Price - (Price * 0.05)
+
+        Case 2
+            ApplyDiscount = Price - (Price * 0.07)
+
+        Case 3
+            ApplyDiscount = Price - (Price * 0.1)
+
+    End Select
+
+    '<EhFooter>
+    Exit Function
 
 ApplyDiscount_Err:
-        LogError err.Description & vbCrLf & _
-               "in ServidorArgentum.mShop.ApplyDiscount " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ServidorArgentum.mShop.ApplyDiscount " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Function
+
 Private Sub ComprarItem()
     
     With Shop(ShopCopy(SelectedTienda).ID)
+
         If ApplyDiscount(Account.Premium, .Gld) > Account.Gld And SelectedPrice = ePRICE.eGLD Then
             Call MsgBox("¡Parece que no tienes las Monedas de Oro en tu cuenta!")
             Exit Sub
+
         End If
     
         If .ObjIndex <> 880 Then
             If ApplyDiscount(Account.Premium, .Dsp) > Account.Eldhir And SelectedPrice = ePRICE.eDSP Then
                 Call MsgBox("¡Parece que no tienes los DSP en tu cuenta!")
                 Exit Sub
+
             End If
+
         End If
         
         If .Points > UserPoints Then
             Call MsgBox("¡Tus puntos de Torneo no son suficientes para realizar el Canje!")
             Exit Sub
+
         End If
         
     End With
     
     Call WriteConfirmItem(ShopCopy(SelectedTienda).ID, SelectedPrice)
+
 End Sub
+
 Private Sub CargarDSP()
 
     If txtEmail.Text = vbNullString Then
@@ -1038,11 +1065,13 @@ Private Sub CargarDSP()
     End If
 
     If txtBank.Text = vbNullString Then
-         Call MsgBox("Debes proporcionar un nombre bancario, una cuenta de Mercado Pago o bien algo que haga referencia que el dinero que nos llegará, proviene de tu cuenta.")
+        Call MsgBox("Debes proporcionar un nombre bancario, una cuenta de Mercado Pago o bien algo que haga referencia que el dinero que nos llegará, proviene de tu cuenta.")
         Exit Sub
+
     End If
     
     Call WriteConfirmTransaccion(txtEmail.Text, cmbPromotion.ListIndex, txtBank.Text)
+
 End Sub
 
 Private Sub imgCopy_Click()
@@ -1052,6 +1081,7 @@ Private Sub imgCopy_Click()
     Clipboard.SetText lblCVU.Caption
     
     Call MsgBox("CVU copiado exitosamente")
+
 End Sub
 
 Private Sub imgDsp_Click()
@@ -1063,7 +1093,6 @@ End Sub
 
 Private Sub imgGeneral_Click()
     Call Audio.PlayInterface(SND_CLICK)
-      
     
     SelectedPanel ePanel.eTienda
       
@@ -1076,24 +1105,32 @@ Private Sub imgPagination_Click(Index As Integer)
     Select Case Index
     
         Case 0 ' Página anterior
+
             If (Pagination - 8) < 0 Then Exit Sub
             Pagination = Pagination - 8
         
         Case 1 ' Página siguiente
+
             If Panel = ePanel.eTienda Then
                 If (Pagination + 8) >= Lastcopy Then Exit Sub
             Else
-                 If (Pagination + 8) >= ShopCharLast Then Exit Sub
+
+                If (Pagination + 8) >= ShopCharLast Then Exit Sub
+
             End If
+
             Pagination = Pagination + 8
+
     End Select
     
     SelectedTienda = 0
+
 End Sub
 
 Private Sub imgPaypal_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Call MsgBox("Para realizar pagos vía Paypal deberás contactarte de forma privada con nuestros administradores")
+
 End Sub
 
 Private Sub imgTier_Click()
@@ -1143,7 +1180,7 @@ Private Sub SelectedPanel(ByVal cPanel As ePanel)
     Next A
     
     lblGld.visible = False
-    lblDSP.visible = False
+    lblDsp.visible = False
     lblPoints.visible = False
     imgGeneral.visible = False
     imgTier.visible = False
@@ -1173,7 +1210,7 @@ Private Sub SelectedPanel(ByVal cPanel As ePanel)
             
             PicDraw.visible = True
             lblGld.visible = True
-            lblDSP.visible = True
+            lblDsp.visible = True
             lblPoints.visible = True
             imgGeneral.visible = True
             imgTier.visible = True
@@ -1192,7 +1229,7 @@ Private Sub SelectedPanel(ByVal cPanel As ePanel)
             Next A
             
             lblGld.visible = True
-            lblDSP.visible = True
+            lblDsp.visible = True
             lblPoints.visible = True
             imgGeneral.visible = True
             imgTier.visible = True
@@ -1209,24 +1246,23 @@ Private Sub SelectedPanel(ByVal cPanel As ePanel)
             imgCopy.visible = True
             lblCVU.visible = True
             lblAlias.visible = True
+
     End Select
 
 End Sub
 
 ' ############ SOLAPA DE ITEMS SHOP ##########################
 Private Sub imgItem_Click(Index As Integer)
-   Call Audio.PlayInterface(SND_CLICK)
+    Call Audio.PlayInterface(SND_CLICK)
     SelectedTienda = (Index + 1) + Pagination
     
     Call UpdateMeditationLearn
     Call DetectPrize(SelectedTienda)
+
 End Sub
 
 Private Sub imgMenu_Click(Index As Integer)
     Call Audio.PlayInterface(SND_CLICK)
-    
-    
-
     
     imgNoUsage.visible = False
     imgUsage.visible = False
@@ -1282,26 +1318,34 @@ Private Sub imgMenu_Click(Index As Integer)
         Case 6 ' Otros
             imgMenu(6).Picture = LoadPicture(DirInterface & "shop\other_hover.jpg")
             Shop_OrderBy_Other
+
     End Select
     
     Pagination = 0
     SelectedTienda = 0
     AjustarClic
+
 End Sub
+
 Private Sub InitMeditares()
 
     Dim A As Long
     
     For A = LBound(ShopCopy) To UBound(ShopCopy)
+
         With ShopCopy(A)
+
             If .ObjIndex = 9998 Then
-             '   InitGrh .FX, FxData(.ObjAmount).Animacion, , True
+
+                '   InitGrh .FX, FxData(.ObjAmount).Animacion, , True
             End If
             
         End With
+
     Next A
 
 End Sub
+
 Private Sub lblMenu_Click(Index As Integer)
     imgMenu_Click Index
 
@@ -1319,7 +1363,9 @@ Private Function Shop_Is_ObjIndex_Other(ByVal ObjIndex As Integer) As Boolean
     If ObjIndex = FRAGMENTO_HIELO Then Shop_Is_ObjIndex_Other = True
     If ObjIndex = MANUSCRITO_1 Then Shop_Is_ObjIndex_Other = True
     If ObjIndex = MANUSCRITO_2 Then Shop_Is_ObjIndex_Other = True
+
 End Function
+
 Private Sub Shop_OrderBy_Other()
 
     Dim A    As Long
@@ -1343,6 +1389,7 @@ Private Sub Shop_OrderBy_Other()
     Next A
 
     Lastcopy = Last
+
 End Sub
 
 Private Sub Shop_OrderByMeditares()
@@ -1363,6 +1410,7 @@ Private Sub Shop_OrderByMeditares()
                 ShopCopy(Last).ID = A
                 
                 InitGrh ShopCopy(Last).fX, FxData(ShopCopy(Last).ObjAmount).Animacion, , True
+
             End If
             
         End With
@@ -1370,6 +1418,7 @@ Private Sub Shop_OrderByMeditares()
     Next A
 
     Lastcopy = Last
+
 End Sub
 
 Private Sub Shop_OrderByAvatars()
@@ -1388,6 +1437,7 @@ Private Sub Shop_OrderByAvatars()
                     
                 ShopCopy(Last) = Shop(A)
                 ShopCopy(Last).ID = A
+
             End If
             
         End With
@@ -1395,8 +1445,10 @@ Private Sub Shop_OrderByAvatars()
     Next A
 
     Lastcopy = Last
+
 End Sub
- ' Ordena por ObjType
+
+' Ordena por ObjType
 Private Sub Shop_OrdenBy(ByVal ObjType As Byte, Optional ByVal Points As Integer = 0)
     
     Dim A    As Long
@@ -1419,21 +1471,23 @@ Private Sub Shop_OrdenBy(ByVal ObjType As Byte, Optional ByVal Points As Integer
             Else
                 
                 If .ObjIndex <> 9999 And .ObjIndex <> 9998 And .ObjIndex <> 9997 Then
-                If ObjData(.ObjIndex).ObjType = ObjType Then
-                    Last = Last + 1
+                    If ObjData(.ObjIndex).ObjType = ObjType Then
+                        Last = Last + 1
                     
-                    ShopCopy(Last) = Shop(A)
-                    ShopCopy(Last).ID = A
+                        ShopCopy(Last) = Shop(A)
+                        ShopCopy(Last).ID = A
+
+                    End If
+
                 End If
-                End If
+
             End If
             
         End With
     
     Next A
     
-    
-        Lastcopy = Last
+    Lastcopy = Last
 
 End Sub
 
@@ -1443,15 +1497,18 @@ Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     If Panel = ePanel.eCargar Then
-         SelectedPanel ePanel.eTienda
-         Exit Sub
+        SelectedPanel ePanel.eTienda
+        Exit Sub
+
     End If
     
     MirandoShop = False
-   If MsgBox("¿Estás seguro que deseas salir?", vbYesNo) = vbYes Then
+
+    If MsgBox("¿Estás seguro que deseas salir?", vbYesNo) = vbYes Then
         Unload Me
 
     End If
+
     MirandoShop = True
     
 End Sub
@@ -1460,7 +1517,7 @@ End Sub
 
 Private Sub Render_Tienda()
 
- Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
+    Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
 
     Dim A          As Long
 
@@ -1476,7 +1533,6 @@ Private Sub Render_Tienda()
 
     Dim InitialY   As Integer
     
-    
     X = 15
     Y = 30
 
@@ -1488,6 +1544,7 @@ Private Sub Render_Tienda()
 
                 If .ObjIndex > 0 And .ObjIndex <> 9997 Then
                     Call Render_Obj(A + Pagination, X, Y)
+
                 End If
             
             End With
@@ -1505,6 +1562,7 @@ Private Sub Render_Tienda()
     Next A
 
 End Sub
+
 Private Sub Render_Obj(ByVal A As Long, ByVal X As Long, ByVal Y As Long)
     
     Dim C As Long, DescY As Long
@@ -1545,7 +1603,6 @@ Private Sub Render_Obj(ByVal A As Long, ByVal X As Long, ByVal Y As Long)
 
                 End If
             
-            
             Case Else
                 Call Draw_Texture(ObjData(.ObjIndex).GrhIndex, X + 10, Y + 32, To_Depth(3), 32, 32, -1, 0, eTechnique.t_Alpha)
                 Draw_Text f_Tahoma, 12, X + 25, Y + 55, To_Depth(4), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "(x" & .ObjAmount & ")", True, True
@@ -1580,225 +1637,228 @@ End Sub
 
 Private Sub Render_Chars()
 
-        Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
+    Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
 
-        Dim A          As Long
+    Dim A          As Long
 
-        Dim OffsetY    As Integer
+    Dim OffsetY    As Integer
 
-        Dim x1         As Long
+    Dim x1         As Long
 
-        Dim y1         As Long
+    Dim y1         As Long
 
-        Dim ColourText As Long
+    Dim ColourText As Long
     
-        Dim InitialX   As Integer
+    Dim InitialX   As Integer
 
-        Dim InitialY   As Integer
+    Dim InitialY   As Integer
                 
-108     X = 15
-110     Y = 30
+    X = 15
+    Y = 30
 
-112     For A = 1 To 8
+    For A = 1 To 8
         
-114         If A <= ShopCharLast Then
+        If A <= ShopCharLast Then
 
-116             With ShopChars(A + Pagination)
+            With ShopChars(A + Pagination)
 
-                    ' Efecto Seleccionado
-120                 If SelectedTienda = (A + Pagination) Then
-122                     Call Draw_Texture_Graphic_Gui(94, X, Y, To_Depth(2), 250, 74, 0, 0, 250, 74, -1, 0, eTechnique.t_Alpha)
-124                     'Call Draw_Texture_Graphic_Gui(61, X, Y, To_Depth(3), 250, 74, 0, 0, 250, 74, ARGB(255, 197, 0, 50), 0, eTechnique.t_Alpha)
-                    Else
-126                     Call Draw_Texture_Graphic_Gui(81, X, Y, To_Depth(2), 250, 74, 0, 0, 250, 74, -1, 0, eTechnique.t_Alpha)
+                ' Efecto Seleccionado
+                If SelectedTienda = (A + Pagination) Then
+                    Call Draw_Texture_Graphic_Gui(94, X, Y, To_Depth(2), 250, 74, 0, 0, 250, 74, -1, 0, eTechnique.t_Alpha)
+                    'Call Draw_Texture_Graphic_Gui(61, X, Y, To_Depth(3), 250, 74, 0, 0, 250, 74, ARGB(255, 197, 0, 50), 0, eTechnique.t_Alpha)
+                Else
+                    Call Draw_Texture_Graphic_Gui(81, X, Y, To_Depth(2), 250, 74, 0, 0, 250, 74, -1, 0, eTechnique.t_Alpha)
 
-                    End If
+                End If
                         
-118                 If .Hp > 0 Then
+                If .Hp > 0 Then
                 
-                        ' Texto del Item
-128                     Draw_Text f_Verdana, 13, X + 5, Y + 5, To_Depth(4), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_LEFT, UCase$(ListaClases(.Class)) & " " & ListaRazasShort(.Raze) & " LVL" & .Elv & " " & IIf(.Porc <> 0, "(" & .Porc & "%)", vbNullString), True, True
+                    ' Texto del Item
+                    Draw_Text f_Verdana, 13, X + 5, Y + 5, To_Depth(4), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_LEFT, UCase$(ListaClases(.Class)) & " " & ListaRazasShort(.Raze) & " LVL" & .Elv & " " & IIf(.Porc <> 0, "(" & .Porc & "%)", vbNullString), True, True
                 
-                        ' Icono del Item + Cantidad
-                        Call Draw_Grh(HeadData(.Head).Head(E_Heading.SOUTH), X + 8, Y + 23, To_Depth(3, , , 1), 1, 0)
+                    ' Icono del Item + Cantidad
+                    Call Draw_Grh(HeadData(.Head).Head(E_Heading.SOUTH), X + 8, Y + 23, To_Depth(3, , , 1), 1, 0)
                        
-146                     Call Draw_Texture_Graphic_Gui(84, X + 230, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
-148                     Draw_Text f_Verdana, 13, X + 230, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(CLng(.Dsp)), True, True
-150
+                    Call Draw_Texture_Graphic_Gui(84, X + 230, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
+                    Draw_Text f_Verdana, 13, X + 230, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(CLng(.Dsp)), True, True
             
-                        Draw_Text f_Verdana, 13, X + 145, Y + 35, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "HP: " & .Hp & IIf(.Ups = 0, vbNullString, IIf(.Ups > 0, " +" & .Ups, .Ups)) & " MAN: " & PonerPuntos(CLng(.Man)), True, True
-                        Draw_Text f_Verdana, 13, X + 145, Y + 50, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "Sin Items. ¡¡Incluye ORO!!", True, True
+                    Draw_Text f_Verdana, 13, X + 145, Y + 35, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "HP: " & .Hp & IIf(.Ups = 0, vbNullString, IIf(.Ups > 0, " +" & .Ups, .Ups)) & " MAN: " & PonerPuntos(CLng(.Man)), True, True
+                    Draw_Text f_Verdana, 13, X + 145, Y + 50, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "Sin Items. ¡¡Incluye ORO!!", True, True
                     
-                    Else
-                        ' Texto del Item
-                        Call Draw_Texture_Graphic_Gui(84, X + 230, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
-                        Draw_Text f_Verdana, 13, X + 230, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, "0", True, True
-                        Draw_Text f_Verdana, 13, X + 5, Y + 5, To_Depth(4), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_LEFT, "<VACIO>", True, True
-                        Draw_Text f_Verdana, 13, X + 145, Y + 35, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "-", True, True
-                        Draw_Text f_Verdana, 13, X + 145, Y + 50, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "-", True, True
+                Else
+                    ' Texto del Item
+                    Call Draw_Texture_Graphic_Gui(84, X + 230, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
+                    Draw_Text f_Verdana, 13, X + 230, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, "0", True, True
+                    Draw_Text f_Verdana, 13, X + 5, Y + 5, To_Depth(4), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_LEFT, "<VACIO>", True, True
+                    Draw_Text f_Verdana, 13, X + 145, Y + 35, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "-", True, True
+                    Draw_Text f_Verdana, 13, X + 145, Y + 50, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, "-", True, True
 
-                    End If
+                End If
             
-                End With
+            End With
         
-            End If
+        End If
 
-166         Y = Y + 85
+        Y = Y + 85
         
-168         If A = 4 Then
-170             X = X + 280
-172             Y = 30
+        If A = 4 Then
+            X = X + 280
+            Y = 30
         
-            End If
+        End If
 
-174     Next A
+    Next A
 
 End Sub
 
 Private Sub Render()
-        '<EhHeader>
-        On Error GoTo Render_Err
-        '</EhHeader>
+
+    '<EhHeader>
+    On Error GoTo Render_Err
+
+    '</EhHeader>
         
-100     Call wGL_Graphic.Use_Device(g_Captions(eCaption.e_Shop))
-102     Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmShop.PicDraw.ScaleWidth, FrmShop.PicDraw.ScaleHeight)
-104     Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
+    Call wGL_Graphic.Use_Device(g_Captions(eCaption.e_Shop))
+    Call wGL_Graphic_Renderer.Update_Projection(&H0, FrmShop.PicDraw.ScaleWidth, FrmShop.PicDraw.ScaleHeight)
+    Call wGL_Graphic.Clear(CLEAR_COLOR Or CLEAR_DEPTH Or CLEAR_STENCIL, 0, 1, &H0)
     
-        Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
+    Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
 
-        Dim A          As Long
+    Dim A          As Long
 
-        Dim OffsetY    As Integer
+    Dim OffsetY    As Integer
 
-        Dim x1         As Long
+    Dim x1         As Long
 
-        Dim y1         As Long
+    Dim y1         As Long
 
-        Dim ColourText As Long
+    Dim ColourText As Long
     
-        Dim InitialX   As Integer
+    Dim InitialX   As Integer
 
-        Dim InitialY   As Integer
+    Dim InitialY   As Integer
 
-106     Call Draw_Texture_Graphic_Gui(82, 0, 0, To_Depth(1), 561, 394, 0, 0, 561, 394, -1, 0, eTechnique.t_Alpha)
+    Call Draw_Texture_Graphic_Gui(82, 0, 0, To_Depth(1), 561, 394, 0, 0, 561, 394, -1, 0, eTechnique.t_Alpha)
 
-
-         ' Flechas para Mover de Solapa a la siguiente
-         Call Draw_Texture_Graphic_Gui(92, 250, 367, To_Depth(5), 20, 17, 0, 0, 20, 17, -1, 0, eTechnique.t_Alpha)
-         Call Draw_Texture_Graphic_Gui(93, 290, 367, To_Depth(5), 20, 17, 0, 0, 20, 17, -1, 0, eTechnique.t_Alpha)
-          Draw_Text f_Verdana, 15, 279, 367, To_Depth(5), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, Int(Pagination / 8) + 1, True, True
-         
+    ' Flechas para Mover de Solapa a la siguiente
+    Call Draw_Texture_Graphic_Gui(92, 250, 367, To_Depth(5), 20, 17, 0, 0, 20, 17, -1, 0, eTechnique.t_Alpha)
+    Call Draw_Texture_Graphic_Gui(93, 290, 367, To_Depth(5), 20, 17, 0, 0, 20, 17, -1, 0, eTechnique.t_Alpha)
+    Draw_Text f_Verdana, 15, 279, 367, To_Depth(5), 0, -1, FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_CENTER, Int(Pagination / 8) + 1, True, True
         
-        Select Case Panel
+    Select Case Panel
             
-            Case ePanel.eAvatars
-                Call Render_Avatars
+        Case ePanel.eAvatars
+            Call Render_Avatars
                 
-            Case ePanel.eTienda
-                Call Render_Tienda
+        Case ePanel.eTienda
+            Call Render_Tienda
 
-            Case ePanel.eChars
-                Call Render_Chars
+        Case ePanel.eChars
+            Call Render_Chars
                 
-        End Select
-         
+    End Select
     
-176     Call wGL_Graphic_Renderer.Flush
+    Call wGL_Graphic_Renderer.Flush
   
-        '<EhFooter>
-        Exit Sub
+    '<EhFooter>
+    Exit Sub
 
 Render_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.FrmShop.Render " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+    LogError err.Description & vbCrLf & "in ARGENTUM.FrmShop.Render " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
 End Sub
+
 Private Sub Render_Avatars()
 
-     Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
+    Dim X          As Long, Y As Long, Map As Integer, C As Long, DescY As Integer
 
-        Dim A          As Long
+    Dim A          As Long
 
-        Dim OffsetY    As Integer
+    Dim OffsetY    As Integer
 
-        Dim x1         As Long
+    Dim x1         As Long
 
-        Dim y1         As Long
+    Dim y1         As Long
 
-        Dim ColourText As Long
+    Dim ColourText As Long
     
-        Dim InitialX   As Integer
+    Dim InitialX   As Integer
 
-        Dim InitialY   As Integer
+    Dim InitialY   As Integer
         
-108     X = 12
-110     Y = 30
+    X = 12
+    Y = 30
 
-112     For A = 1 To 8
+    For A = 1 To 8
         
-114         If A <= ShopLast Then
+        If A <= ShopLast Then
 
-116             With ShopCopy(A + Pagination)
+            With ShopCopy(A + Pagination)
 
-118                 If .ObjIndex > 0 Then
+                If .ObjIndex > 0 Then
             
-                        ' Fondo
+                    ' Fondo
         
-                        ' Efecto Seleccionado
-120                     If SelectedTienda = (A + Pagination) Then
-122                         Call Draw_Texture_Graphic_Gui(97, X, Y, To_Depth(2), 134, 155, 0, 0, 134, 155, -1, 0, eTechnique.t_Alpha)
-                        Else
-126                         Call Draw_Texture_Graphic_Gui(96, X, Y, To_Depth(2), 134, 155, 0, 0, 134, 155, -1, 0, eTechnique.t_Alpha)
-
-                        End If
-                        
-                         
-                          ' Recuadro + Avatar
-                          Call Draw_Texture_Graphic_Gui(95, X + 8, Y + 30, To_Depth(3), 118, 118, 0, 0, 118, 118, -1, 0, eTechnique.t_Alpha)
-                          Call Draw_Avatar(.ObjAmount, X + 16, Y + 38, To_Depth(4), 102, 102, 0, 0, 102, 102, -1, 0, eTechnique.t_Alpha)
-                          
-                        ' PRECIO
-138                     If .Gld > 0 Then
-140                         Call Draw_Texture_Graphic_Gui(83, X + 110, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
-142                         Draw_Text f_Verdana, 13, X + 110, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(.Gld), True, True
-144                     ElseIf .Dsp > 0 Then
-146                         Call Draw_Texture_Graphic_Gui(84, X + 110, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
-148                         Draw_Text f_Verdana, 13, X + 110, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(.Dsp), True, True
-150                     ElseIf .Points > 0 Then
-152                         Call Draw_Texture_Graphic_Gui(91, X + 110, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
-154                         Draw_Text f_Verdana, 13, X + 110, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(CLng(.Points)), True, True
-
-                        End If
+                    ' Efecto Seleccionado
+                    If SelectedTienda = (A + Pagination) Then
+                        Call Draw_Texture_Graphic_Gui(97, X, Y, To_Depth(2), 134, 155, 0, 0, 134, 155, -1, 0, eTechnique.t_Alpha)
+                    Else
+                        Call Draw_Texture_Graphic_Gui(96, X, Y, To_Depth(2), 134, 155, 0, 0, 134, 155, -1, 0, eTechnique.t_Alpha)
 
                     End If
+                         
+                    ' Recuadro + Avatar
+                    Call Draw_Texture_Graphic_Gui(95, X + 8, Y + 30, To_Depth(3), 118, 118, 0, 0, 118, 118, -1, 0, eTechnique.t_Alpha)
+                    Call Draw_Avatar(.ObjAmount, X + 16, Y + 38, To_Depth(4), 102, 102, 0, 0, 102, 102, -1, 0, eTechnique.t_Alpha)
+                          
+                    ' PRECIO
+                    If .Gld > 0 Then
+                        Call Draw_Texture_Graphic_Gui(83, X + 110, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
+                        Draw_Text f_Verdana, 13, X + 110, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(.Gld), True, True
+                    ElseIf .Dsp > 0 Then
+                        Call Draw_Texture_Graphic_Gui(84, X + 110, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
+                        Draw_Text f_Verdana, 13, X + 110, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(.Dsp), True, True
+                    ElseIf .Points > 0 Then
+                        Call Draw_Texture_Graphic_Gui(91, X + 110, Y + 3, To_Depth(3), 16, 16, 0, 0, 16, 16, -1, 0, eTechnique.t_Alpha)
+                        Draw_Text f_Verdana, 13, X + 110, Y + 5, To_Depth(4), 0, ARGB(255, 197, 0, 255), FONT_ALIGNMENT_TOP Or FONT_ALIGNMENT_RIGHT, PonerPuntos(CLng(.Points)), True, True
+
+                    End If
+
+                End If
             
-                End With
+            End With
         
-            End If
+        End If
         
-166         Y = Y + 165
+        Y = Y + 165
         
-168         If A Mod 2 = 0 Then
-170             X = X + 135
-172             Y = 30
+        If A Mod 2 = 0 Then
+            X = X + 135
+            Y = 30
         
-            End If
+        End If
         
-174     Next A
+    Next A
 
 End Sub
+
 Private Sub imgUsage_Click()
+
     If SelectedTienda > 0 Then
         MeditationSelected = Val(ReadField(2, Shop(ShopCopy(SelectedTienda).ID).Name, Asc(" ")))
         
         Call WriteLearnMeditation(1, MeditationSelected)
         
     End If
+
 End Sub
+
 Private Sub imgNoUsage_Click()
     Call WriteLearnMeditation(1, 0)
+
 End Sub
 
 Private Sub DetectPrize(ByVal SelectedTienda As Integer)
@@ -1826,6 +1886,7 @@ Private Sub DetectPrize(ByVal SelectedTienda As Integer)
         End If
             
     Else
+
         If ShopCopy(SelectedTienda).ID = 0 Then Exit Sub
         
         ' Prioriza la venta por DSP
@@ -1871,7 +1932,7 @@ Private Sub ValuePrize_Selected(ByRef Tipo As ePRICE)
 
                 End If
                 
-                 lblPriceGLD.Caption = ShopChars(SelectedTienda).Gld
+                lblPriceGLD.Caption = ShopChars(SelectedTienda).Gld
                  
             End If
             
@@ -1905,7 +1966,6 @@ Private Sub ValuePrize_Selected(ByRef Tipo As ePRICE)
             imgValueGLD.Picture = LoadPicture(DirInterface & "\shop\gld.jpg")
 
     End Select
-    
 
     SelectedPrice = Tipo
 
@@ -1915,24 +1975,28 @@ Private Sub imgValueGLD_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call ValuePrize_Selected(eGLD)
+
 End Sub
 
 Private Sub imgValueDSP_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     Call ValuePrize_Selected(eDSP)
-End Sub
 
+End Sub
 
 Private Sub lblPriceDSP_Click()
     imgValueDSP_Click
+
 End Sub
 
 Private Sub lblPriceGLD_Click()
     imgValueGLD_Click
+
 End Sub
 
 Private Sub tUpdate_Timer()
+
     If Not MirandoShop Then Exit Sub
     
     Render
@@ -1952,6 +2016,7 @@ Private Sub SetTier(ByVal Tier As Byte)
     RecTxt(Tier).Text = vbNullString
     RecTxt(Tier).SelText = vbNullString
     TierSelected = Tier + 1
+
     Select Case (Tier + 1)
     
         Case 1
@@ -1966,7 +2031,7 @@ Private Sub SetTier(ByVal Tier As Byte)
             Call AddtoRichTextBox(RecTxt(Tier), "COMANDO /RESET:", 250, 240, 0, 1, 1, False)
             Call AddtoRichTextBox(RecTxt(Tier), "Si eres inferior a nivel 29 podrás reiniciar tu personaje a los atributos iniciales y comenzar de nuevo sin borrar el personaje." & vbCrLf, 200, 200, 200, 0, 0)
         
-        Call AddtoRichTextBox(RecTxt(Tier), "COMANDO /HOGAR: ", 250, 240, 0, 1, 1, False)
+            Call AddtoRichTextBox(RecTxt(Tier), "COMANDO /HOGAR: ", 250, 240, 0, 1, 1, False)
             Call AddtoRichTextBox(RecTxt(Tier), "60 Segundos. Regreso 50%OFF" & vbCrLf, 200, 200, 200, 0, 0)
             
             Call AddtoRichTextBox(RecTxt(Tier), "* Todos los personajes de tu cuenta reciben los beneficios del Tier escogido", 2, 51, 223, 0, 1)
@@ -2091,6 +2156,7 @@ Public Sub UpdateMeditationLearn()
                     imgNoUsage.visible = False
                     imgUsage.visible = False
                     imgAdd.visible = True
+
                 End If
 
             End If
@@ -2103,10 +2169,14 @@ End Sub
 
 Private Sub AjustarClic()
     
-    Dim A As Long
-    Dim T As Long, L As Long, W As Long, H As Long
+    Dim A    As Long
+
+    Dim T    As Long, L As Long, W As Long, H As Long
+
     Dim Last As Long
-    Dim X As Long, Y As Long
+
+    Dim X    As Long, Y As Long
+
     Dim AddX As Long, AddY As Long
     
     Select Case Panel
@@ -2128,6 +2198,7 @@ Private Sub AjustarClic()
             Last = 4
             AddX = 300
             AddY = 40
+
     End Select
     
     For A = imgItem.LBound To imgItem.UBound
@@ -2142,7 +2213,9 @@ Private Sub AjustarClic()
             Y = 0
         Else
             Y = Y + (imgItem(0).Top + AddY)
+
         End If
       
     Next A
+
 End Sub

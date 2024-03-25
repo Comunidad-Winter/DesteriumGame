@@ -2,9 +2,9 @@ Attribute VB_Name = "mDataServer"
 ' Generamos los archivos que serán enviados al CLIENTE (Para evitar enviar datos por sockets)
 Option Explicit
 
-
 Public NpcsGlobal_Last As Integer
-Public NpcsGlobal() As Integer
+
+Public NpcsGlobal()    As Integer
 
 ' Todo lo de empaquetado & Decript
 Public Type tCabeceraEncrypt
@@ -15,28 +15,32 @@ Public Type tCabeceraEncrypt
 
 End Type
 
-
-Public CabeceraEncrypt    As tCabeceraEncrypt
+Public CabeceraEncrypt        As tCabeceraEncrypt
 
 Public Const PASSWD_CHARACTER As String = "AesirAO20TDSIMPERIUM"
-
 
 ' Info skills atributes
 
 Public Type eLevelSkill
+
     LevelValue As Integer
+
 End Type
 
 Public Type eInfoSkill
+
     Name As String
     MaxValue As Integer
     Color As Long
     bold As Boolean
+
 End Type
 
-Public LevelSkill(1 To 50)                            As eLevelSkill
-Public InfoSkill(1 To NUMSKILLS)                        As eInfoSkill
-Public InfoSkillEspecial(1 To NUMSKILLSESPECIAL)          As eInfoSkill
+Public LevelSkill(1 To 50)                       As eLevelSkill
+
+Public InfoSkill(1 To NUMSKILLS)                 As eInfoSkill
+
+Public InfoSkillEspecial(1 To NUMSKILLSESPECIAL) As eInfoSkill
 
 Public Type tRuletaItem
 
@@ -48,16 +52,15 @@ Public Type tRuletaItem
 End Type
 
 Public Type tRuletaConfig
+
     ItemLast As Integer
     Items() As tRuletaItem
     RuletaGld As Long
     RuletaDsp As Long
-    
 
 End Type
 
 Public RuletaConfig As tRuletaConfig
-
 
 Public Sub DataServer_LoadAll()
     
@@ -65,11 +68,13 @@ Public Sub DataServer_LoadAll()
     Call DataServer_Generate_Npcs
     Call DataServer_Generate_Quests
     Call DataServer_Load_Shop
+
 End Sub
 
 Public Sub Determinate_Tier_Aura(ByVal ObjIndex As Integer)
     
 End Sub
+
 Public Sub DataServer_Load_ObjData()
     
     Dim Manager  As clsIniManager
@@ -131,6 +136,7 @@ Public Sub DataServer_Load_ObjData()
             
             If .Skin > 0 Then
                 SkinLast = SkinLast + 1
+
             End If
 
             .SkillNum = Val(Manager.GetValue(CStr(A), "SKILLS"))
@@ -165,7 +171,7 @@ Public Sub DataServer_Load_ObjData()
                 ReDim .Upgrade.Required(1 To .Upgrade.RequiredCant) As Obj
                 
                 For b = 1 To .Upgrade.RequiredCant
-                     Temp = Manager.GetValue(CStr(A), "R" & b)
+                    Temp = Manager.GetValue(CStr(A), "R" & b)
                     .Upgrade.Required(b).ObjIndex = Val(ReadField(1, Temp, 45))
                     .Upgrade.Required(b).Amount = Val(ReadField(2, Temp, 45))
                 Next b
@@ -178,12 +184,15 @@ Public Sub DataServer_Load_ObjData()
                 .CP_Valid = True
                 
                 Dim CopyARR() As String
+
                 CopyARR = Split(Temp, "-")
                 
                 ReDim .CP(LBound(CopyARR) To UBound(CopyARR)) As Byte
+
                 For b = LBound(CopyARR) To UBound(CopyARR)
                     .CP(b) = Val(CopyARR(b))
                 Next b
+
             End If
             
             .Chest.NroDrop = Val(Manager.GetValue(CStr(A), "CHESTLAST"))
@@ -197,24 +206,27 @@ Public Sub DataServer_Load_ObjData()
                 For b = 1 To .Chest.NroDrop
                     .Chest.Drop(b) = Val(Manager.GetValue(CStr(A), "CHEST" & b))
                 Next b
+
             End If
             
-            
             .ID = A
+
         End With
         
         DoEvents
     Next A
     
-   ' Call Skins_Ordenate_ObjType(ObjData)
+    ' Call Skins_Ordenate_ObjType(ObjData)
     
     Set Manager = Nothing
 
 End Sub
+
 ' # Ordena los objetos para que aparezcan más juntos y luzca mejor.
 Public Function Skins_Ordenate_ObjType(ByRef ObjData() As tObjData)
 
     Dim A    As Long, b As Long
+
     Dim Temp As tObjData
     
     CopyObjs = ObjData
@@ -227,98 +239,110 @@ Public Function Skins_Ordenate_ObjType(ByRef ObjData() As tObjData)
         For b = 1 To NumObjDatas - A
 
             With CopyObjs(b)
-                    If .ObjType > CopyObjs(b + 1).ObjType Then
-                        Temp = CopyObjs(b)
-                        CopyObjs(b) = CopyObjs(b + 1)
-                        CopyObjs(b + 1) = Temp
-                        
+
+                If .ObjType > CopyObjs(b + 1).ObjType Then
+                    Temp = CopyObjs(b)
+                    CopyObjs(b) = CopyObjs(b + 1)
+                    CopyObjs(b + 1) = Temp
                     
-                    End If
+                End If
+
             End With
+
         Next b
     Next A
                 
 End Function
-Public Sub DataServer_Generate_Npcs()
-        '<EhHeader>
-        On Error GoTo DataServer_Generate_Npcs_Err
-        '</EhHeader>
-    
-        Dim Manager  As clsIniManager
-        Dim N        As Integer
-        Dim A        As Long, b As Long, ln As String
-        Dim filePath As String
-    
-100     filePath = IniPath & "server\server_npcs.ind"
-102     Set Manager = New clsIniManager
-        Call Manager.Initialize(filePath)
-        
-        NumNpcs = Val(Manager.GetValue("INIT", "LASTNPC"))
-        ReDim NpcList(1 To NumNpcs) As tNpcs
-        
-108     For A = 1 To NumNpcs
-            With NpcList(A)
-                .Name = mEncrypt_B.XORDecryption(Manager.GetValue(A, "NAME"))
-                .Desc = mEncrypt_B.XORDecryption(Manager.GetValue(A, "DESC"))
-                .Body = Val(Manager.GetValue(A, "BODY"))
-                .Head = Val(Manager.GetValue(A, "HEAD"))
-                
-                .NpcType = Val(Manager.GetValue(A, "NPCTYPE"))
-                .Def = Val(Manager.GetValue(A, "DEF"))
-                .DefM = Val(Manager.GetValue(A, "DEFM"))
-                
-                .MinHit = Val(Manager.GetValue(A, "MINHIT"))
-                .MaxHit = Val(Manager.GetValue(A, "MAXHIT"))
-                
-                .MaxHp = Val(Manager.GetValue(A, "MAXHP"))
-                .Comercia = Val(Manager.GetValue(A, "COMERCIA"))
-                .Craft = Val(Manager.GetValue(A, "Craft"))
-                .PoderEvasion = Val(Manager.GetValue(A, "PODEREVASION"))
-                .PoderAtaque = Val(Manager.GetValue(A, "PODERATAQUE"))
-                .GiveExp = Val(Manager.GetValue(A, "EXP"))
-                .GiveGld = Val(Manager.GetValue(A, "GLD"))
-                .RespawnTime = Val(Manager.GetValue(A, "RESPAWNTIME"))
-                
-                .NroItems = Val(Manager.GetValue(A, "NROITEMS"))
-                .NroDrops = Val(Manager.GetValue(A, "NRODROPS"))
-                
-                For b = 1 To .NroItems
-                    ln = Manager.GetValue(A, "OBJ" & b)
-                    .Object(b).ObjIndex = Val(ReadField(1, ln, 45))
-                    .Object(b).Amount = Val(ReadField(2, ln, 45))
-                Next b
-                
-                For b = 1 To .NroDrops
-                    ln = Manager.GetValue(A, "DROP" & b)
-                    .Drop(b).ObjIndex = Val(ReadField(1, ln, 45))
-                    .Drop(b).Amount = Val(ReadField(2, ln, 45))
-                    .Drop(b).Probability = Val(ReadField(3, ln, 45))
-                Next b
-                
-                DoEvents
-            End With
 
-114     Next A
+Public Sub DataServer_Generate_Npcs()
+
+    '<EhHeader>
+    On Error GoTo DataServer_Generate_Npcs_Err
+
+    '</EhHeader>
     
-118     Set Manager = Nothing
-        '<EhFooter>
-        Exit Sub
+    Dim Manager  As clsIniManager
+
+    Dim N        As Integer
+
+    Dim A        As Long, b As Long, ln As String
+
+    Dim filePath As String
+    
+    filePath = IniPath & "server\server_npcs.ind"
+    Set Manager = New clsIniManager
+    Call Manager.Initialize(filePath)
+        
+    NumNpcs = Val(Manager.GetValue("INIT", "LASTNPC"))
+    ReDim NpcList(1 To NumNpcs) As tNpcs
+        
+    For A = 1 To NumNpcs
+
+        With NpcList(A)
+            .Name = mEncrypt_B.XORDecryption(Manager.GetValue(A, "NAME"))
+            .Desc = mEncrypt_B.XORDecryption(Manager.GetValue(A, "DESC"))
+            .Body = Val(Manager.GetValue(A, "BODY"))
+            .Head = Val(Manager.GetValue(A, "HEAD"))
+                
+            .NpcType = Val(Manager.GetValue(A, "NPCTYPE"))
+            .Def = Val(Manager.GetValue(A, "DEF"))
+            .DefM = Val(Manager.GetValue(A, "DEFM"))
+                
+            .MinHit = Val(Manager.GetValue(A, "MINHIT"))
+            .MaxHit = Val(Manager.GetValue(A, "MAXHIT"))
+                
+            .MaxHp = Val(Manager.GetValue(A, "MAXHP"))
+            .Comercia = Val(Manager.GetValue(A, "COMERCIA"))
+            .Craft = Val(Manager.GetValue(A, "Craft"))
+            .PoderEvasion = Val(Manager.GetValue(A, "PODEREVASION"))
+            .PoderAtaque = Val(Manager.GetValue(A, "PODERATAQUE"))
+            .GiveExp = Val(Manager.GetValue(A, "EXP"))
+            .GiveGld = Val(Manager.GetValue(A, "GLD"))
+            .RespawnTime = Val(Manager.GetValue(A, "RESPAWNTIME"))
+                
+            .NroItems = Val(Manager.GetValue(A, "NROITEMS"))
+            .NroDrops = Val(Manager.GetValue(A, "NRODROPS"))
+                
+            For b = 1 To .NroItems
+                ln = Manager.GetValue(A, "OBJ" & b)
+                .Object(b).ObjIndex = Val(ReadField(1, ln, 45))
+                .Object(b).Amount = Val(ReadField(2, ln, 45))
+            Next b
+                
+            For b = 1 To .NroDrops
+                ln = Manager.GetValue(A, "DROP" & b)
+                .Drop(b).ObjIndex = Val(ReadField(1, ln, 45))
+                .Drop(b).Amount = Val(ReadField(2, ln, 45))
+                .Drop(b).Probability = Val(ReadField(3, ln, 45))
+            Next b
+                
+            DoEvents
+
+        End With
+
+    Next A
+    
+    Set Manager = Nothing
+    '<EhFooter>
+    Exit Sub
 
 DataServer_Generate_Npcs_Err:
-        LogError err.Description & vbCrLf & _
-           "in DataServer_Generate_Npcs " & _
-           "at line " & Erl
+    LogError err.Description & vbCrLf & "in DataServer_Generate_Npcs " & "at line " & Erl
 
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Public Sub DataServer_Generate_Quests()
     
-    Dim Manager      As clsIniManager
-    Dim N            As Integer
-    Dim A            As Long, b As Long
+    Dim Manager  As clsIniManager
+
+    Dim N        As Integer
+
+    Dim A        As Long, b As Long
+
     Dim filePath As String
-    Dim Temp As String
+
+    Dim Temp     As String
     
     Set Manager = New clsIniManager
     filePath = IniPath & "server\server_quests.ind"
@@ -328,6 +352,7 @@ Public Sub DataServer_Generate_Quests()
     ReDim QuestList(1 To NumQuests) As tQuest
         
     For A = 1 To NumQuests
+
         With QuestList(A)
             .Name = mEncrypt_B.XORDecryption(Manager.GetValue(A, "NAME"))
             Temp = mEncrypt_B.XORDecryption(Manager.GetValue(A, "DESC"))
@@ -378,7 +403,7 @@ Public Sub DataServer_Generate_Quests()
             Next b
             
             For b = 1 To .Npc
-                 Temp = Manager.GetValue(A, "NPC" & b)
+                Temp = Manager.GetValue(A, "NPC" & b)
                 .Npcs(b).NpcIndex = ReadField(1, Temp, 45)
                 .Npcs(b).Amount = ReadField(2, Temp, 45)
                 .Npcs(b).Hp = ReadField(3, Temp, 45)
@@ -390,8 +415,6 @@ Public Sub DataServer_Generate_Quests()
                 .RewardObjs(b).Amount = ReadField(2, Temp, 45)
                 '.RewardObjs(b).Durabilidad = ReadField(3, Temp, 45)
             Next b
-
-
             
         End With
             
@@ -399,15 +422,18 @@ Public Sub DataServer_Generate_Quests()
     Next A
 
     Set Manager = Nothing
-End Sub
 
+End Sub
 
 Public Sub DataServer_Load_Shop()
     
-    Dim Manager      As clsIniManager
-    Dim A            As Long
+    Dim Manager  As clsIniManager
+
+    Dim A        As Long
+
     Dim filePath As String
-    Dim Temp As String
+
+    Dim Temp     As String
     
     filePath = IniPath & "server\server_shop.ind"
 
@@ -418,10 +444,12 @@ Public Sub DataServer_Load_Shop()
     ShopLast = Val(Manager.GetValue("INIT", "LAST"))
     
     ReDim Shop(1 To ShopLast) As tShop
+
     For A = 1 To ShopLast
+
         With Shop(A)
             .Name = mEncrypt_B.XORDecryption(Manager.GetValue(CStr(A), "NAME"))
-             Temp = mEncrypt_B.XORDecryption(Manager.GetValue(CStr(A), "DESC"))
+            Temp = mEncrypt_B.XORDecryption(Manager.GetValue(CStr(A), "DESC"))
             .Desc = Split(Temp, "|")
             .Gld = Val(Manager.GetValue(CStr(A), "GLD"))
             .Dsp = Val(Manager.GetValue(CStr(A), "DSP"))
@@ -437,65 +465,77 @@ Public Sub DataServer_Load_Shop()
     Next A
     
     Set Manager = Nothing
+
 End Sub
 
 Public Sub DB_LoadSkills()
+
     Dim Manager As clsIniManager
-    Dim A As Long
-    Dim Temp As String
-    Dim r As Byte, g As Byte, b As Byte
+
+    Dim A       As Long
+
+    Dim Temp    As String
+
+    Dim r       As Byte, g As Byte, b As Byte
+
     Set Manager = New clsIniManager
         
-        Manager.Initialize IniPath & "skills.ini"
+    Manager.Initialize IniPath & "skills.ini"
         
-        ' Skills por Nivel que puede ganar el personaje
-        For A = 1 To 50
-            LevelSkill(A).LevelValue = Val(Manager.GetValue("LEVELVALUE", "Lvl" & A))
-        Next A
+    ' Skills por Nivel que puede ganar el personaje
+    For A = 1 To 50
+        LevelSkill(A).LevelValue = Val(Manager.GetValue("LEVELVALUE", "Lvl" & A))
+    Next A
             
-        ' Habilidades Cotidianas del Personaje
-        For A = 1 To NUMSKILLS
-            InfoSkill(A).Name = Manager.GetValue("SK" & A, "Name")
-            InfoSkill(A).MaxValue = Val(Manager.GetValue("SK" & A, "MaxValue"))
+    ' Habilidades Cotidianas del Personaje
+    For A = 1 To NUMSKILLS
+        InfoSkill(A).Name = Manager.GetValue("SK" & A, "Name")
+        InfoSkill(A).MaxValue = Val(Manager.GetValue("SK" & A, "MaxValue"))
             
-            Temp = Manager.GetValue("SK" & A, "Color")
-            r = Val(ReadField(1, Temp, 45))
-            g = Val(ReadField(2, Temp, 45))
-            b = Val(ReadField(3, Temp, 45))
-            InfoSkill(A).Color = ARGB(r, g, b, 255)
-            'InfoSkill(A).Bold = Manager.GetValue("SK" & A, "Bold")
-        Next A
+        Temp = Manager.GetValue("SK" & A, "Color")
+        r = Val(ReadField(1, Temp, 45))
+        g = Val(ReadField(2, Temp, 45))
+        b = Val(ReadField(3, Temp, 45))
+        InfoSkill(A).Color = ARGB(r, g, b, 255)
+        'InfoSkill(A).Bold = Manager.GetValue("SK" & A, "Bold")
+    Next A
     
-        ' Habilidades Extremas del Personaje
-        For A = 1 To NUMSKILLSESPECIAL
-            InfoSkillEspecial(A).Name = Manager.GetValue("SKESP" & A, "Name")
-            InfoSkillEspecial(A).MaxValue = Val(Manager.GetValue("SKESP" & A, "MaxValue"))
+    ' Habilidades Extremas del Personaje
+    For A = 1 To NUMSKILLSESPECIAL
+        InfoSkillEspecial(A).Name = Manager.GetValue("SKESP" & A, "Name")
+        InfoSkillEspecial(A).MaxValue = Val(Manager.GetValue("SKESP" & A, "MaxValue"))
             
-            Temp = Manager.GetValue("SKESP" & A, "Color")
-            r = Val(ReadField(1, Temp, 45))
-            g = Val(ReadField(2, Temp, 45))
-            b = Val(ReadField(3, Temp, 45))
-            InfoSkillEspecial(A).Color = ARGB(r, g, b, 255)
-            'InfoSkillEspecial(A).Bold = Manager.GetValue("SKESP" & A, "Bold")
-        Next A
+        Temp = Manager.GetValue("SKESP" & A, "Color")
+        r = Val(ReadField(1, Temp, 45))
+        g = Val(ReadField(2, Temp, 45))
+        b = Val(ReadField(3, Temp, 45))
+        InfoSkillEspecial(A).Color = ARGB(r, g, b, 255)
+        'InfoSkillEspecial(A).Bold = Manager.GetValue("SKESP" & A, "Bold")
+    Next A
         
     Set Manager = Nothing
+
 End Sub
 
 ' # Busca un slot repetido
 Public Function ListNpc_Repeat(ByVal NpcIndex As Integer) As Boolean
+
     Dim A As Long
     
     If NpcsGlobal_Last = 0 Then Exit Function
     
     For A = 1 To NpcsGlobal_Last
+
         If NpcsGlobal(A) = NpcIndex Then
             ListNpc_Repeat = True
             Exit Function
+
         End If
+
     Next A
     
 End Function
+
 ' # Guardamos el NPC en la lista global de npcs visibles para el usuario
 Public Sub AddListNpcs(ByVal NpcIndex As Integer)
     
@@ -506,6 +546,7 @@ Public Sub AddListNpcs(ByVal NpcIndex As Integer)
     ReDim Preserve NpcsGlobal(1 To NpcsGlobal_Last) As Integer
     
     NpcsGlobal(NpcsGlobal_Last) = NpcIndex
+
 End Sub
 
 Public Sub DataServer_Load_Maps()
@@ -542,11 +583,8 @@ Public Sub DataServer_Load_Maps()
                 For b = 1 To .NpcsNum
                     .Npcs(b).NpcIndex = Val(Manager.GetValue(A, "NPC_INDEX" & b))
                     
-                    If NpcList(.Npcs(b).NpcIndex).MaxHp > 0 Then _
-                    Call AddListNpcs(.Npcs(b).NpcIndex)
+                    If NpcList(.Npcs(b).NpcIndex).MaxHp > 0 Then Call AddListNpcs(.Npcs(b).NpcIndex)
                 Next b
-                
-                
 
             End If
             
@@ -626,6 +664,7 @@ Public Sub DataServer_Load_Spells()
         With Hechizos(A)
             .Nombre = mEncrypt_B.XORDecryption(Manager.GetValue(A, "NAME"))
             .AutoLanzar = Val(Manager.GetValue(A, "AUTOLANZAR"))
+
         End With
         
         DoEvents
@@ -634,110 +673,118 @@ Public Sub DataServer_Load_Spells()
     Set Manager = Nothing
 
 End Sub
+
 Public Sub Drops_Load()
-        '<EhHeader>
-        On Error GoTo Drops_Load_Err
-        '</EhHeader>
-        Dim Manager As clsIniManager
-        Dim A As Long, b As Long
-        Dim Temp As String
-    
-100     Set Manager = New clsIniManager
 
-          Dim filePath As String
-          filePath = Drops_FilePath
-102     Manager.Initialize (filePath)
+    '<EhHeader>
+    On Error GoTo Drops_Load_Err
+
+    '</EhHeader>
+    Dim Manager As clsIniManager
+
+    Dim A       As Long, b As Long
+
+    Dim Temp    As String
     
-104     DropLast = Val(Manager.GetValue("INIT", "LAST"))
+    Set Manager = New clsIniManager
+
+    Dim filePath As String
+
+    filePath = Drops_FilePath
+    Manager.Initialize (filePath)
     
-106     ReDim DropData(1 To DropLast) As tDrop
+    DropLast = Val(Manager.GetValue("INIT", "LAST"))
     
-108     For A = 1 To DropLast
-110         With DropData(A)
-112             .Last = Val(Manager.GetValue(A, "LAST"))
+    ReDim DropData(1 To DropLast) As tDrop
+    
+    For A = 1 To DropLast
+
+        With DropData(A)
+            .Last = Val(Manager.GetValue(A, "LAST"))
             
-114             ReDim .data(1 To .Last) As tDropData
+            ReDim .data(1 To .Last) As tDropData
             
-116             For b = 1 To .Last
-118                 Temp = Manager.GetValue(A, b)
-120                 .data(b).ObjIndex = Val(ReadField(1, Temp, 45))
-                      .data(b).Prob = Val(ReadField(2, Temp, 45))
-122                 .data(b).Amount(0) = Val(ReadField(3, Temp, 45))
-124                 .data(b).Amount(1) = Val(ReadField(4, Temp, 45))
-126             Next b
+            For b = 1 To .Last
+                Temp = Manager.GetValue(A, b)
+                .data(b).ObjIndex = Val(ReadField(1, Temp, 45))
+                .data(b).Prob = Val(ReadField(2, Temp, 45))
+                .data(b).Amount(0) = Val(ReadField(3, Temp, 45))
+                .data(b).Amount(1) = Val(ReadField(4, Temp, 45))
+            Next b
         
-            End With
-    
-    
-128     Next A
-130     Set Manager = Nothing
-    
-        '<EhFooter>
-        Exit Sub
-
-Drops_Load_Err:
-        Set Manager = Nothing
-        LogError err.Description & vbCrLf & _
-               "in ServidorArgentum.mDrop.Drops_Load " & _
-               "at line " & Erl
-        
-        '</EhFooter>
-End Sub
-Public Sub Ruleta_LoadItems()
-        '<EhHeader>
-        On Error GoTo Ruleta_LoadItems_Err
-        '</EhHeader>
-
-        Dim Manager As clsIniManager
-
-        Dim A       As Long
-
-        Dim Temp    As String
-    
-        Dim filePath As String
-    
-100     Set Manager = New clsIniManager
-    
-102     filePath = IniPath & "server\ruleta.dat"
-            
-            Manager.Initialize filePath
-104     With RuletaConfig
-106         .ItemLast = Val(Manager.GetValue("INIT", "LAST"))
-108         .RuletaDsp = Val(Manager.GetValue("INIT", "RULETADSP"))
-110         .RuletaGld = Val(Manager.GetValue("INIT", "RULETAGLD"))
-        
-112         If .ItemLast > 0 Then
-114             ReDim .Items(1 To .ItemLast) As tRuletaItem
-        
-116             For A = 1 To .ItemLast
-
-118                 With .Items(A)
-120                     Temp = Manager.GetValue("LIST", "OBJ" & A)
-                
-122                     .ObjIndex = Val(ReadField(1, Temp, 45))
-124                     .Amount = Val(ReadField(2, Temp, 45))
-126                     .Prob = Val(ReadField(3, Temp, 45))
-128                     .ProbNum = Val(ReadField(4, Temp, 45))
-                
-                    End With
-
-130             Next A
-    
-            End If
-    
         End With
     
-132     Set Manager = Nothing
+    Next A
 
-        '<EhFooter>
-        Exit Sub
+    Set Manager = Nothing
+    
+    '<EhFooter>
+    Exit Sub
 
-Ruleta_LoadItems_Err:
-        LogError err.Description & vbCrLf & _
-               "in ARGENTUM.mDataServer.Ruleta_LoadItems " & _
-               "at line " & Erl
-        Resume Next
-        '</EhFooter>
+Drops_Load_Err:
+    Set Manager = Nothing
+    LogError err.Description & vbCrLf & "in ServidorArgentum.mDrop.Drops_Load " & "at line " & Erl
+        
+    '</EhFooter>
 End Sub
 
+Public Sub Ruleta_LoadItems()
+
+    '<EhHeader>
+    On Error GoTo Ruleta_LoadItems_Err
+
+    '</EhHeader>
+
+    Dim Manager  As clsIniManager
+
+    Dim A        As Long
+
+    Dim Temp     As String
+    
+    Dim filePath As String
+    
+    Set Manager = New clsIniManager
+    
+    filePath = IniPath & "server\ruleta.dat"
+            
+    Manager.Initialize filePath
+
+    With RuletaConfig
+        .ItemLast = Val(Manager.GetValue("INIT", "LAST"))
+        .RuletaDsp = Val(Manager.GetValue("INIT", "RULETADSP"))
+        .RuletaGld = Val(Manager.GetValue("INIT", "RULETAGLD"))
+        
+        If .ItemLast > 0 Then
+            ReDim .Items(1 To .ItemLast) As tRuletaItem
+        
+            For A = 1 To .ItemLast
+
+                With .Items(A)
+                    Temp = Manager.GetValue("LIST", "OBJ" & A)
+                
+                    .ObjIndex = Val(ReadField(1, Temp, 45))
+                    .Amount = Val(ReadField(2, Temp, 45))
+                    .Prob = Val(ReadField(3, Temp, 45))
+                    .ProbNum = Val(ReadField(4, Temp, 45))
+                
+                End With
+
+            Next A
+    
+        End If
+    
+    End With
+    
+    Set Manager = Nothing
+
+    '<EhFooter>
+    Exit Sub
+
+Ruleta_LoadItems_Err:
+    LogError err.Description & vbCrLf & "in ARGENTUM.mDataServer.Ruleta_LoadItems " & "at line " & Erl
+
+    Resume Next
+
+    '</EhFooter>
+End Sub
 

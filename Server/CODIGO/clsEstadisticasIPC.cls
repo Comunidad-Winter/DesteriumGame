@@ -102,6 +102,7 @@ Private Function BuscaVentana(Wnd As Long, Str As String) As Long
                 Exit Function
 
             End If
+
         End If
 
         W = GetWindow(W, GW_HWNDNEXT)
@@ -118,6 +119,7 @@ Public Function Informar(ByVal QueCosa As EstaNotificaciones, _
 
     If hVentana <> 0 Then
         Informar = SendMessageLong(hVentana, sMensaje, QueCosa, Parametro)
+
     End If
 
 End Function

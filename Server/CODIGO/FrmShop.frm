@@ -90,69 +90,66 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub ButtonAccept_Click()
-        '<EhHeader>
-        On Error GoTo ButtonAccept_Click_Err
-        '</EhHeader>
 
-100     If lstShop.ListIndex = -1 Then Exit Sub
+    '<EhHeader>
+    On Error GoTo ButtonAccept_Click_Err
+
+    '</EhHeader>
+
+    If lstShop.ListIndex = -1 Then Exit Sub
     
-102     'If MsgBox("¿Estás seguro que deseas aceptar la transacción de " & lstShop.List(lstShop.ListIndex) & "?", vbYesNo) = vbYes Then
-104         Call mShop.Transaccion_Accept((val(ReadField(1, lstShop.List(lstShop.ListIndex), Asc("|")))))
-        'End If
-        '<EhFooter>
-        Exit Sub
+    'If MsgBox("¿Estás seguro que deseas aceptar la transacción de " & lstShop.List(lstShop.ListIndex) & "?", vbYesNo) = vbYes Then
+    Call mShop.Transaccion_Accept((val(ReadField(1, lstShop.List(lstShop.ListIndex), Asc("|")))))
+    'End If
+    '<EhFooter>
+    Exit Sub
 
 ButtonAccept_Click_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.FrmShop.ButtonAccept_Click " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.FrmShop.ButtonAccept_Click " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Private Sub ButtonRechace_Click()
-        '<EhHeader>
-        On Error GoTo ButtonRechace_Click_Err
-        '</EhHeader>
-100      If lstShop.ListIndex = -1 Then Exit Sub
-     
-102    ' If MsgBox("¿Estás seguro que deseas rechazar la transacción de " & lstShop.List(lstShop.ListIndex) & "?", vbYesNo) = vbYes Then
-104         Call mShop.Transaccion_Clear(val(ReadField(1, lstShop.List(lstShop.ListIndex), Asc("|"))))
 
-       ' End If
-        '<EhFooter>
-        Exit Sub
+    '<EhHeader>
+    On Error GoTo ButtonRechace_Click_Err
+
+    '</EhHeader>
+    If lstShop.ListIndex = -1 Then Exit Sub
+     
+    ' If MsgBox("¿Estás seguro que deseas rechazar la transacción de " & lstShop.List(lstShop.ListIndex) & "?", vbYesNo) = vbYes Then
+    Call mShop.Transaccion_Clear(val(ReadField(1, lstShop.List(lstShop.ListIndex), Asc("|"))))
+
+    ' End If
+    '<EhFooter>
+    Exit Sub
 
 ButtonRechace_Click_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.FrmShop.ButtonRechace_Click " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.FrmShop.ButtonRechace_Click " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub
 
 Private Sub lstShop_Click()
-        '<EhHeader>
-        On Error GoTo lstShop_Click_Err
-        '</EhHeader>
-100     If lstShop.ListIndex = -1 Then Exit Sub
-    
-   
-    
-        Dim Slot As Long
-    
-102     Slot = val(ReadField(1, lstShop.List(lstShop.ListIndex), Asc("|")))
-    
-104     lblRef.Caption = ShopWaiting(Slot).Bank
 
+    '<EhHeader>
+    On Error GoTo lstShop_Click_Err
+
+    '</EhHeader>
+    If lstShop.ListIndex = -1 Then Exit Sub
     
-        '<EhFooter>
-        Exit Sub
+    Dim Slot As Long
+    
+    Slot = val(ReadField(1, lstShop.List(lstShop.ListIndex), Asc("|")))
+    
+    lblRef.Caption = ShopWaiting(Slot).Bank
+    
+    '<EhFooter>
+    Exit Sub
 
 lstShop_Click_Err:
-        LogError Err.description & vbCrLf & _
-               "in ServidorArgentum.FrmShop.lstShop_Click " & _
-               "at line " & Erl
+    LogError Err.description & vbCrLf & "in ServidorArgentum.FrmShop.lstShop_Click " & "at line " & Erl
         
-        '</EhFooter>
+    '</EhFooter>
 End Sub

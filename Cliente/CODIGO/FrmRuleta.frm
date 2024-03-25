@@ -101,12 +101,15 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private InvRuleta As clsGrapchicalInventory
+
 Private Sub Form_KeyPress(KeyAscii As Integer)
+
     If KeyAscii = vbKeyEscape Then
         FrmMain.SetFocus
         Unload Me
         
     End If
+
 End Sub
 
 Private Sub Form_Load()
@@ -125,19 +128,23 @@ Private Sub Form_Load()
         Next A
         
     End With
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
     Set InvRuleta = Nothing
     
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.eInvRuleta))
+
 End Sub
 
 Private Sub imgDsp_Click()
     WriteTirarRuleta 2
+
 End Sub
 
 Private Sub imgGld_Click()
     WriteTirarRuleta 1
+
 End Sub
 

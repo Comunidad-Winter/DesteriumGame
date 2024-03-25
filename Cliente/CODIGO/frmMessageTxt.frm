@@ -147,27 +147,27 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private clsFormulario  As clsFormMovementManager
+Private clsFormulario         As clsFormMovementManager
 
-Private cBotonGuardar  As clsGraphicalButton
+Private cBotonGuardar         As clsGraphicalButton
 
-Private cBotonCancelar As clsGraphicalButton
+Private cBotonCancelar        As clsGraphicalButton
 
-Public LastPressed     As clsGraphicalButton
+Public LastPressed            As clsGraphicalButton
 
 Private Const MAX_LEN_MESSAGE As Long = 60
 
 Private Sub Form_Load()
 
-    Dim I As Long
+    Dim i As Long
           
     ' Handles Form movement (drag and drop).
     Set clsFormulario = New clsFormMovementManager
     clsFormulario.Initialize Me
           
-    For I = 0 To 9
-        messageTxt(I) = CustomMessages.Message(I)
-    Next I
+    For i = 0 To 9
+        messageTxt(i) = CustomMessages.Message(i)
+    Next i
 
     '  Me.Picture = LoadPicture(App.path & "\graficos\VentanaMensajesPersonalizados.jpg")
           
@@ -191,22 +191,24 @@ Private Sub LoadButtons()
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+
     'LastPressed.ToggleToNormal
 End Sub
 
 Private Sub imgCancelar_Click()
     Unload Me
+
 End Sub
 
 Private Sub imgGuardar_Click()
 
     On Error GoTo ErrHandler
 
-    Dim I As Long
+    Dim i As Long
     
-    For I = 0 To 9
-        CustomMessages.Message(I) = messageTxt(I)
-    Next I
+    For i = 0 To 9
+        CustomMessages.Message(i) = messageTxt(i)
+    Next i
           
     Unload Me
 
@@ -216,7 +218,8 @@ ErrHandler:
 
     'Did detected an invalid message??
     If err.Number = CustomMessages.InvalidMessageErrCode Then
-        Call MsgBox("El Mensaje " & CStr(I + 1) & " es inválido. Modifiquelo por favor.")
+        Call MsgBox("El Mensaje " & CStr(i + 1) & " es inválido. Modifiquelo por favor.")
+
     End If
 
 End Sub
@@ -226,5 +229,6 @@ Private Sub messageTxt_MouseMove(Index As Integer, _
                                  Shift As Integer, _
                                  X As Single, _
                                  Y As Single)
+
     'LastPressed.ToggleToNormal
 End Sub

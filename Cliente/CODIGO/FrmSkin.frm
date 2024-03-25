@@ -91,54 +91,65 @@ Option Explicit
 
 Public SkinSelected As Integer
 
-
 Private Enum eType
-        eWeapon = 1
-        eArmour = 2
-        eShield = 3
-        eHelm = 4
+
+    eWeapon = 1
+    eArmour = 2
+    eShield = 3
+    eHelm = 4
+
 End Enum
 
 Private Enum eModo
-        eBuy = 1
-        eUsage = 2
-        eDesequipar = 3
+
+    eBuy = 1
+    eUsage = 2
+    eDesequipar = 3
+
 End Enum
 
+Private Modo                 As eModo
 
-Private Modo As eModo
-Private SelectedType As eType
+Private SelectedType         As eType
 
-Private Skin_ObjIndex As Integer
-Private Armadura As Integer
-Private Arma As Integer
-Private ArmaSecundaria As Integer
-Private Escudo As Integer
-Private Casco As Integer
+Private Skin_ObjIndex        As Integer
+
+Private Armadura             As Integer
+
+Private Arma                 As Integer
+
+Private ArmaSecundaria       As Integer
+
+Private Escudo               As Integer
+
+Private Casco                As Integer
 
 Private Const MAX_SKINS_VIEW As Byte = 6
 
-Private TemporalObj As Long
+Private TemporalObj          As Long
 
-Private Heading As E_Heading
+Private Heading              As E_Heading
 
-Public MouseX As Long
-Public MouseY As Long
+Public MouseX                As Long
 
-Private ObjIndex_Selected As Integer
-Private clsFormulario          As clsFormMovementManager
+Public MouseY                As Long
 
+Private ObjIndex_Selected    As Integer
 
-Private ListObj As clsGraphicalList
+Private clsFormulario        As clsFormMovementManager
 
-Private LastList As Integer
-Dim CopyList() As tObjData
+Private ListObj              As clsGraphicalList
 
+Private LastList             As Integer
+
+Dim CopyList()               As tObjData
 
 ' # Mueve el Heading del Personaje
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         Unload Me
+
     End If
     
     If KeyCode = vbKeyLeft Then
@@ -149,9 +160,11 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         Heading = E_Heading.EAST
     ElseIf KeyCode = vbKeyUp Then
         Heading = E_Heading.NORTH
+
     End If
     
 End Sub
+
 ' # Se fija si puede usar el item según su género biologico.
 Function SexoPuedeUsarItem(ByVal UserSexo As Byte, _
                            ByVal ObjIndex As Integer, _
@@ -165,6 +178,7 @@ Function SexoPuedeUsarItem(ByVal UserSexo As Byte, _
         SexoPuedeUsarItem = UserSexo <> eGenero.Mujer
     Else
         SexoPuedeUsarItem = True
+
     End If
     
     If Not SexoPuedeUsarItem Then sMotivo = "Tu género no puede usar este objeto."
@@ -173,26 +187,35 @@ Function SexoPuedeUsarItem(ByVal UserSexo As Byte, _
 
 ErrHandler:
     Call LogError("SexoPuedeUsarItem")
+
 End Function
+
 ' # Se fija si la clase tiene que ver el objeto en la lista
-Private Function ClasePuedeUsarItem(ByVal ObjIndex As Integer, ByVal Clase As Byte) As Boolean
+Private Function ClasePuedeUsarItem(ByVal ObjIndex As Integer, _
+                                    ByVal Clase As Byte) As Boolean
 
     Dim A As Long
-    
     
     ClasePuedeUsarItem = True
 
     With ObjData(ObjIndex)
+
         If .CP_Valid Then
+
             For A = LBound(.CP) To UBound(.CP)
-                 If .CP(A) = Clase Then
+
+                If .CP(A) = Clase Then
                     ClasePuedeUsarItem = False
                     Exit Function
-                 End If
+
+                End If
                  
             Next A
+
         End If
+
     End With
+
 End Function
 
 ' # Rellena las skins en el PictureBox
@@ -200,11 +223,11 @@ Public Sub Skins_Load()
     
     Dim A As Long
     
-    
     If InventorySkins Is Nothing Then
         Set InventorySkins = New clsGrapchicalInventory
     
-        Call InventorySkins.Initialize(PicInv, 63, SkinLast, eCaption.eInvSkin1, , , , , , , , , , , , True)
+        Call InventorySkins.Initialize(picInv, 63, SkinLast, eCaption.eInvSkin1, , , , , , , , , , , , True)
+
     End If
     
     LastList = 0
@@ -212,7 +235,9 @@ Public Sub Skins_Load()
     ReDim CopyList(0) As tObjData
     
     For A = 1 To NumObjDatas
+
         With ObjData(A)
+
             If .Skin > 0 Then
                 If ClasePuedeUsarItem(A, UserClase) And SexoPuedeUsarItem(UserSexo, A) Then
                     LastList = LastList + 1
@@ -224,58 +249,74 @@ Public Sub Skins_Load()
                     'ExistSkin = Skin_SearchUser(CopyObjs(A).ID)
                     
                     'If InventorySkins Is Nothing Then
-                       ' Call InventorySkins.SetItem(LastList, CopyObjs(A).ID, 1, 0, .GrhIndex, .ObjType, 0, 0, 0, 0, .ValueGLD, "Skin", .ValueDSP, True, 0, 0, 0, 0, , , , , ExistSkin)
+                    ' Call InventorySkins.SetItem(LastList, CopyObjs(A).ID, 1, 0, .GrhIndex, .ObjType, 0, 0, 0, 0, .ValueGLD, "Skin", .ValueDSP, True, 0, 0, 0, 0, , , , , ExistSkin)
                     'Else
                         
-                   ' End If
+                    ' End If
                 End If
             
             End If
             
         End With
+
     Next A
     
     Call Objs_OrdenatePrice(0)
     Call Objs_OrdenatePrice(1)
     
     Dim ExistSkin As Integer
+
     For A = 1 To LastList
+
         With CopyList(A)
             ExistSkin = Skin_SearchUser(.ID)
 
             Call InventorySkins.SetItem(A, .ID, 1, 0, .GrhIndex, .ObjType, 0, 0, 0, 0, .ValueGLD, "Skin", .ValueDSP, True, 0, 0, 0, 0, , , , , ExistSkin)
+
         End With
+
     Next A
     
     InventorySkins.DrawInventory
+
 End Sub
 
 ' # Ordena los objetos por precio
 Public Sub Objs_OrdenatePrice(ByVal Tipo As Byte)
 
     Dim A    As Long, b As Long
+
     Dim Temp As tObjData
     
     For A = 1 To LastList - 1
         For b = 1 To LastList - A
 
             With CopyList(b)
+
                 If Tipo = 0 Then
+
                     ' # Ordena por Oro
                     If .ValueGLD > CopyList(b + 1).ValueGLD Then
                         Temp = CopyList(b)
                         CopyList(b) = CopyList(b + 1)
                         CopyList(b + 1) = Temp
+
                     End If
+
                 Else
+
                     ' # Ordena por DSP
                     If .ValueDSP > CopyList(b + 1).ValueDSP Then
                         Temp = CopyList(b)
                         CopyList(b) = CopyList(b + 1)
                         CopyList(b + 1) = Temp
+
                     End If
+
                 End If
+
             End With
+
         Next b
     Next A
                 
@@ -286,27 +327,29 @@ Private Sub imgScroll_Click(Index As Integer)
 
     Call Audio.PlayInterface(SND_CLICK)
     
-      If (InventorySkins Is Nothing) Then Exit Sub
+    If (InventorySkins Is Nothing) Then Exit Sub
         
     Select Case Index
     
         Case 0
-             InventorySkins.ScrollInventory (False)
+            InventorySkins.ScrollInventory (False)
+
         Case 1
             InventorySkins.ScrollInventory (True)
-    End Select
-End Sub
 
+    End Select
+
+End Sub
 
 Private Sub Form_Load()
     
-    Dim FilePath As String
+    Dim filePath As String
     
-    FilePath = DirInterface & "menucompacto\"
-    Me.Picture = LoadPicture(FilePath & "skins.jpg")
+    filePath = DirInterface & "menucompacto\"
+    Me.Picture = LoadPicture(filePath & "skins.jpg")
     
     ' Inventario de las skins
-    g_Captions(eCaption.eInvSkin1) = wGL_Graphic.Create_Device_From_Display(PicInv.hWnd, PicInv.ScaleWidth, PicInv.ScaleHeight)
+    g_Captions(eCaption.eInvSkin1) = wGL_Graphic.Create_Device_From_Display(picInv.hWnd, picInv.ScaleWidth, picInv.ScaleHeight)
 
     ' Personaje con el SET equipado
     g_Captions(eCaption.eInvSkin2) = wGL_Graphic.Create_Device_From_Display(Me.hWnd, Me.ScaleWidth, Me.ScaleHeight)
@@ -328,16 +371,16 @@ Private Sub Form_Load()
     ' # Solicita actualizar la lista de skins que tiene el personaje, para ver cual usa y cual no.
 End Sub
 
-
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     
     MouseX = X
     MouseY = Y
     
-    
-   If MirandoObjetos Then
+    If MirandoObjetos Then
         FrmObject_Info.Close_Form
+
     End If
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -347,6 +390,7 @@ Private Sub Form_Unload(Cancel As Integer)
     Call wGL_Graphic.Destroy_Device(g_Captions(eCaption.eInvSkin2))
     
     MirandoSkins = False
+
 End Sub
 
 Private Sub imgAdd_Click()
@@ -356,13 +400,13 @@ Private Sub imgAdd_Click()
     
     If Inventario.SelectedItem = 0 Then Exit Sub
     If InvSkin.SelectedItem = 0 Then Exit Sub
-    
    
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Unload Me
+
 End Sub
 
 Private Sub lblBuy_Click()
@@ -370,6 +414,7 @@ Private Sub lblBuy_Click()
     Call Audio.PlayInterface(SND_CLICK)
     
     If InventorySkins.SelectedItem = 0 Then Exit Sub
+
     Dim ObjIndex As Integer
     
     ObjIndex = InventorySkins.ObjIndex(InventorySkins.SelectedItem)
@@ -378,12 +423,15 @@ Private Sub lblBuy_Click()
         If UserGLD < ObjData(ObjIndex).ValueGLD Then
             Call ShowConsoleMsg("¡Oro insuficiente!", 247, 222, 10)
             Exit Sub
+
         End If
         
         If UserDSP < ObjData(ObjIndex).ValueDSP Then
             Call ShowConsoleMsg("Dsp insuficiente!", 247, 122, 35)
             Exit Sub
+
         End If
+
     End If
     
     WriteRequiredSkins ObjIndex, Modo
@@ -391,6 +439,7 @@ Private Sub lblBuy_Click()
 End Sub
 
 Private Sub PicInv_Click()
+
     If Not MainTimer.Check(TimersIndex.Packet250) Then Exit Sub
     Call Audio.PlayInterface(SND_CLICK)
     
@@ -399,6 +448,7 @@ Private Sub PicInv_Click()
     If InventorySkins.SelectedItem = 0 Then Exit Sub
     
     ObjIndex = InventorySkins.ObjIndex(InventorySkins.SelectedItem)
+
     If ObjIndex = 0 Then Exit Sub
     
     If Skin_SearchExist(ObjIndex) Then
@@ -408,65 +458,83 @@ Private Sub PicInv_Click()
         Else
             Modo = eUsage
             lblBuy.Caption = "USAR"
+
         End If
+
     Else
         Modo = eBuy
         lblBuy.Caption = "COMPRAR"
+
     End If
     
     Skin_DeterminateTipo ObjIndex
     
     ShowConsoleMsg "Objeto: " & ObjIndex & "(" & InventorySkins.ItemName(InventorySkins.SelectedItem) & ")"
     
-    
 End Sub
 
 Private Function Skin_DeterminateTipo(ByVal ObjIndex As Integer)
+
     With ObjData(ObjIndex)
+
         Select Case .ObjType
+
             Case eOBJType.otarmadura
                 Armadura = .Anim
                 
             Case eOBJType.otWeapon
+
                 If .Proyectil > 0 Then
                     Arma = .Anim
                 Else
                     ArmaSecundaria = .Anim
+
                 End If
-                
                 
             Case eOBJType.otcasco
                 Casco = .Anim
-                
             
             Case eOBJType.otescudo
                 Escudo = .Anim
+
         End Select
+
     End With
+
 End Function
+
 Private Function Skin_SearchExist(ByVal ObjIndex As Integer) As Boolean
     
     Dim A As Long
     
     For A = 1 To ClientInfo.Skin.Last
+
         If ClientInfo.Skin.ObjIndex(A) = ObjIndex Then
             Skin_SearchExist = True
             Exit Function
+
         End If
+
     Next A
+
 End Function
 
 Private Sub PicInv_KeyDown(KeyCode As Integer, Shift As Integer)
     Form_KeyDown KeyCode, Shift
+
 End Sub
 
-
-Private Sub PicInv_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub PicInv_MouseMove(Button As Integer, _
+                             Shift As Integer, _
+                             X As Single, _
+                             Y As Single)
     MouseX = X
     MouseY = Y
+
 End Sub
 
 Private Sub tUpdate_Timer()
     InventorySkins.DrawInventory
+
 End Sub
 

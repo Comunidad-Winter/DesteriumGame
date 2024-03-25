@@ -87,6 +87,7 @@ Option Explicit
 Private Sub Command1_Click()
     Call Audio.PlayInterface(SND_CLICK)
     Unload Me
+
 End Sub
 
 Public Sub recievePeticion(ByVal p As String)

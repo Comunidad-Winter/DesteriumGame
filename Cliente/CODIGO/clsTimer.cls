@@ -87,12 +87,13 @@ Public Enum TimersIndex
     Packet500 = 13
     Work = 14
     Shift = 15
+
 End Enum
 
 ''
 ' How many timers we are going to use-
 '
-Private Const CANTIDADTIMERS As Byte = 15
+Private Const CANTIDADTIMERS   As Byte = 15
 
 'Timers
 Dim Timer(1 To CANTIDADTIMERS) As Timer
@@ -107,7 +108,6 @@ Dim Timer(1 To CANTIDADTIMERS) As Timer
 Public Sub SetInterval(ByVal TimerIndex As TimersIndex, ByVal Interval As Long)
     
     On Error GoTo SetInterval_Err
-    
 
     '*************************************************
     'Author: Nacho (Integer)
@@ -117,7 +117,6 @@ Public Sub SetInterval(ByVal TimerIndex As TimersIndex, ByVal Interval As Long)
     If TimerIndex < 1 Or TimerIndex > CANTIDADTIMERS Then Exit Sub
     
     Timer(TimerIndex).Interval = Interval
-
     
     Exit Sub
 
@@ -136,7 +135,6 @@ End Sub
 Public Sub Start(ByVal TimerIndex As TimersIndex)
     
     On Error GoTo Start_Err
-    
 
     '*************************************************
     'Author: Nacho (Integer)
@@ -146,7 +144,6 @@ Public Sub Start(ByVal TimerIndex As TimersIndex)
     If TimerIndex < 1 Or TimerIndex > CANTIDADTIMERS Then Exit Sub
     
     Timer(TimerIndex).Run = True 'We allow the Timer to run.
-
     
     Exit Sub
 
@@ -165,7 +162,6 @@ End Sub
 Public Sub Continue(ByVal TimerIndex As TimersIndex)
     
     On Error GoTo Continue_Err
-    
 
     '*************************************************
     'Author: Nacho (Integer)
@@ -178,7 +174,6 @@ Public Sub Continue(ByVal TimerIndex As TimersIndex)
     
     'We´ll set the StartTick again
     Timer(TimerIndex).StartTick = Timer(TimerIndex).StartTick + Timer(TimerIndex).CurrentTick
-
     
     Exit Sub
 
@@ -197,7 +192,6 @@ End Sub
 Public Sub Pause(ByVal TimerIndex As TimersIndex)
     
     On Error GoTo Pause_Err
-    
 
     '*************************************************
     'Author: Nacho (Integer)
@@ -209,7 +203,6 @@ Public Sub Pause(ByVal TimerIndex As TimersIndex)
     Timer(TimerIndex).Run = False 'Don´t allow the timer to run.
     
     Timer(TimerIndex).CurrentTick = FrameTime - Timer(TimerIndex).StartTick 'Calculates acutual tick
-
     
     Exit Sub
 
@@ -227,10 +220,10 @@ End Sub
 ' @return True if the interval has already been elapsed
 ' @remarks  Can´t be done if the timer is stoped or if it had never been started.
 
-Public Function Check(ByVal TimerIndex As TimersIndex, Optional Restart As Boolean = True) As Boolean
+Public Function Check(ByVal TimerIndex As TimersIndex, _
+                      Optional Restart As Boolean = True) As Boolean
     
     On Error GoTo Check_Err
-    
 
     '*************************************************
     'Author: Nacho Agustin (Integer)
@@ -254,7 +247,6 @@ Public Function Check(ByVal TimerIndex As TimersIndex, Optional Restart As Boole
         End If
 
     End If
-
     
     Exit Function
 
@@ -272,7 +264,6 @@ End Function
 Public Sub Restart(ByVal TimerIndex As TimersIndex)
     
     On Error GoTo Restart_Err
-    
 
     '*************************************************
     'Author: Nacho Agustin (Integer)
@@ -282,7 +273,6 @@ Public Sub Restart(ByVal TimerIndex As TimersIndex)
     If TimerIndex < 1 Or TimerIndex > CANTIDADTIMERS Then Exit Sub
     
     Timer(TimerIndex).StartTick = FrameTime
-
     
     Exit Sub
 
@@ -291,5 +281,4 @@ Restart_Err:
     Resume Next
     
 End Sub
-
 

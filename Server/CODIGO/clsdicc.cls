@@ -54,15 +54,18 @@ Private p_cant                     As Integer
 Public Sub Class_Initialize()
     'constructor
     p_cant = 0
+
 End Sub
 
 Public Sub Class_Terminate()
+
     'destructor
     'destruir los variants?????
 End Sub
 
 Public Property Get CantElem() As Integer
     CantElem = p_cant
+
 End Property
 
 Public Function AtPut(ByVal clave As String, ByRef elem As Variant) As Boolean
@@ -96,6 +99,7 @@ Public Function AtPut(ByVal clave As String, ByRef elem As Variant) As Boolean
             p_elementos(p_cant).def = elem
             p_elementos(p_cant).clave = clave
             AtPut = True
+
         End If
 
     End If
@@ -125,6 +129,7 @@ End Function
 
 Public Function AtIndex(ByVal i As Integer) As String
     AtIndex = p_elementos(i).clave
+
 End Function
 
 Public Function MayorValor(ByRef cant As Integer) As String
@@ -147,6 +152,7 @@ Public Function MayorValor(ByRef cant As Integer) As String
             cant = IIf(max = CInt(p_elementos(i).def), cant + 1, 1)
             clave = IIf(max = CInt(p_elementos(i).def), clave & "," & p_elementos(i).clave, p_elementos(i).clave)
             max = CInt(p_elementos(i).def)
+
         End If
 
     Next i

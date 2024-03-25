@@ -52,6 +52,7 @@ Public Sub Initialize(ByRef tForm As Form, Optional ByVal VerticalLimit As Integ
     Set Formulario = tForm
     
     LimitY = VerticalLimit
+
 End Sub
 
 Private Sub Formulario_MouseDown(Button As Integer, _
@@ -69,7 +70,7 @@ Private Sub Formulario_MouseDown(Button As Integer, _
         If ClientSetup.bConfig(eSetupMods.SETUP_PANTALLACOMPLETA) = 1 Then Exit Sub
         If ClientSetup.bConfig(eSetupMods.SETUP_MOVERPANTALLA) = 0 Then Exit Sub
         #If ModoBig = 1 Then
-         '   Exit Sub
+            '   Exit Sub
         #End If
 
     End If
@@ -95,18 +96,18 @@ Private Sub Formulario_MouseMove(Button As Integer, _
     'Implements the mouse move event of the form.
     '***************************************************
     
-    
-    
     If FrmMain.hWnd = Formulario.hWnd Then
         If ClientSetup.bConfig(eSetupMods.SETUP_PANTALLACOMPLETA) = 1 Then Exit Sub
         If ClientSetup.bConfig(eSetupMods.SETUP_MOVERPANTALLA) = 0 Then Exit Sub
         #If ModoBig > 0 Then
-           ' Exit Sub
+            ' Exit Sub
         #End If
+
     End If
     
     If LimitY > 0 Then
         If Y > LimitY Then Exit Sub
+
     End If
     
     If Button > 0 Then

@@ -92,8 +92,10 @@ Public Function VaciarColeccion()
 
 ErrHandler:
     Call LogError("Error en RestarConexion " & Err.description)
+
 End Function
 
 Private Sub Class_Initialize()
     Set m_coleccion = New Collection
+
 End Sub

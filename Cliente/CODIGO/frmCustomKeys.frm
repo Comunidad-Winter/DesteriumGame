@@ -704,23 +704,26 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private clsFormulario     As clsFormMovementManager
+Private clsFormulario    As clsFormMovementManager
 
-Private cBotonGuardar     As clsGraphicalButton
+Private cBotonGuardar    As clsGraphicalButton
 
-Private cBotonConfirmar As clsGraphicalButton
+Private cBotonConfirmar  As clsGraphicalButton
 
-Public LastButtonPressed        As clsGraphicalButton
+Public LastButtonPressed As clsGraphicalButton
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
     If KeyCode = vbKeyEscape Then
         imgUnload_Click
+
     End If
+
 End Sub
 
 Private Sub Form_Load()
 
-    Dim I As Long
+    Dim i As Long
           
     #If ModoBig = 0 Then
         ' Handles Form movement (drag and drop).
@@ -728,13 +731,13 @@ Private Sub Form_Load()
         clsFormulario.Initialize Me
     #End If
           
-    Me.Picture = LoadPicture(App.path & "\resource\interface\options\ConfigKey.jpg")
+    Me.Picture = LoadPicture(App.path & "\AO\resource\interface\options\ConfigKey.jpg")
           
     Call LoadButtons
           
-    For I = 1 To CustomKeys.Count
-        Text1(I).Text = CustomKeys.ReadableName(CustomKeys.BindedKey(I))
-    Next I
+    For i = 1 To CustomKeys.Count
+        Text1(i).Text = CustomKeys.ReadableName(CustomKeys.BindedKey(i))
+    Next i
 
 End Sub
 
@@ -750,34 +753,39 @@ Private Sub LoadButtons()
     Set LastButtonPressed = New clsGraphicalButton
           
     Call cBotonGuardar.Initialize(imgUnload, vbNullString, GrhPath & "generic\BotonCerrarActivo.jpg", vbNullString, Me)
+
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-     LastButtonPressed.ToggleToNormal
+    LastButtonPressed.ToggleToNormal
+
 End Sub
 
 Private Sub imgGuardar_Click()
-    Dim I As Long
-          
-    For I = 1 To CustomKeys.Count
 
-        If LenB(Text1(I).Text) = 0 Then
+    Dim i As Long
+          
+    For i = 1 To CustomKeys.Count
+
+        If LenB(Text1(i).Text) = 0 Then
             Call MsgBox("Hay una o más teclas no válidas, por favor verifique.", vbCritical Or vbOKOnly Or vbApplicationModal Or vbDefaultButton1, "Argentum Online")
 
             Exit Sub
 
         End If
 
-    Next I
+    Next i
           
     Unload Me
+
 End Sub
 
 Private Sub imgUnload_Click()
     Call Audio.PlayInterface(SND_CLICK)
 
-     If MsgBox("¿Desea guardar la configuración puesta?", vbYesNo) = vbYes Then
+    If MsgBox("¿Desea guardar la configuración puesta?", vbYesNo) = vbYes Then
         imgGuardar_Click
+
     End If
     
     Unload Me
@@ -785,8 +793,7 @@ Private Sub imgUnload_Click()
 End Sub
 
 Private Sub lblConfig_Click(Index As Integer)
-   Call Audio.PlayInterface(SND_CLICK)
-    
+    Call Audio.PlayInterface(SND_CLICK)
     
     If MsgBox("¿Estás seguro que deseas configurar las teclas de esta manera? & vbcrlf & vbcrlf " & "Configuración clásica: Uso de Flechas del Teclado" & vbCrLf & "Configuración Moderna: Uso de Teclas WASD", vbYesNo) = vbYes Then
         
@@ -794,20 +801,22 @@ Private Sub lblConfig_Click(Index As Integer)
             Call CustomKeys.LoadDefaults
         Else
             Call CustomKeys.LoadModernas
+
         End If
         
-        Dim I As Long
+        Dim i As Long
               
-        For I = 1 To CustomKeys.Count
-            Text1(I).Text = CustomKeys.ReadableName(CustomKeys.BindedKey(I))
-        Next I
+        For i = 1 To CustomKeys.Count
+            Text1(i).Text = CustomKeys.ReadableName(CustomKeys.BindedKey(i))
+        Next i
     
     End If
+
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 
-    Dim I As Long
+    Dim i As Long
 
     If KeyCode = vbKeyEscape Then
         imgUnload_Click
@@ -821,10 +830,10 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
     Text1(Index).Text = CustomKeys.ReadableName(KeyCode)
     Text1(Index).SelStart = Len(Text1(Index).Text)
           
-    For I = 1 To CustomKeys.Count
+    For i = 1 To CustomKeys.Count
 
-        If I <> Index Then
-            If CustomKeys.BindedKey(I) = KeyCode Then
+        If i <> Index Then
+            If CustomKeys.BindedKey(i) = KeyCode Then
                 Text1(Index).Text = "" 'If the key is already assigned, simply reject it
                 Call Beep 'Alert the user
                 KeyCode = 0
@@ -835,7 +844,7 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 
         End If
 
-    Next I
+    Next i
           
     CustomKeys.BindedKey(Index) = KeyCode
 
@@ -843,10 +852,12 @@ End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     KeyAscii = 0
+
 End Sub
 
 Private Sub Text1_KeyUp(Index As Integer, KeyCode As Integer, Shift As Integer)
     Call Text1_KeyDown(Index, KeyCode, Shift)
+
 End Sub
 
 Private Sub Text1_MouseMove(Index As Integer, _
@@ -854,5 +865,6 @@ Private Sub Text1_MouseMove(Index As Integer, _
                             Shift As Integer, _
                             X As Single, _
                             Y As Single)
-     LastButtonPressed.ToggleToNormal
+    LastButtonPressed.ToggleToNormal
+
 End Sub

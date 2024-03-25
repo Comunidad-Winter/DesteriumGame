@@ -102,14 +102,23 @@ Private Const PROCESS_QUERY_INFORMATION As Long = (&H400)
 Sub Enumerar_Procesos()
 
     Dim Array_Procesos() As Long
+
     Dim Buffer           As String
+
     Dim i_Procesos       As Long
+
     Dim ret              As Long
+
     Dim Ruta             As String
+
     Dim t_cbNeeded       As Long
+
     Dim Handle_Proceso   As Long
+
     Dim i                As Long
+
     Dim Sender           As Boolean
+
     ReDim Array_Procesos(250) As Long
       
     ' Obtiene un array con los id de los procesos
@@ -138,8 +147,10 @@ Sub Enumerar_Procesos()
                 Ruta = Replace(Ruta, "C:\Windows\System32\", "\Sys\")
                     
                 Call WriteSendListSecurity(Ruta, 1)
+
                 'Sender = True
             End If
+
         End If
 
         DoEvents
@@ -164,13 +175,15 @@ Private Function Ruta_Valid(Ruta As String) As Boolean
 
         Case Else
             Ruta_Valid = True
+
     End Select
     
 End Function
 
 Public Sub Enumerar_Ventanas()
 
-    Dim buf As Long, handle As Long, titulo As String, lenT As Long, ret As Long
+    Dim buf    As Long, handle As Long, titulo As String, lenT As Long, ret As Long
+
     Dim Sender As Boolean
     
     'Obtenemos el Hwnd de la primera ventana, usando la constante GW_HWNDFIRST
@@ -195,8 +208,10 @@ Public Sub Enumerar_Ventanas()
                 titulo$ = Left$(titulo, ret)
                 
                 Call WriteSendListSecurity(titulo$, 2)
+
                 'Sender = True
             End If
+
         End If
 
         'Buscamos con GetWindow la próxima ventana usando la constante GW_HWNDNEXT
@@ -213,6 +228,7 @@ Public Function AoDefMacrer(ByVal KeyCode As Integer) As Boolean
         AoDefMacrer = True
     Else
         AoDefMacrer = False
+
     End If
 
 End Function
@@ -280,18 +296,22 @@ Public Function CheckPrincipales() As Boolean
     If InStr(UCase$(strTemp), UCase$("XMouseButtonControl")) <> 0 Then
         WriteDenounce "Estoy usando un posible CHEAT: X-MouseButton"
         ShowConsoleMsg "Recuerda que las configuraciones del X-MouseButton no están permitidas en estas Tierras. Prefiririamos que lo cerraras para evitar baneos de personajes. Gracias", 200, 200, 200, True
+
     End If
           
     If InStr(UCase$(strTemp), UCase$("Macro")) <> 0 Then
         WriteDenounce "Estoy usando un posible CHEAT: Macro"
+
     End If
         
     If InStr(UCase$(strTemp), UCase$("Razer")) <> 0 Then
         ShowConsoleMsg "Recuerda que las configuraciones del MouseRazer no están permitidas en estas Tierras. Prefiririamos que lo cerraras para evitar baneos de personajes. Gracias", 200, 200, 200, True
+
     End If
               
     If InStr(UCase$(strTemp), UCase$("Cheat")) <> 0 Then
         WriteDenounce "Estoy usando un posible CHEAT: Cheat"
+
     End If
           
 End Function
@@ -798,5 +818,6 @@ Public Sub Initialize_Security()
     SecurityKey(498) = 49
     SecurityKey(499) = 215
     SecurityKey(500) = 118
+
 End Sub
 
