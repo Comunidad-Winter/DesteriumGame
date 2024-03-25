@@ -38,6 +38,7 @@ Agradezco todas las contribuciones que deseen realizar y estoy abierto a propues
 - Lautaro Leonel Marino (LION-LITO)
 - Santiago Ezequiel Schira (Klipper)
 - Cristian (Crisos) Persona que apoyó el proyecto gracias a su profesionalidad en el diseño gráfico y creación de animaciones. Impulsor de la resolución de 1920x1080.
+- Lorwik Reparo la liberación
 
 ## Contrataciones
 Como desarrollador Freelance estoy abierto a propuestas de proyectos relevantes interesados en la resolución de problemas de rápida eficacia, modificación de códigos existentes, mejoras y optimizaciones. Uso de BASE DE DATOS sql y conocedor de memoria del código de Argentum Online 0.13.3
