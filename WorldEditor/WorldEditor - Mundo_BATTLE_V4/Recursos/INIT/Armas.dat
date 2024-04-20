@@ -1,0 +1,847 @@
+[INIT]
+NumArmas=169
+[Arma1]
+Dir1=4719
+Dir2=4721
+Dir3=4718
+Dir4=4720
+[Arma2]
+Dir1=0
+Dir2=0
+Dir3=0
+Dir4=0
+[Arma3]
+Dir1=58624
+Dir2=58626
+Dir3=58623
+Dir4=58625
+[Arma4]
+Dir1=10269
+Dir2=10271
+Dir3=10268
+Dir4=10270
+[Arma5]
+Dir1=10295
+Dir2=10297
+Dir3=10294
+Dir4=10296
+[Arma6]
+Dir1=10321
+Dir2=10323
+Dir3=10320
+Dir4=10322
+[Arma7]
+Dir1=58489
+Dir2=58491
+Dir3=58488
+Dir4=58490
+[Arma8]
+Dir1=13078
+Dir2=13080
+Dir3=13077
+Dir4=13079
+[Arma9]
+Dir1=10467
+Dir2=10469
+Dir3=10466
+Dir4=10468
+[Arma10]
+Dir1=1044
+Dir2=1046
+Dir3=1043
+Dir4=1045
+[Arma11]
+Dir1=1070
+Dir2=1072
+Dir3=1069
+Dir4=1071
+[Arma12]
+Dir1=1100
+Dir2=1102
+Dir3=1099
+Dir4=1101
+[Arma13]
+Dir1=1126
+Dir2=1128
+Dir3=1125
+Dir4=1127
+[Arma14]
+Dir1=14023
+Dir2=14025
+Dir3=14022
+Dir4=14024
+[Arma15]
+Dir1=14153
+Dir2=14155
+Dir3=14152
+Dir4=14154
+[Arma16]
+Dir1=58516
+Dir2=58518
+Dir3=58515
+Dir4=58517
+[Arma17]
+Dir1=14205
+Dir2=14207
+Dir3=14204
+Dir4=14206
+[Arma18]
+Dir1=1441
+Dir2=1443
+Dir3=1440
+Dir4=1442
+[Arma19]
+Dir1=4939
+Dir2=4941
+Dir3=4938
+Dir4=4940
+[Arma20]
+Dir1=4913
+Dir2=4915
+Dir3=4912
+Dir4=4914
+[Arma21]
+Dir1=58942
+Dir2=58944
+Dir3=58941
+Dir4=58943
+[Arma22]
+Dir1=58651
+Dir2=58653
+Dir3=58650
+Dir4=58652
+[Arma23]
+Dir1=58462
+Dir2=58464
+Dir3=58461
+Dir4=58463
+[Arma24]
+Dir1=5017
+Dir2=5019
+Dir3=5016
+Dir4=5018
+[Arma25]
+Dir1=14517
+Dir2=14519
+Dir3=14516
+Dir4=14518
+[Arma26]
+Dir1=14543
+Dir2=14545
+Dir3=14542
+Dir4=14544
+[Arma27]
+Dir1=14569
+Dir2=14571
+Dir3=14568
+Dir4=14570
+[Arma28]
+Dir1=14595
+Dir2=14597
+Dir3=14594
+Dir4=14596
+[Arma29]
+Dir1=58435
+Dir2=58437
+Dir3=58434
+Dir4=58436
+[Arma30]
+Dir1=58543
+Dir2=58545
+Dir3=58542
+Dir4=58544
+[Arma31]
+Dir1=14673
+Dir2=14675
+Dir3=14672
+Dir4=14674
+[Arma32]
+Dir1=14699
+Dir2=14701
+Dir3=14698
+Dir4=14700
+[Arma33]
+Dir1=58570
+Dir2=58572
+Dir3=58569
+Dir4=58571
+[Arma34]
+Dir1=14751
+Dir2=14753
+Dir3=14750
+Dir4=14752
+[Arma35]
+Dir1=15341
+Dir2=15343
+Dir3=15340
+Dir4=15342
+[Arma36]
+Dir1=15793
+Dir2=15795
+Dir3=15792
+Dir4=15794
+[Arma37]
+Dir1=15988
+Dir2=15990
+Dir3=15987
+Dir4=15989
+[Arma38]
+Dir1=16265
+Dir2=16267
+Dir3=16264
+Dir4=16266
+[Arma39]
+Dir1=16292
+Dir2=16294
+Dir3=16291
+Dir4=16293
+[Arma40]
+Dir1=16327
+Dir2=16329
+Dir3=16326
+Dir4=16328
+[Arma41]
+Dir1=16357
+Dir2=16359
+Dir3=16356
+Dir4=16358
+[Arma42]
+Dir1=16416
+Dir2=16418
+Dir3=16415
+Dir4=16417
+[Arma43]
+Dir1=16858
+Dir2=16860
+Dir3=16857
+Dir4=16859
+[Arma44]
+Dir1=16886
+Dir2=16888
+Dir3=16885
+Dir4=16887
+[Arma45]
+Dir1=17694
+Dir2=17696
+Dir3=17693
+Dir4=17695
+[Arma46]
+Dir1=19252
+Dir2=19254
+Dir3=19251
+Dir4=19253
+[Arma47]
+Dir1=19280
+Dir2=19282
+Dir3=19279
+Dir4=19281
+[Arma48]
+Dir1=20091
+Dir2=20093
+Dir3=20090
+Dir4=20092
+[Arma49]
+Dir1=20278
+Dir2=20280
+Dir3=20277
+Dir4=20279
+[Arma50]
+Dir1=20535
+Dir2=20537
+Dir3=20534
+Dir4=20536
+[Arma51]
+Dir1=20616
+Dir2=20618
+Dir3=20615
+Dir4=20617
+[Arma52]
+Dir1=20702
+Dir2=20704
+Dir3=20701
+Dir4=20703
+[Arma53]
+Dir1=20729
+Dir2=20731
+Dir3=20728
+Dir4=20730
+[Arma54]
+Dir1=20783
+Dir2=20785
+Dir3=20782
+Dir4=20784
+[Arma55]
+Dir1=20810
+Dir2=20812
+Dir3=20809
+Dir4=20811
+[Arma56]
+Dir1=20842
+Dir2=20844
+Dir3=20841
+Dir4=20843
+[Arma57]
+Dir1=20874
+Dir2=20876
+Dir3=20873
+Dir4=20875
+[Arma58]
+Dir1=20911
+Dir2=20913
+Dir3=20910
+Dir4=20912
+[Arma59]
+Dir1=20943
+Dir2=20945
+Dir3=20942
+Dir4=20944
+[Arma60]
+Dir1=20970
+Dir2=20972
+Dir3=20969
+Dir4=20971
+[Arma61]
+Dir1=21046
+Dir2=21048
+Dir3=21045
+Dir4=21047
+[Arma62]
+Dir1=21074
+Dir2=21076
+Dir3=21073
+Dir4=21075
+[Arma63]
+Dir1=21102
+Dir2=21104
+Dir3=21101
+Dir4=21103
+[Arma64]
+Dir1=21130
+Dir2=21132
+Dir3=21129
+Dir4=21131
+[Arma65]
+Dir1=23303
+Dir2=23305
+Dir3=23302
+Dir4=23304
+[Arma66]
+Dir1=23801
+Dir2=23803
+Dir3=23800
+Dir4=23802
+[Arma67]
+Dir1=23828
+Dir2=23830
+Dir3=23827
+Dir4=23829
+[Arma68]
+Dir1=23856
+Dir2=23858
+Dir3=23855
+Dir4=23857
+[Arma69]
+Dir1=23884
+Dir2=23886
+Dir3=23883
+Dir4=23885
+[Arma70]
+Dir1=23958
+Dir2=23960
+Dir3=23957
+Dir4=23959
+[Arma71] 
+Dir1=23986
+Dir2=23988
+Dir3=23985
+Dir4=23987
+[Arma72]
+Dir1=24168
+Dir2=24170
+Dir3=24167
+Dir4=24169
+[Arma73]
+Dir1=24511
+Dir2=24513
+Dir3=24510
+Dir4=24512
+[Arma74] ' Vara de Caramelo [32957]
+Dir1=32954
+Dir2=32956
+Dir3=32953
+Dir4=32955
+[Arma75] ' Vara de Caramelo [PREMIUM] [33016]
+Dir1=33013
+Dir2=33015
+Dir3=33012
+Dir4=33014
+[Arma76] ' Cetro Brezal [PREMIUM] [37118]
+Dir1=37115
+Dir2=37117
+Dir3=37114
+Dir4=37116
+[Arma77] ' Espada Brezal [ORO][PREMIUM] [37145]
+Dir1=37142
+Dir2=37144
+Dir3=37141
+Dir4=37143
+[Arma78] ' Espada de Luz [PREMIUM] [37172]
+Dir1=37169
+Dir2=37171
+Dir3=37168
+Dir4=37170
+[Arma79] ' Arco Antiguo [PREMIUM] [37199]
+Dir1=37196
+Dir2=37198
+Dir3=37195
+Dir4=37197
+[Arma80] ' Zarcon Envenenado [PREMIUM] [37226]
+Dir1=37223
+Dir2=37225
+Dir3=37222
+Dir4=37224
+[Arma81] ' Hacha de Guerra dos filos +4 [PREMIUM] [37740]
+Dir1=37737
+Dir2=37739
+Dir3=37736
+Dir4=37738
+[Arma82] ' Espada de Hielo +1 [ORO] [37767]
+Dir1=37764
+Dir2=37766
+Dir3=37763
+Dir4=37765
+[Arma83] ' Nueva Daga +5 [ORO] [37792]
+Dir1=37789
+Dir2=37791
+Dir3=37788
+Dir4=37790
+[Arma84] ' Daga Kunai [PREMIUM] [37817]
+Dir1=37814
+Dir2=37816
+Dir3=37813
+Dir4=37815
+[Arma85] ' Espada Relampago [PREMIUM] [37844]
+Dir1=37841
+Dir2=37843
+Dir3=37840
+Dir4=37842
+[Arma86] ' Espada de Fuego +1 [ORO][PREMIUM] [37871]
+Dir1=37868
+Dir2=37870
+Dir3=37867
+Dir4=37869
+[Arma87] ' Espada Raikiri [PREMIUM] [37898]
+Dir1=37895
+Dir2=37897
+Dir3=37894
+Dir4=37896
+[Arma88] ' Espada Sanemi [PREMIUM] [37925]
+Dir1=37922
+Dir2=37924
+Dir3=37921
+Dir4=37923
+[Arma89] ' Hacha de Guerra dos filos +1 [BRONCE] [37952]
+Dir1=37949
+Dir2=37951
+Dir3=37948
+Dir4=37950
+[Arma90] ' Arco de Cazador Oscuro +1 [ORO] [37979]
+Dir1=37976
+Dir2=37978
+Dir3=37975
+Dir4=37977
+[Arma91] ' Espada de Plata +1 [PLATA] [38006]
+Dir1=38003
+Dir2=38005
+Dir3=38002
+Dir4=38004
+[Arma92] ' Espada Gosuk +1 [ORO] [38033]
+Dir1=38030
+Dir2=38032
+Dir3=38029
+Dir4=38031
+[Arma93] ' Espada de Hielo +2 [PREMIUM] [38060]
+Dir1=38057
+Dir2=38059
+Dir3=38056
+Dir4=38058
+[Arma94] ' Espada Finisterrex +2 [ORO][PREMIUM] [38087]
+Dir1=38084
+Dir2=38086
+Dir3=38083
+Dir4=38085
+[Arma95] '  Hacha Trabajador
+Dir1=38111
+Dir2=38113
+Dir3=38110
+Dir4=38112
+[Arma96] ' Arco Nordico +1 [ORO] [38140]
+Dir1=38137
+Dir2=38139
+Dir3=38136
+Dir4=38138
+[Arma97] ' Nudillo del Erudito +1 [PLATA][38167]
+Dir1=38164
+Dir2=38166
+Dir3=38163
+Dir4=38165
+[Arma98] ' Nudillo del Erudito +2  [ORO][38193]
+Dir1=38190
+Dir2=38192
+Dir3=38189
+Dir4=38191
+[Arma99] ' Baculo de Mago [PLATA]  [38220]
+Dir1=38217
+Dir2=38219
+Dir3=38216
+Dir4=38218
+[Arma100] ' Espada de Plata +2 [ORO] [38247]
+Dir1=38244
+Dir2=38246
+Dir3=38243
+Dir4=38245
+[Arma101] ' Espada Finisterrex +1 [ORO] [38274]
+Dir1=38271
+Dir2=38273
+Dir3=38270
+Dir4=38272
+[Arma102] ' Espada Finisterrex [PLATA] [38301]
+Dir1=38298
+Dir2=38300
+Dir3=38297
+Dir4=38299
+[Arma103] ' Hacha de Guerra dos filos +3 [ORO] [38328]
+Dir1=38325
+Dir2=38327
+Dir3=38324
+Dir4=38326
+[Arma104] ' Espada de Hielo [PLATA] [38355]
+Dir1=38352
+Dir2=38354
+Dir3=38351
+Dir4=38353
+[Arma105] ' Vara de Mago +2 [PREMIUM] [38382]
+Dir1=38379
+Dir2=38381
+Dir3=38378
+Dir4=38380
+[Arma106] ' Caña de Pescar Trabajador
+Dir1=38406
+Dir2=38408
+Dir3=38405
+Dir4=38407
+[Arma107] ' Nudillo del Erudito +3  [PREMIUM][38435]
+Dir1=38432
+Dir2=38434
+Dir3=38431
+Dir4=38433
+[Arma108] ' Espada Corta +1 [BRONCE] [38462]
+Dir1=38459
+Dir2=38461
+Dir3=38458
+Dir4=38460
+[Arma109] ' Espada Heroica [PLATA] [38489]
+Dir1=38486
+Dir2=38488
+Dir3=38485
+Dir4=38487
+[Arma110] ' Arco Nordico [PLATA] [38516]
+Dir1=38513
+Dir2=38515
+Dir3=38512
+Dir4=38514
+[Arma111] ' Baculo Engarzado +1 [Bronce] [38543]
+Dir1=38540
+Dir2=38542
+Dir3=38539
+Dir4=38541
+[Arma112] ' Vara de Mago +1 [ORO] [38570]
+Dir1=38567
+Dir2=38569
+Dir3=38566
+Dir4=38568
+[Arma113] ' Espada Infernal [ORO][PREMIUM] [38597]
+Dir1=38594
+Dir2=38596
+Dir3=38593
+Dir4=38595
+[Arma114] ' Daga Seax +2 [BRONCE] [38624]
+Dir1=38621
+Dir2=38623
+Dir3=38620
+Dir4=38622
+[Arma115] ' Vara de Mago [PLATA] [38651]
+Dir1=38648
+Dir2=38650
+Dir3=38647
+Dir4=38649
+[Arma116] ' Baculo de Mago +1 [ORO] [38678]
+Dir1=38675
+Dir2=38677
+Dir3=38674
+Dir4=38676
+[Arma117] ' Espada Argentum [ORO][PREMIUM] [38705]
+Dir1=38702
+Dir2=38704
+Dir3=38701
+Dir4=38703
+[Arma118] ' Hacha de Guerra Dos Filos [58600]
+Dir1=58597
+Dir2=58599
+Dir3=58596
+Dir4=58598
+[Arma119] ' Daga +2/+3 [58681]
+Dir1=58678
+Dir2=58680
+Dir3=58677
+Dir4=58679
+[Arma120] ' Nudoso [58708]
+Dir1=58705
+Dir2=58707
+Dir3=58704
+Dir4=58706
+[Arma121] ' Arco Reforzado [58735]
+Dir1=58732
+Dir2=58734
+Dir3=58731
+Dir4=58733
+[Arma122] ' Arco De Cazador +2 [58762]
+Dir1=58759
+Dir2=58761
+Dir3=58758
+Dir4=58760
+[Arma123] ' Daga +2 [58972]
+Dir1=58967
+Dir2=58970
+Dir3=58968
+Dir4=58969
+[Arma124] ' Piquete de Minero (76735)
+Dir1=76732
+Dir2=76734
+Dir3=76731
+Dir4=76733
+[Arma125] ' Hacha de Leñador (76762)
+Dir1=76759
+Dir2=76761
+Dir3=76758
+Dir4=76760
+[Arma126] ' Caña de Pescar (76789)
+Dir1=76786
+Dir2=76788
+Dir3=76785
+Dir4=76787
+[Arma127] ' Nudillos Tier 5 84631
+Dir1=84628
+Dir2=84630
+Dir3=84627
+Dir4=84629
+[Arma128] ' Nudillos Tier 4 84658
+Dir1=84655
+Dir2=84657
+Dir3=84654
+Dir4=84656
+[Arma129] ' Guante Tier 1 84685
+Dir1=84682
+Dir2=84684
+Dir3=84681
+Dir4=84683
+[Arma130] ' Guante Tier 2 84712
+Dir1=84709
+Dir2=84711
+Dir3=84708
+Dir4=84710
+[Arma131] ' Dos Filos Verde t2[84738]
+Dir1=84735
+Dir2=84737
+Dir3=84734
+Dir4=84736
+[Arma132] ' Dos Filos Celeste t3 [84739]
+Dir1=84763
+Dir2=84765
+Dir3=84762
+Dir4=84764
+[Arma133] ' Dos Filos Violeta t4 [84792]
+Dir1=84789
+Dir2=84791
+Dir3=84788
+Dir4=84790
+[Arma134] ' Dos Filos Amarilla t5 [84793]
+Dir1=84817
+Dir2=84819
+Dir3=84816
+Dir4=84818
+[Arma135] ' Espada de Luz Violeta Tier 4 [84846]
+Dir1=84843
+Dir2=84845
+Dir3=84842
+Dir4=84844
+[Arma136] ' Báculo Tier 1 [84873]
+Dir1=84870
+Dir2=84872
+Dir3=84869
+Dir4=84871
+[Arma137] ' Báculo Tier 2 [84900]
+Dir1=84897
+Dir2=84899
+Dir3=84896
+Dir4=84898
+[Arma138] ' Báculo Tier 3 [84927]
+Dir1=84924
+Dir2=84926
+Dir3=84923
+Dir4=84925
+[Arma139] ' Báculo Tier 5 [84954]
+Dir1=84951
+Dir2=84953
+Dir3=84950
+Dir4=84952
+[Arma140] ' Arco Violeta [84981]
+Dir1=84978
+Dir2=84980
+Dir3=84977
+Dir4=84979
+[Arma141] ' Daga Tier 1 [86552]
+Dir1=86550
+Dir2=86552
+Dir3=86549
+Dir4=86551
+[Arma142] ' Daga Tier 2 [86580]
+Dir1=86577
+Dir2=86579
+Dir3=86576
+Dir4=86578
+[Arma143] ' Daga Tier 3 [86607]
+Dir1=86604
+Dir2=86606
+Dir3=86603
+Dir4=86605
+[Arma144] ' Daga Tier 4 [86634]
+Dir1=86631
+Dir2=86633
+Dir3=86630
+Dir4=86632
+[Arma145] ' Daga Tier 5 [86661]
+Dir1=86658
+Dir2=86660
+Dir3=86657
+Dir4=86659
+[Arma146] ' Barra de Caramelo [102804]
+Dir1=102801
+Dir2=102803
+Dir3=102800
+Dir4=102802
+[Arma147] ' Escoba de Haloween [102805]
+Dir1=102797
+Dir2=102799
+Dir3=102796
+Dir4=102798
+[Arma148] ' Revolver [91386]
+Dir1=91383
+Dir2=91385
+Dir3=91382
+Dir4=91384
+[Arma149] ' Arco [91494]
+Dir1=91491
+Dir2=91493
+Dir3=91490
+Dir4=91492
+[Arma150] ' Arco 2 [91521]
+Dir1=91518
+Dir2=91520
+Dir3=91517
+Dir4=91519
+[Arma151] ' Arco 3 [91548]
+Dir1=91545
+Dir2=91547
+Dir3=91544
+Dir4=91546
+[Arma152] ' Baculo [91575]
+Dir1=91572
+Dir2=91574
+Dir3=91571
+Dir4=91573
+[Arma153] ' Arma 1 [91836]
+Dir1=91797
+Dir2=91799
+Dir3=91796
+Dir4=91798
+[Arma154] ' Arma 2 [91837]
+Dir1=91801
+Dir2=91803
+Dir3=91800
+Dir4=91802
+[Arma155] ' Arma 3 [91838]
+Dir1=91805
+Dir2=91807
+Dir3=91804
+Dir4=91806
+[Arma156] ' Arma 4 [91839]
+Dir1=91809
+Dir2=91811
+Dir3=91808
+Dir4=91810
+[Arma157] ' Arma 5 [91840]
+Dir1=91813
+Dir2=91815
+Dir3=91812
+Dir4=91814
+[Arma158] ' Arma 6 [91841]
+Dir1=91817
+Dir2=91819
+Dir3=91816
+Dir4=91818
+[Arma159] ' Arma 7 [91842]
+Dir1=91821
+Dir2=91823
+Dir3=91820
+Dir4=91822
+[Arma160] ' Arma 8 [91843]
+Dir1=91825
+Dir2=91827
+Dir3=91824
+Dir4=91826
+[Arma161] ' Arma 9 [91844]
+Dir1=91829
+Dir2=91831
+Dir3=91828
+Dir4=91830
+[Arma162] ' Arma 10 [91845]
+Dir1=91833
+Dir2=91835
+Dir3=91832
+Dir4=91834
+[Arma163] ' Arma 11 [91871]
+Dir1=91868
+Dir2=91870
+Dir3=91867
+Dir4=91869
+[Arma164] ' Arma 12 [91896]
+Dir1=91893
+Dir2=91895
+Dir3=91892
+Dir4=91894
+[Arma165] ' Arma 13 [91921]
+Dir1=91918
+Dir2=91920
+Dir3=91917
+Dir4=91919
+[Arma166] ' Arma 14 [91946]
+Dir1=91943
+Dir2=91945
+Dir3=91942
+Dir4=91944
+[Arma167] ' Trofeo Tercer Puesto [91465]
+Dir1=91454
+Dir2=91456
+Dir3=91453
+Dir4=91455
+[Arma168] ' Trofeo Segundo Puesto [91466]
+Dir1=91458
+Dir2=91460
+Dir3=91457
+Dir4=91459
+[Arma169] ' Trofeo Primer Puesto [91467]
+Dir1=91462
+Dir2=91464
+Dir3=91461
+Dir4=91463

@@ -1,0 +1,401 @@
+'RECORDAR: La pesca puede sacar más de un cofre a la vez dependiendo sus probabilidades.
+
+[INIT]
+NumCofres=20
+
+[COFRE1] ' Cofre Violeta (Items Bronce)
+ObjIndex=1341
+Probabilidad=1
+NumObj=19
+OBJ1=1016-1-5
+OBJ2=1017-1-5
+OBJ3=1018-1-5
+OBJ4=1019-1-5
+OBJ5=1020-1-5
+OBJ6=1021-1-5
+OBJ7=1022-1-5
+OBJ8=1023-1-5
+OBJ9=1024-1-5
+OBJ10=1025-1-1
+OBJ11=1026-1-1
+OBJ12=1028-1-5
+OBJ13=1027-1-1
+OBJ14=1029-1-1
+OBJ15=1030-1-1
+OBJ16=1033-1-5
+OBJ17=1039-1-5
+OBJ18=1378-1-5
+OBJ19=1379-1-5
+MaxDrop=1
+
+[COFRE2] 'Cofre Amarillo (Items Premium)
+ObjIndex=1342 
+Probabilidad=1
+NumObj=2 
+Obj1=1037-2-1
+Obj2=402-1-50
+MaxDrop=3
+
+[COFRE3] ' Cofre Celeste
+ObjIndex=1343
+Probabilidad=1
+NumObj=6
+OBJ1=1380-1-10
+OBJ2=1373-1-5
+OBJ3=1374-1-5
+OBJ4=1375-1-5
+OBJ5=1376-1-5
+OBJ6=1377-1-5
+MaxDrop=1
+
+[COFRE4] ' Cofre Verde
+ObjIndex=1344
+Probabilidad=3 
+NumObj=2 
+Obj1=1037-2-1
+Obj2=402-1-50
+MaxDrop=3
+##########################################
+
+[COFRE5] ' Cofre donacion Pack 1 - Violeta - De lider
+ObjIndex=1381
+Probabilidad=0
+NumObj=3
+Obj1=887-1-100
+Obj2=886-1-100
+Obj3=888-1-100
+MaxDrop=3
+Gld=0
+
+[COFRE6] ' Cofre donacion Pack 2 - Amarillo - Bronce
+ObjIndex=1382 
+Probabilidad=0
+NumObj=5
+Obj1=943-250-100
+Obj2=946-1-100
+Obj3=1388-3-100
+Obj4=1387-3-100
+Obj5=1380-6-100
+MaxDrop=5
+Gld=0
+
+[COFRE7] ' Cofre donacion Pack 3 - Celeste - Plata
+ObjIndex=1383
+Probabilidad=0
+NumObj=6
+Obj1=943-350-100
+Obj2=946-1-100
+Obj3=945-1-100
+Obj4=1388-5-100
+Obj5=1387-5-100
+Obj6=1380-8-100
+MaxDrop=6
+Gld=0
+
+[COFRE8] ' Cofre donacion Pack 4 - Verde - Oro -
+ObjIndex=1384
+Probabilidad=0 
+NumObj=7
+Obj1=943-500-100
+Obj2=946-2-100
+Obj3=945-1-100
+Obj4=944-1-100
+Obj5=1388-7-100
+Obj6=1387-7-100
+Obj7=1380-12-100
+MaxDrop=7
+Gld=0
+
+[COFRE9] ' Cofre donacion Pack 5 - PREM
+ObjIndex=1385
+Probabilidad=0 
+NumObj=8
+Obj1=943-1000-100
+Obj2=946-3-100
+Obj3=945-2-100
+Obj4=944-1-100
+Obj5=1115-1-100
+Obj6=1388-10-100
+Obj7=1387-10-100
+Obj8=1380-15-100
+MaxDrop=8
+Gld=0
+
+[COFRE10] ' Perla de la Fortuna [NO-PREMIUM]
+ObjIndex=1471
+Probabilidad=0
+NumObj=19
+Obj1=1386-1-5
+Obj2=1377-1-5
+Obj3=1380-3-10
+Obj4=318-1-10
+Obj5=319-1-10
+Obj6=886-1-1
+Obj7=887-1-1
+Obj8=946-1-2
+Obj9=1473-1-5
+Obj10=1470-2-5
+Obj11=1475-1-5
+OBJ12=1485-10-20
+OBJ13=1467-10-15
+OBJ14=1485-25-12
+OBJ15=1467-25-9
+OBJ16=1485-50-7
+OBJ17=1467-50-3
+OBJ18=1380-1-20
+Obj19=1475-3-1
+MaxDrop=1
+Gld=0
+
+[COFRE11] ' Perla de la Fortuna [PREMIUM]
+ObjIndex=1442
+Probabilidad=0
+NumObj=20
+Obj1=1387-1-5
+Obj2=1388-1-5
+Obj3=1380-3-10
+Obj4=318-1-10
+Obj5=319-1-10
+Obj6=886-1-5
+Obj7=887-1-5
+Obj8=888-1-5
+Obj9=946-1-4
+Obj10=945-1-2
+Obj11=1473-3-5
+Obj12=1470-3-5
+Obj13=1475-3-5
+OBJ14=1485-100-10
+OBJ15=1467-100-8
+OBJ16=1485-500-5
+OBJ17=1467-500-3
+Obj18=1380-10-10
+Obj19=1380-17-5
+MaxDrop=1
+Gld=0
+
+[COFRE12] ' Perla de la Fortuna [BRONCE]
+ObjIndex=1472
+Probabilidad=0
+NumObj=7
+Obj1=1016-1-1
+Obj2=1025-1-1
+Obj3=1026-1-1
+Obj4=1027-1-1
+Obj5=1029-1-1
+Obj6=1030-1-1
+Obj7=1039-1-1
+MaxDrop=1
+Gld=0
+
+[COFRE13] ' PERLA DE LA FORTUNA
+ObjIndex=1471
+Probabilidad=0
+NumObj=10
+Obj1=943-1-5
+Obj2=1380-1-10
+Obj3=943-1-5
+Obj4=1380-1-10
+Obj5=943-3-3
+Obj6=1380-2-5
+Obj7=943-1-10
+Obj8=1380-1-10
+Obj9=943-2-5
+Obj10=1380-3-5
+MaxDrop=1
+Gld=0
+
+[COFRE14] ' JDH
+ObjIndex=1500
+Probabilidad=0
+NumObj=11
+Obj1=36-15-100
+Obj2=37-173-100
+Obj3=38-76-100
+Obj4=39-15-100
+Obj5=621-1-100
+Obj6=623-1-100
+Obj7=238-1-100
+Obj8=617-1-100
+Obj9=31-1-100
+Obj10=240-1-100
+Obj11=629-20-100
+MaxDrop=11
+Gld=0
+
+[COFRE15] ' JDH
+ObjIndex=1501
+Probabilidad=0
+NumObj=10
+Obj1=36-20-100
+Obj2=37-57-100
+Obj3=38-128-100
+Obj4=39-25-100
+Obj5=129-1-100
+Obj6=130-1-100
+Obj7=644-1-100
+Obj8=31-1-100
+Obj9=240-1-100
+Obj10=629-20-100
+MaxDrop=10
+Gld=0
+
+[COFRE16] ' JDH
+ObjIndex=1502
+Probabilidad=0
+NumObj=10
+Obj1=36-35-100
+Obj2=37-103-100
+Obj3=38-170-100
+Obj4=39-38-100
+Obj5=628-1-100
+Obj6=828-70-100
+Obj7=31-1-100
+Obj8=240-1-100
+Obj9=629-20-100
+MaxDrop=10
+Gld=0
+
+[COFRE17] ' JDH
+ObjIndex=1503
+Probabilidad=0
+NumObj=10
+Obj1=36-15-100
+Obj2=37-153-100
+Obj3=38-158-100
+Obj4=39-15-100
+Obj5=367-1-100
+Obj6=365-1-100
+Obj7=404-1-100
+Obj8=31-1-100
+Obj9=240-1-100
+Obj10=629-20-100
+MaxDrop=1
+Gld=0
+
+
+
+[COFRE18] ' Huevo Sorpresa (Chico)
+' Cofre de Bronce (x1) (5%)
+' Cofre de Plata (x1) (2%)
+' Pendiente de Sacrificio (x1) (10%)
+' Pendiente de Sacrificio (x3) (5%)
+' Roca Beck (x5) (10%)
+' Roca Beck (x2) (30%)
+' Cofre de Bronce (x3) (1%)
+' Piedra Beck (x1) (15%)
+' Piedra Beck (x3) (5%)
+' Libro Antiguo (x1) (15%)
+' Libro Antiguo (x3) (5%)
+' Barca Antigua (x1) (3%)
+' Galera Antigua (x1) (2%)
+' Galeon Antiguo (x1) (1%)
+
+ObjIndex=1926
+Probabilidad=0
+NumObj=15
+OBJ1=946-1-5
+OBJ2=946-3-1
+OBJ3=945-1-2
+OBJ4=1465-1-10
+OBJ5=1465-3-5
+OBJ6=946-3-1
+OBJ7=1470-5-10
+OBJ8=1470-2-30
+OBJ9=1475-1-15
+OBJ10=1475-3-5
+OBJ11=1473-1-15
+OBJ12=1473-3-5
+OBJ13=1490-1-3
+OBJ14=1491-1-2
+OBJ15=1492-1-1
+MaxDrop=2
+
+[COFRE19] ' Huevo Sorpresa (Grande)
+'Lista
+' Cofre de [ORO] (x1) (3%)
+' Cofre [PREMIUM] (x1) (1%)
+' Escudo de Chocolate (x1) (5%)
+' Vincha de Conejo (x1) (2%)
+' Fragmento Premium (x5) (7%)
+' Vincha de Conejo (x2) (1%)
+' Cofre de [ORO] (x3) (1%)
+' Mascara Anonymous (x1) (1%)
+' Mascara de la Muerte (x1) (1%)
+' Mascara Kitsune (x1) (2%)
+' Mascara Pikachu (x1) (1%)
+' Mascara Charmander (x1) (2%)
+ObjIndex=1927
+Probabilidad=0
+NumObj=21
+OBJ1=944-1-1
+OBJ2=1115-1-1
+OBJ3=1922-1-5
+OBJ4=1814-1-2
+OBJ5=1466-5-7
+OBJ6=1814-2-1
+OBJ7=944-3-1
+OBJ8=1726-1-1
+OBJ9=1725-1-1
+OBJ10=1724-1-2
+OBJ11=1570-1-1
+OBJ12=1571-1-2
+OBJ13=1037-1-1
+OBJ14=1037-3-1
+OBJ15=1380-3-10
+OBJ16=1922-1-5
+OBJ17=1922-1-5
+OBJ18=1922-1-5
+OBJ19=1922-1-5
+OBJ20=1922-1-5
+OBJ21=1922-1-5
+MaxDrop=1
+
+[COFRE20] ' Conejo Sorpresa
+' Lista
+' Espada Mata Dragones (x1) (3%)
+' Scroll de Rostro (x3) (10%)
+' Scroll de Exp +15% (x1) (20%)
+' Scroll de Exp +20% (x1) (15%)
+' Scroll de Oro +30% (30 min) (x1) (8%)
+' Scroll de Oro +50% (60 min) (x1) (1%)
+' Scroll de Exp +50% (60 min) (x1) (1%)
+' Amuleto de Lider (x1) (3%)
+' Gema de Liderazgo (x1) (2%)
+' Acta de Fundacion (x1) (1%)
+
+ObjIndex=1928
+Probabilidad=0
+NumObj=10
+OBJ1=1037-1-3
+OBJ2=1380-3-10
+OBJ3=1375-1-20
+OBJ4=1376-1-15
+OBJ5=1377-1-8
+OBJ6=1388-1-1
+OBJ7=1387-1-1
+OBJ8=886-1-3
+OBJ9=887-1-2
+OBJ10=888-1-1
+MaxDrop=1
+##########################################
+
+¡REVIVIENDO EL MUELLE DE NIX!
+Los Dioses han creado una caña de pesca, cubierta de oro solido que podrá sacar de la ciudad de Nix , valiosos cofres perdidos en el tiempo. Al abrirlos los mismos podrán revelar sus reliquias al usuario o bien desaparecer.
+
+Para pescar estos cofres, deberás comenzar por juntar monedas de oro y una vez obtenida la cantidad de 15.000.000 monedas de oro dirigirte a la ciudad de Nix. En la casa de pescadores encontrarás lo que necesitas para comenzar a pescar cofres! Tu personaje deberá ser nivel 35 o superior para equipar la caña.
+
+Recuerda que podrás subirte a tu barca para ubicarte en un lugar de tu agrado o bien pescar desde las orillas del rio.
+
+¡Existen 4 tipos de Cofres! En el muelle de Nix podrás agarrar 1 de los cuatro cofres disponibles. Cuando logres capturar el cofre tendrás diferentes porcentajes (%) dependiendo el cofre y el mismo hará que puedas pescar el cofre o no. Los cofres pueden dropear hasta 3 objetos seguidos!
+
+REQUISITOS E INFORMACIÓN:
+- Tener Caña de pesca de ORO. (Se consigue en Nix)
+- Tener 100 skills en Pesca.
+- Es necesario pescar únicamente en la ciudad de Nix.
+- Cada tirada de caña tiene un 80% de no pescar ningún cofre.
+
+OBTENCIÓN DE LOS COFRES:
+Cofre Violeta: (Fácil)
+Cofre Verde:   (Medio)
+Cofre Celeste: (Difícil)
+Cofre Amarillo: (Extremadamente Difícil)

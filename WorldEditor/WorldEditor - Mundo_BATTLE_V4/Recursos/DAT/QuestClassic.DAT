@@ -1,0 +1,2139 @@
+[INIT]
+NumQuests=89
+
+[QUEST1]
+Nombre=Nueva Aventura
+Desc=Es hora de comenzar una nueva aventura.| Ten algunos Objetos Iniciales que te ayudaran en los primeros niveles.| Al nivel 13 te largarás de aquí de manera automática.|
+
+RequiredOBJs=0
+
+RequiredNPCs=5
+RequiredNpc1=581-5		' Escorpión
+RequiredNpc2=579-5		' Murciélago
+RequiredNpc3=578-3		' Lobo
+RequiredNpc4=580-5     		' Gallo Salvaje
+RequiredNpc5=582-5              ' Serpiente
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1930-1		' Cofre Newbie
+RewardOBJs=2
+RewardOBJ1=38-15		' Poción Roja
+RewardOBJ2=394-1		' Llamado a la naturaleza
+RewardExp=10500
+RewardGld=1500
+
+LastQuest=0
+NextQuest=2
+
+[QUEST2]
+Nombre=Explorando la Naturaleza
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1485-10		' Colmillo de Lobo
+RequiredOBJs=3
+RequiredOBJ1=236-5		' Ropa de Pordiosero
+RequiredOBJ2=414-15		' Pieles de Lobo
+RequiredOBJ3=26-10		' Pollo
+RequiredNPCs=3
+RequiredNpc1=530-5		' Bandido
+RequiredNpc2=512-15		' Lobo
+RequiredNpc3=506-10		' Gallo Salvaje
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=1
+RewardObj1=197-1		' Flecha Magica
+RewardExp=3000
+RewardGld=1500
+
+LastQuest=1
+NextQuest=3
+
+[QUEST3]
+Nombre=La travesía hacia lo Desconocido
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1830-5		' Huesos de Esqueleto
+RequiredOBJs=3
+RequiredOBJ1=165-5		' Daga +1
+RequiredOBJ2=27-5		' Chuleta
+RequiredOBJ3=1830-5		' Huesos de Esqueleto
+RequiredNPCs=4
+RequiredNpc1=531-7		' Asesino
+RequiredNpc2=557-5		' Jabali Salvaje
+RequiredNpc3=503-10		' Esqueleto
+RequiredNpc4=513-10		' Zombie
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0-0		' 
+
+RewardOBJs=3
+RewardObj1=204-1		' Flecha Magica
+RewardObj2=196-1		' Tunica de Mago
+RewardObj3=30-1		        ' Armadura de Cuero
+RewardExp=6000
+RewardGld=2250
+
+LastQuest=2
+NextQuest=4
+
+[QUEST4]
+Nombre=La aventura mas allá del Horizonte
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=398-2
+RequiredOBJs=2
+RequiredOBJ1=132-10		' Casco de Hierro
+RequiredOBJ2=398-5		' Garrote
+
+RequiredNPCs=3
+RequiredNpc1=510-10		' Araña Gigante
+RequiredNpc2=563-10		' Goblin
+RequiredNpc3=541-7		' Ogro
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=2
+RewardObj1=19-1 		' Espada dos Manos
+RewardObj2=625-1	        ' Vara de Fresno
+RewardExp=9000
+RewardGld=3000
+
+LastQuest=3
+NextQuest=5
+
+[QUEST5]
+Nombre=Camino hacía el Bosque Dorck
+Desc=
+
+RequiredOBJs=2
+RequiredOBJ1=3-5		' Hacha Orca
+RequiredOBJ2=58-500		' Leña
+RequiredNPCs=3
+RequiredNpc1=526-10             ' Araña Gigante
+RequiredNpc2=522-15		' Orco
+RequiredNpc3=584-10		' Ucorno
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1931-1		' Cofre Dorck Mapa 21
+
+RewardOBJs=2
+RewardOBJ1=38-200		' Pocion Roja
+RewardOBJ2=58-3000		' Leña
+RewardExp=15000
+RewardGld=4500
+
+LastQuest=4
+NextQuest=6
+
+[QUEST6]
+Nombre=La travesía del Bosque Místico
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=404-5		' Escudo de Tortuga
+RequiredOBJs=1
+RequiredOBJ1=404-5              ' Escudo de Tortuga
+RequiredNPCs=2
+RequiredNpc1=539-10             ' Tortuga Gigante
+RequiredNpc2=534-15		' Hormiga Gigante
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1932-1		' Cofre Bosque Mistico Mapa 4
+
+RewardOBJs=1
+RewardOBJ1=37-200		' Pocion Azul
+RewardExp=22500
+RewardGld=6000
+
+LastQuest=5
+NextQuest=7
+
+[QUEST7]
+Nombre=Bosque del Olvido Eterno
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=577-7             ' Acechador Invisible
+RequiredNpc2=576-5	       ' Servidor del Mal
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1933-1		' Cofre Bosque Fantasmal Mapa 18
+RequiredChestOBJ2=1934-1		' Cofre Bosque Fantasmal Mapa 18
+
+RewardOBJs=1
+RewardOBJ1=38-200 		' Pocion Roja
+RewardExp=30000
+RewardGld=9000
+
+LastQuest=6
+NextQuest=8
+
+[QUEST8]
+Nombre=Travesía del Bosque Arghál
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1485-20		' Colmillo de Lobo
+RequiredOBJs=3
+RequiredOBJ1=414-15		' Piel de Lobo
+RequiredOBJ2=415-20		' Piel de Oso Pardo
+RequiredOBJ3=1785-18		' Piel de Tigre
+RequiredNPCs=3
+RequiredNpc1=512-25		' Lobo
+RequiredNpc2=538-20		' Oso Pardo
+RequiredNpc3=575-18		' Tigre Salvaje
+
+RequiredChestOBJs=3
+RequiredChestOBJ1=1935-1		' Cofre Bosque de Banderbill Mapa 52
+RequiredChestOBJ2=1937-1		' Cofre Bosque de Osos Mapa 53
+RequiredChestOBJ3=1936-1		' Cofre Bosque Arghal Oeste Mapa 54
+
+RewardOBJs=4
+RewardObj1=239-1		' Tunica Roja
+RewardObj2=381-1 		' Tunica de Monje
+RewardObj3=38-100 	        ' Pocion Roja
+RewardObj4=37-100 	        ' Pocion Azul
+RewardExp=36000
+RewardGld=4200
+
+LastQuest=7
+NextQuest=9
+
+[QUEST9]
+Nombre=Travesia Aledaña
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=165-20		' Daga +1
+RequiredOBJs=1
+RequiredOBJ1=58-500 		' Leña
+RequiredNPCs=5
+RequiredNpc1=530-25		' Bandido
+RequiredNpc2=531-25		' Asesino
+RequiredNpc3=510-20		' Araña Gigante
+RequiredNpc4=577-10		' Acechador Invisible
+RequiredNpc5=583-20		' Arbol de Jungla
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1931-3		' Cofre Bosque Dorck Mapa 21
+
+RewardOBJs=2
+RewardOBJ1=395-1		' Invocar Zombie
+RewardOBJ2=58-5000		' Leña
+RewardExp=45000
+RewardGld=15000
+
+LastQuest=8
+NextQuest=0
+
+[QUEST10]
+Nombre=En busca Del Oasis
+Desc=
+
+RequiredNPCs=2
+RequiredNpc1=526-5		' Araña Gigante
+RequiredNpc2=515-15		' Serpiente
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1939-1		' Cofre Desierto Mapa 16
+
+RewardOBJs=5
+RewardObj1=404-1		' Escudo de Tortuga
+RewardObj2=132-1 		' Casco de Hierro
+RewardObj3=36-10 	        ' Pocion Amarilla
+RewardObj4=39-10 	        ' Pocion Verde
+RewardObj5=480-100 	        ' Flecha
+RewardExp=15000
+RewardGld=3000
+
+LastQuest=0
+NextQuest=11
+
+[QUEST11]
+Nombre=Vagando por el Desierto
+Desc=
+
+RequiredNPCs=2
+RequiredNpc1=521-10		' Araña Gigante
+RequiredNpc2=529-7		' Escorpion
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1938-1		' Cofre Desierto Mapa 17
+
+RewardOBJs=5
+RewardObj1=200-1		' Curar Veneno
+RewardObj2=166-15 		' Pocion Violeta
+RewardObj3=38-100 	        ' Pocion Roja
+RewardObj4=37-150 	        ' Pocion Azul
+RewardObj5=480-200 	        ' Flecha
+RewardExp=22500
+RewardGld=6000
+
+LastQuest=10
+NextQuest=0
+
+[QUEST12]
+Nombre=La oscuridad bajo la Ciudad
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=521-1		' Araña Gigante
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1940-1		' Cofre Catacumbas de Ullathorpe 40
+
+RewardOBJs=4
+RewardObj1=200-1		' Curar Veneno
+RewardObj2=36-20 		' Pocion Amarilla
+RewardObj3=39-10 	        ' Pocion Verde
+RewardObj4=480-500 	        ' Flecha
+RewardExp=15000
+RewardGld=1500
+
+LastQuest=0
+NextQuest=13
+
+[QUEST13]
+Nombre=La maldición de Ullathorpe
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=522-10		' Orco
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1941-1		' Cofre Catacumbas de Ullathorpe Mapa 41
+
+RewardOBJs=4
+RewardObj1=201-1		' Curar Heridas Leves
+RewardObj2=36-20		' Pocion Amarilla
+RewardObj3=39-10 	        ' Pocion Verde
+RewardObj4=480-300 	        ' Flecha
+RewardExp=9000
+RewardGld=900
+
+LastQuest=12
+NextQuest=14
+
+[QUEST14]
+Nombre=La Prueba Del Coraje
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=521-7		' Araña Gigante
+RequiredNpc2=522-10		' Orco
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1942-1		' Cofre Catacumbas de Ullathorpe Mapa 42
+
+RewardOBJs=3
+RewardObj1=166-15		' Pocion Violeta
+RewardObj2=38-100 	        ' Pocion Roja
+RewardObj3=480-1000 	        ' Flecha
+RewardExp=22500
+RewardGld=3000
+
+LastQuest=13
+NextQuest=15
+
+[QUEST15]
+Nombre=La Prueba de la Osadía
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=526-7		' (Araña Gigante)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1943-1		' Cofre Catacumbas de Nix Mapa 45
+
+RewardOBJs=4
+RewardObj1=200-1		' Curar Veneno
+RewardObj2=36-20 		' Pocion Amarilla
+RewardObj3=39-10 	        ' Pocion Verde
+RewardObj4=480-300 	        ' Flecha
+RewardExp=15000
+RewardGld=1500
+
+LastQuest=14
+NextQuest=16
+
+[QUEST16]
+Nombre=La Caza del Tesoro de Nix
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=526-15		' (Araña Gigante)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1944-1		' Cofre Catacumbas de Nix Mapa 45
+
+RewardOBJs=4
+RewardObj1=201-1		' Curar Heridas Leves
+RewardObj2=166-20		' Pocion Violeta
+RewardObj3=38-100 	        ' Pocion Roja
+RewardObj4=480-300 	        ' Flecha
+RewardExp=30000
+RewardGld=3000
+
+LastQuest=15
+NextQuest=0
+
+[QUEST17]
+Nombre=Maldición de Marabel
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=398-10		' Garrote
+RequiredOBJs=2
+RequiredOBJ1=3-5		' Hacha Orca
+RequiredOBJ2=398-10		' Garrote
+RequiredNPCs=2
+RequiredNpc1=523-10		' (Orco)
+RequiredNpc2=541-10		' Ogro
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		'
+
+RewardOBJs=3
+RewardObj1=30-1 		' Armadura de Cuero
+RewardObj2=239-1 		' Tunica Roja
+RewardObj3=480-1000 	        ' Flecha
+RewardExp=30000
+RewardGld=7500
+
+LastQuest=0
+NextQuest=18
+
+[QUEST18]
+Nombre=El Laberinto de Marabel
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=540-20		' (Duende)
+RequiredNpc2=507-20		' Lord Zombie
+RequiredNpc3=510-25		' Araña Gigante
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=3
+RewardObj1=38-300 		' Pocion Roja
+RewardObj2=37-300 		' Pocion Azul
+RewardObj3=480-1000 	        ' Flecha
+RewardExp=45000
+RewardGld=9000
+
+LastQuest=17
+NextQuest=19
+
+[QUEST19]
+Nombre=Tesoro Marabel
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=510-25		' (Araña Gigante)
+RequiredNpc2=509-5		' Pequeño Dragon Rojo
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1945-1		' Cofre Dungeon Marabel Mapa 95
+
+RewardOBJs=2
+RewardObj1=207-1		' Remover Paralisis
+RewardObj2=551-1000 		' Flecha Envenenada
+RewardExp=60000
+RewardGld=9000
+
+LastQuest=18
+NextQuest=20
+
+[QUEST20]
+Nombre=Laberinto de Marabel II
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=4
+RequiredNpc1=540-20		' (Duende)
+RequiredNpc2=549-15		' Orco Brujo
+RequiredNpc3=507-20		' Lord Zombie
+RequiredNpc4=543-1		' Demonio
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=6
+RewardObj1=359-1		' Cota de Mallas
+RewardObj2=130-1 		' Escudo de Hierro
+RewardObj3=357-1 	        ' Tunica de Druida
+RewardObj4=621-1 	        ' Sombrero de Aprendiz
+RewardObj5=359-1 	        ' Armadura de Caza
+RewardObj6=480-1000 	        ' Flecha
+RewardExp=90000
+RewardGld=15000
+
+LastQuest=19
+NextQuest=21
+
+[QUEST21]
+Nombre=Tumba del Demonio
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=543-2		' (Demonio)
+RequiredNpc2=549-20		' Orco Brujo
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=4
+RewardObj1=203-1		' Curar Heridas Graves
+RewardObj2=480-1000 		' Flecha
+RewardObj3=38-300 	        ' Pocion Roja
+RewardObj4=37-300 	        ' Pocion Azul
+RewardExp=90000
+RewardGld=22500
+
+LastQuest=20
+NextQuest=22
+
+[QUEST22]
+Nombre=Travesia Marabel
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=4
+RequiredNpc1=541-10	        ' (Ogro)
+RequiredNpc2=509-5		' Pequeño Dragon
+RequiredNpc3=549-10		' Orco Brujo
+RequiredNpc4=543-3		' Demonio
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1946-2		' Cofre Dungeon Marabel Mapa 96
+
+RewardOBJs=4
+RewardObj1=206-1		' Paralizar
+RewardObj2=551-1000 		' Flecha Envenenada
+RewardObj3=38-300 	        ' Pocion Roja
+RewardObj4=37-300 	        ' Pocion Azul
+RewardExp=150000
+RewardGld=30000
+
+LastQuest=21
+NextQuest=0
+
+[QUEST23]
+Nombre=Tesoro del Dragon Mitico
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=541-20		' (Ogro)
+RequiredNpc2=537-20		' Beholder
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1947-2		' Cofre Dungeon Dragon Mapa 48
+
+RewardOBJs=5
+RewardObj1=357-1		' Tunica de Druida
+RewardObj2=624-1 		' Baston Nudoso
+RewardObj3=159-1 	        ' Hacha de Barbaro
+RewardObj4=125-1 	        ' Sable
+RewardObj5=480-2000 	        ' Flecha
+RewardExp=90000
+RewardGld=30000
+
+LastQuest=0
+NextQuest=24
+
+[QUEST24]
+Nombre=Consquista de la Guarida del Dragon
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=541-20	        ' (Ogro)
+RequiredNpc2=509-10		' Pequeño Dragon Rojo
+RequiredNpc3=537-20		' Beholder
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=4
+RewardObj1=36-30		' Pocion Amarilla
+RewardObj2=39-30 		' Pocion Verde
+RewardObj3=38-400 	        ' Pocion Roja
+RewardObj4=37-400 	        ' Pocion Azul
+RewardExp=225000
+RewardGld=30000
+
+LastQuest=23
+NextQuest=25
+
+[QUEST25]
+Nombre=Batalla en el Nido del Dragon
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=542-1		' Gran Dragon Rojo DD
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1948-3		' Cofre Dungeon Dragon Mapa 48
+
+RewardOBJs=4
+RewardObj1=38-400 	        ' Pocion Roja
+RewardObj2=37-400 	        ' Pocion Azul
+RewardObj3=36-50                ' Pocion Amarilla
+RewardObj4=39-50                ' Pocion Verde
+RewardExp=900000
+RewardGld=150000
+
+LastQuest=24
+NextQuest=0
+
+[QUEST26]
+Nombre=Explorando nuevas Islas
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=555-15		' (Lord Orco)
+RequiredNpc2=554-15		' Liche
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1965-1		' Cofre Isla Esperanza Mapa 35
+
+RewardOBJs=3
+RewardObj1=359-1		' Cota de Mallas
+RewardObj2=357-1 		' Tunica de Druida
+RewardObj3=360-1 	        ' Armadura de Caza
+RewardExp=600000
+RewardGld=60000
+
+LastQuest=0
+NextQuest=27
+
+[QUEST27]
+Nombre=Magos se apoderan de las Islas
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=550-10		' (Bruja)
+RequiredNpc2=551-10		' Mago Malvado
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=5
+RewardObj1=159-1		' Hacha de Barbaro
+RewardObj2=624-1 		' Baston Nudoso
+RewardObj3=621-1 	        ' Sombrero de Aprendiz
+RewardObj4=125-1 	        ' Sable
+RewardObj5=627-1 	        ' Arco Compuesto Reforzado
+RewardExp=600000
+RewardGld=60000
+
+LastQuest=26
+NextQuest=28
+
+[QUEST28]
+Nombre=Grandes criaturas en los Mares de las Islas
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=574-30		' Calamar
+RequiredNpc2=548-15		' Leviatan
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1964-3		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=4
+RewardObj1=480-2000		' Flecha
+RewardObj2=130-1 		' Escudo de Hierro
+RewardObj3=621-1 	        ' Sombrero de Aprendiz
+RewardObj4=644-1 	        ' Anillo de Resistencia Magica
+RewardExp=750000
+RewardGld=60000
+
+LastQuest=27
+NextQuest=29
+
+[QUEST29]
+Nombre=Aun queda Esperanza
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=550-5		' Bruja
+RequiredNpc2=548-10		' Leviatan
+RequiredNpc3=554-25		' Liche
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=3
+RewardObj1=480-2000		' Flecha
+RewardObj2=38-800 	        ' Pocion Roja
+RewardObj3=37-800 	        ' Pocion Azul
+RewardExp=600000
+RewardGld=60000
+
+LastQuest=28
+NextQuest=30
+
+[QUEST30]
+Nombre=Islas Peligrosas
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=551-5		' Mago Malvado
+RequiredNpc2=555-25		' Lord Orco
+RequiredNpc3=574-30		' Calamar
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=3
+RewardObj1=688-1		' Armadura Klox
+RewardObj2=195-1 		' Placas Completas
+RewardObj3=519-1 	        ' Tunica Legendaria
+RewardExp=450000
+RewardGld=60000
+
+LastQuest=29
+NextQuest=31
+
+[QUEST31]
+Nombre=Termina la Travesia por Esperanza
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=551-10		' Mago Malvado
+RequiredNpc2=555-30		' Lord Orco
+RequiredNpc3=548-15		' Leviatan
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1964-3		' Cofre Isla Esperanza Mapa 36
+
+RewardOBJs=6
+RewardObj1=129-1		' Hacha de Guerra dos Filos
+RewardObj2=367-1 		' Daga +4
+RewardObj3=628-1 	        ' Arco de Cazador
+RewardObj4=623-1 	        ' Baculo Engarzado
+RewardObj5=643-1 	        ' Laud Magico
+RewardObj6=648-1 	        ' Anillo Magico
+RewardExp=600000
+RewardGld=60000
+
+LastQuest=30
+NextQuest=0
+
+[QUEST32]
+Nombre=Expedición a la Isla Vespar
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=569-2		' (Galeon Fantasmal)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1962-1		' Cofre Isla Vespar Mapa 67 
+
+RewardOBJs=1
+RewardOBJ1=38-300		' Pocion Roja
+RewardExp=60000
+RewardGld=15000
+
+LastQuest=0
+NextQuest=33
+
+[QUEST33]
+Nombre=Exploración a la Isla Vespar
+Desc=
+
+RequiredOBJs=1
+RequiredOBJ1=1831-25		' Ojos de Araña
+RequiredNPCs=1
+RequiredNpc1=589-25		' Viuda Negra
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1962-1		' Cofre Isla Vespar Mapa 67
+
+RewardOBJs=3
+RewardObj1=38-300		' Pocion Roja
+RewardObj2=36-30 		' Pocion Amarilla
+RewardObj3=39-30 	        ' Pocion Verde
+RewardExp=300000
+RewardGld=30000
+
+LastQuest=32
+NextQuest=34
+
+[QUEST34]
+Nombre=Invasion en Vespar
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1831-10		' Ojos de Araña
+RequiredOBJs=1
+RequiredOBJ1=1831-25		' Ojos de Araña
+RequiredNPCs=1
+RequiredNpc1=589-50		' Viuda Negra
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1949-1		' Cofre Vespar Mapa 70
+
+RewardOBJs=5
+RewardObj1=624-1 		' Baston Nudoso
+RewardObj2=159-1 		' Hacha de Barbaro
+RewardObj3=125-1 	        ' Sable
+RewardObj4=627-1 	        ' Arco Compuesto Reforzado
+RewardObj5=480-1000 	        ' Flecha
+RewardExp=600000
+RewardGld=30000
+
+LastQuest=33
+NextQuest=35
+
+[QUEST35]
+Nombre=Exterminar a las Arañas
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1831-30	' Ojos de Araña
+RequiredOBJs=1
+RequiredOBJ1=1831-50  		' Ojo de Araña
+RequiredNPCs=1
+RequiredNpc1=589-100		' Viuda Negra
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1949-2		' Cofre Vespar Mapa 70
+
+RewardOBJs=4
+RewardObj1=357-1 		' Tunica de Druida
+RewardObj2=359-1 		' Cota de Mallas
+RewardObj3=360-1 	        ' Armadura de Cazador
+RewardObj4=480-1000 	        ' Flecha
+RewardExp=900000
+RewardGld=30000
+
+LastQuest=34
+NextQuest=36
+
+[QUEST36]
+Nombre=Ultima oleada aracnida
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1831-30		' Ojos de Araña
+RequiredOBJs=1
+RequiredOBJ1=1831-100  		' Ojo de Araña
+RequiredNPCs=1
+RequiredNpc1=589-200		' Viuda Negra
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1949-3		' Cofre Vespar Mapa 70
+
+RewardOBJs=6
+RewardObj1=129-1		' Hacha de Guerra dos Filos
+RewardObj2=367-1 		' Daga +4
+RewardObj3=623-1 	        ' Baculo Engarzado
+RewardObj4=628-1 	        ' Arco de Cazador
+RewardObj5=643-1 	        ' Laud Magico
+RewardObj6=648-1 	        ' Anillo Magico
+RewardExp=1500000
+RewardGld=60000
+
+LastQuest=35
+NextQuest=0
+
+[QUEST37]
+Nombre=Explorando los Mares Ocultos de Nereo
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=154-10		' Pulpo Chico
+RequiredNpc2=155-10		' Pulpo Grande
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1982-1		' Cofre Dungeon Nereo Mapa 183
+
+RewardOBJs=2
+RewardObj1=36-50 		' Pocion Amarilla
+RewardObj2=39-50 	        ' Pocion Verde
+RewardExp=150000
+RewardGld=15000
+
+LastQuest=0
+NextQuest=38
+
+[QUEST38]
+Nombre=Seres extraños con Tridentes nunca antes vistos
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=156-10		' Triton Amarillo
+RequiredNpc2=157-10		' Triton Verde
+RequiredNpc3=158-10		' Triton Rosado
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1982-1		' Cofre Dungeon Nereo Mapa 183
+
+RewardOBJs=8
+RewardObj1=480-1000		' Flecha
+RewardObj2=159-1 		' Hacha de Barbaro
+RewardObj3=125-1 	        ' Sable
+RewardObj4=627-1 	        ' Arco Compuesto Reforzado
+RewardObj5=624-1 	        ' Baston Nudoso
+RewardObj6=644-1 	        ' Anillo de Resistencia Magica
+RewardObj7=38-700 	        ' Pocion Roja
+RewardObj8=37-700 	        ' Pocion Azul
+RewardExp=300000
+RewardGld=30000
+
+LastQuest=37
+NextQuest=39
+
+[QUEST39]
+Nombre=Es hora de Conquistar estos Mares Peligrosos
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1831-20
+RequiredOBJs=3
+RequiredOBJ1=1833-20		' Carne de Triton Amarillo
+RequiredOBJ2=1834-20		' Carne de Triton Verde
+RequiredOBJ3=1835-20		' Carne de Triton Rosado
+RequiredNPCs=5
+RequiredNpc1=154-25		' Pulpo Chico
+RequiredNpc2=155-25		' Pulpo Grande
+RequiredNpc3=156-20		' Triton Amarillo
+RequiredNpc4=157-20		' Triton Verde
+RequiredNpc5=158-20		' Triton Rosado
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1983-1		' Cofre Dungeon Nereo Mapa 184
+
+RewardOBJs=6
+RewardObj1=129-1		' Hacha de Guerra dos Filos
+RewardObj2=367-1 		' Daga +4
+RewardObj3=623-1 	        ' Baculo Engarzado
+RewardObj4=628-1 	        ' Arco de Cazador
+RewardObj5=643-1 	        ' Laud Magico
+RewardObj6=648-1 	        ' Anillo Magico
+RewardExp=750000
+RewardGld=30000
+
+LastQuest=38
+NextQuest=0
+
+[QUEST40]
+Nombre=Guerreros del Laberinto Spectra
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=141-30		' Guerrero Orco
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1984-1		' Cofre Spectra Mapa 177
+
+RewardOBJs=5
+RewardObj1=480-1000		' Flecha
+RewardObj2=38-500 		' Pocion Roja
+RewardObj3=36-50 	        ' Pocion Amarilla
+RewardObj4=39-50 	        ' Pocion Verde
+RewardObj5=159-1 	        ' Hacha de Barbaro
+RewardExp=225000
+RewardGld=30000
+
+LastQuest=0
+NextQuest=41
+
+[QUEST41]
+Nombre=¡Demasiados guerreros! ¡Demasiada Sangre!
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=141-60		' Guerrero Orco
+
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1984-2		' Cofre Spectra Mapa 177
+
+RewardOBJs=6
+RewardObj1=129-1		' Hacha de Guerra dos Filos
+RewardObj2=628-1 	        ' Arco de Cazador
+RewardObj3=480-2000		' Flecha
+RewardObj4=38-800 		' Pocion Roja
+RewardObj5=36-100 	        ' Pocion Amarilla
+RewardObj6=39-100 	        ' Pocion Verde
+RewardExp=375000
+RewardGld=30000
+
+LastQuest=40
+NextQuest=42
+
+[QUEST42]
+Nombre=Camino al final de el Laberinto Spectra
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=4
+RequiredNpc1=149-10		' Shadowmoon
+RequiredNpc2=150-10		' Blackrock
+RequiredNpc3=152-5		' Warsong
+RequiredNpc4=151-5		' Frostwolf
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1987-1		' Cofre Spectra Mapa 179
+
+RewardOBJs=6
+RewardObj1=159-1 		' Hacha de Barbaro
+RewardObj2=627-1 	        ' Arco Compuesto Reforzado
+RewardObj3=480-2000		' Flecha
+RewardObj4=38-800 		' Pocion Roja
+RewardObj5=36-100 	        ' Pocion Amarilla
+RewardObj6=39-100 	        ' Pocion Verde
+RewardExp=300000
+RewardGld=30000
+
+LastQuest=41
+NextQuest=43
+
+[QUEST43]
+Nombre=¡Es momento de acabar con estas Bestias!
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=4
+RequiredNpc1=149-20		' Shadowmoon
+RequiredNpc2=150-20		' Blackrock
+RequiredNpc3=152-15		' Warsong
+RequiredNpc4=151-15		' Frostwolf
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1987-1		' Cofre Spectra Mapa 179
+RequiredChestOBJ2=1988-1		' Cofre Spectra Mapa 179
+
+RewardOBJs=6
+RewardObj1=129-1		' Hacha de Guerra dos Filos
+RewardObj2=628-1 	        ' Arco de Cazador
+RewardObj3=480-2000		' Flecha
+RewardObj4=38-800 		' Pocion Roja
+RewardObj5=36-100 	        ' Pocion Amarilla
+RewardObj6=39-100 	        ' Pocion Verde
+RewardExp=750000
+RewardGld=30000
+
+LastQuest=42
+NextQuest=0
+
+[QUEST44]
+Nombre=Explorando los Mares de Nueva Esperanza
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=574-25		' (Calamar)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1966-1		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=5
+RewardObj1=480-1000		' Flecha
+RewardObj2=38-300 	        ' Pocion Roja
+RewardObj3=37-300 	        ' Pocion Azul
+RewardObj4=36-50 	        ' Pocion Amarilla
+RewardObj5=39-50 	        ' Pocion Verde
+RewardExp=300000
+RewardGld=45000
+
+LastQuest=0
+NextQuest=45
+
+[QUEST45]
+Nombre=¡Estas criaturas marinas son enormes y peligrosas!
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=574-50		' (Calamar)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1966-2		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=7
+RewardObj1=480-1500		' Flecha
+RewardObj2=36-50 	        ' Pocion Amarilla
+RewardObj3=39-50 	        ' Pocion Verde
+RewardObj4=159-1 		' Hacha de Barbaro
+RewardObj5=125-1 	        ' Sable
+RewardObj6=627-1 	        ' Arco Compuesto Reforzado
+RewardObj7=624-1 	        ' Baston Nudoso
+RewardExp=600000
+RewardGld=45000
+
+LastQuest=44
+NextQuest=46
+
+[QUEST46]
+Nombre=Muchos tentaculos en estos Mares
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=574-100		' (Calamar)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1966-3		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=7
+RewardObj1=480-2000		' Flecha
+RewardObj2=129-1		' Hacha de Guerra dos Filos
+RewardObj3=367-1 		' Daga +4
+RewardObj4=623-1 	        ' Baculo Engarzado
+RewardObj5=628-1 	        ' Arco de Cazador
+RewardObj6=643-1 	        ' Laud Magico
+RewardObj7=648-1 	        ' Anillo Magico
+RewardExp=900000
+RewardGld=45000
+
+LastQuest=45
+NextQuest=47
+
+[QUEST47]
+Nombre=En busca de la Gran Bestia Leviatan
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=548-10		' (Leviatan)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1966-1		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=2
+RewardObj1=38-500 	        ' Pocion Roja
+RewardObj2=37-500 	        ' Pocion Azul
+RewardExp=300000
+RewardGld=60000
+
+LastQuest=46
+NextQuest=48
+
+[QUEST48]
+Nombre=Enfrentando a la Gran Bestia Leviatan
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=548-25		' (Leviatan)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1966-2		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=5
+RewardObj1=480-1500		' Flecha
+RewardObj2=36-30 	        ' Pocion Amarilla
+RewardObj3=39-15 	        ' Pocion Verde
+RewardObj4=38-50                ' Pocion Roja
+RewardObj5=37-50                ' Pocion Azul
+RewardExp=450000
+RewardGld=15000
+
+LastQuest=47
+NextQuest=49
+
+[QUEST49]
+Nombre=Derrotando al terror de los Mares
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=548-50		' (Leviatan)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1966-3		' Cofre Isla Esperanza Mapa 32
+
+RewardOBJs=7
+RewardObj1=480-2000		' Flecha
+RewardObj2=129-1		' Hacha de Guerra dos Filos
+RewardObj3=367-1 		' Daga +4
+RewardObj4=623-1 	        ' Baculo Engarzado
+RewardObj5=628-1 	        ' Arco de Cazador
+RewardObj6=643-1 	        ' Laud Magico
+RewardObj7=648-1 	        ' Anillo Magico
+RewardExp=1050000
+RewardGld=150000
+
+LastQuest=48
+NextQuest=50
+
+[QUEST50]
+Nombre=Barcos Fantasmales
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=548-25		' (Galeon Fantasmal)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1960-1		' Cofre Isla Veleta 'Mapa 47
+
+RewardOBJs=2
+RewardObj1=38-500 	        ' Pocion Roja
+RewardObj2=37-500 	        ' Pocion Azul
+RewardExp=300000
+RewardGld=60000
+
+LastQuest=49
+NextQuest=0
+
+[QUEST51]
+Nombre=Refugiado en la Isla Veril
+Desc=
+
+RequiredOBJs=1
+RequiredOBJ1=404-10		' (Escudo de Tortuga)
+RequiredNPCs=2
+RequiredNpc1=539-20		' (Tortuga Gigante)
+RequiredNpc2=574-12		' (Calamar)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1950-1		' Cofre Isla Veril Mapa 88
+
+RewardOBJs=2
+RewardObj1=38-200		' Pocion Roja
+RewardObj2=37-200 		' Pocion Azul
+RewardExp=135000
+RewardGld=30000
+
+LastQuest=0
+NextQuest=52
+
+[QUEST52]
+Nombre=Reino del Olvido
+Desc=
+
+RequiredOBJs=0
+
+RequiredNPCs=3
+RequiredNpc1=540-10		' (Duende)
+RequiredNpc2=550-5		' (Bruja)
+RequiredNpc3=554-20		' (Liche)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1951-1		' Cofre Pasillo Principal Mapa 100
+RequiredChestOBJ2=1952-1		' Cofre Pasillo Principal Mapa 100
+
+RewardOBJs=2
+RewardObj1=38-200		' Pocion Roja
+RewardObj2=37-200 		' Pocion Azul
+RewardExp=270000
+RewardGld=60000
+
+LastQuest=51
+NextQuest=53
+
+[QUEST53]
+Nombre=Pasillos Inciertos
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=553-10		' (Medusa)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1953-1		' Cofre Pasillo Principal Mapa 101
+RequiredChestOBJ2=1954-1		' Cofre Pasillo Principal Mapa 101
+
+RewardOBJs=2
+RewardObj1=38-200		' Pocion Roja
+RewardObj2=37-200 		' Pocion Azul
+RewardExp=450000
+RewardGld=90000
+
+LastQuest=52
+NextQuest=54
+
+[QUEST54]
+Nombre=Guarida del Mal
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=553-25		' (Medusa)
+RequiredNpc2=549-15		' (Orco Brujo)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1955-1		' Cofre Cercanias del Fuerte Mapa 102
+
+RewardOBJs=2
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+
+RewardExp=900000
+RewardGld=120000
+
+LastQuest=53
+NextQuest=55
+
+[QUEST55]
+Nombre=Cripta del Terror
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=553-50		' (Medusa)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1956-2		' Cofre El Fuerte Mapa 106
+RequiredChestOBJ2=1957-2		' Cofre El Fuerte Mapa 106
+
+RewardOBJs=6
+RewardObj1=622-1		' Sombrero de Mago
+RewardObj2=644-1 		' Anillo de Resistencia Magica
+RewardObj3=124-1 	        ' Katana
+RewardObj4=627-1 	        ' Arco Compuesto Reforzado
+RewardObj5=159-1 	        ' Hacha de Barbaro
+RewardObj6=399-1 	        ' Cimitarra
+RewardExp=1500000
+RewardGld=150000
+
+LastQuest=54
+NextQuest=56
+
+[QUEST56]
+Nombre=Camara del Abismo
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=553-100		' (Medusa)
+RequiredNpc2=703-5		' (Medusa Reina)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1958-1		' Cofre Deadly Room
+
+RewardOBJs=7
+RewardObj1=129-1		' Hacha de Guerra dos Filos
+RewardObj2=367-1 		' Daga +4
+RewardObj3=628-1 	        ' Arco de Cazador
+RewardObj4=622-1 	        ' Sombrero de Mago
+RewardObj5=623-1 	        ' Baculo Engarzado
+RewardObj6=648-1 	        ' Anillo Magico
+RewardObj7=643-1 	        ' Laud Magico
+RewardExp=2250000
+RewardGld=225000
+
+LastQuest=55
+NextQuest=57
+
+[QUEST57]
+Nombre=Reino del Recuerdo
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=550-50		' (Bruja)
+RequiredNpc2=28-20		' (Minero de Oro)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1959-1		' Cofre Minas de Oro
+RewardOBJs=0
+RewardExp=1500000
+RewardGld=150000
+
+LastQuest=0
+NextQuest=0
+
+[QUEST58]
+Nombre=Isla de los Sacerdotes y Protectores del Rey
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=548-15		' (Leviatan)
+RequiredNpc2=569-5		' (Galeon Fantasmal)
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		' 
+
+RewardOBJs=2
+RewardObj1=38-200		' Pocion Roja
+RewardObj2=37-200 		' Pocion Azul
+RewardExp=300000
+RewardGld=30000
+
+LastQuest=0
+NextQuest=59
+
+[QUEST59]
+Nombre=Guarida de los Arzobispos protectores de los Ciudadanos
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=167-15		' Wolftein
+RequiredNpc2=166-15		' Hombre de Lodo
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1989-1	' Cofre Dungeon Thanak Mapa 171
+
+RewardOBJs=2
+RewardObj1=38-500		' Pocion Roja
+RewardObj2=37-500 		' Pocion Azul
+RewardExp=750000
+RewardGld=75000
+
+LastQuest=58
+NextQuest=60
+
+[QUEST60]
+Nombre=Secretos sangrientos de Thanak
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=4
+RequiredNpc1=166-20		' Golem de Lodo
+RequiredNpc2=167-20		' Wolfstein
+RequiredNpc3=717-15		' Vampiro
+RequiredNpc4=718-15		' Vampireza
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1991-2	' Cofre Dungeon Thanak Mapa 172
+
+RewardOBJs=2
+RewardObj1=38-500		' Pocion Roja
+RewardObj2=37-500 		' Pocion Azul
+RewardExp=1050000
+RewardGld=60000
+
+LastQuest=59
+NextQuest=61
+
+[QUEST61]
+Nombre=Secretos sangrientos de Thanak II
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1832-10		' Colmillos de Vampiros
+RequiredOBJs=1
+RequiredOBJ1=1832-10
+RequiredNPCs=4
+RequiredNpc1=166-10		' Golem de Lodo
+RequiredNpc2=167-10		' Wolfstein
+RequiredNpc3=717-25		' Vampiro
+RequiredNpc4=718-25		' Vampireza
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1991-2	' Cofre Dungeon Thanak Mapa 172
+
+RewardOBJs=3
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=621-1 		' Sombrero de Aprendiz
+RewardObj3=480-2000 		' Flecha
+RewardExp=1650000
+RewardGld=60000
+
+LastQuest=60
+NextQuest=62
+
+[QUEST62]
+Nombre=Almas Perdidas de Thanak
+Desc=
+
+RequiredSaleOBJs=1
+RequiredSaleOBJ1=1832-10		' Colmillos de Vampiros
+RequiredOBJs=1
+RequiredOBJ1=1832-10
+RequiredNPCs=4
+RequiredNpc1=166-20		' Golem de Lodo
+RequiredNpc2=167-20		' Wolfstein
+RequiredNpc3=717-50		' Vampiro
+RequiredNpc4=718-50		' Vampireza
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1991-3	' Cofre Dungeon Thanak Mapa 172
+
+RewardOBJs=4
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=622-1 		' Sombrero de Mago
+RewardObj3=519-1 		' Tunica Legendaria
+RewardObj4=480-3000 		' Flecha
+RewardExp=2250000
+RewardGld=60000
+
+LastQuest=61
+NextQuest=63
+
+[QUEST63]
+Nombre=Secretos sangrientos en lo mas profundo de Thanak
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=168-25		' (Sigmar)
+RequiredNpc2=169-20		' (Nosferatu)
+RequiredNpc3=170-20		' (Ghouls)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1992-1	' Cofre Dungeon Thanak Mapa 173
+
+RewardOBJs=2
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+RewardExp=1650000
+RewardGld=75000
+
+LastQuest=62
+NextQuest=64
+
+[QUEST64]
+Nombre=Secretos sangrientos en lo mas profundo de Thanak II
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=168-25		' (Sigmar)
+RequiredNpc2=169-20		' (Nosferatu)
+RequiredNpc3=170-20		' (Ghouls)		
+		
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1992-1	' Cofre Dungeon Thanak Mapa 173
+
+RewardOBJs=4
+RewardObj1=360-1		' Armadura de Cazador
+RewardObj2=688-1 		' Armadura Klox
+RewardObj3=195-1 		' Placas Completas
+RewardObj4=519-1 		' Tunica Legendaria
+RewardExp=1650000
+RewardGld=75000
+
+LastQuest=63
+NextQuest=65
+
+[QUEST65]
+Nombre=Secretos sangrientos en lo mas profundo de Thanak III
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=168-50		' (Sigmar)
+RequiredNpc2=169-100		' (Nosferatu)
+RequiredNpc3=170-100		' (Ghouls)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1992-1	' Cofre Dungeon Thanak Mapa 173
+
+RewardOBJs=6
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=622-1 		' Sombrero de Mago
+RewardObj3=519-1 		' Tunica Legendaria
+RewardObj4=480-3000 		' Flecha
+RewardObj5=38-1000		' Pocion Roja
+RewardObj6=37-1200 		' Pocion Azul
+RewardExp=4650000
+RewardGld=75000
+
+LastQuest=64
+NextQuest=66
+
+[QUEST66]
+Nombre=Ultima travesia para terminar con las pesadillas de Thanak
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=168-100		' (Sigmar)
+RequiredNpc2=169-100		' (Nosferatu)
+RequiredNpc3=170-100		' (Ghouls)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1992-2	' Cofre Dungeon Thanak Mapa 173
+
+RewardOBJs=11
+RewardObj1=360-1 	        ' Armadura de Cazador
+RewardObj2=688-1		' Armadura Klox
+RewardObj3=195-1 		' Placas Completas
+RewardObj4=519-1 	        ' Tunica Legendaria
+RewardObj5=129-1 	        ' Hacha de Guerra dos Filos
+RewardObj6=367-1 	        ' Daga +4
+RewardObj7=628-1 	        ' Arco de Cazador
+RewardObj8=623-1 	        ' Baculo de Mago
+RewardObj9=622-1 	        ' Sombrero de Mago
+RewardObj10=648-1 	        ' Anillo Magico
+RewardObj11=643-1 	        ' Laud Magico
+RewardExp=3600000
+RewardGld=150000
+
+LastQuest=65
+NextQuest=0
+
+[QUEST67]
+Nombre=Descubriendo el Tenebroso Castillo Brezal
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=735-15		' (Sombra Brezal)
+RequiredNpc2=736-15		' (Sombra Brezal)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1994-1	' Cofre Dungeon Brezal Mapa 148
+
+RewardOBJs=2
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+RewardExp=600000
+RewardGld=45000
+
+LastQuest=66
+NextQuest=68
+
+[QUEST68]
+Nombre=Laberinto de los Reflejos Oscuros
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=735-25		' (Sombra Brezal)
+RequiredNpc2=736-25		' (Sombra Brezal)
+RequiredNpc3=729-25		' (Espectro Maligno)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1995-1	' Cofre Dungeon Brezal Mapa 149
+
+RewardOBJs=3
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=621-1 		' Sombrero de Aprendiz
+RewardObj3=480-2000 		' Flecha
+RewardExp=1050000
+RewardGld=45000
+
+LastQuest=67
+NextQuest=69
+
+[QUEST69]
+Nombre=Desafio de la Oscuridad
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=729-25		' (Espectro Maligno)
+RequiredNpc2=731-25		' (Demonio Infernal)
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0     	' 
+
+RewardOBJs=2
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+RewardExp=1050000
+RewardGld=45000
+
+LastQuest=68
+NextQuest=70
+
+[QUEST70]
+Nombre=Cruzada contra el Rey de la Muerte
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=735-15		' (Sombra Brezal)
+RequiredNpc2=736-15		' (Sombra Brezal)
+RequiredNpc3=783-30		' (Parca)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1996-1     	' Cofre Dungeon Brezal Mapa 151
+
+RewardOBJs=2
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+RewardExp=1050000
+RewardGld=45000
+
+LastQuest=69
+NextQuest=71
+
+[QUEST71]
+Nombre=Maldicion de las Mazmorras Brezal
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=729-20		' (Espectro Maligno)
+RequiredNpc2=731-20		' (Demonio Infernal)
+RequiredNpc3=783-30		' (Parca)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1996-1     	' Cofre Dungeon Brezal Mapa 151
+
+RewardOBJs=2
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+RewardExp=1050000
+RewardGld=45000
+
+LastQuest=70
+NextQuest=72
+
+[QUEST72]
+Nombre=Ultima Cruzada con la Oscuridad
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=729-25		' (Espectro Maligno)
+RequiredNpc2=731-25		' (Demonio Infernal)
+RequiredNpc3=783-35		' (Parca)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1996-1     	' Cofre Dungeon Brezal Mapa 151
+
+RewardOBJs=3
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=621-1 		' Sombrero de Aprendiz
+RewardObj3=480-2000 		' Flecha
+RewardExp=7500000
+RewardGld=120000
+
+LastQuest=71
+NextQuest=73
+
+[QUEST73]
+Nombre=Superando las Mazmorras del Castillo Brezal
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=729-50		' (Espectro Maligno)
+RequiredNpc2=731-50		' (Demonio Infernal)
+RequiredNpc3=783-50		' (Parca)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1997-1     	' Cofre Dungeon Brezal Mapa 152
+
+RewardOBJs=11
+RewardObj1=360-1 	        ' Armadura de Cazador
+RewardObj2=688-1		' Armadura Klox
+RewardObj3=195-1 		' Placas Completas
+RewardObj4=519-1 	        ' Tunica Legendaria
+RewardObj5=129-1 	        ' Hacha de Guerra dos Filos
+RewardObj6=367-1 	        ' Daga +4
+RewardObj7=628-1 	        ' Arco de Cazador
+RewardObj8=623-1 	        ' Baculo de Mago
+RewardObj9=622-1 	        ' Sombrero de Mago
+RewardObj10=648-1 	        ' Anillo Magico
+RewardObj11=643-1 	        ' Laud Magico
+RewardExp=12000000
+RewardGld=150000
+
+LastQuest=72
+NextQuest=0
+
+[QUEST74]
+Nombre=Afueras del Infierno
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=569-25		' (Galeon Fantasmal)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1961-2	' Cofre Isla de la Muerte
+
+RewardOBJs=0
+RewardExp=1500000
+RewardGld=75000
+
+LastQuest=73
+NextQuest=75
+
+[QUEST75]
+Nombre=Conociendo el poder del Rey de el Infierno
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=618-25		' (Cthulu)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1967-1	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-1	' Cofre Dungeon Speculum Mapa 108
+
+RewardOBJs=5
+RewardObj1=38-1000		' Pocion Roja
+RewardObj2=37-1200 		' Pocion Azul
+RewardObj3=644-1		' Anillo de Resistencia Magica
+RewardObj4=621-1 		' Sombrero de Aprendiz
+RewardObj5=480-2000 		' Flecha
+RewardExp=3000000
+RewardGld=150000
+
+LastQuest=74
+NextQuest=76
+
+[QUEST76]
+Nombre=Enfrentando al Rey del Infierno
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=618-50		' (Cthulu)
+
+RequiredChestOBJs=3
+RequiredChestOBJ1=1967-1	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-1	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ3=1978-1	' Cofre Dungeon Magma Mapa 145
+
+RewardOBJs=8
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=622-1 		' Sombrero de Mago
+RewardObj3=519-1 		' Tunica Legendaria
+RewardObj4=480-3000 		' Flecha
+RewardObj5=38-500		' Pocion Roja
+RewardObj6=37-500 		' Pocion Azul
+RewardObj7=36-50		' Pocion Amarilla
+RewardObj8=39-50 		' Pocion Verde
+RewardExp=7500000
+RewardGld=150000
+
+LastQuest=75
+NextQuest=77
+
+[QUEST77]
+Nombre=Derrotando al Rey de el Infierno
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=618-100		' (Cthulu)
+
+RequiredChestOBJs=3
+RequiredChestOBJ1=1967-2	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-2	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ3=1978-1	' Cofre Dungeon Magma Mapa 145
+
+RewardOBJs=11
+RewardObj1=360-1 	        ' Armadura de Cazador
+RewardObj2=688-1		' Armadura Klox
+RewardObj3=195-1 		' Placas Completas
+RewardObj4=519-1 	        ' Tunica Legendaria
+RewardObj5=129-1 	        ' Hacha de Guerra dos Filos
+RewardObj6=367-1 	        ' Daga +4
+RewardObj7=628-1 	        ' Arco de Cazador
+RewardObj8=623-1 	        ' Baculo de Mago
+RewardObj9=622-1 	        ' Sombrero de Mago
+RewardObj10=648-1 	        ' Anillo Magico
+RewardObj11=643-1 	        ' Laud Magico
+RewardExp=16500000
+RewardGld=150000
+
+LastQuest=76
+NextQuest=78
+
+[QUEST78]
+Nombre=Desafiando a los Gigantes del Volcan
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=552-25		' (Golem)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1967-1	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-1	' Cofre Dungeon Speculum Mapa 108
+
+RewardOBJs=5
+RewardObj1=38-1500		' Pocion Roja
+RewardObj2=37-1500 		' Pocion Azul
+RewardObj3=644-1		' Anillo de Resistencia Magica
+RewardObj4=621-1 		' Sombrero de Aprendiz
+RewardObj5=480-2000 		' Flecha
+RewardExp=6900000
+RewardGld=150000
+
+LastQuest=77
+NextQuest=79
+
+[QUEST79]
+Nombre=Desafiando a los Gigantes del Volcan II
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=552-50		' (Golem)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1967-2	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-2	' Cofre Dungeon Speculum Mapa 108
+
+RewardOBJs=9
+RewardObj1=159-1		' Hacha de Barbaro
+RewardObj2=622-1 		' Sombrero de Mago
+RewardObj3=519-1 		' Tunica de Druida
+RewardObj4=480-3000 		' Flecha
+RewardObj5=359-1 		' Cota de Mallas
+RewardObj6=360-1 		' Armadura de Cazador
+RewardObj7=130-1 	        ' Escudo de Hierro
+RewardObj8=627-1 		' Arco Compuesto Reforzado
+RewardObj9=124-1 		' Katana
+RewardExp=10500000
+RewardGld=150000
+
+LastQuest=78
+NextQuest=80
+
+[QUEST80]
+Nombre=Derrotando a los Gigantes del Volcan III
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=552-100		' (Golem)
+
+RequiredChestOBJs=3
+RequiredChestOBJ1=1967-2	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-2	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ3=1976-1	' Cofre Dungeon Magma Mapa 113
+
+RewardOBJs=11
+RewardObj1=360-1 	        ' Armadura de Cazador
+RewardObj2=688-1		' Armadura Klox
+RewardObj3=195-1 		' Placas Completas
+RewardObj4=519-1 	        ' Tunica Legendaria
+RewardObj5=129-1 	        ' Hacha de Guerra dos Filos
+RewardObj6=367-1 	        ' Daga +4
+RewardObj7=628-1 	        ' Arco de Cazador
+RewardObj8=623-1 	        ' Baculo de Mago
+RewardObj9=622-1 	        ' Sombrero de Mago
+RewardObj10=648-1 	        ' Anillo Magico
+RewardObj11=643-1 	        ' Laud Magico
+RewardExp=15000000
+RewardGld=150000
+
+LastQuest=79
+NextQuest=81
+
+[QUEST81]
+Nombre=Tesoro de las Profundidades Volcanicas I
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=696-3		' (Exilioth)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1976-1	' Cofre Dungeon Magma Mapa 113
+
+RewardOBJs=4
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=622-1 		' Sombrero de Mago
+RewardObj3=519-1 		' Tunica Legendaria
+RewardObj4=480-3000 		' Flecha
+RewardExp=7500000
+RewardGld=15000
+
+LastQuest=80
+NextQuest=82
+
+[QUEST82]
+Nombre=Tesoro de las Profundidades Volcanicas II
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=3
+RequiredNpc1=618-100		' (Cthulu)
+RequiredNpc2=552-30		' (Golem)
+RequiredNpc3=696-1		' (Exilioth)
+
+RequiredChestOBJs=2
+RequiredChestOBJ1=1967-2	' Cofre Dungeon Speculum Mapa 108
+RequiredChestOBJ2=1968-2	' Cofre Dungeon Speculum Mapa 108
+
+RewardOBJs=4
+RewardObj1=644-1		' Anillo de Resistencia Magica
+RewardObj2=622-1 		' Sombrero de Mago
+RewardObj3=519-1 		' Tunica Legendaria
+RewardObj4=480-5000 		' Flecha
+RewardExp=15000000
+RewardGld=150000
+
+LastQuest=81
+NextQuest=83
+
+[QUEST83]
+Nombre=Saliendo victorioso de las Profundidades Volcanicas
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=2
+RequiredNpc1=552-50		' (Golem)
+RequiredNpc2=696-5		' (Exilioth)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1976-5	' Cofre Dungeon Magma Mapa 113
+
+RewardOBJs=12
+RewardObj1=360-1 	        ' Armadura de Cazador
+RewardObj2=688-1		' Armadura Klox
+RewardObj3=195-1 		' Placas Completas
+RewardObj4=519-1 	        ' Tunica Legendaria
+RewardObj5=129-1 	        ' Hacha de Guerra dos Filos
+RewardObj6=367-1 	        ' Daga +4
+RewardObj7=628-1 	        ' Arco de Cazador
+RewardObj8=623-1 	        ' Baculo de Mago
+RewardObj9=622-1 	        ' Sombrero de Mago
+RewardObj10=648-1 	        ' Anillo Magico
+RewardObj11=643-1 	        ' Laud Magico
+RewardObj12=646-1 	        ' Anillo de Disolucion Magica
+RewardExp=21000000
+RewardGld=300000
+
+LastQuest=82
+NextQuest=0
+
+[QUEST84]
+Nombre=En busca del Polo Norte
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=572-5		' (Pingüino)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1979-1		' Cofre Polo Norte Mapa 97
+
+RewardOBJs=2
+RewardObj1=38-1500		' Pocion Roja
+RewardObj2=37-1500 		' Pocion Azul
+RewardExp=0
+RewardGld=30000
+
+LastQuest=0
+NextQuest=85
+
+[QUEST85]
+Nombre=Explorando el Frio Extremo
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=570-8		' (Lobo Invernal)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1979-1		' Cofre Polo Norte Mapa 97
+
+RewardOBJs=2
+RewardObj1=159-1 		' Hacha de Barbaro
+RewardObj2=130-1 		' Escudo de Hierro
+RewardExp=0
+RewardGld=45000
+
+LastQuest=84
+NextQuest=86
+
+[QUEST86]
+Nombre=Aventuras Articas
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=571-12		' (Oso Invernal)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1980-1		' Cofre Polo Norte Mapa 98
+
+RewardOBJs=2
+RewardObj1=624-1 		' Bastón nudoso
+RewardObj2=622-1 		' Sombrero de Mago
+RewardExp=0
+RewardGld=60000
+
+LastQuest=85
+NextQuest=87
+
+[QUEST87]
+Nombre=Desafio del Hielo
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=1
+RequiredNpc1=573-7		' (Golem de Hielo)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1981-1		' Cofre Polo Norte Mapa 99
+
+RewardOBJs=1
+RewardObj1=1473-15 		' Manuscritos de Liderazgo +1
+RewardExp=0
+RewardGld=75000
+
+LastQuest=86
+NextQuest=88
+
+[QUEST88]
+Nombre=Habitantesdel Hielo
+Desc=
+
+RequiredOBJs=0
+RequiredNPCs=4
+RequiredNpc1=572-3		' (Pinguimo)
+RequiredNpc2=570-3		' (Lobo Invernal)
+RequiredNpc3=571-3		' (Oso Invernal)
+RequiredNpc4=573-3		' (Golem de Hielo)
+
+RequiredChestOBJs=1
+RequiredChestOBJ1=1981-1		' Cofre Polo Norte Mapa 99
+
+RewardOBJs=1
+RewardObj1=1473-30 		' Manuscritos de Liderazgo +1
+RewardExp=0
+RewardGld=105000
+
+LastQuest=87
+NextQuest=89
+
+[QUEST89]
+Nombre=Casco de Criaturas Asesinas
+Desc=
+
+RequiredNPCs=3
+RequiredNpc1=572-50		' (Pinguimo)
+RequiredNpc2=570-50		' (Lobo Invernal)
+RequiredNpc3=571-50		' (Oso Invernal)
+
+RequiredChestOBJs=0
+RequiredChestOBJ1=0		'
+
+RewardOBJs=1
+RewardObj1=1414-1 		' Casco de Criatura Asesinas
+RewardExp=0
+RewardGld=150000
+
+LastQuest=88
+NextQuest=0

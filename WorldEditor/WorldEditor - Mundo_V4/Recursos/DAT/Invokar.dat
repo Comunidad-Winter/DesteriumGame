@@ -1,0 +1,22 @@
+﻿'#################### LISTA DE SPAWN #############################
+[INIT]
+NumNPCs=6
+
+[LIST]
+NI1=24
+NN1=Banquero
+
+NI2=14
+NN2=Alquimia
+
+NI3=5
+NN3=Sacerdote
+
+NI4=8
+NN4=Comidas
+
+NI5=15
+NN5=Bebidas
+
+NI6=117
+NN6=Centinela

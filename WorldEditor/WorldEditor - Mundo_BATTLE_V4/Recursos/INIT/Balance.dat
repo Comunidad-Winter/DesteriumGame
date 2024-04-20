@@ -1,0 +1,26 @@
+[MODRAZA]
+HumanoFuerza=+1
+HumanoAgilidad=+1
+HumanoInteligencia=0
+HumanoCarisma=0
+HumanoConstitucion=+2
+ElfoFuerza=+0
+ElfoAgilidad=+4
+ElfoInteligencia=+2
+ElfoCarisma=+2
+ElfoConstitucion=+1
+Elfo OscuroFuerza=+2
+Elfo OscuroAgilidad=+2
+Elfo OscuroInteligencia=+2
+Elfo OscuroCarisma=-3
+Elfo OscuroConstitucion=+1
+EnanoFuerza=+3
+EnanoAgilidad=-1
+EnanoInteligencia=-6
+EnanoCarisma=-2
+EnanoConstitucion=+3
+GnomoFuerza=-4
+GnomoAgilidad=+3
+GnomoInteligencia=+3
+GnomoCarisma=+1
+GnomoConstitucion=0

@@ -1,0 +1,22 @@
+[INIT]
+NumObjs=5
+ 
+[OBJ1] 'Flecha
+Index=480
+Cantidad=100
+ 
+[OBJ2] 'Flecha +1
+Index=551
+Cantidad=100
+ 
+[OBJ3] 'Flecha +2
+Index=552
+Cantidad=100
+ 
+[OBJ4] 'Flecha +3
+Index=553
+Cantidad=100
+ 
+[OBJ5] 'Laud Mágico
+Index=696
+Cantidad=1

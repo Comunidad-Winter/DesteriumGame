@@ -1,0 +1,49 @@
+[INIT]
+NumInvocaciones=0
+
+[INVOCACION1] 'Dragón legendario
+NpcIndex=698
+desc=¡Un poderoso aventurero ha logrado invocar al Gran dragón legendario!
+Mapa=58
+CantidadUsuarios=1
+Pos1=79-17
+
+[INVOCACION2] 'Gairu Espartano
+NpcIndex=699
+desc=¡El Rey Gairú ha vuelto en forma de piedra, con mas fuerza que nunca!
+Mapa=58
+CantidadUsuarios=1
+Pos1=78-57
+
+[INVOCACION3] 'Gairú
+NpcIndex=700
+desc=¡El Rey Gairú ha vuelto en forma de piedra, con mas fuerza que nunca!
+Mapa=58
+CantidadUsuarios=1
+Pos1=79-82
+
+[INVOCACION4]
+NpcIndex=733
+desc=¡Gran Dios Celtic! Ha renacido en busca de sangre fria
+Mapa=37
+CantidadUsuarios=3
+Pos1=33-44
+Pos2=43-44
+Pos3=38-48
+
+[INVOCACION5]
+NpcIndex=783
+desc=¡Rey Exodo! Ha salido el Rey Exodo
+Mapa=52
+CantidadUsuarios=4
+Pos1=22-79
+Pos2=22-87
+Pos3=32-87
+Pos4=32-79
+
+[INVOCACION6]
+NpcIndex=788
+desc=¡Un rayo escalofriante ha resurgido de las tinieblas!
+Mapa=58
+CantidadUsuarios=1
+Pos1=36-53

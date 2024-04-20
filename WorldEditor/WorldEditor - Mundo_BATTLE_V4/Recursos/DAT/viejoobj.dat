@@ -1,0 +1,3452 @@
+##############################################
+#########TIPOS  DE OBJETOS (ObjType)##########
+##############################################
+
+' 1: Comida
+' 2: Armas
+' 3: Armaduras
+' 4: Arboles
+' 5: Dinero
+' 6: Puertas
+' 7: Objetos contenedores (x ej. bolsas y cofres)
+' 8: Carteles
+' 9: Llaves
+' 10: Foros
+' 11: Pociones
+' 12: Libros
+' 13: Bebida
+' 14: Leña
+' 15: Fogata
+' 16: escudos
+' 17: cascos
+' 18: Herramientas
+' 19: telep
+' 20: Muebles
+' 21: joyas
+' 22: yacimiento
+' 23: metales
+' 24: pergaminos
+' 25: aura
+' 26: Instrumentos Musicales
+' 27: Yunque
+' 28: Fragua
+' 29: Gemas
+' 30: Flores
+' 31: barcos
+' 32: flechas
+' 33: botellas vacias
+' 34: botellas llenas
+' 35: manchas
+' 36: Anillos
+' 37: Mochilas
+' 38: Arbol Elfico
+
+
+##############################################
+#############TIPOS  DE POCIONES###############
+##############################################
+
+'1 Modifica la Agilidad
+'2 Modifica la Fuerza
+'3 Repone HP
+'4 Repone Mana
+'5 Cura Envenenamiento
+
+[INIT]
+NumOBJs=350
+
+[OBJ1]
+Name=Piel de Pinguino
+GrhIndex=57952
+Agarrable=0
+ObjType=0
+valor=3500
+Crucial=1
+
+[OBJ2]
+Name=Aliento de Dragon (Verde)
+GrhIndex=56080
+Valor=2400000
+Agarrable=0
+Crucial=1
+Log=1
+HechizoIndex=65
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ3]
+Name=Tornado Igneo
+GrhIndex=56092
+Valor=2400000
+Agarrable=0
+Crucial=1
+Log=1
+HechizoIndex=66
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ4]
+Name=Expansion de Banshee
+GrhIndex=56093
+Valor=2400000
+Agarrable=0
+Crucial=1
+Log=1
+HechizoIndex=67
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ5]
+Name=Cebolla
+GrhIndex=56303
+ObjType=0
+Maduration=7200
+
+[OBJ6]
+Name=Papa
+GrhIndex=56304
+ObjType=0
+Maduration=7200
+
+[OBJ7]
+Name=Lechuga
+GrhIndex=56305
+ObjType=0
+Maduration=7200
+
+[OBJ8]
+Name=Zanahoria
+GrhIndex=56306
+ObjType=0
+Maduration=7200
+
+[OBJ9]
+Name=Pimiento Amarillo
+GrhIndex=56307
+ObjType=0
+Maduration=14400
+
+[OBJ10]
+Name=Pimiento Picante
+GrhIndex=56308
+ObjType=0
+Maduration=18400
+
+[OBJ11]
+Name=Tomates
+GrhIndex=56309
+ObjType=0
+Maduration=12400
+
+[OBJ12]
+Name=Remolacha
+GrhIndex=56310
+ObjType=0
+Maduration=8600
+
+[OBJ13]
+Name=Lima
+GrhIndex=56311
+ObjType=0
+Maduration=12400
+
+[OBJ14]
+Name=Cerezas
+GrhIndex=56312
+ObjType=0
+Maduration=24400
+
+[OBJ15] ' NO USAR
+Name=Coco Partido
+GrhIndex=56313
+ObjType=0
+Maduration=24400
+
+[OBJ16]
+Name=Hongos
+GrhIndex=56314
+ObjType=0
+Maduration=24400
+
+[OBJ17]
+Name=Maiz
+GrhIndex=56316
+ObjType=0
+Maduration=24400
+
+[OBJ18] ' Color Amarillo con puntito en la punta
+Name=Flores del Bosque
+GrhIndex=56744
+ObjType=0
+Maduration=10000
+
+[OBJ19] ' Color Rojo grande con amarillo en el medio tipo girasol
+Name=Flores del Bosque
+GrhIndex=56741
+ObjType=0
+Maduration=15000
+
+[OBJ20] ' Color Rojo con Gorrito
+Name=Hongo del Bosque
+GrhIndex=56750
+ObjType=0
+Maduration=480
+
+[OBJ21] ' Color Verde (Grandesita)
+Name=Hojas del Bosque
+GrhIndex=56294
+ObjType=0
+Maduration=480
+
+[OBJ22] ' Carne Cocida
+Name=Costeleta de Vaca
+GrhIndex=56338
+ObjType=0
+Maduration=480
+
+[OBJ23] ' Raices Blandas (Cada 3 Horas)
+Name=Raices Blandas
+GrhIndex=56761
+ObjType=0
+Maduration=10800
+
+[OBJ24] ' Raices Duras (Cada 6 Horas)
+Name=Raices Duras
+GrhIndex=56774
+ObjType=0
+Maduration=21600
+
+[OBJ25] 'Pociones vacias de las PRINCIPALES
+Name=Recipiente Vacio
+GrhIndex=57439
+ObjType=0
+
+[OBJ26]
+Name=Cofre con Recipientes
+GrhIndex=39306
+ObjType=54
+CofreIndex=1
+Log=1
+
+[OBJ27]
+Name=Poción de Movilidad
+GrhIndex=57432
+Agarrable=0
+ObjType=11
+TipoPocion=8
+Crucial=0
+
+[OBJ28]
+Name=Poción de Invisibilidad
+GrhIndex=57440
+Agarrable=0
+ObjType=11
+TipoPocion=9
+Crucial=0
+
+[OBJ29]
+Name=Cabeza de Serpiente
+GrhIndex=56965
+ObjType=0
+Valor=20
+Crucial=0
+
+[OBJ30]
+Name=Cuero de Tortuga
+GrhIndex=57304
+ObjType=0
+Valor=75
+Crucial=0
+
+[OBJ31]
+Name=Tijeras de Acero
+GrhIndex=56561
+ObjType=0
+
+[OBJ32]
+Name=Tijeras Mágica
+GrhIndex=56562
+ObjType=0
+
+[OBJ33]
+Name=Rollo de Hilo Mágico
+GrhIndex=56563
+ObjType=0
+
+[OBJ34] ' Utilizado para crear Espadas
+Name=Mango Base
+GrhIndex=56635
+ObjType=0
+
+[OBJ35] ' Utilizado para crear Espadas & Dagas
+Name=Filo Base
+GrhIndex=56631
+ObjType=0
+
+[OBJ36] ' Utilizado para crear Espadas & Dagas
+Name=Filo Base de Oro
+GrhIndex=56632
+ObjType=0
+
+[OBJ37] ' Utilizado para crear Espadas & Dagas
+Name=Filo Base Mágico
+GrhIndex=56633
+ObjType=0
+
+[OBJ38] ' Hilo para las Tunica de Druida
+Name=Hilo Verde
+GrhIndex=65759
+ObjType=0
+
+[OBJ39] ' Hilo para las Tunica de Druida & Legendarias
+Name=Hilo Naranja
+GrhIndex=65760
+ObjType=0
+
+[OBJ40] ' Aguja para crear las vestimentas finas
+Name=Agujas
+GrhIndex=56559
+ObjType=0
+
+[OBJ41]
+Name=Hilo Violeta
+GrhIndex=65762
+ObjType=0
+
+[OBJ42]
+Name=Cristales Celeste
+GrhIndex=57033
+ObjType=0
+
+[OBJ43]
+Name=Lingote de Acero
+GrhIndex=56901
+ObjType=0
+
+[OBJ44] ' Fragmento de Acero (Grande)
+Name=Fragmento de Acero
+GrhIndex=57196
+ObjType=0
+
+[OBJ45] ' Poción Negra
+Name=Poción Mágica
+GrhIndex=57441
+ObjType=0
+
+[OBJ46] ' Permite utilizar la poción para encantar objetos y convertirlos en mágicos (Reemplazo a la Poción Mágica)
+Name=Martillo Mágico
+GrhIndex=56630
+ObjType=0
+
+[OBJ47]
+Name=Cristales Rojos
+GrhIndex=57034
+ObjType=0
+
+[OBJ48]
+Name=Serrucho
+GrhIndex=607
+ObjType=0
+
+[OBJ49]
+Name=Martillo
+GrhIndex=726
+ObjType=0
+
+[OBJ50] 
+Name=Lingote de Hierro
+GrhIndex=67982
+ObjType=0
+Crucial=1
+
+[OBJ51]
+Name=Fragmento de Oro
+GrhIndex=66084
+ObjType=0
+Crucial=0
+
+[OBJ52]
+Name=Piel de Tigre
+GrhIndex=56939
+ObjType=0
+Valor=125
+Crucial=1
+
+[OBJ53]
+Name=Lingote de Roca Escarlata
+GrhIndex=67981
+ObjType=0
+Crucial=0
+
+[OBJ54]
+Name=Fragmento de Granate
+GrhIndex=66086
+ObjType=0
+Crucial=0
+
+[OBJ55]
+Name=Fragmentos Verde
+GrhIndex=56889
+ObjType=0
+Crucial=0
+
+[OBJ56]
+Name=Cola de Tortuga
+GrhIndex=56956
+Valor=45
+Crucial=0
+
+[OBJ57]
+Name=Piel de Oso Pardo
+GrhIndex=57961
+Valor=125
+Crucial=1
+
+[OBJ58]
+Name=Piel de Oso Polar
+GrhIndex=57960
+Valor=550
+Crucial=1
+
+[OBJ59]
+Name=Caparazon de Tortuga
+GrhIndex=56936
+Valor=75
+Crucial=0
+
+[OBJ60]
+Name=Calamarsito
+GrhIndex=56374
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=0
+
+[OBJ61]
+Name=Viseras de Ciervo
+GrhIndex=57311
+Valor=90
+Crucial=0
+
+[OBJ62]
+Name=Lengua de Sapo
+GrhIndex=56966
+Valor=200
+Crucial=0
+
+[OBJ63]
+Name=Piel de Vaca
+GrhIndex=56942
+Valor=30
+Crucial=1
+
+[OBJ64]
+Name=Cornamento de Alce
+GrhIndex=56954
+Valor=110
+Crucial=0
+
+[OBJ65]
+Name=Cabeza de Ciervo
+GrhIndex=56953
+Valor=100
+Crucial=0
+
+[OBJ66]
+Name=Piel de Zorrino
+GrhIndex=56914
+Valor=45
+Crucial=1
+
+[OBJ67]
+Name=Piel de Mapache
+GrhIndex=56913
+Valor=45
+Crucial=1
+
+[OBJ68]
+Name=Piel de Lobo Negro
+GrhIndex=64340
+Valor=45
+Crucial=1
+
+[OBJ69]
+Name=Piel de Lobo Polar
+GrhIndex=64341
+Valor=400
+Crucial=1
+
+[OBJ70]
+Name=Colmillo de Jabalí Salvaje
+GrhIndex=56923
+Valor=25
+Crucial=0
+
+[OBJ71]
+Name=Piel de Jabalí
+GrhIndex=56915
+Valor=75
+Crucial=1
+
+[OBJ72]
+Name=Cuero de Goblin
+GrhIndex=57051
+Crucial=0
+Valor=110
+
+[OBJ73]
+Name=Cuero de Goblin
+GrhIndex=57050
+Crucial=0
+Valor=110
+
+[OBJ74]
+Name=Cuero de Goblin
+GrhIndex=57052
+Crucial=0
+Valor=110
+
+[OBJ75]
+Name=Cuero de Goblin
+GrhIndex=57053
+Crucial=0
+Valor=110
+
+[OBJ76]
+Name=Cuero de Camello
+GrhIndex=56946
+Valor=120
+Crucial=0
+
+[OBJ77]
+Name=Colmillo de León
+GrhIndex=57911
+Valor=135
+Crucial=0
+
+[OBJ78]
+Name=Veneno de Escorpión
+GrhIndex=57013
+Valor=60
+Crucial=0
+
+[OBJ79]
+Name=Cola de Escorpión
+GrhIndex=56924
+Valor=80
+Crucial=0
+
+[OBJ80]
+Name=Piel de Zorro
+GrhIndex=56950
+Valor=45
+Crucial=1
+
+[OBJ81]
+Name=Pata de Pollo
+GrhIndex=56295
+Crucial=0
+
+[OBJ82]
+Name=Pata de Pollo Cocida
+GrhIndex=56296
+Crucial=0
+
+[OBJ83]
+Name=Veneno de Araña
+GrhIndex=57210
+Valor=110
+Crucial=0
+
+[OBJ84]
+Name=Piel de Ardilla
+GrhIndex=56930
+Valor=45
+Crucial=1
+
+[OBJ85]
+Name=Cuero de Conejo
+GrhIndex=56910
+Valor=45
+Crucial=0
+
+[OBJ86]
+Name=Hilo Rojo
+GrhIndex=65761
+ObjType=0
+Crucial=0
+
+[OBJ87]
+Name=Túnica de Druida
+GrhIndex=681
+NumRopaje=56
+RopajeEnano=155
+ObjType=3
+MAXDEF=25
+MINDEF=20
+Crucial=1
+Valor=8000
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+
+[OBJ88]
+Name=Túnica de Druida +1
+GrhIndex=35502
+NumRopaje=519
+RopajeEnano=520
+ObjType=3
+MAXDEF=15
+MINDEF=15
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+
+[OBJ89]
+Name=Túnica de Druida +2
+GrhIndex=36424
+NumRopaje=543
+RopajeEnano=544
+ObjType=3
+MAXDEF=20
+MINDEF=17
+DefensaMagicaMin=1
+DefensaMagicaMax=1
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+
+[OBJ90]
+Name=Túnica de Druida +3
+GrhIndex=36370
+NumRopaje=541
+RopajeEnano=542
+ObjType=3
+MAXDEF=20
+MINDEF=20
+DefensaMagicaMin=2
+DefensaMagicaMax=2
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+
+[OBJ91]
+Name=Túnica Legendaria
+GrhIndex=796
+NumRopaje=130
+RopajeEnano=156
+ObjType=3
+MAXDEF=35
+MINDEF=30
+Crucial=1
+Valor=22000
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+
+[OBJ92]
+Name=Túnica Legendaria +1
+GrhIndex=35718
+NumRopaje=527
+RopajeEnano=526
+Agarrable=0
+ObjType=3
+MAXDEF=15
+MINDEF=15
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+
+[OBJ93]
+Name=Túnica Legendaria +2
+GrhIndex=54639
+NumRopaje=652
+RopajeEnano=654
+Agarrable=0
+ObjType=3
+MAXDEF=20
+MINDEF=20
+DefensaMagicaMin=1
+DefensaMagicaMax=1
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+
+[OBJ94]
+Name=Túnica Legendaria +3
+GrhIndex=24729
+NumRopaje=393
+RopajeEnano=394
+ObjType=3
+MAXDEF=25
+MINDEF=25
+DefensaMagicaMin=2
+DefensaMagicaMax=2
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+
+[OBJ95]
+Name=Túnica de Cazador
+GrhIndex=65817
+NumRopaje=718
+RopajeEnano=719
+ObjType=3
+MAXDEF=15
+MINDEF=10
+Valor=8500
+Crucial=1
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=MAGO
+CP6=BARDO
+CP7=DRUIDA
+
+[OBJ96]
+Name=Armadura de Cazador
+GrhIndex=54181
+NumRopaje=636
+RopajeEnano=637
+ObjType=3
+MAXDEF=30
+MINDEF=15
+Valor=17000
+Crucial=1
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=MAGO
+CP6=BARDO
+CP7=DRUIDA
+Oculto=1
+
+[OBJ97]
+Name=Armadura de Pieles
+GrhIndex=35988
+NumRopaje=537
+RopajeEnano=538
+ObjType=3
+MAXDEF=25
+MINDEF=25
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=MAGO
+CP6=BARDO
+CP7=DRUIDA
+Oculto=1
+
+[OBJ98]
+Name=Túnica Medieval
+GrhIndex=606
+NumRopaje=46
+RopajeEnano=161
+Agarrable=0
+ObjType=3
+MAXDEF=15
+MINDEF=5
+Valor=3000
+Crucial=1
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+CP4=CAZADOR
+
+[OBJ99]
+Name=Túnica de Monje
+GrhIndex=693
+NumRopaje=79
+RopajeEnano=159
+ObjType=3
+Agarrable=0
+MAXDEF=15
+MINDEF=5
+Valor=3000
+Crucial=1
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+CP4=CAZADOR
+
+[OBJ100]
+Name=Manto de Monje
+GrhIndex=65870
+NumRopaje=720
+RopajeEnano=721
+ObjType=3
+Agarrable=0
+MAXDEF=15
+MINDEF=10
+Valor=4850
+Crucial=1
+CP1=GUERRERO
+CP2=ASESINO
+CP3=PALADIN
+CP4=CAZADOR
+
+[OBJ101]
+Name=Cota de Mallas Liviana
+GrhIndex=65923
+NumRopaje=722
+RopajeEnano=723
+ObjType=3
+Agarrable=0
+MAXDEF=15
+MINDEF=10
+Valor=1000
+CP1=MAGO
+CP2=DRUIDA
+
+[OBJ102]
+Name=Armadura de Cuero
+GrhIndex=65976
+NumRopaje=724
+RopajeEnano=725
+ObjType=3
+Agarrable=0
+MAXDEF=25
+MINDEF=20
+Valor=4000
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+
+[OBJ103]
+Name=Armadura Ligera
+GrhIndex=66029
+NumRopaje=726
+RopajeEnano=727
+ObjType=3
+Agarrable=0
+MAXDEF=15
+MINDEF=10
+Valor=4750
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+
+[OBJ104]
+Name=Placas de Acero
+GrhIndex=67980
+NumRopaje=728
+RopajeEnano=729
+ObjType=3
+Agarrable=0
+MAXDEF=20
+MINDEF=20
+Valor=285
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+
+[OBJ105]
+Name=Armadura Klox
+GrhIndex=35880
+NumRopaje=533
+RopajeEnano=534
+ObjType=3
+Agarrable=0
+MAXDEF=30
+MINDEF=25
+Valor=16000
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=PALADIN
+CP6=GUERRERO
+CP7=CLERIGO
+
+[OBJ106]
+Name=Armadura Klox +1
+GrhIndex=35934
+NumRopaje=535
+RopajeEnano=536
+ObjType=3
+Agarrable=0
+MAXDEF=25
+MINDEF=25
+Valor=153
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=PALADIN
+CP6=GUERRERO
+CP7=CLERIGO
+
+[OBJ107]
+Name=Armadura Escarlata
+GrhIndex=771
+NumRopaje=105
+RopajeEnano=530
+ObjType=3
+Agarrable=0
+MAXDEF=40
+MINDEF=35
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=ASESINO
+
+[OBJ108]
+Name=Armadura de la Ciénaga
+GrhIndex=68035
+NumRopaje=730
+RopajeEnano=731
+ObjType=3
+Agarrable=0
+MAXDEF=50
+MINDEF=45
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+
+[OBJ109]
+Name=Armadura Legendaria
+GrhIndex=761
+NumRopaje=94
+RopajeEnano=531
+ObjType=3
+Agarrable=0
+MAXDEF=50
+MINDEF=50
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+
+[OBJ110]
+Name=Placas de Gala
+GrhIndex=35475
+NumRopaje=518
+RopajeEnano=516
+ObjType=3
+Agarrable=0
+MAXDEF=40
+MINDEF=40
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+
+[OBJ111]
+Name=Armadura de Sigilo
+GrhIndex=68157
+NumRopaje=732
+RopajeEnano=733
+ObjType=3
+Agarrable=0
+MAXDEF=25
+MINDEF=25
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=PALADIN
+CP7=GUERRERO
+
+[OBJ112]
+Name=Armadura de Venfrot
+GrhIndex=68158
+NumRopaje=734
+RopajeEnano=735
+ObjType=3
+Agarrable=0
+MAXDEF=25
+MINDEF=25
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=GUERRERO
+
+[OBJ113]
+Name=Armadura de Odin
+GrhIndex=52649
+NumRopaje=580
+RopajeEnano=581
+ObjType=3
+Agarrable=0
+MAXDEF=5
+MINDEF=5
+Valor=0
+
+[OBJ114]
+Name=Corona de Odin
+GrhIndex=50727
+NumRopaje=2
+Agarrable=0
+Anim=192
+ObjType=17
+Subtipo=1
+MAXDEF=3
+MINDEF=3
+
+[OBJ115]
+Name=Casco de Odin
+GrhIndex=50707
+NumRopaje=2
+Agarrable=0
+Anim=188
+ObjType=17
+Subtipo=1
+MAXDEF=3
+MINDEF=3
+
+[OBJ116]
+Name=Escudo de Hierro
+GrhIndex=557
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=3
+Subtipo=2
+MAXDEF=4
+MINDEF=1
+Valor=2200
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+
+[OBJ117]
+Name=Escudo Imperial
+GrhIndex=560
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=1
+Subtipo=2
+MAXDEF=8
+MINDEF=4
+Valor=6000
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+
+[OBJ118]
+Name=Casco de Hierro
+GrhIndex=559
+NumRopaje=2
+Agarrable=0
+Anim=1
+ObjType=17
+SubTipo=1
+MAXDEF=3
+MINDEF=8
+Valor=350
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+
+[OBJ119]
+Name=Casco de Hierro Completo
+GrhIndex=558
+NumRopaje=2
+Agarrable=0
+Anim=3
+ObjType=17
+SubTipo=1
+MAXDEF=15
+MINDEF=5
+Valor=2850
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+
+[OBJ120]
+Name=Casco de Plata
+GrhIndex=717
+NumRopaje=2
+Agarrable=0
+Anim=4
+ObjType=17
+SubTipo=1
+MAXDEF=25
+MINDEF=20
+Valor=7400
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+
+[OBJ121]
+Name=Sombrero de Odin
+GrhIndex=32343
+NumRopaje=2
+Agarrable=0
+GrhIndex=50787
+Anim=204
+ObjType=17
+SubTipo=1
+MAXDEF=2
+MINDEF=2
+DefensaMagicaMin=10
+DefensaMagicaMax=10
+CP1=GUERRERO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+CP6=CLERIGO
+CP7=PALADIN
+
+[OBJ122]
+Name=Placas de Acero Completa
+GrhIndex=52891
+NumRopaje=588
+RopajeEnano=589
+ObjType=3
+Agarrable=0
+MAXDEF=60
+MINDEF=60
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+CP6=CLERIGO
+
+[OBJ123]
+Name=Sotana Clerical
+GrhIndex=52944
+NumRopaje=591
+RopajeEnano=592
+ObjType=3
+Agarrable=0
+MAXDEF=50
+MINDEF=45
+DefensaMagicaMin=1
+DefensaMagicaMax=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+CP6=PALADIN
+CP7=GUERRERO
+
+[OBJ124]
+Name=Casco de Acero
+GrhIndex=50702
+Anim=187
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=30
+MINDEF=25
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+CP6=CLERIGO
+
+[OBJ125]
+Name=Casco Clerical
+GrhIndex=50692
+Anim=185
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=15
+MINDEF=10
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=ASESINO
+CP6=PALADIN
+CP7=GUERRERO
+
+[OBJ126]
+Name=Casco de Sigilo
+GrhIndex=50677
+Anim=182
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=20
+MINDEF=20
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=PALADIN
+CP7=GUERRERO
+
+[OBJ127]
+Name=Sombrero de Bardo
+GrhIndex=50782
+Anim=203
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=5
+MINDEF=5
+DefensaMagicaMin=1
+DefensaMagicaMax=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=ASESINO
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=PALADIN
+CP7=GUERRERO
+
+[OBJ128]
+Name=Capucha de Cuero
+GrhIndex=50777
+Anim=202
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=5
+MINDEF=5
+CP1=MAGO
+CP2=DRUIDA
+CP3=ASESINO
+CP4=BARDO
+CP5=CLERIGO
+CP6=PALADIN
+CP7=GUERRERO
+
+[OBJ129]
+Name=Capucha de Tela Verde
+GrhIndex=50757
+Anim=198
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=5
+MINDEF=5
+CP1=MAGO
+CP2=DRUIDA
+CP3=ASESINO
+CP4=GUERRERO
+CP5=CLERIGO
+CP6=PALADIN
+
+[OBJ130]
+Name=Capucha de Tela Lila
+GrhIndex=50762
+Anim=197
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=5
+MINDEF=5
+CP1=MAGO
+CP2=DRUIDA
+CP3=ASESINO
+CP4=GUERRERO
+CP5=CLERIGO
+CP6=PALADIN
+
+[OBJ131]
+Name=Capucha de Piel de Oso
+GrhIndex=50752
+Anim=199
+NumRopaje=2
+Agarrable=0
+ObjType=17
+SubTipo=1
+MAXDEF=5
+MINDEF=5
+CP1=MAGO
+CP2=DRUIDA
+CP3=ASESINO
+CP4=GUERRERO
+CP5=CLERIGO
+CP6=PALADIN
+
+[OBJ132]
+Name=Casco de Cuero
+GrhIndex=32283
+NumRopaje=2
+Agarrable=0
+Anim=88
+ObjType=17
+Subtipo=1
+MAXDEF=8
+MINDEF=3
+Crucial=1
+Valor=350
+CP1=MAGO
+
+[OBJ133]
+Name=Hacha de Bárbaro
+GrhIndex=58654
+Objtype=2
+Agarrable=0
+Anim=22
+MinHIT=5
+MaxHIT=16
+Valor=4000
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+Energia=25
+WeaponSkill=47
+
+[OBJ134]
+Name=Hacha de Guerra
+GrhIndex=58627
+Objtype=2
+Agarrable=0
+Anim=3
+MinHIT=4
+MaxHIT=15
+Valor=2900
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+Energia=20
+WeaponSkill=40
+
+[OBJ135]
+Name=Daga
+GrhIndex=58945
+Objtype=2
+Agarrable=0
+MinHIT=2
+MaxHIT=2
+Valor=50
+Crucial=1
+Anim=21
+Apuñala=1
+CP1=MAGO
+CP2=GUERRERO
+Refuerzo=5
+NpcBonusDamage=12
+Energia=12
+
+[OBJ136]
+Name=Espada Larga
+GrhIndex=38462
+Objtype=2
+Agarrable=0
+Anim=108
+MinHIT=1
+MaxHIT=8
+Crucial=1
+Valor=420
+CP1=MAGO
+CP2=BARDO
+CP3=DRUIDA
+CP4=CAZADOR
+CP5=ASESINO
+Energia=5
+
+[OBJ137]
+Name=Espada Dos Manos
+GrhIndex=58546
+Objtype=2
+Agarrable=0
+Anim=30
+MinHIT=2
+MaxHIT=8
+Valor=5500
+Crucial=1
+CP1=MAGO
+CP2=CLERIGO
+CP3=ASESINO
+CP=BARDO
+CP5=DRUIDA
+Energia=15
+Durabilidad=100
+DurabilidadPorc=5
+DosManos=1
+
+[OBJ138]
+Name=Zarcon Envenenado
+GrhIndex=37226
+Objtype=2
+Agarrable=0
+MinHIT=5
+MaxHIT=7
+Valor=1800
+Crucial=1
+Anim=80
+Apuñala=1
+CP1=MAGO
+CP2=GUERRERO
+CP3=PALADIN
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=DRUIDA
+CP7=BARDO
+Refuerzo=10
+NpcBonusDamage=25
+Energia=20
+
+[OBJ139]
+Name=Puñal Infernal
+GrhIndex=58681
+Objtype=2
+Agarrable=0
+MinHIT=6
+MaxHIT=8
+Valor=0
+Crucial=0
+Anim=119
+Apuñala=1
+CP1=MAGO
+CP2=GUERRERO
+CP3=PALADIN
+CP4=CAZADOR
+CP5=CLERIGO
+CP6=DRUIDA
+CP7=BARDO
+Refuerzo=10
+NpcBonusDamage=50
+Energia=35
+
+[OBJ140]
+Name=Nudillos de Hierro
+GrhIndex=38435
+Objtype=2
+Agarrable=0
+MinHIT=6
+MaxHIT=14
+Crucial=1
+Anim=107
+Energia=15
+Valor=3350
+CP1=CLERIGO
+CP2=MAGO
+CP3=GUERRERO
+CP4=PALADIN
+
+[OBJ141]
+Name=Hacha Dos Filos
+GrhIndex=58600
+Objtype=2
+Agarrable=0
+Anim=118
+MinHIT=5
+MaxHIT=20
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+Energia=45
+
+[OBJ142]
+Name=Espada de Plata
+GrhIndex=38301
+Objtype=2
+Agarrable=0
+Anim=102
+MinHIT=10
+MaxHIT=20
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+CP6=CLERIGO
+Energia=65
+
+[OBJ143]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=0
+
+[OBJ144]
+Name=Sangre
+GrhIndex=263
+Objtype=19
+Agarrable=1
+
+[OBJ145]
+Name=Poción Roja
+GrhIndex=57430
+ObjType=11
+Agarrable=0
+TipoPocion=3
+MaxModificador=30
+MinModificador=30
+Valor=10
+Crucial=1
+Desc=Aumenta tu Vida en 30 Puntos
+
+[OBJ146]
+Name=Poción Azul
+GrhIndex=57431
+ObjType=11
+Agarrable=0
+TipoPocion=4
+MaxModificador=0
+MinModificador=0
+Valor=12
+Crucial=1
+Desc=Aumenta tu Maná según tu Nivel
+
+[OBJ147]
+Name=Poción Amarilla
+GrhIndex=57433
+ObjType=11
+Agarrable=0
+TipoPocion=1
+MaxModificador=5
+MinModificador=5
+DuracionEfecto=4000
+Valor=24
+Crucial=1
+Desc=Aumenta tu Agilidad en 5 Puntos
+
+[OBJ148]
+Name=Poción Verde
+GrhIndex=57432
+ObjType=11
+Agarrable=0
+TipoPocion=2
+MaxModificador=5
+MinModificador=1
+DuracionEfecto=4000
+Valor=32
+Desc=Aumenta tu Fuerza en 5 Puntos
+Crucial=1
+
+[OBJ149]
+Name=Escudo de la Torre
+GrhIndex=37253
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=42
+Subtipo=2
+MAXDEF=10
+MINDEF=7
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+CP6=CLERIGO
+
+[OBJ150]
+Name=Escudo Escarlata
+GrhIndex=37497
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=51
+Subtipo=2
+MAXDEF=10
+MINDEF=5
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+CP6=CLERIGO
+
+[OBJ151]
+Name=Escudo de Leon
+GrhIndex=37551
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=53
+Subtipo=2
+MAXDEF=8
+MINDEF=6
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+
+[OBJ152]
+Name=Egida de Dragon
+GrhIndex=37470
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=50
+Subtipo=2
+MAXDEF=8
+MINDEF=6
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+
+[OBJ153]
+Name=Escudo Nordico
+GrhIndex=37443
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=49
+Subtipo=2
+MAXDEF=8
+MINDEF=6
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=ASESINO
+CP5=CAZADOR
+
+[OBJ154]
+Name=Flecha
+GrhIndex=59151
+Objtype=32
+Agarrable=0
+MinHIT=1
+MaxHIT=3
+Valor=1
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=PALADIN
+CP5=ASESINO
+CP6=CLERIGO
+
+[OBJ155]
+Name=Flecha Envenenada
+GrhIndex=39310
+Objtype=32
+Agarrable=0
+MinHIT=1
+MaxHIT=4
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=PALADIN
+CP5=ASESINO
+CP6=CLERIGO
+Envenena=1
+
+[OBJ156]
+Name=Flecha Incendiada
+GrhIndex=59153
+VictimAnim=80
+Objtype=32
+Agarrable=0
+MinHIT=1
+MaxHIT=5
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=PALADIN
+CP5=ASESINO
+CP6=CLERIGO
+Incinera=1
+
+[OBJ157]
+Name=Flecha Congelada
+GrhIndex=59154
+VictimAnim=81
+Objtype=32
+Agarrable=0
+MinHIT=2
+MaxHIT=5
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=PALADIN
+CP5=ASESINO
+CP6=CLERIGO
+Paraliza=1
+
+[OBJ158]
+Name=Flecha de Tejo
+GrhIndex=59152
+VictimAnim=82
+Objtype=32
+Agarrable=0
+MinHIT=6
+MaxHIT=6
+Valor=0
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=PALADIN
+CP5=ASESINO
+CP6=CLERIGO
+
+[OBJ159]
+Name=Runa Veril
+GrhIndex=56419
+
+[OBJ160]
+Name=Runa Leviatan
+GrhIndex=56416
+
+[OBJ161]
+Name=Runa Egipto
+GrhIndex=56420
+
+[OBJ162]
+Name=Runa Polar
+GrhIndex=56418
+
+[OBJ163]
+Name=Runa Vespar
+GrhIndex=56416
+
+[OBJ164]
+Name=Anillo de Resistencia Mágica
+GrhIndex=38713
+ObjType=18
+Agarrable=0
+Crucial=1
+DefensaMagicaMax=2
+DefensaMagicaMin=2
+Valor=3000
+CP1=MAGO
+CP2=GUERRERO
+CP3=CAZADOR
+
+[OBJ165]
+Name=Anillo de Protección Mágica
+GrhIndex=38714
+ObjType=18
+Agarrable=0
+Crucial=0
+DefensaMagicaMax=8
+DefensaMagicaMin=8
+CP1=MAGO
+CP2=GUERRERO
+CP3=ASESINO
+CP4=PALADIN
+CP5=CAZADOR
+CP6=BARDO
+
+[OBJ166]
+Name=Anillo de Disolución Mágica
+GrhIndex=38715
+ObjType=18
+Agarrable=0
+Crucial=0
+DefensaMagicaMax=13
+DefensaMagicaMin=13
+CP1=MAGO
+CP2=GUERRERO
+CP3=ASESINO
+CP4=BARDO
+CP5=CAZADOR
+CP6=PALADIN
+
+[OBJ167]
+Name=Laúd Mágico
+GrhIndex=38717
+ObjType=61
+Agarrable=0
+Crucial=0
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=MAGO
+CP7=DRUIDA
+StaffPower=40
+
+[OBJ168]
+Name=Anillo Mágico
+GrhIndex=38715
+ObjType=61
+Agarrable=0
+Crucial=0
+CP1=MAGO
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=BARDO
+CP7=GUERRERO
+StaffPower=40
+
+
+[OBJ169]
+Name=Vara de Fresno
+GrhIndex=58519
+Objtype=2
+Agarrable=0
+MinHIT=1
+MaxHIT=1
+Crucial=1
+Anim=16
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+StaffPower=1
+StaffDamageBonus=28
+Valor=800
+
+[OBJ170]
+Name=Bastón Nudoso
+GrhIndex=58708
+Objtype=2
+Agarrable=0
+MinHIT=1
+MaxHIT=1
+Anim=120
+Crucial=1
+Valor=2500
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+StaffPower=1
+StaffDamageBonus=30
+
+[OBJ171]
+Name=Báculo Engarzado
+GrhIndex=38543
+Objtype=2
+Agarrable=0
+Crucial=0
+Anim=111
+CP1=CLERIGO
+CP2=GUERRERO
+CP3=ASESINO
+CP4=BARDO
+CP5=DRUIDA
+CP6=PALADIN
+CP7=CAZADOR
+StaffPower=3
+StaffDamageBonus=32
+
+[OBJ172]
+Name=Sombrero de Aprendiz
+Anim=74
+GrhIndex=32224
+NumRopaje=2
+Agarrable=0
+ObjType=17
+Crucial=1
+Subtipo=1
+MAXDEF=1
+MINDEF=1
+Valor=8000
+DefensaMagicaMin=3
+DefensaMagicaMax=3
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+
+[OBJ173]
+Name=Sombrero de Hechicero
+Anim=76
+GrhIndex=32238
+NumRopaje=2
+Agarrable=0
+ObjType=17
+Subtipo=1
+MAXDEF=3
+MINDEF=3
+DefensaMagicaMin=12
+DefensaMagicaMax=12
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+
+[OBJ174]
+Name=Misil Mágico
+GrhIndex=56072
+Valor=9000
+Crucial=1
+HechizoIndex=8
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ175]
+Name=Paralizar
+GrhIndex=56084
+Valor=50000
+Crucial=1
+HechizoIndex=9
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ176]
+Name=Inmovilizar
+GrhIndex=56095
+Valor=110000
+Agarrable=0
+Crucial=1
+HechizoIndex=24
+Objtype=24
+Crucial=1
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ177]
+Name=Remover Paralisis
+GrhIndex=56083
+Valor=33000
+Crucial=1
+HechizoIndex=10
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ178]
+Name=Celeridad
+GrhIndex=56075
+Valor=12050
+Crucial=1
+HechizoIndex=18
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ179]
+Name=Fuerza
+GrhIndex=56086
+Agarrable=0
+Valor=15000
+Crucial=1
+HechizoIndex=20
+Objtype=24
+CP1=GUERRERO
+CP2=CAZADOR
+CP3=LADRON
+CP4=TRABAJADOR
+
+[OBJ180]
+Name=Tormenta de fuego
+GrhIndex=56073
+Valor=32000
+Crucial=15
+HechizoIndex=15
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+Crucial=1
+
+[OBJ181]
+Name=Descarga electrica
+GrhIndex=56076
+Valor=1200000
+Agarrable=0
+Crucial=1
+Log=1
+HechizoIndex=23
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ182]
+Name=Apocalipsis
+GrhIndex=56089
+Valor=2400000
+Agarrable=0
+Crucial=1
+Log=1
+HechizoIndex=25
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ183]
+Name=Invisibilidad
+GrhIndex=56078
+Valor=210000
+Log=1
+Crucial=1
+HechizoIndex=14
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ184]
+Name=Resucitar
+GrhIndex=56081
+Valor=400000
+Crucial=1
+Log=1
+HechizoIndex=11
+Objtype=24
+Agarrable=0
+Plata=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ185]
+Name=Ojos de Araña
+GrhIndex=57922
+Valor=350
+Crucial=0
+
+[OBJ186]
+Name=Colmillo de Araña
+GrhIndex=57912
+Valor=520
+Crucial=0
+
+[OBJ187]
+Name=Colmillo de Araña
+GrhIndex=57913
+Valor=520
+Crucial=0
+
+[OBJ188]
+Name=Sombrero de Mago Azul
+Anim=65
+GrhIndex=32174
+NumRopaje=2
+Agarrable=0
+ObjType=17
+Subtipo=1
+Crucial=1
+Valor=16000
+MAXDEF=1
+MINDEF=1
+DefensaMagicaMin=7
+DefensaMagicaMax=7
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+
+[OBJ189]
+Name=Sombrero de Mago Rojo
+Anim=62
+GrhIndex=32159
+NumRopaje=2
+Agarrable=0
+ObjType=17
+Subtipo=1
+Crucial=1
+Valor=16000
+MAXDEF=1
+MINDEF=1
+DefensaMagicaMin=7
+DefensaMagicaMax=7
+CP1=CAZADOR
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+
+[OBJ190]
+Name=Mineral de Hierro
+GrhIndex=76695
+ObjType=0
+Crucial=0
+
+[OBJ191]
+Name=Mineral de Plata
+GrhIndex=76696
+ObjType=0
+Crucial=0
+
+[OBJ192]
+Name=Mineral de Oro
+GrhIndex=76697
+ObjType=0
+Crucial=0
+
+[OBJ193]
+Name=Lingote de Hierro
+GrhIndex=76698
+ObjType=0
+Crucial=1
+
+[OBJ194]
+Name=Lingote de Plata
+GrhIndex=76699
+ObjType=0
+Crucial=1
+
+[OBJ195]
+Name=Lingote de Oro
+GrhIndex=76700
+ObjType=0
+Crucial=1
+
+[OBJ196]
+Name=Leña
+GrhIndex=76701
+ObjType=0
+Crucial=1
+
+[OBJ197]
+Name=Leña de Tejo
+GrhIndex=76702
+ObjType=0
+Crucial=1
+
+[OBJ198]
+Name=Leña de Roble
+GrhIndex=76703
+ObjType=0
+Crucial=1
+
+[OBJ199]
+Name=Piquete de Minero
+GrhIndex=76736
+Objtype=2
+Agarrable=0
+Anim=124
+MinHIT=1
+MaxHIT=3
+Valor=137
+Crucial=1
+Energia=35
+
+[OBJ200]
+Name=Hacha de Leñador
+GrhIndex=76762
+Objtype=2
+Agarrable=0
+Anim=125
+MinHIT=1
+MaxHIT=3
+Valor=137
+Crucial=1
+Energia=35
+
+[OBJ201]
+Name=Caña de Pescar
+GrhIndex=76789
+Objtype=2
+Agarrable=0
+Anim=126
+MinHIT=1
+MaxHIT=3
+Valor=0
+Crucial=1
+Energia=35
+
+[OBJ202]
+Name=Daga Inicial
+GrhIndex=58492
+Anim=7
+Objtype=2
+Agarrable=0
+MinHIT=1
+MaxHIT=1
+Crucial=1
+NoSeCae=1
+NoNada=1
+Energia=2
+Apuñala=1
+LvlMax=18
+
+[OBJ203]
+Name=Vestimenta Inicial
+GrhIndex=76816
+NumRopaje=780
+RopajeEnano=781
+ObjType=3
+MAXDEF=0
+MINDEF=0
+CP1=MAGO
+CP2=BARDO
+CP3=DRUIDA
+CP4=CLERIGO
+NoSeCae=1
+NoNada=1
+LvlMax=18
+
+[OBJ204]
+Name=Túnica Inicial
+GrhIndex=76869
+NumRopaje=782
+RopajeEnano=783
+ObjType=3
+MAXDEF=0
+MINDEF=0
+CP1=GUERRERO
+CP2=PALADIN
+CP3=ASESINO
+CP4=CAZADOR
+NoSeCae=1
+NoNada=1
+LvlMax=18
+
+[OBJ205]
+Name=Poción Roja (inicial)
+GrhIndex=542
+ObjType=11
+Agarrable=0
+TipoPocion=3
+MaxModificador=10
+MinModificador=10
+Valor=0
+Crucial=1
+Desc=Aumenta tu Vida en 5 Puntos
+Ilimitado=1
+Crucial=1
+NoSeCae=1
+NoNada=1
+LvlMax=18
+
+[OBJ206]
+Name=Poción Azul (inicial)
+GrhIndex=541
+ObjType=11
+Agarrable=0
+TipoPocion=4
+MaxModificador=0
+MinModificador=0
+Desc=Aumenta tu Maná según tu Nivel
+Ilimitado=1
+Crucial=1
+NoSeCae=1
+NoNada=1
+LvlMax=18
+
+[OBJ207]
+Name=Poción Amarilla (inicial)
+GrhIndex=540
+ObjType=11
+Agarrable=0
+TipoPocion=1
+MaxModificador=5
+MinModificador=5
+DuracionEfecto=4000
+Desc=Aumenta tu Agilidad en 5 Puntos
+Ilimitado=1
+Crucial=1
+NoSeCae=1
+NoNada=1
+LvlMax=18
+
+[OBJ208]
+Name=Poción Verde (inicial)
+GrhIndex=543
+ObjType=11
+Agarrable=0
+TipoPocion=2
+MaxModificador=5
+MinModificador=1
+DuracionEfecto=4000
+Desc=Aumenta tu Fuerza en 5 Puntos
+Ilimitado=1
+Crucial=1
+NoSeCae=1
+NoNada=1
+LvlMax=18
+
+[OBJ209]
+Name=Fuego
+GrhIndex=70272
+ObjType=0
+Agarrable=0
+Sound=411
+
+[OBJ210]
+Name=Fuego
+GrhIndex=55663
+ObjType=0
+Agarrable=0
+Sound=411
+
+[OBJ211]
+Name=Arco de Madera
+GrhIndex=38516
+Objtype=2
+Agarrable=0
+MinHIT=2
+MaxHIT=4
+Crucial=1
+Valor=127
+Anim=110
+CP1=MAGO
+CP2=PALADIN
+CP3=CLERIGO
+CP4=ASESINO
+CP5=BARDO
+CP6=DRUIDA
+Proyectil=1
+Municiones=1
+Refuerzo=16
+ArcoSkill=5
+Energia=34
+
+[OBJ212]
+Name=Arco de Cazador
+GrhIndex=38140
+Objtype=2
+Agarrable=0
+MinHIT=6
+MaxHIT=11
+Anim=96
+CP1=TRABAJADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+Proyectil=1
+Municiones=1
+Refuerzo=16
+ArcoSkill=75
+Energia=64
+
+[OBJ213]
+Name=Barca
+GrhIndex=76428
+ObjType=31
+Agarrable=0
+Crucial=0
+NumRopaje=84
+MinSkill=35
+Crucial=0
+
+[OBJ214]
+Name=Galera
+GrhIndex=76477
+ObjType=31
+Agarrable=0
+NumRopaje=85
+MinSkill=73
+Crucial=0
+
+[OBJ215]
+Name=Galeon
+GrhIndex=76526
+ObjType=31
+Agarrable=0
+NumRopaje=86
+MinSkill=100
+Crucial=0
+
+[OBJ216]
+Name=Ropaje Invernal
+GrhIndex=52784
+NumRopaje=585
+RopajeEnano=587
+ObjType=3
+Agarrable=0
+MAXDEF=15
+MINDEF=10
+ArmaduraSkill=50
+
+[OBJ217]´76701
+Name=Arbol
+GrhIndex=39641
+NumRopaje=585
+Objtype=4
+Resistencia=500
+Agarrable=1
+ArbolItem=58
+
+[OBJ218]
+Name=Arbol
+GrhIndex=39642
+Objtype=4
+Resistencia=500
+Agarrable=1
+ArbolItem=58
+
+[OBJ219]
+Name=Arbol
+GrhIndex=39643
+Objtype=4
+Resistencia=500
+Agarrable=1
+ArbolItem=58
+
+[OBJ220]
+Name=Teleport Amarillo
+GrhIndex=79379
+ObjType=19
+Agarrable=1
+
+[OBJ221]
+Name=Teleport Verde
+GrhIndex=79380
+ObjType=19
+Agarrable=1
+
+[OBJ222]
+Name=Teleport Celeste
+GrhIndex=79381
+ObjType=19
+Agarrable=1
+
+[OBJ223]
+Name=Teleport Violeta
+GrhIndex=79382
+ObjType=19
+Agarrable=1
+
+[OBJ224]
+Name=Teleport Rojo
+GrhIndex=79383
+ObjType=19
+Agarrable=1
+
+[OBJ225]
+Name=Teleport Gris
+GrhIndex=79384
+ObjType=19
+Agarrable=1
+
+[OBJ226]
+Name=Petrificar
+GrhIndex=56095
+Valor=110000
+Agarrable=0
+Crucial=1
+HechizoIndex=65
+Objtype=24
+Crucial=1
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+CP5=CLERIGO
+CP6=MAGO
+CP7=BARDO
+CP8=DRUIDA
+
+[OBJ227]
+Name=Flecha Mágica
+GrhIndex=56085
+Valor=2300
+Agarrable=0
+Crucial=1
+HechizoIndex=6
+Objtype=24
+Crucial=1
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ228]
+Name=Flecha Eléctrica
+GrhIndex=56088
+Valor=4500
+Agarrable=0
+Crucial=1
+HechizoIndex=7
+Objtype=24
+Crucial=1
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ229]
+Name=Teleport
+GrhIndex=59176
+ObjType=19
+Agarrable=1
+
+[OBJ230]
+Name=Teleport
+GrhIndex=59198
+ObjType=19
+Agarrable=1
+
+[OBJ231]
+Name=Teleport
+GrhIndex=59220
+ObjType=19
+Agarrable=1
+
+[OBJ232]
+Name=Teleport
+GrhIndex=59242
+ObjType=19
+Agarrable=1
+
+[OBJ233]
+Name=Teleport
+GrhIndex=70513
+ObjType=19
+Agarrable=1
+
+[OBJ234]
+Name=Curar veneno
+GrhIndex=56074
+Valor=200
+Crucial=1
+HechizoIndex=1
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ235]
+Name=Curar heridas leves
+GrhIndex=56102
+Valor=500
+Crucial=1
+HechizoIndex=3
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ236]
+Name=Dardo Desterium
+GrhIndex=56087
+Valor=500
+Crucial=1
+HechizoIndex=2
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ237]
+Name=Curar heridas graves
+GrhIndex=56082
+Valor=35000
+Crucial=1
+Agarrable=0
+HechizoIndex=5
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=TRABAJADOR
+CP4=CAZADOR
+
+[OBJ238]
+Name=Llamado a la Naturaleza
+GrhIndex=56096
+Valor=14000
+Crucial=1
+HechizoIndex=16
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+
+[OBJ239]
+Name=Invocar Esqueleto
+GrhIndex=56098
+Valor=20000
+Crucial=1
+HechizoIndex=17
+Objtype=24
+Agarrable=0
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+SkillM=48
+
+[OBJ240]
+Name=Implorar ayuda
+GrhIndex=56077
+Valor=950000
+Crucial=1
+Log=1
+HechizoIndex=29
+Objtype=24
+Agarrable=0
+CP1=MAGO
+CP2=CLERIGO
+CP3=GUERRERO
+CP4=ASESINO
+CP5=LADRON
+CP6=BARDO
+CP7=PALADIN
+CP8=CAZADOR
+CP9=TRABAJADOR
+
+[OBJ241]
+Name=Ayuda del Espiritu Indomable
+GrhIndex=56090
+Valor=950000
+Log=1
+Crucial=1
+HechizoIndex=33
+Objtype=24
+Agarrable=0
+CP1=TRABAJADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=GUERRERO
+CP8=BARDO
+CP9=MAGO
+
+[OBJ242]
+Name=Mimetismo
+GrhIndex=56097
+Valor=400000
+Crucial=1
+HechizoIndex=42 '35
+Objtype=24
+Agarrable=0
+Log=1
+CP1=TRABAJADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=GUERRERO
+CP8=BARDO
+CP9=MAGO
+
+[OBJ243]
+Name=Elemental Terrestre (Paladin)
+GrhIndex=56668
+Valor=350000
+Crucial=1
+Agarrable=0
+HechizoIndex=67
+Objtype=24
+CP1=CAZADOR
+CP2=TRABAJADOR
+CP3=MAGO
+CP4=BARDO
+CP5=CLERIGO
+CP6=DRUIDA
+CP7=GUERRERO
+CP8=ASESINO
+CP9=LADRON
+
+[OBJ244]
+Name=Elemental Terrestre (Asesino)
+GrhIndex=56669
+Valor=350000
+Crucial=1
+Agarrable=0
+HechizoIndex=68
+Objtype=24
+CP1=CAZADOR
+CP2=TRABAJADOR
+CP3=MAGO
+CP4=BARDO
+CP5=CLERIGO
+CP6=DRUIDA
+CP7=GUERRERO
+CP8=PALADIN
+CP9=LADRON
+
+[OBJ245]
+Name=Elemental de Fuego (Mago)
+GrhIndex=56670
+Valor=500000
+Crucial=1
+Agarrable=0
+HechizoIndex=26
+Objtype=24
+CP1=CAZADOR
+CP2=TRABAJADOR
+CP3=PALADIN
+CP4=BARDO
+CP5=CLERIGO
+CP6=DRUIDA
+CP7=GUERRERO
+CP8=ASESINO
+CP9=LADRON
+
+[OBJ246]
+Name=Elemental de Tierra (Bardo)
+GrhIndex=56672
+Valor=420000
+Crucial=1
+Agarrable=0
+HechizoIndex=28
+Objtype=24
+CP1=CAZADOR
+CP2=TRABAJADOR
+CP3=PALADIN
+CP4=MAGO
+CP5=CLERIGO
+CP6=DRUIDA
+CP7=GUERRERO
+CP8=ASESINO
+CP9=LADRON
+
+[OBJ247]
+Name=Elemental de Viento (Druida)
+GrhIndex=56667
+Valor=500000
+Crucial=1
+Agarrable=0
+HechizoIndex=66
+Objtype=24
+CP1=CAZADOR
+CP2=TRABAJADOR
+CP3=PALADIN
+CP4=BARDO
+CP5=CLERIGO
+CP6=MAGO
+CP7=GUERRERO
+CP8=ASESINO
+CP9=LADRON
+
+[OBJ248]
+Name=Elemental de Agua (Clerigo)
+GrhIndex=56666
+Valor=420000
+Crucial=1
+Agarrable=0
+HechizoIndex=27
+Objtype=24
+CP1=CAZADOR
+CP2=TRABAJADOR
+CP3=PALADIN
+CP4=BARDO
+CP5=MAGO
+CP6=DRUIDA
+CP7=GUERRERO
+CP8=ASESINO
+CP9=LADRON
+
+[OBJ249]
+Name=Explosión Abismal
+GrhIndex=56079
+Agarrable=0
+Crucial=0
+LOG=1
+HechizoIndex=62
+Objtype=24
+CP1=GUERRERO
+CP2=LADRON
+CP3=CAZADOR
+CP4=TRABAJADOR
+CP5=PALADIN
+CP6=ASESINO
+
+[OBJ250]
+Name=Fragmento de Fosforo
+GrhIndex=57219
+Valor=180
+Crucial=0
+
+[OBJ251]
+Name=Cuerno de Orco
+GrhIndex=57907
+Valor=750
+Crucial=0
+
+[OBJ252]
+Name=Dentadura de Orco
+GrhIndex=56319
+Valor=700
+Crucial=0
+
+[OBJ253]
+Name=Cuero de Orco
+GrhIndex=56934
+Valor=800
+Crucial=0
+
+[OBJ254]
+Name=Garra de Dragon
+GrhIndex=56919
+Valor=800
+Crucial=0
+
+[OBJ255]
+Name=Pluma de Dragon
+GrhIndex=56921
+Valor=1700
+Crucial=0
+
+[OBJ256]
+Name=Cuero de Dragon
+GrhIndex=56932
+Valor=3500
+Crucial=0
+
+[OBJ257]
+Name=Ojo de Dragon
+GrhIndex=58010
+Valor=2500
+Crucial=0
+
+[OBJ258]
+Name=Cuero de Cerbero
+GrhIndex=56918
+Valor=2500
+Crucial=0
+
+[OBJ259]
+Name=Cuerno de Cthulu
+GrhIndex=56957
+Valor=1200
+Crucial=0
+
+[OBJ260]
+Name=Fragmento de Cristal
+GrhIndex=58286
+Valor=5000
+Crucial=0
+
+[OBJ261]   ´Se forma con 10 Fragmentos de Cristal
+Name=Cristal de Hielo
+GrhIndex=58283
+Valor=60000
+Crucial=0
+
+[OBJ262]
+Name=Corazon de Leviatan
+GrhIndex=57321
+Valor=800
+Crucial=0
+
+[OBJ263]
+Name=Corazon de Leviatan
+GrhIndex=57322
+Valor=700
+Crucial=0
+
+[OBJ264]
+Name=Garras de Medusa
+GrhIndex=56922
+Valor=700
+Crucial=0
+
+[OBJ265]
+Name=Cabeza de Medusa
+GrhIndex=80402
+Valor=600
+Crucial=0
+
+[OBJ266]
+Name=Ojo de Bruja
+GrhIndex=80403
+Valor=450
+Crucial=0
+
+[OBJ267]
+Name=Fragmento de Amuleto 1/5
+GrhIndex=57381
+Valor=450
+Crucial=0
+
+[OBJ268]
+Name=Fragmento de Amuleto 2/5
+GrhIndex=57382
+Valor=450
+Crucial=0
+
+[OBJ269]
+Name=Fragmento de Amuleto 3/5
+GrhIndex=57383
+Valor=600
+Crucial=0
+
+[OBJ270]
+Name=Fragmento de Amuleto 4/5
+GrhIndex=57384
+Valor=600
+Crucial=0
+
+[OBJ271]
+Name=Fragmento de Amuleto 5/5
+GrhIndex=57385
+Valor=800
+Crucial=0
+
+[OBJ272] Formado por todos los amuletos
+Name=Amuleto Antiguo
+GrhIndex=57386
+Valor=5000
+Crucial=0
+
+[OBJ273]
+Name=Cadenas
+GrhIndex=56629
+Valor=300
+Crucial=0
+
+[OBJ274]
+Name=Grilletes
+GrhIndex=56621
+Valor=400
+Crucial=0
+
+[OBJ275]
+Name=Cadenas
+GrhIndex=56875
+Valor=300
+Crucial=0
+
+[OBJ276]
+Name=Cuero de Insecto
+GrhIndex=56912
+Valor=360
+Crucial=0
+
+[OBJ277]
+Name=Huesos
+GrhIndex=57035
+Valor=8
+Crucial=0
+
+[OBJ278]
+Name=Huesos
+GrhIndex=57036
+Valor=4
+Crucial=0
+
+[OBJ279]
+Name=Alas Chicas
+GrhIndex=57216
+Valor=30
+Crucial=0
+
+[OBJ280]
+Name=Garras de Lagarto
+GrhIndex=57942
+Valor=350
+Crucial=0
+
+[OBJ281]
+Name=Harapos de Lagarto
+GrhIndex=57126
+Valor=300
+Crucial=0
+
+[OBJ282]
+Name=Restos de Guerreros
+GrhIndex=57355
+Valor=350
+Crucial=0
+
+[OBJ283]
+Name=Restos de Guerreros
+GrhIndex=57356
+Valor=400
+Crucial=0
+
+[OBJ284]
+Name=Restos de Guerreros
+GrhIndex=57357
+Valor=350
+Crucial=0
+
+[OBJ285]
+Name=Restos de Guerreros
+GrhIndex=57358
+Valor=400
+Crucial=0
+
+[OBJ286]
+Name=Restos de Guerreros
+GrhIndex=57359
+Valor=300
+Crucial=0
+
+[OBJ287]
+Name=Cuchilla Rota
+GrhIndex=56320
+Valor=90
+Crucial=0
+
+[OBJ288]
+Name=Cuerno Vikingo
+GrhIndex=56391
+Valor=110
+Crucial=0
+
+[OBJ289]
+Name=Collar Elfico
+GrhIndex=56392
+Valor=100
+Crucial=0
+
+[OBJ290]
+Name=Hombrera
+GrhIndex=56613
+Valor=90
+Crucial=0
+
+[OBJ291]
+Name=Hombrera Reforzada
+GrhIndex=56613
+Valor=130
+Crucial=0
+
+[OBJ292]
+Name=Espada Rota
+GrhIndex=57021
+Valor=110
+Crucial=0
+
+[OBJ293]
+Name=Hacha Rota
+GrhIndex=57022
+Valor=100
+Crucial=0
+
+[OBJ294]
+Name=Hoz Rota
+GrhIndex=57023
+Valor=90
+Crucial=0
+
+[OBJ295]
+Name=Mazo Roto
+GrhIndex=57024
+Valor=90
+Crucial=0
+
+[OBJ296]
+Name=Fragmento Grande de Vulcan
+GrhIndex=57416
+Valor=900
+Crucial=0
+
+[OBJ297]
+Name=Ojo de Bruja Nocturna
+GrhIndex=58011
+Valor=150
+Crucial=0
+
+[OBJ298]
+Name=Ojo de Demonio
+GrhIndex=56963
+Valor=250
+Crucial=0
+
+[OBJ299]
+Name=Craneo de Guerrero
+GrhIndex=57143
+Valor=350
+Crucial=0
+
+[OBJ300]
+Name=Trofeo de Demonio
+GrhIndex=57165
+Valor=500
+Crucial=0
+
+[OBJ301]
+Name=Queso
+GrhIndex=56332
+Valor=5
+ObjType=1
+Agarrable=0
+MinHAM=25
+Crucial=0
+
+[OBJ302]
+Name=Ojo de Dragon Cthulu
+GrhIndex=57902
+Valor=1200
+Crucial=0
+
+[OBJ303]
+Name=Fragmento Mediano de Vulcan
+GrhIndex=56853
+Valor=700
+Crucial=0
+
+[OBJ304]
+Name=Diamante de Hielo
+GrhIndex=56808
+Valor=10000
+Crucial=0
+
+[OBJ305]
+Name=Carne de Triton Verde
+GrhIndex=80406
+Valor=250
+Crucial=0
+
+[OBJ306]
+Name=Carne de Triton Amarillo
+GrhIndex=80405
+Valor=350
+Crucial=0
+
+[OBJ307]
+Name=Carne de Triton Rosa
+GrhIndex=80404
+Valor=350
+Crucial=0
+
+[OBJ308]
+Name=Medias de Aldeano
+GrhIndex=56519
+Valor=110
+Crucial=0
+
+[OBJ309]
+Name=Guantes de Aldeano
+GrhIndex=56520
+Valor=110
+Crucial=0
+
+[OBJ310]
+Name=Pañuelo de Aldeano
+GrhIndex=56524
+Valor=130
+Crucial=0
+
+[OBJ311]
+Name=Huesos de Peces
+GrhIndex=56290
+Valor=25
+Crucial=0
+
+[OBJ312]
+Name=Huesos de Peces
+GrhIndex=56291
+Valor=75
+Crucial=0
+
+[OBJ313]
+Name=Diente de Tiburon
+GrhIndex=57911
+Valor=400
+Crucial=0
+
+[OBJ314]
+Name=Jarra Vacia
+GrhIndex=57144
+Valor=1
+ObjType=33
+Agarrable=0
+Crucial=1
+IndexAbierta=315
+IndexCerrada=314
+
+[OBJ315]
+Name=Jarra Llena
+GrhIndex=57160
+Valor=5
+ObjType=34
+Agarrable=0
+MinST=3
+MinAgu=30
+Crucial=1
+IndexAbierta=315
+IndexCerrada=314
+
+[OBJ316]
+Name=Yunque Herreria
+GrhIndex=56622
+Valor=0
+Crucial=0
+
+[OBJ317]
+Name=Cofre
+GrhIndex=56449
+Valor=0
+Crucial=0
+
+[OBJ318]
+Name=Cofre
+GrhIndex=56451
+Valor=0
+Crucial=0
+
+[OBJ319]
+Name=Cofre
+GrhIndex=56452
+Valor=0
+Crucial=0
+
+[OBJ320]
+Name=Cofre
+GrhIndex=56453
+Valor=0
+Crucial=0
+
+[OBJ321]
+Name=Cofre
+GrhIndex=56454
+Valor=0
+Crucial=0
+
+[OBJ322]
+Name=Cofre
+GrhIndex=56455
+Valor=0
+Crucial=0
+
+[OBJ323]
+Name=Cofre
+GrhIndex=56456
+Valor=0
+Crucial=0
+
+[OBJ324]
+Name=Alas de Murcielago
+GrhIndex=56958
+Valor=30
+Crucial=0
+
+[OBJ325]
+Name=Scroll::Oro +1.000.000
+GrhIndex=38707
+ObjType=60
+Agarrable=0
+Crucial=1
+Time=0
+BonusTipe=1
+BonusValue=1000000
+RemoveObj=1
+
+[OBJ326]
+Name=Atun Blanco
+GrhIndex=56159
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ327]
+Name=Pez Espada
+GrhIndex=56160
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ328]
+Name=Pulpo
+GrhIndex=56164
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ329]
+Name=Pez Payaso
+GrhIndex=56165
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ330]
+Name=Bacalao
+GrhIndex=56205
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ331]
+Name=Salmon
+GrhIndex=56208
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ332]
+Name=Trucha Marron
+GrhIndex=56213
+ObjType=1
+Agarrable=0
+MinHAM=50
+Valor=30
+Crucial=1
+
+[OBJ333]
+Name=Escudo de tortuga
+Anim=29
+GrhIndex=32503
+NumRopaje=2
+Agarrable=0
+ObjType=16
+Subtipo=2
+MAXDEF=1
+MINDEF=1
+Crucial=0
+CP1=MAGO
+CP2=DRUIDA
+
+[OBJ334]
+Name=Poción de Energia
+GrhIndex=57433
+Agarrable=0
+ObjType=11
+TipoPocion=7
+MaxModificador=15
+MinModificador=15
+Valor=47
+Crucial=1
+
+[OBJ335]
+Name=Poción de Movilidad
+GrhIndex=57432
+Agarrable=0
+ObjType=11
+TipoPocion=8
+Crucial=0
+
+[OBJ336]
+Name=Poción de Invisibilidad
+GrhIndex=57440
+Agarrable=0
+ObjType=11
+TipoPocion=9
+Crucial=0
+
+[OBJ337]
+Name=Scroll::Cambio Cara
+GrhIndex=16301
+ObjType=60
+Agarrable=0
+Valor=0
+Crucial=0
+Time=0
+BonusTipe=4
+BonusValue=0
+RemoveObj=0
+
+#################### COFRE POSICIÓN NRO 1 (Abajo) #######################
+[OBJ338]
+Name=Cofre Cerrado
+GrhIndex=83912
+Agarrable=1
+ObjType=54
+IndexAbierta=339
+IndexCerrada=340	' Cofre roto
+NroDrop=3
+Drops=1-2-3-4-5-6
+RespawnTime=10
+ClicTime=5
+ProbClose=10
+ProbBreak=10
+
+[OBJ339]
+Name=Cofre Abierto
+GrhIndex=83913
+Agarrable=1
+ObjType=53
+IndexCerrada=338
+
+[OBJ340]
+Name=Cofre Roto
+GrhIndex=83924
+Agarrable=1
+ObjType=53
+IndexCerrada=338
+#################### COFRE POSICIÓN NRO 2 #######################

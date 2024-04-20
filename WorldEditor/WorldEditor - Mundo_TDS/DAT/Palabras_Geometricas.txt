@@ -1,0 +1,16 @@
+Cuadrado
+Hexagono
+Circulo
+Heptagono
+Nonagono
+Triangulo
+Cruz
+Paralelogramo
+Estrella
+Rombo
+Octagono
+Trapecio
+Rectangulo
+Triangulo
+Ovalo
+Semicirculo
